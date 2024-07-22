@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
 const {convertCsvToXlsx} = require ('@aternus/csv-to-xlsx');
+const { text } = require('stream/consumers');
 const localDownloadPath = 'C:/Users/Admin/Downloads';
 let downloadFilename
 const filePath ='C:\Users\Admin\Pictures\aa1';
@@ -24,7 +25,8 @@ const filePath ='C:\Users\Admin\Pictures\aa1';
     // Print dashboard No of session value
     const dashboardValueSelector = "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-9'] p[class='text-base font-medium']";
     global.dashboardValue = await page.$eval(dashboardValueSelector, el => parseFloat(el.innerText));
- 
+
+    globalTextContent = '';
         console.log(`Total no of sessions(From Dashboard): ${dashboardValue}`);
 
     // Print dashboard Usage value
@@ -203,7 +205,7 @@ test("Total usage validation",async ({ page }) => {
 
 test.only('Add charger flow validation', async ({ page}) => {
   
-
+  global.content=''
   const filepath1 = '.upload/aa1.png'
   // Navigate to the login page
     await page.goto('https://novo.kazam.in');
@@ -253,13 +255,13 @@ test.only('Add charger flow validation', async ({ page}) => {
 
   // charger type
   const chargertype = page.locator("//p[normalize-space()='AC']");
-    await page.waitForTimeout(1000); // 2000 milliseconds = 2 seconds
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     await chargertype.click();
    
 
   // select parking type
   const parktype = page.locator("//input[@placeholder='Select Parking Type']");
-    await page.waitForTimeout(1000); // 2000 milliseconds = 2 seconds
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     await parktype.click();
     await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     await page.click("(//span[normalize-space()='2W'])[1]");
@@ -291,7 +293,7 @@ test.only('Add charger flow validation', async ({ page}) => {
   // connector 2 details
   const connector2 = page.locator("//input[contains(@placeholder,'Select')]");
     await connector2.click();
-    await page.waitForTimeout(1000); // 2000 milliseconds = 2 seconds
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     await page.click("//div[normalize-space()='3 Pin Socket']");
     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
@@ -318,7 +320,7 @@ test.only('Add charger flow validation', async ({ page}) => {
     await longitude.clear();
     await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     await longitude.type("77.462");
-    await page.waitForTimeout(1000); // 2000 milliseconds = 2 seconds
+    await page.waitForTimeout(1000); // 11000 milliseconds = 1 seconds
 
 
   // get address
@@ -341,7 +343,7 @@ test.only('Add charger flow validation', async ({ page}) => {
   // charger timings
   const timings = page.locator("(//*[name()='svg'])[18]");    
     await timings.click();
-    await page.waitForTimeout(1000); // 2000 milliseconds = 2 seconds
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     await page.click("//div[normalize-space()='No']");
     await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     
@@ -354,7 +356,7 @@ test.only('Add charger flow validation', async ({ page}) => {
     await starttime1.click();
     await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     await starttime1.type("08:00");
-    await page.waitForTimeout(1000); // 2000 milliseconds = 2 seconds
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
 
   const endtime1 = page.locator("(//input[contains(@type,'time')])[2]");
     await endtime1.click();
@@ -392,13 +394,14 @@ test.only('Add charger flow validation', async ({ page}) => {
     await uploadimage.click();
     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
     
-  const imagePath = "C:\\Users\\Admin\\aa1.png"
+ // const imagePath = "C:\\Users\\Admin\\aa1.png"
+ const path = require('path');
   const filePath = path.resolve('C:\\Users\\Admin\\aa1.png');
-  if (!fs.existsSync(filePath)) {
-    console.error('File does not exist:', filePath);
-    return;
+  // if (!fs.existsSync(filePath)) {
+  //   console.error('File does not exist:', filePath);
+  //   return;
     
-  }
+  // }
 
   console.log('File exists:', filePath);
   await page.setInputFiles('input[type="file"]',filePath); 
@@ -406,171 +409,247 @@ test.only('Add charger flow validation', async ({ page}) => {
   await page.keyboard.press('Enter');
   await page.waitForTimeout(3000);
   
-  // Launch a browser instance
-  const browser = await chromium.launch({ headless: false }); // Set headless to false for debugging
+  
+(async () => {
+  try{
+  // Launch the browser
+  const browser = await chromium.launch({ headless: false });
   const context = await browser.newContext();
+  console.log('Browser context created');
 
   // Handle any new pages that open
-  context.on('page', async newPage => {
+  context.on('page', async (page) => {
     console.log('New page opened, closing it.');
-    await newPage.close();
-    
-  })
+    await page.close();
+    console.log('Closed page');
+  })} catch(error){
+      console.error('Error:', error)}});
   // Add charger button
   const addcharger = page.locator("//button[normalize-space()='Add Charger']");
     await addcharger.click();
     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-  //charger id:rdwsma
+
    console.log("charger configured successfully");
 
-   const clickdownloadbutton = page.locator("//button[normalize-space()='Download QR Code']");
-   await clickdownloadbutton.click();
-   await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+  // Set up the download event listener
+  const [download] = await Promise.all([
+    page.waitForEvent('download'), // Wait for the download to start
+    page.click("//button[normalize-space()='Download QR Code']")
+    
+  ]);
+  await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
-  // Directory to read from
-  const downloadsDirectory = path.resolve('C:/Users/Admin/Downloads'); 
-  // Function to read the directory and print the first file name
-  function printFirstFileName(directory) {
-  fs.readdir(directory, { withFileTypes: true }, (err, files) => {
-    if (err) {
-      console.error('Error reading directory:', err);
-      return;
-    }
-
-    // Filter out directories
-    const fileNames = files
-      .filter(file => file.isFile())
-      .map(file => file.name);
-
-    if (fileNames.length === 0) {
-      console.log('No files found in the directory.');
-      return;
-    }
-
-    // Print the first file name
-    console.log('First file name:', fileNames[0]);
-  });
-}
-
-   // Call the function
-   printFirstFileName(downloadsDirectory);
+  
+  // Print the suggested file name
+  const filename = download.suggestedFilename()
+  const start = filename.indexOf('(') + 1
+  const end = filename.indexOf(')');
+  content = filename.slice(start, end);
+  console.log('Suggested file name:', content);
 
 });
 
 
+test.only("Newly added charger validation",async ({ page }) => {
+    // Navigate to the login page
+    await page.goto('https://novo.kazam.in');
 
-// test("Reconfiguration Validation",async ({ page }) => 
+  // Login
+    await page.fill('#large-input','akhilesh@kazam.in');
+    await page.fill('#password','Akbl@1724');
+    await page.click("button[type='submit']");
+    await page.click("//a[2]//div[1]//div[1]//div[1]//div[2]//p[1]");
+  // Wait for a few seconds
+    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
-//   // Navigate to the login page
-//     await page.goto('https://novo.kazam.in');
+  //click charger session module
+    await page.click("//span[normalize-space()='Chargers & Sessions']");
+    await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-//   // Login
-//     await page.fill('#large-input','akhilesh@kazam.in');
-//     await page.fill('#password','Akbl@1724');
-//     await page.click("button[type='submit']");
-//     await page.click("//p[normalize-space()='NIKOL EV']");
-//   // Wait for a few seconds
-//     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
-//   //click charger session module
-//     await page.click("//span[normalize-space()='Chargers & Sessions']");
-//     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+  // Go to the search bar
+    const search = page.locator("//input[@id='simple-search']");
+     await search.click();
+     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     await search.fill(content);
+     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+  // clcik on the search result
+    const searchresult = page.locator("td:nth-child(3)");
+    await searchresult.click(); 
+    await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+    // Print Device name
+  const dataSelectors1 = {
+    "Device_name" : "//p[contains(@title,'Kazam_Automation_Test')]",
+    "Host_name" : "//p[contains(@title,'Akhilesh - 9495644454')]",
+    "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
+    "Connector_1" : "(//div[contains(@class,'grid grid-cols-6 items-center text-xs py-1')])[1]",
+    "Connector_2" : "(//div[@class='grid grid-cols-6 items-center text-xs py-1'])[2]"
+  };
+
+  const texts = [];
+  const comparison = {'Device_name' : 'Kazam_Automation_Test', 
+    'Host_name' : 'Akhilesh (9495644454)',
+    'Charger_type' : 'Private',
+    'Connector_1' : '1  three_pin 3.3 Unavailable ----',
+    'Connector_2' : ' 2  three_pin 3.3 Unavailable ----'}
+  console.log('comparison is ',comparison)
+  // Extract and print data from each selector
+  const extractedTexts = {};
+
+for (const [key, selector] of Object.entries(dataSelectors1)) {
+  const elements = await page.$$(selector);
+  const texts = [];
+  for (const element of elements) {
+    const text = await element.textContent();
+    const trimmedText = String(text).trim();
+    console.log(`${key} from detail page: ${trimmedText}`);
+    texts.push(trimmedText); // Accumulate text for each selector
+  }
+  extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+}
+
+  if (JSON.stringify(dataSelectors1) == JSON.stringify(comparison)){
+    console.log("All the keys matched")
+  }else{
+    console.log("False")
+  }
+ 
+  
+});
 
 
-//   // search for a configured charger
-//   const configuredcharger = page.locator("//input[@id='simple-search']");
-//     await configuredcharger.click();
-//     await configuredcharger.type("rdwsma");
-//     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
-//   const searchclick = page.locator("td:nth-child(2)");
-//     await searchclick.click();
-//     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+test("Reconfiguration Validation",async ({ page }) => 
 
-//   // click on reconfiguration button 
-//   const reconfigurationcharger = page.locator("//button[normalize-space()='Reconfigure Charger']");
-//     await reconfigurationcharger.click();
-//     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+  {
 
-//   // enter total capacity
-//   const totalcapacity = page.locator("//input[contains(@placeholder,'eg: 3.3, 7.4. 22')]")
-//     await totalcapacity.click();
-//     await totalcapacity.clear ();
-//     await totalcapacity.clear ();
-//     await totalcapacity.type("22");
+  // Navigate to the login page
+    await page.goto('https://novo.kazam.in');
 
-//   // click on next button
-//   const nextbutton = page.locator("//button[normalize-space()='Next']");
-//     await nextbutton.click();
-//     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds 
+  // Login
+    await page.fill('#large-input','akhilesh@kazam.in');
+    await page.fill('#password','Akbl@1724');
+    await page.click("button[type='submit']");
+    await page.click("//p[normalize-space()='NIKOL EV']");
+  // Wait for a few seconds
+    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+  //click charger session module
+    await page.click("//span[normalize-space()='Chargers & Sessions']");
+    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+
+  // search for a configured charger
+  const configuredcharger = page.locator("//input[@id='simple-search']");
+    await configuredcharger.click();
+    await search.fill(content);
+    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+  const searchclick = page.locator("td:nth-child(2)");
+    await searchclick.click();
+    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+  // click on reconfiguration button 
+  const reconfigurationcharger = page.locator("//button[normalize-space()='Reconfigure Charger']");
+    await reconfigurationcharger.click();
+    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+  // enter total capacity
+  const totalcapacity = page.locator("//input[contains(@placeholder,'eg: 3.3, 7.4. 22')]")
+    await totalcapacity.click();
+    await totalcapacity.clear ();
+    await totalcapacity.clear ();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await totalcapacity.type("22");
+
+  // click on next button
+  const nextbutton = page.locator("//button[normalize-space()='Next']");
+    await nextbutton.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds 
     
-//   // change the connector 1 total capacity
-//   const totalcapacity1 = page.locator("(//input[contains(@placeholder,'eg: 3.3, 7.4. 22')])[1]");
-//     await totalcapacity1.click();
-//     await totalcapacity1.clear();
-//     await totalcapacity1.clear();
-//     await totalcapacity1.type("7.7");
+  // change the connector 1 total capacity
+  const totalcapacity1 = page.locator("(//input[contains(@placeholder,'eg: 3.3, 7.4. 22')])[1]");
+    await totalcapacity1.click();
+    await totalcapacity1.clear();
+    await totalcapacity1.clear();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await totalcapacity1.type("7.7");
 
-//   // change connector 2 total capacity
-//   const totalcapacity2 = page.locator("(//input[@placeholder='eg: 3.3, 7.4. 22'])[2]");
-//     await totalcapacity2.click();
-//     await totalcapacity2.clear();
-//     await totalcapacity2.clear();
-//     await totalcapacity2.type("7.7");
-//     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+  // change connector 2 total capacity
+  const totalcapacity2 = page.locator("(//input[@placeholder='eg: 3.3, 7.4. 22'])[2]");
+    await totalcapacity2.click();
+    await totalcapacity2.clear();
+    await totalcapacity2.clear();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await totalcapacity2.type("7.7");
+    await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-//   // click on next button
-//   const nextbutton1 = page.locator("//button[normalize-space()='Next']");
-//     await nextbutton1.click();
-//     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+  // click on next button
+  const nextbutton1 = page.locator("//button[normalize-space()='Next']");
+    await nextbutton1.click();
+    await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-//   // click on next button
-//   const nextbutton2 = page.locator("//button[normalize-space()='Next']");
-//     await nextbutton2.click();
-//     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+  // click on next button
+  const nextbutton2 = page.locator("//button[normalize-space()='Next']");
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await nextbutton2.click();
+    await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-//   // Additional details
-//   const privatecharger = page.locator("(//input[@placeholder='Select'])[1]");
-//     await privatecharger.click();
-//     await page.click("//div[normalize-space()='Yes']");
+  // Additional details
+  const privatecharger = page.locator("(//input[@placeholder='Select'])[1]");
+    await privatecharger.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await page.click("//div[normalize-space()='Yes']");
 
-//   // charger timings
-//   const timings = page.locator("(//*[name()='svg'])[18]");    
-//     await timings.click();
-//     await page.click("//div[normalize-space()='No']");
+  // charger timings
+  const timings = page.locator("(//*[name()='svg'])[18]");    
+    await timings.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await page.click("//div[normalize-space()='No']");
 
-//   // select timing
-//   const checkbox1 = page.locator("(//input[contains(@type,'checkbox')])[1]");
-//     await checkbox1.click();
-//   const starttime1 = page.locator("(//input[contains(@type,'time')])[1]"); 
-//     await starttime1.click();
-//     await starttime1.type("09:00");
-//   const endtime1 = page.locator("(//input[contains(@type,'time')])[2]");
-//     await endtime1.click();
-//     await endtime1.type("19:00");
+  // select timing
+  const checkbox1 = page.locator("(//input[contains(@type,'checkbox')])[1]");
+    await checkbox1.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+  const starttime1 = page.locator("(//input[contains(@type,'time')])[1]"); 
+    await starttime1.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await starttime1.type("09:00");
+  const endtime1 = page.locator("(//input[contains(@type,'time')])[2]");
+    await endtime1.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await endtime1.type("19:00");
 
-//   const checkbox2 = page.locator("(//input[contains(@type,'checkbox')])[3]");
-//     await checkbox2.click();
-//   const starttime2 = page.locator("(//input[contains(@type,'time')])[5]");
-//     await starttime2.click();  
-//     await starttime2.type("09:00");
-//   const endtime2 = page.locator("(//input[contains(@type,'time')])[6]"); 
-//     await endtime2.click();
-//     await endtime2.type("19:00");
+  const checkbox2 = page.locator("(//input[contains(@type,'checkbox')])[3]");
+    await checkbox2.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+  const starttime2 = page.locator("(//input[contains(@type,'time')])[5]");
+    await starttime2.click();  
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await starttime2.type("09:00");
+  const endtime2 = page.locator("(//input[contains(@type,'time')])[6]"); 
+    await endtime2.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await endtime2.type("19:00");
 
-//   const checkbox3 = page.locator("(//input[@id='link-checkbox'])[5]");
-//     await checkbox3.click();
-//   const starttime3 = page.locator("(//input[@type='time'])[9]");
-//     await starttime3.click(); 
-//     await starttime3.type("09:00");
-//   const endtime3 = page.locator("(//input[contains(@type,'time')])[10]");
-//     await endtime3.click();
-//     await endtime3.type("19:00");
+  const checkbox3 = page.locator("(//input[@id='link-checkbox'])[5]");
+    await checkbox3.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+  const starttime3 = page.locator("(//input[@type='time'])[9]");
+    await starttime3.click(); 
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await starttime3.type("09:00");
+  const endtime3 = page.locator("(//input[contains(@type,'time')])[10]");
+    await endtime3.click();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await endtime3.type("19:00");
 
-//   // // Add charger button
-//   // const addcharger = page.locator("//button[normalize-space()='Add Charger']");
-//   //   await addcharger.click();
-//   //   await page.waitForTimeout(5000); // 2000 milliseconds = 2 seconds
-//   // //charger id:rdwsma
-//   //  console.log("charger reconfigured successfully");
+  // Add charger button
+  const addcharger = page.locator("//button[normalize-space()='Add Charger']");
+    await addcharger.click();
+    await page.waitForTimeout(5000); // 2000 milliseconds = 2 seconds
+  
+   console.log("charger reconfigured successfully");
+
+});
 
 
-// });
