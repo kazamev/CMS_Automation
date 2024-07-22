@@ -9,7 +9,7 @@ const localDownloadPath = 'C:/Users/Admin/Downloads';
 let downloadFilename
 const filePath ='C:\Users\Admin\Pictures\aa1';
  
- test('Dashboard validation', async ({ page}) => {
+ test.only('Dashboard validation', async ({ page}) => {
   
     // Navigate to the login page
       await page.goto('https://novo.kazam.in');
@@ -26,7 +26,6 @@ const filePath ='C:\Users\Admin\Pictures\aa1';
     const dashboardValueSelector = "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-9'] p[class='text-base font-medium']";
     global.dashboardValue = await page.$eval(dashboardValueSelector, el => parseFloat(el.innerText));
 
-    globalTextContent = '';
         console.log(`Total no of sessions(From Dashboard): ${dashboardValue}`);
 
     // Print dashboard Usage value
@@ -53,7 +52,7 @@ const filePath ='C:\Users\Admin\Pictures\aa1';
 });
 
 
-test("Email download",async ({ page }) => {
+test.only("Email download",async ({ page }) => {
   
     const email = "akhilesh@kazam.in";
       await page.goto('https://mail.google.com');
@@ -102,7 +101,7 @@ test("Email download",async ({ page }) => {
        
 });
 
-test("Total No of session validation",async ({ page }) => {
+test.only("Total No of session validation",async ({ page }) => {
    const XLSX = require('xlsx');({
     acceptDownloads: true,
   });
@@ -150,7 +149,7 @@ test("Total No of session validation",async ({ page }) => {
 
 });
 
-test("Total usage validation",async ({ page }) => {
+test.only("Total usage validation",async ({ page }) => {
   const fs = require('fs');
   const path = require('path');
   const XLSX = require('xlsx');({
@@ -445,7 +444,7 @@ test.only('Add charger flow validation', async ({ page}) => {
   const start = filename.indexOf('(') + 1
   const end = filename.indexOf(')');
   content = filename.slice(start, end);
-  console.log('Suggested file name:', content);
+  console.log('Newly added charger:', content);
 
 });
 
@@ -488,11 +487,14 @@ test.only("Newly added charger validation",async ({ page }) => {
   };
 
   const texts = [];
-  const comparison = {'Device_name' : 'Kazam_Automation_Test', 
+  const trimmedText = [];
+  const comparison = {
+    'Device_name' : 'Kazam_Automation_Test', 
     'Host_name' : 'Akhilesh (9495644454)',
     'Charger_type' : 'Private',
     'Connector_1' : '1  three_pin 3.3 Unavailable ----',
-    'Connector_2' : ' 2  three_pin 3.3 Unavailable ----'}
+    'Connector_2' : ' 2  three_pin 3.3 Unavailable ----'
+    }
   console.log('comparison is ',comparison)
   // Extract and print data from each selector
   const extractedTexts = {};
@@ -503,13 +505,13 @@ for (const [key, selector] of Object.entries(dataSelectors1)) {
   for (const element of elements) {
     const text = await element.textContent();
     const trimmedText = String(text).trim();
-    console.log(`${key} from detail page: ${trimmedText}`);
+    console.log(`${key} from the details page: ${trimmedText}`);
     texts.push(trimmedText); // Accumulate text for each selector
   }
   extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
 }
 
-  if (JSON.stringify(dataSelectors1) == JSON.stringify(comparison)){
+  if (JSON.stringify({dataSelectors1}) == JSON.stringify(comparison)){
     console.log("All the keys matched")
   }else{
     console.log("False")
@@ -519,7 +521,7 @@ for (const [key, selector] of Object.entries(dataSelectors1)) {
 });
 
 
-test("Reconfiguration Validation",async ({ page }) => 
+test.only("Reconfiguration Validation",async ({ page }) => 
 
   {
 
@@ -530,7 +532,7 @@ test("Reconfiguration Validation",async ({ page }) =>
     await page.fill('#large-input','akhilesh@kazam.in');
     await page.fill('#password','Akbl@1724');
     await page.click("button[type='submit']");
-    await page.click("//p[normalize-space()='NIKOL EV']");
+    await page.click("//a[2]//div[1]//div[1]//div[1]//div[2]//p[1]");
   // Wait for a few seconds
     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
   //click charger session module
@@ -538,14 +540,17 @@ test("Reconfiguration Validation",async ({ page }) =>
     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
 
-  // search for a configured charger
-  const configuredcharger = page.locator("//input[@id='simple-search']");
-    await configuredcharger.click();
-    await search.fill(content);
-    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
-  const searchclick = page.locator("td:nth-child(2)");
-    await searchclick.click();
-    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+   // Go to the search bar
+    const search = page.locator("//input[@id='simple-search']");
+     await search.click();
+     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     await search.fill(content);
+     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+  // clcik on the search result
+    const searchresult = page.locator("td:nth-child(3)");
+    await searchresult.click(); 
+    await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
   // click on reconfiguration button 
   const reconfigurationcharger = page.locator("//button[normalize-space()='Reconfigure Charger']");
@@ -644,11 +649,26 @@ test("Reconfiguration Validation",async ({ page }) =>
     await endtime3.type("19:00");
 
   // Add charger button
-  const addcharger = page.locator("//button[normalize-space()='Add Charger']");
+  const addcharger = page.locator("//button[normalize-space()='Configure Charger']");
     await addcharger.click();
     await page.waitForTimeout(5000); // 2000 milliseconds = 2 seconds
-  
    console.log("charger reconfigured successfully");
+
+   // Set up the download event listener
+  const [download] = await Promise.all([
+    page.waitForEvent('download'), // Wait for the download to start
+    page.click("//button[normalize-space()='Download QR Code']")
+    
+  ]);
+  await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+  
+  // Print the suggested file name
+  const filename = download.suggestedFilename()
+  const start = filename.indexOf('(') + 1
+  const end = filename.indexOf(')');
+  content = filename.slice(start, end);
+  console.log('Reconfigured charger name:', content);
 
 });
 
