@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const XLSX = require('xlsx');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 const { chromium } = require('playwright');
 const {convertCsvToXlsx} = require ('@aternus/csv-to-xlsx');
 const { text } = require('stream/consumers');
@@ -408,21 +409,22 @@ test.only('Add charger flow validation', async ({ page}) => {
   await page.keyboard.press('Enter');
   await page.waitForTimeout(3000);
   
-  
-(async () => {
-  try{
-  // Launch the browser
-  const browser = await chromium.launch({ headless: false });
-  const context = await browser.newContext();
-  console.log('Browser context created');
+  // Execute the AutoIt script to press the Esc key
+    exec('pressEsc.exe', (error, stdout, stderr) => {
+     if (error) {
+        console.error(`Error executing AutoIt script: ${error.message}`);
+        return;
+    }
+     if (stderr) {
+        console.error(`AutoIt script stderr: ${stderr}`);
+        return;
+    }
+        console.log(`AutoIt script stdout: ${stdout}`);
+    });
 
-  // Handle any new pages that open
-  context.on('page', async (page) => {
-    console.log('New page opened, closing it.');
-    await page.close();
-    console.log('Closed page');
-  })} catch(error){
-      console.error('Error:', error)}});
+    // Wait for the dialog to be closed
+    await page.waitForTimeout(2000);
+ 
   // Add charger button
   const addcharger = page.locator("//button[normalize-space()='Add Charger']");
     await addcharger.click();
@@ -487,15 +489,14 @@ test.only("Newly added charger validation",async ({ page }) => {
   };
 
   const texts = [];
-  const trimmedText = [];
   const comparison = {
     'Device_name' : 'Kazam_Automation_Test', 
     'Host_name' : 'Akhilesh (9495644454)',
     'Charger_type' : 'Private',
     'Connector_1' : '1  three_pin 3.3 Unavailable ----',
-    'Connector_2' : ' 2  three_pin 3.3 Unavailable ----'
+    'Connector_2' : '2  three_pin 3.3 Unavailable ----'
     }
-  console.log('comparison is ',comparison)
+  //console.log('comparison is ',comparison)
   // Extract and print data from each selector
   const extractedTexts = {};
 
@@ -511,10 +512,22 @@ for (const [key, selector] of Object.entries(dataSelectors1)) {
   extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
 }
 
-  if (JSON.stringify({dataSelectors1}) == JSON.stringify(comparison)){
-    console.log("All the keys matched")
+let flattenedText = {};
+
+for (let key in extractedTexts) {
+  if (Array.isArray(extractedTexts[key])) {
+    flattenedText[key] = extractedTexts[key][0];
+  } else {
+    flattenedText[key] = extractedTexts[key];
+  }
+}
+
+//console.log("Data from charger details page is",flattenedText);
+  console.log("comparison text is",comparison)
+  if (JSON.stringify(flattenedText) == JSON.stringify(comparison)){
+    console.log("Added values and charger details page values are matching")
   }else{
-    console.log("False")
+    console.log("Added values and charger details page values are Not matching")
   }
  
   
@@ -557,6 +570,13 @@ test.only("Reconfiguration Validation",async ({ page }) =>
     await reconfigurationcharger.click();
     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
+  // enter charger name
+  const chargername = page.locator("#large-input");
+    await chargername.click();
+    await chargername.clear();
+    await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+    await chargername.type("Kazam_Automation")
+    
   // enter total capacity
   const totalcapacity = page.locator("//input[contains(@placeholder,'eg: 3.3, 7.4. 22')]")
     await totalcapacity.click();
@@ -673,3 +693,84 @@ test.only("Reconfiguration Validation",async ({ page }) =>
 });
 
 
+test.only("Reconfigured charger validation",async ({ page }) => {
+  // Navigate to the login page
+  await page.goto('https://novo.kazam.in');
+
+// Login
+  await page.fill('#large-input','akhilesh@kazam.in');
+  await page.fill('#password','Akbl@1724');
+  await page.click("button[type='submit']");
+  await page.click("//a[2]//div[1]//div[1]//div[1]//div[2]//p[1]");
+// Wait for a few seconds
+  await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+//click charger session module
+  await page.click("//span[normalize-space()='Chargers & Sessions']");
+  await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+// Go to the search bar
+  const search = page.locator("//input[@id='simple-search']");
+   await search.click();
+   await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   await search.fill(content);
+   await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+// clcik on the search result
+  const searchresult = page.locator("td:nth-child(3)");
+  await searchresult.click(); 
+  await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+  // Print Device name
+const dataSelectors2 = {
+  "Device_name" : "//p[@title='Kazam_Automation']",
+  "Host_name" : "//p[contains(@title,'Akhilesh - 9495644454')]",
+  "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
+  "Connector_1" : "(//div[contains(@class,'grid grid-cols-6 items-center text-xs py-1')])[1]",
+  "Connector_2" : "(//div[@class='grid grid-cols-6 items-center text-xs py-1'])[2]"
+};
+
+const texts = [];
+const comparison1 = {
+  'Device_name' : 'Kazam_Automation', 
+  'Host_name' : 'Akhilesh (9495644454)',
+  'Charger_type' : 'Private',
+  'Connector_1' : '1  three_pin 7.7 Unavailable ----',
+  'Connector_2' : '2  three_pin 7.7 Unavailable ----'
+  }
+//console.log('comparison is ',comparison)
+// Extract and print data from each selector
+const extractedTexts = {};
+
+for (const [key, selector] of Object.entries(dataSelectors2)) {
+const elements = await page.$$(selector);
+const texts = [];
+for (const element of elements) {
+  const text = await element.textContent();
+  const trimmedText = String(text).trim();
+  console.log(`${key} from the details page: ${trimmedText}`);
+  texts.push(trimmedText); // Accumulate text for each selector
+}
+extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+}
+
+let flattenedText = {};
+
+for (let key in extractedTexts) {
+if (Array.isArray(extractedTexts[key])) {
+  flattenedText[key] = extractedTexts[key][0];
+} else {
+  flattenedText[key] = extractedTexts[key];
+}
+}
+
+//console.log("Data from charger details page is",flattenedText);
+console.log("comparison text is",comparison1)
+if (JSON.stringify(flattenedText) == JSON.stringify(comparison1)){
+  console.log("Added values and charger details page values are matching")
+}else{
+  console.log("Added values and charger details page values are Not matching")
+}
+
+
+});
