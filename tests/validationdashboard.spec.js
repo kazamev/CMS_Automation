@@ -409,21 +409,21 @@ test.only('Add charger flow validation', async ({ page}) => {
   await page.keyboard.press('Enter');
   await page.waitForTimeout(3000);
   
-  // Execute the AutoIt script to press the Esc key
-    exec('pressEsc.exe', (error, stdout, stderr) => {
-     if (error) {
-        console.error(`Error executing AutoIt script: ${error.message}`);
-        return;
-    }
-     if (stderr) {
-        console.error(`AutoIt script stderr: ${stderr}`);
-        return;
-    }
-        console.log(`AutoIt script stdout: ${stdout}`);
-    });
+  // // Execute the AutoIt script to press the Esc key
+  //   exec('pressEsc.exe', (error, stdout, stderr) => {
+  //    if (error) {
+  //       console.error(`Error executing AutoIt script: ${error.message}`);
+  //       return;
+  //   }
+  //    if (stderr) {
+  //       console.error(`AutoIt script stderr: ${stderr}`);
+  //       return;
+  //   }
+  //       console.log(`AutoIt script stdout: ${stdout}`);
+  //   });
 
-    // Wait for the dialog to be closed
-    await page.waitForTimeout(2000);
+  //   // Wait for the dialog to be closed
+  //   await page.waitForTimeout(2000);
  
   // Add charger button
   const addcharger = page.locator("//button[normalize-space()='Add Charger']");
@@ -484,6 +484,7 @@ test.only("Newly added charger validation",async ({ page }) => {
     "Device_name" : "//p[contains(@title,'Kazam_Automation_Test')]",
     "Host_name" : "//p[contains(@title,'Akhilesh - 9495644454')]",
     "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
+    "Charger_status": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-red-600/10 text-red-600']",
     "Connector_1" : "(//div[contains(@class,'grid grid-cols-6 items-center text-xs py-1')])[1]",
     "Connector_2" : "(//div[@class='grid grid-cols-6 items-center text-xs py-1'])[2]"
   };
@@ -493,6 +494,7 @@ test.only("Newly added charger validation",async ({ page }) => {
     'Device_name' : 'Kazam_Automation_Test', 
     'Host_name' : 'Akhilesh (9495644454)',
     'Charger_type' : 'Private',
+    'Charger_status': 'Offline',
     'Connector_1' : '1  three_pin 3.3 Unavailable ----',
     'Connector_2' : '2  three_pin 3.3 Unavailable ----'
     }
@@ -525,9 +527,9 @@ for (let key in extractedTexts) {
 //console.log("Data from charger details page is",flattenedText);
   console.log("comparison text is",comparison)
   if (JSON.stringify(flattenedText) == JSON.stringify(comparison)){
-    console.log("Added values and charger details page values are matching")
+    console.log("Added data and charger detail page data are matching")
   }else{
-    console.log("Added values and charger details page values are Not matching")
+    console.log("Added data and charger detail page data are Not matching")
   }
  
   
@@ -726,8 +728,9 @@ const dataSelectors2 = {
   "Device_name" : "//p[@title='Kazam_Automation']",
   "Host_name" : "//p[contains(@title,'Akhilesh - 9495644454')]",
   "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
-  "Connector_1" : "(//div[contains(@class,'grid grid-cols-6 items-center text-xs py-1')])[1]",
-  "Connector_2" : "(//div[@class='grid grid-cols-6 items-center text-xs py-1'])[2]"
+  "Charger_status":"//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-red-600/10 text-red-600']",
+  "Connector_1" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)",
+  "Connector_2" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)"
 };
 
 const texts = [];
@@ -735,10 +738,11 @@ const comparison1 = {
   'Device_name' : 'Kazam_Automation', 
   'Host_name' : 'Akhilesh (9495644454)',
   'Charger_type' : 'Private',
+  'Charger_status' : 'Offline',
   'Connector_1' : '1  three_pin 7.7 Unavailable ----',
   'Connector_2' : '2  three_pin 7.7 Unavailable ----'
   }
-//console.log('comparison is ',comparison)
+//console.log('comparison is ',comparison1)
 // Extract and print data from each selector
 const extractedTexts = {};
 
@@ -767,9 +771,9 @@ if (Array.isArray(extractedTexts[key])) {
 //console.log("Data from charger details page is",flattenedText);
 console.log("comparison text is",comparison1)
 if (JSON.stringify(flattenedText) == JSON.stringify(comparison1)){
-  console.log("Added values and charger details page values are matching")
+  console.log("Added data and charger detail page data are matching")
 }else{
-  console.log("Added values and charger details page values are Not matching")
+  console.log("Added data and charger detail page data are Not matching")
 }
 
 
