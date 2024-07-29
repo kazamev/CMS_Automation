@@ -10,7 +10,7 @@ const localDownloadPath = 'C:/Users/Admin/Downloads';
 let downloadFilename
 const filePath ='C:\Users\Admin\Pictures\aa1';
  
- test.only('Dashboard validation', async ({ page}) => {
+ test('Dashboard validation', async ({ page}) => {
   
     // Navigate to the login page
       await page.goto('https://novo.kazam.in');
@@ -53,7 +53,7 @@ const filePath ='C:\Users\Admin\Pictures\aa1';
 });
 
 
-test.only("Email download",async ({ page }) => {
+test("Email download",async ({ page }) => {
   
     const email = "akhilesh@kazam.in";
       await page.goto('https://mail.google.com');
@@ -102,7 +102,7 @@ test.only("Email download",async ({ page }) => {
        
 });
 
-test.only("Total No of session validation",async ({ page }) => {
+test("Total No of session validation",async ({ page }) => {
    const XLSX = require('xlsx');({
     acceptDownloads: true,
   });
@@ -150,7 +150,7 @@ test.only("Total No of session validation",async ({ page }) => {
 
 });
 
-test.only("Total usage validation",async ({ page }) => {
+test("Total usage validation",async ({ page }) => {
   const fs = require('fs');
   const path = require('path');
   const XLSX = require('xlsx');({
@@ -203,7 +203,7 @@ test.only("Total usage validation",async ({ page }) => {
 
 });
 
-test.only('Add charger flow validation', async ({ page}) => {
+test('Add charger flow validation', async ({ page}) => {
   
   global.content=''
   const filepath1 = '.upload/aa1.png'
@@ -451,7 +451,7 @@ test.only('Add charger flow validation', async ({ page}) => {
 });
 
 
-test.only("Newly added charger validation",async ({ page }) => {
+test("Newly added charger validation",async ({ page }) => {
     // Navigate to the login page
     await page.goto('https://novo.kazam.in');
 
@@ -536,7 +536,7 @@ for (let key in extractedTexts) {
 });
 
 
-test.only("Reconfiguration Validation",async ({ page }) => 
+test("Reconfiguration Validation",async ({ page }) => 
 
   {
 
@@ -695,7 +695,7 @@ test.only("Reconfiguration Validation",async ({ page }) =>
 });
 
 
-test.only("Reconfigured charger validation",async ({ page }) => {
+test("Reconfigured charger validation",async ({ page }) => {
   // Navigate to the login page
   await page.goto('https://novo.kazam.in');
 
@@ -778,3 +778,134 @@ if (JSON.stringify(flattenedText) == JSON.stringify(comparison1)){
 
 
 });
+
+test.only('Revenue Validation', async ({ page}) => {
+
+  global.transaction=''
+  
+  // Navigate to the login page
+    await page.goto('https://novo.kazam.in');
+
+  // Login
+    await page.fill('#large-input','akhilesh@kazam.in');
+    await page.fill('#password','Akbl@1724');
+    await page.click("button[type='submit']");
+    await page.click("//a[2]//div[1]//div[1]//div[1]//div[2]//p[1]");
+  // Wait for a few seconds
+    await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+  // Print dashboard revenue
+ 
+  const dashboardRevenue = await page.innerText("//div[@class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-10']//p[@class='text-base font-medium']");
+      console.log(`Total Revenue(From Dashboard): ${dashboardRevenue}`);
+  
+  // click on the revenue card
+  const revenuecard = page.locator("//p[normalize-space()='Revenue']");
+  await revenuecard.click();
+  await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+   
+  // Total Revenue from the RM Module
+  const rmrevenue = await page.innerText("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h6:nth-child(2)");
+      console.log(`Total Revenue(From RM Module): ${rmrevenue}`);
+
+      if(dashboardRevenue==rmrevenue){
+        console.log('Total Revenue in dashboard is equal to the Total revenue in RM Module')
+      }else{
+        console.log('Total Revenue in dashboard is Not equal to the Total revenue in RM Module')
+      }
+  // Total transactions from the RM Module
+  const totaltransaction = await page.innerText("button[class='flex items-center gap-1 w-full h-full px-4 py-2 rounded-l-lg bg-black text-white'] span"); 
+      const start = totaltransaction.indexOf('(') + 1
+      const end = totaltransaction.indexOf(')');
+      transaction = totaltransaction.slice(start, end);
+  console.log(`Total Transaction(From RM Module): ${transaction}`);
+
+  // Organization wallet balance
+  const orgwallet = await page.innerText("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > h6:nth-child(2)");
+      console.log(`Organization wallet balance(From RM Module): ${orgwallet}`);
+      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+
+  // Data from the Overview page
+  const overviewSelectors = {
+  "Transaction id" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(2)",
+  "Billed Amount" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3)",
+  "Host Details": "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(9) > span:nth-child(1) > span:nth-child(1)",
+  "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(10) > span:nth-child(1)",
+  "Time stamp" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(11) > span:nth-child(1)",
+   };
+   const extractedTexts0 = {};
+
+   for (const [key, selector] of Object.entries(overviewSelectors)) {
+   const elements = await page.$$(selector);
+   const texts = [];
+   for (const element of elements) {
+     const text = await element.textContent();
+     const trimmedText = String(text).trim();
+     console.log(`${key} from the Overview page: ${trimmedText}`);
+     texts.push(trimmedText); // Accumulate text for each selector
+   }
+   extractedTexts0[key] = texts; // Store the accumulated texts in the dictionary
+   }
+
+    // // Find the first row containing the text "success"
+    // const successRow = page.locator("(//span[normalize-space()='Success'])").first();
+
+    // // Find the plus button within the same row
+     //const plusButton = successRow.locator("(//button[@class='border p-1 rounded-full text-gray-500'])"); // Adjust the selector based on the actual button class or attributes
+  
+    // // Click the plus button
+    // await plusButton.click();
+
+// Find the first row containing the text "success"
+const successRow = await page.locator("(//span[normalize-space()='Success'])", { hasText: 'success' }).first();
+
+// Debug: Print the text content of the success row to verify the correct row is found
+console.log(await successRow.textContent());
+
+// Find the plus bu3wwwtton within the same row
+const plusButton = await successRow.locator("(//button[@class='border p-1 rounded-full text-gray-500'])"); // Adjust the selector based on the actual button class or attributes
+
+// Check if the plus button exists
+if (await plusButton.count() > 0) {
+  // Click the plus button
+  await plusButton.click();
+  console.log('Plus button clicked successfully.');
+} else {
+  console.log('Plus button not found in the success row.');
+}
+
+
+  
+  // Data from the invoice page
+     const invoiceSelectors = {
+      "Transaction id" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)",
+      "Billed Amount" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > p:nth-child(2)",
+      "Host Details": "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > p:nth-child(2)",
+      "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > p:nth-child(2)",
+      "Time stamp" : "p[class='text-black'] span[class='text-gray-600']",
+    };
+    const extractedTexts = {};
+
+    for (const [key, selector] of Object.entries(invoiceSelectors)) {
+    const elements = await page.$$(selector);
+    const texts = [];
+    for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+      console.log(`${key} from the invoice page: ${trimmedText}`);
+      texts.push(trimmedText); // Accumulate text for each selector
+    }
+    extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+    }
+
+  if(overviewSelectors == invoiceSelectors){
+    console.log('Overview data and Invoice data are matching')
+  }else{
+    console.log('Overview data and Invoice data are Not matching')
+  }
+
+});
+
+
+
