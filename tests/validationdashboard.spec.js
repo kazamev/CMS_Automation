@@ -790,9 +790,9 @@ test.only('Revenue Validation', async ({ page}) => {
     await page.fill('#large-input','akhilesh@kazam.in');
     await page.fill('#password','Akbl@1724');
     await page.click("button[type='submit']");
-    await page.click("//a[2]//div[1]//div[1]//div[1]//div[2]//p[1]");
+    await page.click("a:nth-child(2) div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(2) p:nth-child(1)");
   // Wait for a few seconds
-    await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    await page.waitForTimeout(5000); // 3000 milliseconds = 3 seconds
 
   // Print dashboard revenue
  
@@ -823,7 +823,7 @@ test.only('Revenue Validation', async ({ page}) => {
   // Organization wallet balance
   const orgwallet = await page.innerText("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > h6:nth-child(2)");
       console.log(`Organization wallet balance(From RM Module): ${orgwallet}`);
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
 
   // Data from the Overview page
@@ -848,23 +848,27 @@ test.only('Revenue Validation', async ({ page}) => {
    extractedTexts0[key] = texts; // Store the accumulated texts in the dictionary
    }
 
-    // // Find the first row containing the text "success"
-    // const successRow = page.locator("(//span[normalize-space()='Success'])").first();
-
-    // // Find the plus button within the same row
-     //const plusButton = successRow.locator("(//button[@class='border p-1 rounded-full text-gray-500'])"); // Adjust the selector based on the actual button class or attributes
-  
-    // // Click the plus button
-    // await plusButton.click();
-
 // Find the first row containing the text "success"
-const successRow = await page.locator("(//span[normalize-space()='Success'])", { hasText: 'success' }).first();
+const successRow = page.locator("(//span[normalize-space()='Success'])[1]");
 
-// Debug: Print the text content of the success row to verify the correct row is found
-console.log(await successRow.textContent());
+// Debug: Print the HTML content of the success row to verify the correct row is found
+console.log(await successRow.innerHTML());
 
-// Find the plus bu3wwwtton within the same row
-const plusButton = await successRow.locator("(//button[@class='border p-1 rounded-full text-gray-500'])"); // Adjust the selector based on the actual button class or attributes
+// Find all buttons within the same row (for further debugging)
+const buttons = await successRow.locator("(//button[@class='border p-1 rounded-full text-gray-500'])");
+
+// Debug: Print the count of buttons found in the row
+const buttonCount = await buttons.count();
+console.log(`Number of buttons found in the success row: ${buttonCount}`);
+
+// Loop through the buttons and print their classes (to help identify the correct button)
+for (let i = 0; i < buttonCount; i++) {
+  const button = buttons.nth(i);
+  console.log(`Button ${i} classes: ${await button.getAttribute('class')}`);
+}
+
+// Find the plus button within the same row
+const plusButton = await successRow.locator('button.border.p-1.rounded-full.text-gray-500'); // Adjust the selector based on the actual button class or attributes
 
 // Check if the plus button exists
 if (await plusButton.count() > 0) {
@@ -875,11 +879,15 @@ if (await plusButton.count() > 0) {
   console.log('Plus button not found in the success row.');
 }
 
+// click the invoice 
+const Invoice = page.locator("(//button[normalize-space()='396482468437'])[1]");
+await Invoice.click();
+await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
-  
+
   // Data from the invoice page
      const invoiceSelectors = {
-      "Transaction id" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)",
+      "Transaction id" : "(//span[@class='text-gray-600'][normalize-space()='25075281'])[1]",
       "Billed Amount" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > p:nth-child(2)",
       "Host Details": "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > p:nth-child(2)",
       "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > p:nth-child(2)",
@@ -899,11 +907,98 @@ if (await plusButton.count() > 0) {
     extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
     }
 
-  if(overviewSelectors == invoiceSelectors){
+  if(overviewSelectors==invoiceSelectors){
     console.log('Overview data and Invoice data are matching')
   }else{
     console.log('Overview data and Invoice data are Not matching')
   }
+
+// Select tariff section from the RM Module
+
+  const tariff = page.locator("//span[normalize-space()='Tariffs']");
+  await tariff.click();
+  await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+  // Click on create tariff butoon
+  const createtariff = page.locator("//button[normalize-space()='Create Tariff']");
+  await createtariff.click();
+  await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+  //Click and Enter the tariff name
+  const tariffname = page.locator("//input[@id='large-input']");
+  await tariffname.click();
+  await tariffname.fill("Tariff July 31");
+  await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+  // Enter price 1
+  const price1 = page.locator("//input[@placeholder='0']");
+  await price1.click();
+  await price1.clear();
+  await price1.fill("2");
+  await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+//Click Add price button
+const addprice = page.locator("//button[normalize-space()='Add Price']");
+await addprice.click();
+await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+// Enter price 2
+const price2 = page.locator("(//input[contains(@placeholder,'0')])[2]");
+await price2.click();
+await price2.clear();
+await price2.fill("1");
+await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+// Select dropdown
+const dropdown1 = page.locator("button[value='kwh'] svg");
+await dropdown1.click();
+await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+// Select the dropdown Value
+const dropdownlclcik = page.locator("li:nth-child(2) button:nth-child(1)");
+await dropdownlclcik.click();
+await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+// // create tariff
+// const createbutton = page.locator("//button[normalize-space()='CREATE']");
+// await createbutton.click();
+// await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+ console.log("Tariff created Successfully");
+// close button
+const closebutton = page.locator("//button[@aria-label='Close modal']//*[name()='svg']");
+await closebutton.click();
+
+// Aggregation Fee creation
+const Aggregationfee = page.locator("//span[normalize-space()='Aggregation Fee']");
+await Aggregationfee.click();
+await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+// Click Create Aggregation button
+const createaggregation = page.locator("//button[normalize-space()='Create Aggregation Fee']");
+await createaggregation.click();
+await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+// Enter Fee name 
+const feename = page.locator("//input[@id='large-input']");
+await feename.click();
+await feename.fill("Automation Aggregation Fee")
+await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+// Select fee type
+const feetype = page.locator("//body//div//div[@role='dialog']//div//div//div//div//div//div[2]//div[1]//div[1]//*[name()='svg']");
+await feetype.click();
+await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+// Select percentage from the dropdown
+const percentagefee = page.locator("//div[normalize-space()='Percentage']");
+await percentagefee.click();
+await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+// set percentage
+const setpercentage = page.locator("input[type='number']");
+await setpercentage.click();
+await setpercentage.fill("9");
+await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
 });
 
