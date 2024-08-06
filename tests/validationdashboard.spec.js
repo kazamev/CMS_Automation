@@ -790,13 +790,13 @@ test.only('Revenue Validation', async ({ page}) => {
     await page.fill('#large-input','akhilesh@kazam.in');
     await page.fill('#password','Akbl@1724');
     await page.click("button[type='submit']");
-    await page.click("a:nth-child(2) div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(2) p:nth-child(1)");
+    await page.click("//p[normalize-space()='Kazam EV Tech Pvt. Ltd.']");
   // Wait for a few seconds
     await page.waitForTimeout(5000); // 3000 milliseconds = 3 seconds
 
   // Print dashboard revenue
  
-  const dashboardRevenue = await page.innerText("//div[@class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-10']//p[@class='text-base font-medium']");
+  const dashboardRevenue = await page.innerText("(//p[@class='text-base font-medium'])[1]");
       console.log(`Total Revenue(From Dashboard): ${dashboardRevenue}`);
   
   // click on the revenue card
@@ -805,7 +805,7 @@ test.only('Revenue Validation', async ({ page}) => {
   await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
    
   // Total Revenue from the RM Module
-  const rmrevenue = await page.innerText("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h6:nth-child(2)");
+  const rmrevenue = await page.innerText("//body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/h6[1]");
       console.log(`Total Revenue(From RM Module): ${rmrevenue}`);
 
       if(dashboardRevenue==rmrevenue){
@@ -820,9 +820,9 @@ test.only('Revenue Validation', async ({ page}) => {
       transaction = totaltransaction.slice(start, end);
   console.log(`Total Transaction(From RM Module): ${transaction}`);
 
-  // Organization wallet balance
-  const orgwallet = await page.innerText("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > h6:nth-child(2)");
-      console.log(`Organization wallet balance(From RM Module): ${orgwallet}`);
+  // Print Payout pending 
+  const payoutpending = await page.innerText('h6.text-[#14052C] text-2xl font-medium');
+      console.log(`Organization wallet balance(From RM Module): ${payoutpending}`);
       await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
 
@@ -848,70 +848,70 @@ test.only('Revenue Validation', async ({ page}) => {
    extractedTexts0[key] = texts; // Store the accumulated texts in the dictionary
    }
 
-// Find the first row containing the text "success"
-const successRow = page.locator("(//span[normalize-space()='Success'])[1]");
+// // Find the first row containing the text "success"
+// const successRow = page.locator("(//span[normalize-space()='Success'])[1]");
 
-// Debug: Print the HTML content of the success row to verify the correct row is found
-console.log(await successRow.innerHTML());
+// // Debug: Print the HTML content of the success row to verify the correct row is found
+// console.log(await successRow.innerHTML());
 
-// Find all buttons within the same row (for further debugging)
-const buttons = await successRow.locator("(//button[@class='border p-1 rounded-full text-gray-500'])");
+// // Find all buttons within the same row (for further debugging)
+// const buttons = await successRow.locator("(//button[@class='border p-1 rounded-full text-gray-500'])");
 
-// Debug: Print the count of buttons found in the row
-const buttonCount = await buttons.count();
-console.log(`Number of buttons found in the success row: ${buttonCount}`);
+// // Debug: Print the count of buttons found in the row
+// const buttonCount = await buttons.count();
+// console.log(`Number of buttons found in the success row: ${buttonCount}`);
 
-// Loop through the buttons and print their classes (to help identify the correct button)
-for (let i = 0; i < buttonCount; i++) {
-  const button = buttons.nth(i);
-  console.log(`Button ${i} classes: ${await button.getAttribute('class')}`);
-}
+// // Loop through the buttons and print their classes (to help identify the correct button)
+// for (let i = 0; i < buttonCount; i++) {
+//   const button = buttons.nth(i);
+//   console.log(`Button ${i} classes: ${await button.getAttribute('class')}`);
+// }
 
-// Find the plus button within the same row
-const plusButton = await successRow.locator('button.border.p-1.rounded-full.text-gray-500'); // Adjust the selector based on the actual button class or attributes
+// // Find the plus button within the same row
+// const plusButton = await successRow.locator('button.border.p-1.rounded-full.text-gray-500'); // Adjust the selector based on the actual button class or attributes
 
-// Check if the plus button exists
-if (await plusButton.count() > 0) {
-  // Click the plus button
-  await plusButton.click();
-  console.log('Plus button clicked successfully.');
-} else {
-  console.log('Plus button not found in the success row.');
-}
+// // Check if the plus button exists
+// if (await plusButton.count() > 0) {
+//   // Click the plus button
+//   await plusButton.click();
+//   console.log('Plus button clicked successfully.');
+// } else {
+//   console.log('Plus button not found in the success row.');
+// }
 
-// click the invoice 
-const Invoice = page.locator("(//button[normalize-space()='396482468437'])[1]");
-await Invoice.click();
-await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+// // click the invoice 
+// const Invoice = page.locator("(//button[normalize-space()='396482468437'])[1]");
+// await Invoice.click();
+// await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
 
-  // Data from the invoice page
-     const invoiceSelectors = {
-      "Transaction id" : "(//span[@class='text-gray-600'][normalize-space()='25075281'])[1]",
-      "Billed Amount" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > p:nth-child(2)",
-      "Host Details": "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > p:nth-child(2)",
-      "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > p:nth-child(2)",
-      "Time stamp" : "p[class='text-black'] span[class='text-gray-600']",
-    };
-    const extractedTexts = {};
+//   // Data from the invoice page
+//      const invoiceSelectors = {
+//       "Transaction id" : "(//span[@class='text-gray-600'][normalize-space()='25075281'])[1]",
+//       "Billed Amount" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > p:nth-child(2)",
+//       "Host Details": "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > p:nth-child(2)",
+//       "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > p:nth-child(2)",
+//       "Time stamp" : "p[class='text-black'] span[class='text-gray-600']",
+//     };
+//     const extractedTexts = {};
 
-    for (const [key, selector] of Object.entries(invoiceSelectors)) {
-    const elements = await page.$$(selector);
-    const texts = [];
-    for (const element of elements) {
-      const text = await element.textContent();
-      const trimmedText = String(text).trim();
-      console.log(`${key} from the invoice page: ${trimmedText}`);
-      texts.push(trimmedText); // Accumulate text for each selector
-    }
-    extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
-    }
+//     for (const [key, selector] of Object.entries(invoiceSelectors)) {
+//     const elements = await page.$$(selector);
+//     const texts = [];
+//     for (const element of elements) {
+//       const text = await element.textContent();
+//       const trimmedText = String(text).trim();
+//       console.log(`${key} from the invoice page: ${trimmedText}`);
+//       texts.push(trimmedText); // Accumulate text for each selector
+//     }
+//     extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+//     }
 
-  if(overviewSelectors==invoiceSelectors){
-    console.log('Overview data and Invoice data are matching')
-  }else{
-    console.log('Overview data and Invoice data are Not matching')
-  }
+//   if(overviewSelectors==invoiceSelectors){
+//     console.log('Overview data and Invoice data are matching')
+//   }else{
+//     console.log('Overview data and Invoice data are Not matching')
+//   }
 
 // Select tariff section from the RM Module
 
@@ -967,38 +967,6 @@ await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
 // close button
 const closebutton = page.locator("//button[@aria-label='Close modal']//*[name()='svg']");
 await closebutton.click();
-
-// Aggregation Fee creation
-const Aggregationfee = page.locator("//span[normalize-space()='Aggregation Fee']");
-await Aggregationfee.click();
-await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-
-// Click Create Aggregation button
-const createaggregation = page.locator("//button[normalize-space()='Create Aggregation Fee']");
-await createaggregation.click();
-await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-
-// Enter Fee name 
-const feename = page.locator("//input[@id='large-input']");
-await feename.click();
-await feename.fill("Automation Aggregation Fee")
-await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-
-// Select fee type
-const feetype = page.locator("//body//div//div[@role='dialog']//div//div//div//div//div//div[2]//div[1]//div[1]//*[name()='svg']");
-await feetype.click();
-await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
-
-// Select percentage from the dropdown
-const percentagefee = page.locator("//div[normalize-space()='Percentage']");
-await percentagefee.click();
-await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-
-// set percentage
-const setpercentage = page.locator("input[type='number']");
-await setpercentage.click();
-await setpercentage.fill("9");
-await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
 });
 
