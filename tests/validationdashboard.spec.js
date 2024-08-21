@@ -1223,6 +1223,9 @@ test.only("Revenue Validation", async ({ page }) => {
       let success_path = `(//div[@class='flex items-center p-4 gap-2 cursor-pointer hover:bg-gray-50 duration-150 w-full'])[${i}]//div[2]//span`;
       const successElement = page.locator(success_path);
 
+      let billed_path = `(//div[@class='flex items-center p-4 gap-2 cursor-pointer hover:bg-gray-50 duration-150 w-full'])[${i}]//div[3]`;
+      const billed = page.locator(billed_path);
+
       // Scroll down by a fixed amount
       await page.evaluate(() => window.scrollBy(0, window.innerHeight));
 
@@ -1237,7 +1240,12 @@ test.only("Revenue Validation", async ({ page }) => {
           "Found Payment Status for transaction " + i + " is: " + success
         );
 
-        if (success.trim() === "Success") {
+        const billed_amount = await billed.innerHTML();
+        console.log("Billed Amount (raw):", billed_amount.trim());
+        if (
+          success.trim() === "Success" &&
+          parseFloat(billed_amount.trim()) > 0.0
+        ) {
           let invoice_path = `(//div[@class='flex items-center p-4 gap-2 cursor-pointer hover:bg-gray-50 duration-150 w-full'])[${i}]//div[1]//button`;
           const invoice = page.locator(invoice_path);
           await invoice.click();
