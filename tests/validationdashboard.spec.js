@@ -1312,6 +1312,8 @@ test.only("Revenue Validation", async ({ page }) => {
           await page.waitForTimeout(2000);
 
           console.log("Closed Invoice.");
+
+          break;
         }
       }
 
