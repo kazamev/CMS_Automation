@@ -7,7 +7,11 @@ const config = {
     timeout: 500000,
   },
 
-  reporter: "html",
+//reporter: ["allure-playwright", {outpuFolder: './tests'}],
+reporter: "html",
+//reporter: 'mochawesome',
+
+
   use: {
     browserName: "chromium",
     headless: false,

@@ -1,17 +1,19 @@
-const { test, expect } = require ("@playwright/test");
+const { test } = require('@playwright/test');
+const LoginPage = require('../pages/LoginPage');
 
+const NovoLogin = async () => {
+test('Login and navigate to Nikol EV', async ({ page }) => {
+    const loginPage = new LoginPage(page);
 
-test("Login Flow",async ({ browser }) => {
-  //chrome - plugins / cookies;
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const email = page.locator('#large-input');
-  await page.goto("https://novo.kazam.in");
-  console.log(await page.title());
-  //login credential
-  await email.fill("akhilesh@kazam.in");
-  await page.locator("#password").fill("Akbl@1724");
-  page.locator("button[type='submit']").click;
-  page.close();
-  
+    // Go to the login page
+    await loginPage.gotoLoginPage();
+
+    // Perform login
+    await loginPage.login('akhilesh@kazam.in', 'Akbl@1724');
+
+    // Navigate to Nikol EV section
+    await loginPage.selectNikolEv();
 });
+}
+
+module.exports = { NovoLogin, };
