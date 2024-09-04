@@ -2,71 +2,84 @@ const { test } = require('@playwright/test');
 const LoginPage = require('../pages/LoginPage');
 const DashboardPage = require('../pages/DashboardPage');
 
+let context;
+let page;
+
+// Define DashboardValidation as an async function
 const DashboardValidation = async () => {
-test.beforeEach('Login and navigate to Nikol EV', async ({ page }) => {
+    // First test for login setup
+    test('Login and navigate to Nikol EV', async ({ browser }) => {
+        // Launch a new browser context and page
+        context = await browser.newContext(); // Create a new context
+        page = await context.newPage(); // Open a new page
+
+        // Initialize the login page
         const loginPage = new LoginPage(page);
-    
-        // Go to the login page
+
+        // Perform the login
         await loginPage.gotoLoginPage();
-    
-        // Perform login
         await loginPage.login('akhilesh@kazam.in', 'Akbl@1724');
-    
-        // Navigate to Nikol EV section
         await loginPage.selectNikolEv();
+
+        // Save the logged-in state (optional, useful for debugging)
+        await context.storageState({ path: 'logged-in-state.json' });
+        await page.waitForTimeout(5000);
     });
-test('Dashboard validation', async ({ page }) => {
+
+    // Second test for dashboard validation
+    test('Dashboard validation', async () => {
+        // Initialize the DashboardPage with the page instance
     const dashboardPage = new DashboardPage(page);
-
-    // Navigate to the "NIKOL EV" section
-    //await dashboardPage.navigateToNikolEv();
-
-    // Wait for a few seconds (optional, depending on page load speed)
-    await page.waitForTimeout(5000);
 
     // Get and print dashboard session value
     const dashboardValue = await dashboardPage.getDashboardValue();
-    console.log(`Total no of sessions (From Dashboard): ${dashboardValue}`);
+    console.log(`Total no of sessions(From Dashboard): ${dashboardValue}`);
 
     // Get and print dashboard usage value
     const dashboardUsageValue = await dashboardPage.getDashboardUsageValue();
     console.log(`Total Usage (From Dashboard In kWh): ${dashboardUsageValue}`);
 
-    // Open usage details
-    await dashboardPage.openUsageDetails();
-    await page.waitForTimeout(5000);
+    // Click on the session value to open details
+    await dashboardPage.clickSessionValue();
+    await page.waitForTimeout(5000); // Wait for details to load
 
-    // Apply a filter
+    // Apply filter
     await dashboardPage.applyFilter();
-    await page.waitForTimeout(6000);
+    await page.waitForTimeout(6000); // Wait for filter to apply
 
-    // Download report
+    // Download the report
     await dashboardPage.downloadReport();
-    await page.waitForTimeout(10000);
-});
+    await page.waitForTimeout(10000); // Wait for the download to complete
+    });
 
-test('Email download', async ({ page }) => {
-    const gmailPage = new GmailPage(page);
-    //const localDownloadPath = "C:/Users/Admin/Downloads";
-    const localDownloadPath = "C:/Users/kisho/Downloads/CMS Automation_1/CMS_Automation/pages/excel";
+    test('Email download', async () => {
+    
+        // Initialize the GmailPage with the page instance
+        const gmailPage = new GmailPage(page);
+        const email = "akhilesh@kazam.in";
+        const password = "Akbl@1724";
+        const localDownloadPath = "C:/Users/Admin/Downloads";
+    
+        // Navigate to Gmail and perform login
+        await gmailPage.gotoGmail();
+        await gmailPage.login(email, password);
+    
+        // Open the first email in the inbox
+        await gmailPage.openFirstEmail();
+    
+        // Download the report from the email
+        await gmailPage.downloadReport(localDownloadPath);
+    
+        // Wait to ensure download is complete
+        await page.waitForTimeout(5000);
+        console.log(await page.title());
+    });
 
-    // Navigate to Gmail
-    await gmailPage.gotoGmail();
+};
 
-    // Perform login
-    await gmailPage.login('akhilesh@kazam.in', 'Akbl@1724');
-
-    // Open the first email in the inbox
-    await gmailPage.openFirstEmail();
-
-    // Download the report from the email
-    await gmailPage.downloadReport(localDownloadPath);
-
-    // Print the page title for verification
-    console.log(await page.title());
-});
-}
-
+// Export the DashboardValidation function to be used elsewhere
 module.exports = {
     DashboardValidation,
-  };
+};
+
+
