@@ -1,0 +1,27 @@
+Total Revenue(From Dashboard): ₹ 26151.50
+Total Revenue(From RM Module): ₹ 26151.50
+Total Revenue in dashboard is equal to the Total revenue in RM Module
+Total Transaction(From RM Module): 230
+Withdrawal amount : ₹ 0.00
+Wallet balance: ₹ 1481819.32
+Aggregation fee created Successfully
+Tax created Successfully
+Transaction id from the Overview page: 27889767
+Billed Amount from the Overview page: 193.86
+Host Details from the Overview page: Nikol Automotive Private Limited
+Driver Details from the Overview page: Richie 7507486326
+Time stamp from the Overview page: 05/09/2024
+        
+        10:48:48 am
+Success
+All Transactiona count is : 230
+Found Payment Status for transaction 1 is: Success
+Billed Amount (raw): 193.86
+Clicked on invoice for transaction 1
+Transaction id from the invoice page: 27889767
+Billed Amount from the invoice page: ₹ 193.86
+Host Details from the invoice page: Nikol Automotive Private Limited
+Driver Details from the invoice page: Richie - 7507486326
+Time stamp from the invoice page: Sep 05 2024, 10:48:48
+Overview data and invoice data are not matching
+Closed Invoice.

@@ -1,0 +1,6 @@
+Total Revenue(From Dashboard): ₹ 26151.50
+Total Revenue(From RM Module): ₹ 26151.50
+Total Revenue in dashboard is equal to the Total revenue in RM Module
+Total Transaction(From RM Module): 230
+Withdrawal amount : ₹ 0.00
+Wallet balance: ₹ 1481819.32

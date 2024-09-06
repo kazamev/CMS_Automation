@@ -7,11 +7,12 @@ const config = {
     timeout: 500000,
   },
 
-  reporter: "html",
+  reporter: [["html"], ["allure-playwright", { outputFolder: "Reports" }]],
+
   use: {
     browserName: "chromium",
     headless: false,
-    channel: 'chrome',  // Specify the full Chrome browser
+    channel: "chrome", // Specify the full Chrome browser
   },
 };
 
