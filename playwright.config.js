@@ -7,10 +7,7 @@ const config = {
     timeout: 500000,
   },
 
-//reporter: ["allure-playwright", {outpuFolder: './tests'}],
-reporter: "html",
-//reporter: 'mochawesome',
-
+reporter: [["html"], ["allure-playwright", { outputFolder: "Reports" }]],
 
   use: {
     browserName: "chromium",

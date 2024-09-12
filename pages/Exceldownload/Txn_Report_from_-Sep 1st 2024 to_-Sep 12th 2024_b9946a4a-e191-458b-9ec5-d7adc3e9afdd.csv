@@ -1,0 +1,658 @@
+Hub name,Charger id,Session id,connector_id,Connector Type,vehicle_no,mac,id_tag,Driver Details,Usage,Start Time,End Time,Duration,Status,city,state
+--,b9dk3e,28030326,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"12-09-2024, 02:01:18 PM","12-09-2024, 02:03:00 PM",0:01:42,other,Pune,Maharashtra
+--,b9dk3e,74436384,1,industrial_three_pin (1),--,--,--,Arshad Shaikh  / 9028244797,0.0010 kWh,"12-09-2024, 01:54:50 PM","12-09-2024, 01:56:44 PM",0:01:54,softreset,Pune,Maharashtra
+--,b9dk3e,42459865,1,industrial_three_pin (1),--,--,--,Arshad Shaikh  / 9028244797,0.0000 kWh,"12-09-2024, 01:51:42 PM","12-09-2024, 01:53:24 PM",0:01:42,other,Pune,Maharashtra
+--,b9dk3e,10465662,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"12-09-2024, 01:35:04 PM","12-09-2024, 01:36:46 PM",0:01:42,other,Pune,Maharashtra
+--,b9dk3e,27844447,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"12-09-2024, 01:30:10 PM","12-09-2024, 01:31:52 PM",0:01:42,other,Pune,Maharashtra
+--,b9dk3e,60979518,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"12-09-2024, 01:21:37 PM","12-09-2024, 01:23:17 PM",0:01:40,other,Pune,Maharashtra
+--,gfy681,97166908,2,ccs (2),--,--,--,Mahesh Zodge  / 9226312173,8.2390 kWh,"12-09-2024, 01:11:57 PM","12-09-2024, 01:34:22 PM",0:22:25,remote,Ahmednagar,Maharashtra
+--,gfy681,60102315,1,ccs (1),--,--,--,Rakesh / 9307858739,14.5270 kWh,"12-09-2024, 01:07:23 PM","12-09-2024, 02:03:43 PM",0:56:20,emergencystop,Ahmednagar,Maharashtra
+--,by2kjd,67584767,1,industrial (1),--,--,--,Darshan Bangar  / 9325038767,2.0369 kWh,"12-09-2024, 12:47:01 PM","12-09-2024, 03:05:23 PM",2:18:22,Ongoing,Talegaon Dabhade,Maharashtra
+--,by2kjd,51188146,1,industrial (1),--,--,--,Darshan Bangar  / 9325038767,0.0000 kWh,"12-09-2024, 12:46:20 PM","12-09-2024, 12:46:36 PM",0:00:16,remote,Talegaon Dabhade,Maharashtra
+--,nya6sj,66916718,1,ccs (1),--,--,--,Jitendra  / 9823334458,3.8870 kWh,"12-09-2024, 12:41:44 PM","12-09-2024, 12:53:49 PM",0:12:05,remote,Vangali,Maharashtra
+--,davd7c,34951164,1,ccs (1),--,--,--,Sachin Kale  / 9112129000,15.3920 kWh,"12-09-2024, 12:38:02 PM","12-09-2024, 01:26:03 PM",0:48:01,remote,Lonavala,Maharashtra
+--,by2kjd,98108053,1,industrial (1),--,--,--,Darshan Bangar  / 9325038767,0.1220 kWh,"12-09-2024, 12:25:28 PM","12-09-2024, 12:34:15 PM",0:08:47,powerloss,Talegaon Dabhade,Maharashtra
+--,by2kjd,34242679,1,industrial (1),--,--,--,Darshan Bangar  / 9325038767,0.0000 kWh,"12-09-2024, 12:23:52 PM","12-09-2024, 12:24:04 PM",0:00:12,remote,Talegaon Dabhade,Maharashtra
+--,nya6sj,56371885,2,ccs (2),--,--,--,Kundan Sagar / 9923100431,9.2580 kWh,"12-09-2024, 12:20:22 PM","12-09-2024, 12:53:52 PM",0:33:30,remote,Vangali,Maharashtra
+--,tufvxw,70745212,1,ccs (1),--,--,--,Kundan Sagar / 9923100431,10.5010 kWh,"12-09-2024, 10:14:30 AM","12-09-2024, 10:58:26 AM",0:43:56,remote,Yavat,Maharashtra
+--,davd7c,57600096,1,ccs (1),--,--,--,Goverdhan  / 9689224714,20.1800 kWh,"12-09-2024, 10:11:03 AM","12-09-2024, 10:58:00 AM",0:46:57,remote,Lonavala,Maharashtra
+--,69pvny,91266769,1,industrial_three_pin (1),--,--,--,Shriram  / 8007790696,2.0130 kWh,"12-09-2024, 10:09:49 AM","12-09-2024, 01:07:07 PM",2:57:18,remote,Pimpri-Chinchwad,Maharashtra
+--,davd7c,40247645,2,ccs (2),--,--,--,Goverdhan  / 9689224714,0.2510 kWh,"12-09-2024, 10:08:00 AM","12-09-2024, 10:09:45 AM",0:01:45,remote,Lonavala,Maharashtra
+--,xvbonb,96861941,1,ccs (1),--,--,--,Navnath  / 9890647814,7.6920 kWh,"12-09-2024, 10:08:15 AM","12-09-2024, 10:40:43 AM",0:32:28,other,Shrirampur Rural,Maharashtra
+--,nya6sj,42444538,2,ccs (2),--,--,--,Nikhil / 9850552151,20.9120 kWh,"12-09-2024, 09:40:45 AM","12-09-2024, 10:10:13 AM",0:29:28,remote,Vangali,Maharashtra
+--,nya6sj,73470709,2,ccs (2),--,--,--,Nikhil / 9850552151,0.0000 kWh,"12-09-2024, 09:39:06 AM","12-09-2024, 09:40:07 AM",0:01:01,evdisconnected,Vangali,Maharashtra
+--,tufvxw,77681447,1,ccs (1),--,--,--,Saichand Kolla / 9665005005,8.1270 kWh,"12-09-2024, 09:26:53 AM","12-09-2024, 09:50:01 AM",0:23:08,remote,Yavat,Maharashtra
+--,khxpqf,12585506,2,ccs (2),--,--,--,Mahendra Bagul / 7972989966,3.8390 kWh,"12-09-2024, 09:13:03 AM","12-09-2024, 09:36:03 AM",0:23:00,other,Shirwade Wani,Maharashtra
+--,khxpqf,57728424,2,ccs (2),--,--,--,Mahendra Bagul / 7972989966,6.3400 kWh,"12-09-2024, 08:39:40 AM","12-09-2024, 09:10:05 AM",0:30:25,remote,Shirwade Wani,Maharashtra
+--,a4eb36,60727714,1,three_pin (1),--,--,--,Vitthal / 9881150198,3.3300 kWh,"12-09-2024, 08:15:39 AM","12-09-2024, 01:36:36 PM",5:20:57,limit reached,Pimpri Chinchwad,Maharashtra
+--,5q99me,26073759,2,ccs (2),--,--,--,Tushar Nikam / 7507003030,24.5830 kWh,"12-09-2024, 08:11:40 AM","12-09-2024, 09:32:59 AM",1:21:19,other,Khandarmal,Maharashtra
+--,by2kjd,73309048,1,industrial (1),--,--,--,Darshan Bangar  / 9325038767,0.8390 kWh,"12-09-2024, 07:37:46 AM","12-09-2024, 08:35:06 AM",0:57:20,remote,Talegaon Dabhade,Maharashtra
+--,qbmdr2,41415278,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,23.7690 kWh,"12-09-2024, 04:50:45 AM","12-09-2024, 05:50:44 AM",0:59:59,remote,Pune,Maharashtra
+--,qbmdr2,75720734,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,6.4470 kWh,"12-09-2024, 02:43:33 AM","12-09-2024, 03:05:04 AM",0:21:31,remote,Pune,Maharashtra
+--,qbmdr2,48695580,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,17.7140 kWh,"12-09-2024, 01:04:11 AM","12-09-2024, 02:04:09 AM",0:59:58,remote,Pune,Maharashtra
+--,qbmdr2,21156927,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,17.8270 kWh,"11-09-2024, 11:50:34 PM","12-09-2024, 12:50:32 AM",0:59:58,remote,Pune,Maharashtra
+--,ks6c6g,51785493,2,ccs (2),--,--,--,Amol  / 8805809365,4.8920 kWh,"11-09-2024, 11:16:40 PM","11-09-2024, 11:46:29 PM",0:29:49,emergencystop,Dindori,Maharashtra
+--,davd7c,17374174,2,ccs (2),--,--,--,Anupam Jangid / 8108009090,28.1820 kWh,"11-09-2024, 10:52:28 PM","11-09-2024, 11:44:00 PM",0:51:32,remote,Lonavala,Maharashtra
+--,qbmdr2,76552714,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,18.4060 kWh,"11-09-2024, 10:40:16 PM","11-09-2024, 11:40:15 PM",0:59:59,remote,Pune,Maharashtra
+--,6gay5y,10372522,1,industrial_three_pin (1),--,--,--,Kundan Sagar / 9923100431,2.0290 kWh,"11-09-2024, 10:28:44 PM","11-09-2024, 11:14:22 PM",0:45:38,remote,Pune,Maharashtra
+--,nya6sj,33731706,1,ccs (1),--,--,--,Nooh  / 8080092780,50.0320 kWh,"11-09-2024, 10:06:35 PM","11-09-2024, 11:06:44 PM",1:00:09,remote,Vangali,Maharashtra
+--,nya6sj,15635810,2,ccs (2),--,--,--,+919657281088 / 9657281088,8.5250 kWh,"11-09-2024, 09:43:55 PM","11-09-2024, 10:06:20 PM",0:22:25,remote,Vangali,Maharashtra
+--,nya6sj,53531617,1,ccs (1),--,--,--,+919657281088 / 9657281088,0.0000 kWh,"11-09-2024, 09:41:45 PM","11-09-2024, 09:42:48 PM",0:01:03,evdisconnected,Vangali,Maharashtra
+--,khxpqf,4675792,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,30.5740 kWh,"11-09-2024, 09:24:35 PM","11-09-2024, 10:30:12 PM",1:05:37,local,Shirwade Wani,Maharashtra
+--,khxpqf,71927027,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"11-09-2024, 09:20:14 PM","11-09-2024, 09:21:25 PM",0:01:11,other,Shirwade Wani,Maharashtra
+--,qbmdr2,74785360,1,ccs (1),--,--,--,Dipak Rakshe  / 7775828364,5.9480 kWh,"11-09-2024, 08:52:58 PM","11-09-2024, 09:22:56 PM",0:29:58,remote,Pune,Maharashtra
+--,54fa6q,20439443,2,ccs (2),--,--,--,Ravindra Pawar / 9820182194,10.4970 kWh,"11-09-2024, 08:51:19 PM","11-09-2024, 09:19:32 PM",0:28:13,remote,Pune,Maharashtra
+--,6gay5y,39723549,1,industrial_three_pin (1),--,--,--,Kundan Sagar / 9923100431,4.9360 kWh,"11-09-2024, 08:35:41 PM","11-09-2024, 10:27:16 PM",1:51:35,other,Pune,Maharashtra
+--,54fa6q,66998858,1,ccs (1),--,--,--,Tanajirao Sargar  / 7710037415,24.3570 kWh,"11-09-2024, 08:21:07 PM","11-09-2024, 09:11:48 PM",0:50:41,evdisconnected,Pune,Maharashtra
+--,qbmdr2,38860379,1,ccs (1),--,--,--,Dipak Rakshe  / 7775828364,9.7580 kWh,"11-09-2024, 08:21:20 PM","11-09-2024, 08:51:18 PM",0:29:58,remote,Pune,Maharashtra
+--,gpyzc7,88919753,1,type_2 (1),--,--,--,Namit Bhankharia / 9833517360,25.3100 kWh,"11-09-2024, 08:14:59 PM","12-09-2024, 04:14:59 AM",8:00:00,remote,Mumbai,Maharashtra
+--,brmuyf,16432273,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.0833 kWh,"11-09-2024, 08:14:39 PM","11-09-2024, 08:27:37 PM",0:12:58,evdisconnected,Pune,Maharashtra
+--,54fa6q,68182907,2,ccs (2),--,--,--,Rahul  / 9763720401,16.1920 kWh,"11-09-2024, 07:44:11 PM","11-09-2024, 08:28:38 PM",0:44:27,remote,Pune,Maharashtra
+--,qbmdr2,70874181,1,ccs (1),--,--,--,Dipak Rakshe  / 7775828364,8.1250 kWh,"11-09-2024, 07:41:50 PM","11-09-2024, 08:11:48 PM",0:29:58,remote,Pune,Maharashtra
+--,6gay5y,36844318,1,industrial_three_pin (1),--,--,--,Kundan Sagar / 9923100431,2.6370 kWh,"11-09-2024, 07:33:38 PM","11-09-2024, 08:33:38 PM",1:00:00,remote,Pune,Maharashtra
+--,khxpqf,6663793,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,12.8740 kWh,"10-09-2024, 11:35:44 PM","11-09-2024, 12:00:15 AM",0:24:31,emergencystop,Shirwade Wani,Maharashtra
+--,qbmdr2,59104727,1,ccs (1),--,--,--,Dipak Rakshe  / 7775828364,9.7290 kWh,"11-09-2024, 06:59:38 PM","11-09-2024, 07:29:37 PM",0:29:59,remote,Pune,Maharashtra
+--,auf7cg,88700883,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,2.5670 kWh,"11-09-2024, 06:40:20 PM","11-09-2024, 08:40:20 PM",2:00:00,remote,Pimpri-Chinchwad,Maharashtra
+--,tufvxw,92648812,1,ccs (1),--,--,--,Abhijeet Botre  / 7798898757,9.9220 kWh,"11-09-2024, 06:34:26 PM","11-09-2024, 07:04:29 PM",0:30:03,remote,Yavat,Maharashtra
+--,qbmdr2,27989215,1,ccs (1),--,--,--,Dipak Rakshe  / 7775828364,9.6130 kWh,"11-09-2024, 06:24:59 PM","11-09-2024, 06:54:58 PM",0:29:59,remote,Pune,Maharashtra
+--,ks6c6g,29977656,2,ccs (2),--,--,--,JAYWANT D JANGAM / 9422943971,0.0000 kWh,"11-09-2024, 06:21:22 PM","11-09-2024, 06:21:35 PM",0:00:13,other,Dindori,Maharashtra
+--,ks6c6g,88234717,2,ccs (2),--,--,--,JAYWANT D JANGAM / 9422943971,0.0000 kWh,"11-09-2024, 06:15:04 PM","11-09-2024, 06:15:18 PM",0:00:14,other,Dindori,Maharashtra
+--,brmuyf,15688912,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.9120 kWh,"11-09-2024, 05:57:15 PM","11-09-2024, 07:57:19 PM",2:00:04,remote,Pune,Maharashtra
+--,nya6sj,84362468,2,ccs (2),--,--,--,Avinash  / 9773352720,2.3180 kWh,"11-09-2024, 05:49:48 PM","11-09-2024, 06:08:44 PM",0:18:56,remote,Vangali,Maharashtra
+--,b6pmf6,22388128,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,5.5390 kWh,"11-09-2024, 05:10:24 PM","11-09-2024, 07:12:31 PM",2:02:07,powerloss,Pune,Maharashtra
+--,nya6sj,63575743,2,ccs (2),--,--,--,Avinash  / 9773352720,19.1990 kWh,"11-09-2024, 04:49:17 PM","11-09-2024, 05:45:43 PM",0:56:26,evdisconnected,Vangali,Maharashtra
+--,8gs713,60464070,1,industrial (1),--,--,--,Kushaan Kapoor5 / +911234567890,0.0000 kWh,"11-09-2024, 04:45:06 PM","11-09-2024, 04:47:13 PM",0:02:07,cmd stop,Bengaluru,Karnataka
+--,8gs713,62296241,1,industrial (1),--,--,--,Kushaan Kapoor5 / +911234567890,0.0001 kWh,"11-09-2024, 04:14:30 PM","11-09-2024, 04:21:09 PM",0:06:39,cmd stop,Bengaluru,--
+--,1s3jfm,55320141,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.4105 kWh,"11-09-2024, 10:24:26 AM","11-09-2024, 04:42:32 PM",6:18:06,evdisconnected,--,Maharashtra
+--,5q99me,46634621,1,ccs (1),--,--,--,Ashwanikumar  / 9371009372,17.7360 kWh,"11-09-2024, 03:46:03 PM","11-09-2024, 04:23:36 PM",0:37:33,powerloss,Khandarmal,Maharashtra
+--,7djh9g,71062045,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,0.3620 kWh,"11-09-2024, 02:37:19 PM","11-09-2024, 02:40:30 PM",0:03:11,other,Thane,Maharashtra
+--,7djh9g,7312633,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,0.0300 kWh,"11-09-2024, 02:35:42 PM","11-09-2024, 02:37:10 PM",0:01:28,other,Thane,Maharashtra
+--,davd7c,25148927,1,ccs (1),--,--,--,Saanjh Wadhwani / 9975660000,8.6200 kWh,"11-09-2024, 02:17:02 PM","11-09-2024, 02:44:13 PM",0:27:11,powerloss,Lonavala,Maharashtra
+--,1s3jfm,76119163,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.6693 kWh,"11-09-2024, 08:44:51 AM","11-09-2024, 03:27:44 PM",6:42:53,powerloss,--,Maharashtra
+--,by2kjd,93702914,1,industrial (1),--,--,--,Darshan Bangar  / 9325038767,0.7240 kWh,"11-09-2024, 01:43:07 PM","11-09-2024, 02:43:08 PM",1:00:01,remote,Talegaon Dabhade,Maharashtra
+--,auf7cg,79597535,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"11-09-2024, 01:42:29 PM","11-09-2024, 01:43:29 PM",0:01:00,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,auf7cg,80827109,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"11-09-2024, 01:40:22 PM","11-09-2024, 01:41:23 PM",0:01:01,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,brmuyf,67291672,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,1.9360 kWh,"11-09-2024, 01:36:45 PM","11-09-2024, 05:46:49 PM",4:10:04,remote,Pune,Maharashtra
+--,v9e66v,22658408,1,type_2 (1),--,--,--,Murtaza Kathawala / 9820162557,2.0490 kWh,"11-09-2024, 01:19:16 PM","11-09-2024, 01:55:59 PM",0:36:43,evdisconnected,Talegaon Dabhade,Maharashtra
+--,nya6sj,49105871,1,ccs (1),--,--,--,Avinash  / 9773352720,9.7980 kWh,"11-09-2024, 01:16:51 PM","11-09-2024, 01:46:12 PM",0:29:21,remote,Vangali,Maharashtra
+--,oxj1rt,59984314,1,ccs (1),--,--,--,Vinod Dhamne / 8094444402,0.0300 kWh,"11-09-2024, 12:51:31 PM","11-09-2024, 12:52:25 PM",0:00:54,remote,Pune,Maharashtra
+--,1s3jfm,24886163,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.0512 kWh,"11-09-2024, 07:07:12 AM","11-09-2024, 12:49:15 PM",5:42:03,powerloss,--,Maharashtra
+--,a4eb36,69394594,1,three_pin (1),--,--,--,Komal / 9819890954,0.1844 kWh,"11-09-2024, 12:35:21 PM","11-09-2024, 01:07:21 PM",0:32:00,power failed,Pimpri Chinchwad,Maharashtra
+--,v9e66v,51590512,1,type_2 (1),--,--,--,Murtaza Kathawala / 9820162557,2.2560 kWh,"11-09-2024, 12:28:54 PM","11-09-2024, 01:08:57 PM",0:40:03,powerloss,Talegaon Dabhade,Maharashtra
+--,davd7c,58025875,1,ccs (1),--,--,--,Vijay  / 9820458055,5.1400 kWh,"11-09-2024, 12:07:13 PM","11-09-2024, 12:19:33 PM",0:12:20,remote,Lonavala,Maharashtra
+--,davd7c,90648376,1,ccs (1),--,--,--,Vijay  / 9820458055,0.0000 kWh,"11-09-2024, 12:04:38 PM","11-09-2024, 12:05:04 PM",0:00:26,evdisconnected,Lonavala,Maharashtra
+--,oxj1rt,59139195,1,ccs (1),--,--,--,Vinod Dhamne / 8094444402,11.6800 kWh,"11-09-2024, 12:03:50 PM","11-09-2024, 12:48:33 PM",0:44:43,remote,Pune,Maharashtra
+--,qbmdr2,87135448,1,ccs (1),--,--,--,Vishal Kendre / 9404684157,0.0000 kWh,"11-09-2024, 12:03:25 PM","11-09-2024, 12:03:31 PM",0:00:06,other,Pune,Maharashtra
+--,davd7c,48696563,2,ccs (2),--,--,--,Vijay  / 9820458055,0.0000 kWh,"11-09-2024, 12:01:57 PM","11-09-2024, 12:02:22 PM",0:00:25,evdisconnected,Lonavala,Maharashtra
+--,davd7c,33324354,2,ccs (2),--,--,--,Vijay  / 9820458055,0.0000 kWh,"11-09-2024, 12:00:37 PM","11-09-2024, 12:01:03 PM",0:00:26,evdisconnected,Lonavala,Maharashtra
+--,davd7c,68546491,1,ccs (1),--,--,--,Vijay  / 9820458055,0.0000 kWh,"11-09-2024, 11:57:38 AM","11-09-2024, 11:58:39 AM",0:01:01,evdisconnected,Lonavala,Maharashtra
+--,xoydry,58388301,1,ccs (1),--,--,--,Chandrashekar  / 7353200007,14.0110 kWh,"11-09-2024, 11:56:07 AM","11-09-2024, 12:44:22 PM",0:48:15,remote,Katphal,Maharashtra
+--,by2kjd,11742294,1,industrial (1),--,--,--,Darshan Bangar  / 9325038767,1.4150 kWh,"11-09-2024, 11:30:46 AM","11-09-2024, 01:06:45 PM",1:35:59,powerloss,Talegaon Dabhade,Maharashtra
+--,qbmdr2,85650090,1,ccs (1),--,--,--,Vishal Kendre / 9404684157,3.0870 kWh,"11-09-2024, 11:29:08 AM","11-09-2024, 11:40:29 AM",0:11:21,remote,Pune,Maharashtra
+--,davd7c,23304598,2,ccs (2),--,--,--,Vivek Bendkhale  / 9867185581,6.4030 kWh,"11-09-2024, 10:55:41 AM","11-09-2024, 11:17:49 AM",0:22:08,powerloss,Lonavala,Maharashtra
+--,davd7c,52262850,1,ccs (1),--,--,--,Vivek Bendkhale  / 9867185581,0.0000 kWh,"11-09-2024, 10:54:24 AM","11-09-2024, 10:54:50 AM",0:00:26,evdisconnected,Lonavala,Maharashtra
+--,davd7c,39941416,1,ccs (1),--,--,--,Vivek Bendkhale  / 9867185581,0.0040 kWh,"11-09-2024, 10:51:57 AM","11-09-2024, 10:53:18 AM",0:01:21,evdisconnected,Lonavala,Maharashtra
+--,davd7c,51532358,1,ccs (1),--,--,--,Vivek Bendkhale  / 9867185581,7.0900 kWh,"11-09-2024, 10:23:13 AM","11-09-2024, 10:47:25 AM",0:24:12,powerloss,Lonavala,Maharashtra
+--,davd7c,23807792,2,ccs (2),--,--,--,Vivek Bendkhale  / 9867185581,0.0000 kWh,"11-09-2024, 10:20:14 AM","11-09-2024, 10:20:53 AM",0:00:39,evdisconnected,Lonavala,Maharashtra
+--,gfy681,71833597,2,ccs (2),--,--,--,Pranjal Kad / 9765492214,16.1520 kWh,"11-09-2024, 10:16:19 AM","11-09-2024, 11:04:12 AM",0:47:53,remote,Ahmednagar,Maharashtra
+--,auf7cg,31267480,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"11-09-2024, 09:16:58 AM","11-09-2024, 09:17:59 AM",0:01:01,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,auf7cg,59717585,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0010 kWh,"11-09-2024, 09:14:11 AM","11-09-2024, 09:15:11 AM",0:01:00,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,qbmdr2,85928117,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,18.5980 kWh,"11-09-2024, 08:48:43 AM","11-09-2024, 09:48:40 AM",0:59:57,remote,Pune,Maharashtra
+--,a4eb36,88452154,--,,--,--,--,Vitthal / 9881150198,1.5761 kWh,"11-09-2024, 07:55:15 AM","11-09-2024, 11:07:03 AM",3:11:48,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,qbmdr2,98723804,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,18.5840 kWh,"11-09-2024, 06:12:18 AM","11-09-2024, 07:12:16 AM",0:59:58,remote,Pune,Maharashtra
+--,qbmdr2,28418545,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,17.9540 kWh,"11-09-2024, 02:06:26 AM","11-09-2024, 03:06:26 AM",1:00:00,remote,Pune,Maharashtra
+--,qbmdr2,61007195,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,23.4110 kWh,"11-09-2024, 12:54:03 AM","11-09-2024, 01:54:02 AM",0:59:59,remote,Pune,Maharashtra
+--,j66yuh,73552001,1,type_2 (1),--,--,--,Akshay Kotkar  / 9689181093,7.0860 kWh,"10-09-2024, 06:27:41 PM","11-09-2024, 01:52:53 AM",7:25:12,powerloss,Kamargaon,Maharashtra
+--,a4eb36,96610777,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,2.5300 kWh,"10-09-2024, 11:26:54 PM","11-09-2024, 03:12:40 AM",3:45:46,limit reached,Pimpri Chinchwad,Maharashtra
+--,a4eb36,26698589,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,0.0108 kWh,"10-09-2024, 11:21:35 PM","10-09-2024, 11:24:26 PM",0:02:51,emergency stop,Pimpri Chinchwad,Maharashtra
+--,5q99me,22369703,2,ccs (2),--,--,--,Namdeo Patil / 9765559946,9.4890 kWh,"10-09-2024, 10:47:14 PM","10-09-2024, 11:15:57 PM",0:28:43,remote,Khandarmal,Maharashtra
+--,tufvxw,42703236,1,ccs (1),--,--,--,Nikhil Gote / 8888059111,4.2270 kWh,"10-09-2024, 10:42:35 PM","10-09-2024, 10:57:41 PM",0:15:06,remote,Yavat,Maharashtra
+--,brmuyf,32475186,1,industrial_three_pin (1),--,--,--,Saloni / 9359220251,2.4929 kWh,"10-09-2024, 09:36:47 PM","11-09-2024, 12:49:44 AM",3:12:57,evdisconnected,Pune,Maharashtra
+--,qbmdr2,22857651,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,6.2690 kWh,"10-09-2024, 09:30:01 PM","10-09-2024, 09:50:55 PM",0:20:54,remote,Pune,Maharashtra
+--,nya6sj,18785011,2,ccs (2),--,--,--,Avinash  / 9773352720,41.3600 kWh,"10-09-2024, 09:24:19 PM","10-09-2024, 10:26:23 PM",1:02:04,remote,Vangali,Maharashtra
+--,davd7c,54359528,2,ccs (2),--,--,--,Rohit Ranjit Tribhavan / 9768752861,0.0000 kWh,"10-09-2024, 07:55:11 PM","10-09-2024, 07:56:19 PM",0:01:08,evdisconnected,Lonavala,Maharashtra
+--,davd7c,27348429,1,ccs (1),--,--,--,Chetak Kamthe / 9168381170,0.0000 kWh,"10-09-2024, 07:51:37 PM","10-09-2024, 07:51:58 PM",0:00:21,evdisconnected,Lonavala,Maharashtra
+--,davd7c,21595376,1,ccs (1),--,--,--,Chetak Kamthe / 9168381170,0.0000 kWh,"10-09-2024, 07:49:30 PM","10-09-2024, 07:49:49 PM",0:00:19,evdisconnected,Lonavala,Maharashtra
+--,davd7c,96176343,1,ccs (1),--,--,--,Chetak Kamthe / 9168381170,0.0000 kWh,"10-09-2024, 07:47:29 PM","10-09-2024, 07:47:50 PM",0:00:21,evdisconnected,Lonavala,Maharashtra
+--,brmuyf,40377699,1,industrial_three_pin (1),--,--,--,Saloni / 9359220251,0.3165 kWh,"10-09-2024, 07:46:20 PM","10-09-2024, 08:08:38 PM",0:22:18,remote,Pune,Maharashtra
+--,qbmdr2,96749314,1,ccs (1),--,--,--,Mahesh / 7387889254,17.1450 kWh,"10-09-2024, 07:45:58 PM","10-09-2024, 08:45:56 PM",0:59:58,remote,Pune,Maharashtra
+--,davd7c,74039869,1,ccs (1),--,--,--,Chetak Kamthe / 9168381170,0.0000 kWh,"10-09-2024, 07:38:06 PM","10-09-2024, 07:39:09 PM",0:01:03,evdisconnected,Lonavala,Maharashtra
+--,nya6sj,21115628,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,9.4630 kWh,"10-09-2024, 07:36:42 PM","10-09-2024, 08:02:23 PM",0:25:41,remote,Vangali,Maharashtra
+--,nya6sj,61266539,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,7.5060 kWh,"10-09-2024, 07:08:03 PM","10-09-2024, 07:25:21 PM",0:17:18,evdisconnected,Vangali,Maharashtra
+--,b6pmf6,82569755,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.2580 kWh,"10-09-2024, 07:05:21 PM","10-09-2024, 07:11:17 PM",0:05:56,powerloss,Pune,Maharashtra
+--,nya6sj,27038943,1,ccs (1),--,--,--,Rajesh Ghule / 7020093609,0.0000 kWh,"10-09-2024, 07:00:33 PM","10-09-2024, 07:00:51 PM",0:00:18,evdisconnected,Vangali,Maharashtra
+--,nya6sj,10232167,1,ccs (1),--,--,--,Rajesh Ghule / 7020093609,0.0000 kWh,"10-09-2024, 06:58:46 PM","10-09-2024, 06:59:04 PM",0:00:18,evdisconnected,Vangali,Maharashtra
+--,nya6sj,82827381,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,0.0000 kWh,"10-09-2024, 06:56:52 PM","10-09-2024, 06:57:10 PM",0:00:18,evdisconnected,Vangali,Maharashtra
+--,nya6sj,95189521,1,ccs (1),--,--,--,Rajesh Ghule / 7020093609,0.0000 kWh,"10-09-2024, 06:54:41 PM","10-09-2024, 06:55:00 PM",0:00:19,evdisconnected,Vangali,Maharashtra
+--,nya6sj,28860157,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,0.0000 kWh,"10-09-2024, 06:53:19 PM","10-09-2024, 06:53:37 PM",0:00:18,evdisconnected,Vangali,Maharashtra
+--,nya6sj,79073273,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,0.0000 kWh,"10-09-2024, 06:52:21 PM","10-09-2024, 06:52:39 PM",0:00:18,evdisconnected,Vangali,Maharashtra
+--,nya6sj,76839015,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,0.0000 kWh,"10-09-2024, 06:51:19 PM","10-09-2024, 06:51:37 PM",0:00:18,evdisconnected,Vangali,Maharashtra
+--,qbmdr2,75823226,1,ccs (1),--,--,--,Mahesh / 7387889254,17.1910 kWh,"10-09-2024, 06:50:11 PM","10-09-2024, 07:33:28 PM",0:43:17,remote,Pune,Maharashtra
+--,nya6sj,75072876,1,ccs (1),--,--,--,Ravi  / 7972161638,0.5870 kWh,"10-09-2024, 06:37:53 PM","10-09-2024, 06:41:30 PM",0:03:37,remote,Vangali,Maharashtra
+--,by2kjd,21407251,1,industrial (1),--,--,--,Vedant Kumbhar  / 7058020496,0.5793 kWh,"10-09-2024, 06:13:07 PM","10-09-2024, 06:53:14 PM",0:40:07,remote,Talegaon Dabhade,Maharashtra
+--,gfy681,69338703,2,ccs (2),--,--,--,Ramhari Shirole  / 8919921235,23.3410 kWh,"10-09-2024, 06:10:25 PM","10-09-2024, 07:50:30 PM",1:40:05,other,Ahmednagar,Maharashtra
+--,nya6sj,84828728,1,ccs (1),--,--,--,Ravi  / 7972161638,12.6560 kWh,"10-09-2024, 05:50:24 PM","10-09-2024, 06:37:02 PM",0:46:38,remote,Vangali,Maharashtra
+--,qbmdr2,18859123,1,ccs (1),--,--,--,Mahesh / 7387889254,20.7890 kWh,"10-09-2024, 05:43:35 PM","10-09-2024, 06:36:07 PM",0:52:32,remote,Pune,Maharashtra
+--,1s3jfm,83870156,2,three_pin (2),--,--,--,Amol Adhav  / 9527109541,0.9719 kWh,"10-09-2024, 11:54:04 AM","10-09-2024, 07:04:46 PM",7:10:42,remote,--,Maharashtra
+--,1s3jfm,50440316,2,three_pin (2),--,--,--,Amol Adhav  / 9527109541,0.0000 kWh,"10-09-2024, 11:53:23 AM","10-09-2024, 05:23:35 PM",5:30:12,remote,--,Maharashtra
+--,nya6sj,74581419,2,ccs (2),--,--,--,Sush / 9764544543,9.5780 kWh,"10-09-2024, 05:06:50 PM","10-09-2024, 05:48:41 PM",0:41:51,remote,Vangali,Maharashtra
+--,54fa6q,25870153,2,ccs (2),--,--,--,Devika / 9011458776,2.1550 kWh,"10-09-2024, 05:06:27 PM","10-09-2024, 05:14:53 PM",0:08:26,remote,Pune,Maharashtra
+--,nya6sj,89444313,2,ccs (2),--,--,--,Sush / 9764544543,3.8580 kWh,"10-09-2024, 04:48:47 PM","10-09-2024, 05:00:43 PM",0:11:56,powerloss,Vangali,Maharashtra
+--,nya6sj,41179561,1,ccs (1),--,--,--,Sush / 9764544543,0.0000 kWh,"10-09-2024, 04:45:18 PM","10-09-2024, 04:45:43 PM",0:00:25,evdisconnected,Vangali,Maharashtra
+--,1s3jfm,49226203,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.3210 kWh,"10-09-2024, 11:09:34 AM","10-09-2024, 05:08:13 PM",5:58:39,remote,--,Maharashtra
+--,nya6sj,54892136,1,ccs (1),--,--,--,Sush / 9764544543,4.5140 kWh,"10-09-2024, 04:23:49 PM","10-09-2024, 04:37:49 PM",0:14:00,powerloss,Vangali,Maharashtra
+--,brmuyf,88451171,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,1.2540 kWh,"10-09-2024, 03:51:23 PM","10-09-2024, 05:51:25 PM",2:00:02,remote,Pune,Maharashtra
+--,1s3jfm,73427590,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.3251 kWh,"10-09-2024, 10:10:52 AM","10-09-2024, 04:34:41 PM",6:23:49,powerloss,--,Maharashtra
+--,7djh9g,40904667,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,0.0000 kWh,"10-09-2024, 02:29:06 PM","10-09-2024, 02:31:24 PM",0:02:18,local,Thane,Maharashtra
+--,7djh9g,50412045,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,1.4400 kWh,"10-09-2024, 02:13:06 PM","10-09-2024, 02:28:44 PM",0:15:38,other,Thane,Maharashtra
+--,b9dk3e,26093565,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,2.6960 kWh,"10-09-2024, 01:54:12 PM","10-09-2024, 02:59:42 PM",1:05:30,powerloss,Pune,Maharashtra
+--,brmuyf,89572278,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.0000 kWh,"10-09-2024, 01:35:01 PM","10-09-2024, 01:36:01 PM",0:01:00,evdisconnected,Pune,Maharashtra
+--,brmuyf,29261147,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.0000 kWh,"10-09-2024, 01:31:44 PM","10-09-2024, 01:32:37 PM",0:00:53,remote,Pune,Maharashtra
+--,54fa6q,20398472,2,ccs (2),--,--,--,Vinayak Jadhav / 7718890337,7.5480 kWh,"10-09-2024, 12:59:16 PM","10-09-2024, 01:31:35 PM",0:32:19,remote,Pune,Maharashtra
+--,54fa6q,78424970,2,ccs (2),--,--,--,Vinayak Jadhav / 7718890337,3.7160 kWh,"10-09-2024, 12:29:17 PM","10-09-2024, 12:43:16 PM",0:13:59,powerloss,Pune,Maharashtra
+--,8gs713,86997118,1,industrial (1),--,--,--,Qwerty / 1234567890,0.0000 kWh,"10-09-2024, 12:21:39 PM","10-09-2024, 12:23:17 PM",0:01:38,cmd stop,Bengaluru,--
+--,brmuyf,39656005,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.0000 kWh,"10-09-2024, 11:59:16 AM","10-09-2024, 12:00:17 PM",0:01:01,evdisconnected,Pune,Maharashtra
+--,brmuyf,86713598,1,industrial_three_pin (1),--,--,--,Pradeep / 8208810372,0.0000 kWh,"10-09-2024, 11:51:20 AM","10-09-2024, 11:52:17 AM",0:00:57,remote,Pune,Maharashtra
+--,brmuyf,36285449,1,industrial_three_pin (1),--,--,--,Pradeep / 8208810372,0.0000 kWh,"10-09-2024, 11:49:42 AM","10-09-2024, 11:50:49 AM",0:01:07,evdisconnected,Pune,Maharashtra
+--,khxpqf,76250302,2,ccs (2),--,--,--,Vaibhav More / 9960007177,5.7710 kWh,"10-09-2024, 09:40:32 AM","10-09-2024, 10:06:16 AM",0:25:44,emergencystop,Shirwade Wani,Maharashtra
+--,khxpqf,51120058,1,ccs (1),--,--,--,Paresh / 9764068799,12.4440 kWh,"10-09-2024, 09:38:20 AM","10-09-2024, 10:06:15 AM",0:27:55,emergencystop,Shirwade Wani,Maharashtra
+--,nya6sj,87038691,2,ccs (2),--,--,--,Yogesh Makane / 8421656585,21.0430 kWh,"10-09-2024, 09:34:27 AM","10-09-2024, 10:17:59 AM",0:43:32,remote,Vangali,Maharashtra
+--,nya6sj,23971825,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,1.6350 kWh,"10-09-2024, 08:44:35 AM","10-09-2024, 09:02:03 AM",0:17:28,remote,Vangali,Maharashtra
+--,nya6sj,73111809,1,ccs (1),--,--,--,Avinash Kerappa Ambulge / 9579639111,22.8500 kWh,"10-09-2024, 08:27:18 AM","10-09-2024, 09:21:17 AM",0:53:59,evdisconnected,Vangali,Maharashtra
+--,5q99me,52162294,2,ccs (2),--,--,--,Adwait / 8007520358,0.0000 kWh,"10-09-2024, 08:11:30 AM","10-09-2024, 08:11:54 AM",0:00:24,other,Khandarmal,Maharashtra
+--,qbmdr2,72508456,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,17.3740 kWh,"10-09-2024, 08:09:49 AM","10-09-2024, 09:05:26 AM",0:55:37,remote,Pune,Maharashtra
+--,5q99me,18609358,1,ccs (1),--,--,--,Adwait / 8007520358,0.0000 kWh,"10-09-2024, 08:08:45 AM","10-09-2024, 08:09:10 AM",0:00:25,other,Khandarmal,Maharashtra
+--,5q99me,74817817,1,ccs (1),--,--,--,Tushar Bhamare  / +917676480763,0.0000 kWh,"10-09-2024, 08:00:43 AM","10-09-2024, 08:01:08 AM",0:00:25,other,Khandarmal,Maharashtra
+--,5q99me,46823072,1,ccs (1),--,--,--,Tushar Bhamare  / +917676480763,0.0000 kWh,"10-09-2024, 07:57:16 AM","10-09-2024, 07:57:35 AM",0:00:19,other,Khandarmal,Maharashtra
+--,5q99me,73035510,2,ccs (2),--,--,--,Adwait / 8007520358,0.0000 kWh,"10-09-2024, 07:47:36 AM","10-09-2024, 07:48:01 AM",0:00:25,other,Khandarmal,Maharashtra
+--,5q99me,67117658,1,ccs (1),--,--,--,Adwait / 8007520358,0.0000 kWh,"10-09-2024, 07:45:25 AM","10-09-2024, 07:46:29 AM",0:01:04,other,Khandarmal,Maharashtra
+--,nya6sj,39314206,2,ccs (2),--,--,--,Rajesh Ghule / 7020093609,22.6760 kWh,"10-09-2024, 07:42:54 AM","10-09-2024, 08:42:29 AM",0:59:35,evdisconnected,Vangali,Maharashtra
+--,a4eb36,82498962,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,0.7300 kWh,"10-09-2024, 07:28:00 AM","10-09-2024, 08:36:11 AM",1:08:11,limit reached,Pimpri Chinchwad,Maharashtra
+--,qbmdr2,30427408,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,14.5370 kWh,"10-09-2024, 07:16:58 AM","10-09-2024, 07:54:05 AM",0:37:07,remote,Pune,Maharashtra
+--,qbmdr2,86929616,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,11.1660 kWh,"10-09-2024, 05:01:44 AM","10-09-2024, 05:56:54 AM",0:55:10,powerloss,Pune,Maharashtra
+--,qbmdr2,22808761,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,17.2370 kWh,"10-09-2024, 03:49:24 AM","10-09-2024, 04:49:22 AM",0:59:58,remote,Pune,Maharashtra
+--,khxpqf,30502431,1,ccs (1),--,--,--,Nayan / 9970464848,4.9210 kWh,"10-09-2024, 03:47:29 AM","10-09-2024, 04:00:45 AM",0:13:16,remote,Shirwade Wani,Maharashtra
+--,khxpqf,83308859,1,ccs (1),--,--,--,Nayan / 9970464848,19.6340 kWh,"10-09-2024, 03:14:56 AM","10-09-2024, 03:44:25 AM",0:29:29,remote,Shirwade Wani,Maharashtra
+--,qbmdr2,52457950,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,14.0600 kWh,"10-09-2024, 01:58:03 AM","10-09-2024, 02:58:02 AM",0:59:59,remote,Pune,Maharashtra
+--,qbmdr2,83449253,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,13.7670 kWh,"10-09-2024, 12:42:44 AM","10-09-2024, 01:42:40 AM",0:59:56,remote,Pune,Maharashtra
+--,qbmdr2,88808172,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,16.8490 kWh,"09-09-2024, 11:45:40 PM","10-09-2024, 12:40:29 AM",0:54:49,remote,Pune,Maharashtra
+--,54fa6q,32342488,2,ccs (2),--,--,--,Bhooshan Rajpathak / 8888805700,15.1030 kWh,"09-09-2024, 11:23:48 PM","10-09-2024, 12:16:49 AM",0:53:01,remote,Pune,Maharashtra
+--,qbmdr2,31550721,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,11.8820 kWh,"09-09-2024, 11:02:52 PM","09-09-2024, 11:41:43 PM",0:38:51,remote,Pune,Maharashtra
+--,auf7cg,46641047,1,industrial_three_pin (1),--,--,--,Bluwheelz Mobility Service  / 9923065824,0.0000 kWh,"09-09-2024, 10:55:16 PM","09-09-2024, 10:56:17 PM",0:01:01,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,a4eb36,41924349,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,1.4258 kWh,"09-09-2024, 10:45:07 PM","10-09-2024, 01:38:16 AM",2:53:09,power failed,Pimpri Chinchwad,Maharashtra
+--,a4eb36,84314769,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,0.1530 kWh,"09-09-2024, 10:23:40 PM","09-09-2024, 10:37:27 PM",0:13:47,power failed,Pimpri Chinchwad,Maharashtra
+--,gfy681,63797990,2,ccs (2),--,--,--,Dhammavir Mhaske			 / 9860550165,16.8890 kWh,"09-09-2024, 09:55:13 PM","09-09-2024, 10:50:36 PM",0:55:23,remote,Ahmednagar,Maharashtra
+--,nya6sj,49173111,1,ccs (1),--,--,--,Deepak Andore  / 8856803897,16.3450 kWh,"09-09-2024, 09:50:23 PM","09-09-2024, 11:04:22 PM",1:13:59,remote,Vangali,Maharashtra
+--,khxpqf,69779964,1,ccs (1),--,--,--,Rajeev Ranjan  / 7798983145,4.6790 kWh,"09-09-2024, 09:28:24 PM","09-09-2024, 09:43:30 PM",0:15:06,remote,Shirwade Wani,Maharashtra
+--,qbmdr2,16725446,1,ccs (1),--,--,--,Samadhan Bansode  / 9763527493,0.1200 kWh,"09-09-2024, 09:14:38 PM","09-09-2024, 09:15:23 PM",0:00:45,remote,Pune,Maharashtra
+--,khxpqf,20206369,2,ccs (2),--,--,--,Dipak Shinde  / 9881595652,6.2870 kWh,"09-09-2024, 09:00:10 PM","09-09-2024, 09:30:33 PM",0:30:23,remote,Shirwade Wani,Maharashtra
+--,davd7c,95137569,1,ccs (1),--,--,--,Capt Rajesh  / 9649910200,10.3720 kWh,"09-09-2024, 08:57:02 PM","09-09-2024, 09:29:28 PM",0:32:26,evdisconnected,Lonavala,Maharashtra
+--,khxpqf,74659826,1,ccs (1),--,--,--,Shashikant Kadam / 9921840096,2.6440 kWh,"09-09-2024, 08:26:23 PM","09-09-2024, 08:36:15 PM",0:09:52,remote,Shirwade Wani,Maharashtra
+--,qbmdr2,18441503,1,ccs (1),--,--,--,Mahesh / 7387889254,16.4440 kWh,"09-09-2024, 08:07:12 PM","09-09-2024, 09:00:56 PM",0:53:44,remote,Pune,Maharashtra
+--,1s3jfm,47928730,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.7264 kWh,"09-09-2024, 02:33:54 PM","09-09-2024, 09:23:36 PM",6:49:42,evdisconnected,--,Maharashtra
+--,qbmdr2,50275224,1,ccs (1),--,--,--,Mahesh / 7387889254,5.0110 kWh,"09-09-2024, 07:45:05 PM","09-09-2024, 08:03:27 PM",0:18:22,remote,Pune,Maharashtra
+--,qbmdr2,49499827,1,ccs (1),--,--,--,Vishal Kendre / 9404684157,0.0000 kWh,"09-09-2024, 07:25:55 PM","09-09-2024, 07:26:01 PM",0:00:06,other,Pune,Maharashtra
+--,qbmdr2,23373523,1,ccs (1),--,--,--,Vishal Kendre / 9404684157,0.0000 kWh,"09-09-2024, 07:24:05 PM","09-09-2024, 07:24:11 PM",0:00:06,other,Pune,Maharashtra
+--,nya6sj,73205798,2,ccs (2),--,--,--,Sayali  / 9511607607,14.7860 kWh,"09-09-2024, 07:10:31 PM","09-09-2024, 08:10:50 PM",1:00:19,remote,Vangali,Maharashtra
+--,nya6sj,38240465,2,ccs (2),--,--,--,Sayali  / 9511607607,0.0000 kWh,"09-09-2024, 07:09:49 PM","09-09-2024, 07:09:52 PM",0:00:03,remote,Vangali,Maharashtra
+--,nya6sj,29253490,2,ccs (2),--,--,--,Sayali  / 9511607607,0.0000 kWh,"09-09-2024, 07:06:36 PM","09-09-2024, 07:07:37 PM",0:01:01,evdisconnected,Vangali,Maharashtra
+--,v9e66v,55527092,1,type_2 (1),--,--,--,Murtaza Kathawala / 9820162557,1.6728 kWh,"09-09-2024, 06:56:17 PM","09-09-2024, 07:24:24 PM",0:28:07,remote,Talegaon Dabhade,Maharashtra
+--,qbmdr2,95057413,1,ccs (1),--,--,--,Mahesh / 7387889254,11.8530 kWh,"09-09-2024, 06:51:07 PM","09-09-2024, 07:21:06 PM",0:29:59,remote,Pune,Maharashtra
+--,qbmdr2,20452812,1,ccs (1),--,--,--,Mahesh / 7387889254,0.0000 kWh,"09-09-2024, 06:42:26 PM","09-09-2024, 06:42:32 PM",0:00:06,other,Pune,Maharashtra
+--,v9e66v,41469809,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,0.1530 kWh,"09-09-2024, 06:40:39 PM","09-09-2024, 06:42:15 PM",0:01:36,evdisconnected,Talegaon Dabhade,Maharashtra
+--,54fa6q,31816388,1,ccs (1),--,--,--,Vikash Nano Technology & Alloys / 7507908977,4.6370 kWh,"09-09-2024, 06:26:16 PM","09-09-2024, 06:42:15 PM",0:15:59,remote,Pune,Maharashtra
+--,gfy681,54812123,2,ccs (2),--,--,--,Shailesh / 9823490158,25.6900 kWh,"09-09-2024, 06:21:05 PM","09-09-2024, 07:41:49 PM",1:20:44,remote,Ahmednagar,Maharashtra
+--,8gs713,38751189,1,industrial (1),ETHNET,--,--,Kushaan Kapoorr / 1234567890,0.0001 kWh,"09-09-2024, 06:15:44 PM","09-09-2024, 06:18:44 PM",0:03:00,cmd stop,Bengaluru,Karnataka
+--,gfy681,33266606,2,ccs (2),--,--,--,Shailesh / 9823490158,3.4660 kWh,"09-09-2024, 06:09:35 PM","09-09-2024, 06:17:07 PM",0:07:32,other,Ahmednagar,Maharashtra
+--,mt4rds,13678265,2,three_pin (2),--,--,--,Sandarsh Nigam / 9619472992,0.9450 kWh,"09-09-2024, 12:37:19 PM","09-09-2024, 08:07:49 PM",7:30:30,remote,Pune,Maharashtra
+--,mt4rds,38268136,2,three_pin (2),--,--,--,Sandarsh Nigam / 9619472992,0.0000 kWh,"09-09-2024, 12:36:10 PM","09-09-2024, 06:06:22 PM",5:30:12,remote,Pune,Maharashtra
+--,khxpqf,70707730,1,ccs (1),--,--,--,Om Rajendra Deore / 9883404141,8.5540 kWh,"09-09-2024, 06:05:42 PM","09-09-2024, 06:25:07 PM",0:19:25,remote,Shirwade Wani,Maharashtra
+--,v9e66v,85733675,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,5.5600 kWh,"09-09-2024, 05:48:52 PM","09-09-2024, 06:39:39 PM",0:50:47,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,84235064,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,0.7170 kWh,"09-09-2024, 05:40:50 PM","09-09-2024, 05:47:29 PM",0:06:39,other,Talegaon Dabhade,Maharashtra
+--,qbmdr2,97909631,1,ccs (1),--,--,--,Mahesh / 7387889254,23.6700 kWh,"09-09-2024, 05:39:14 PM","09-09-2024, 06:39:11 PM",0:59:57,remote,Pune,Maharashtra
+--,qbmdr2,94759978,1,ccs (1),--,--,--,Mahesh / 7387889254,0.0000 kWh,"09-09-2024, 05:36:46 PM","09-09-2024, 05:36:52 PM",0:00:06,other,Pune,Maharashtra
+--,davd7c,59600570,2,ccs (2),--,--,--,Dipak Chavare / 8275375846,8.9450 kWh,"09-09-2024, 05:18:08 PM","09-09-2024, 05:45:20 PM",0:27:12,powerloss,Lonavala,Maharashtra
+--,1s3jfm,45445736,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.9720 kWh,"09-09-2024, 10:57:01 AM","09-09-2024, 05:52:44 PM",6:55:43,remote,--,Maharashtra
+--,1s3jfm,27980027,2,three_pin (2),--,--,--,Amol Adhav  / 9527109541,0.0000 kWh,"09-09-2024, 10:53:14 AM","09-09-2024, 04:23:33 PM",5:30:19,remote,--,Maharashtra
+--,1s3jfm,90551447,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.0005 kWh,"09-09-2024, 10:49:46 AM","09-09-2024, 04:20:26 PM",5:30:40,evdisconnected,--,Maharashtra
+--,1s3jfm,30933179,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.0000 kWh,"09-09-2024, 10:48:20 AM","09-09-2024, 04:19:00 PM",5:30:40,evdisconnected,--,Maharashtra
+--,gfy681,67960699,2,ccs (2),--,--,--,Akshay Shidore / 8793777779,14.6700 kWh,"09-09-2024, 04:16:39 PM","09-09-2024, 04:47:59 PM",0:31:20,remote,Ahmednagar,Maharashtra
+--,1s3jfm,43728757,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.0000 kWh,"09-09-2024, 10:46:27 AM","09-09-2024, 04:17:07 PM",5:30:40,evdisconnected,--,Maharashtra
+--,khxpqf,70589243,1,ccs (1),--,--,--,Manoj Rathi / 9822554093,3.7260 kWh,"09-09-2024, 04:05:09 PM","09-09-2024, 04:22:26 PM",0:17:17,remote,Shirwade Wani,Maharashtra
+--,v9e66v,29258961,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,6.7680 kWh,"09-09-2024, 03:59:52 PM","09-09-2024, 05:01:26 PM",1:01:34,other,Talegaon Dabhade,Maharashtra
+--,nya6sj,57513857,1,ccs (1),--,--,--,SHRUTI VADOR / 7977738480,29.2530 kWh,"09-09-2024, 03:20:47 PM","09-09-2024, 04:23:00 PM",1:02:13,remote,Vangali,Maharashtra
+--,qbmdr2,26308884,1,ccs (1),--,--,--,Mahesh / 7387889254,0.2630 kWh,"09-09-2024, 02:54:14 PM","09-09-2024, 02:55:22 PM",0:01:08,remote,Pune,Maharashtra
+--,v9e66v,85871430,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,6.6060 kWh,"09-09-2024, 02:51:07 PM","09-09-2024, 03:51:10 PM",1:00:03,remote,Talegaon Dabhade,Maharashtra
+--,davd7c,69581212,2,ccs (2),--,--,--,Kevin / 7977537132,14.3880 kWh,"09-09-2024, 02:46:51 PM","09-09-2024, 03:47:10 PM",1:00:19,remote,Lonavala,Maharashtra
+--,b6pmf6,87558675,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,2.8550 kWh,"09-09-2024, 02:39:08 PM","09-09-2024, 04:14:43 PM",1:35:35,evdisconnected,Pune,Maharashtra
+--,v9e66v,65588215,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,1.2839 kWh,"09-09-2024, 02:37:41 PM","09-09-2024, 02:50:03 PM",0:12:22,evdisconnected,Talegaon Dabhade,Maharashtra
+--,nya6sj,99465123,1,ccs (1),--,--,--,SHRUTI VADOR / 7977738480,0.0000 kWh,"09-09-2024, 02:33:23 PM","09-09-2024, 02:33:48 PM",0:00:25,evdisconnected,Vangali,Maharashtra
+--,nya6sj,70962113,1,ccs (1),--,--,--,SHRUTI VADOR / 7977738480,0.0000 kWh,"09-09-2024, 02:32:22 PM","09-09-2024, 02:32:48 PM",0:00:26,evdisconnected,Vangali,Maharashtra
+--,nya6sj,24742051,1,ccs (1),--,--,--,SHRUTI VADOR / 7977738480,0.0000 kWh,"09-09-2024, 02:31:13 PM","09-09-2024, 02:31:39 PM",0:00:26,evdisconnected,Vangali,Maharashtra
+--,nya6sj,96318162,1,ccs (1),--,--,--,SHRUTI VADOR / 7977738480,0.0000 kWh,"09-09-2024, 02:29:40 PM","09-09-2024, 02:30:06 PM",0:00:26,evdisconnected,Vangali,Maharashtra
+--,mt4rds,64331935,2,three_pin (2),--,--,--,Sandarsh Nigam / 9619472992,1.5772 kWh,"09-09-2024, 08:58:34 AM","09-09-2024, 06:03:46 PM",9:05:12,powerloss,Pune,Maharashtra
+--,nya6sj,92825923,2,ccs (2),--,--,--,SHRUTI VADOR / 7977738480,0.0000 kWh,"09-09-2024, 02:27:32 PM","09-09-2024, 02:27:57 PM",0:00:25,evdisconnected,Vangali,Maharashtra
+--,54fa6q,69549097,2,ccs (2),--,--,--,Ajinkya Kamte / 9594000709,14.7710 kWh,"09-09-2024, 02:26:50 PM","09-09-2024, 02:58:44 PM",0:31:54,remote,Pune,Maharashtra
+--,qbmdr2,17972339,1,ccs (1),--,--,--,Mahesh / 7387889254,9.7810 kWh,"09-09-2024, 02:19:07 PM","09-09-2024, 02:49:07 PM",0:30:00,remote,Pune,Maharashtra
+--,a4eb36,47466315,1,three_pin (1),--,--,--,Vitthal / 9881150198,1.8735 kWh,"09-09-2024, 02:16:01 PM","09-09-2024, 05:58:04 PM",3:42:03,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,nya6sj,36174868,2,ccs (2),--,--,--,Rohit / 9370902044,4.3050 kWh,"09-09-2024, 01:30:41 PM","09-09-2024, 01:40:54 PM",0:10:13,remote,Vangali,Maharashtra
+--,nya6sj,14783134,2,ccs (2),--,--,--,Rohit / 9370902044,8.5650 kWh,"09-09-2024, 01:08:26 PM","09-09-2024, 01:27:49 PM",0:19:23,remote,Vangali,Maharashtra
+--,xoydry,21299724,1,ccs (1),--,--,--,Sourabh Bothara / 9527453531,29.7320 kWh,"09-09-2024, 12:38:46 PM","09-09-2024, 02:31:13 PM",1:52:27,other,Katphal,Maharashtra
+--,davd7c,75368138,2,ccs (2),--,--,--,Dipak Chavare / 8275375846,15.7820 kWh,"09-09-2024, 12:29:35 PM","09-09-2024, 01:20:45 PM",0:51:10,remote,Lonavala,Maharashtra
+--,gfy681,18994520,2,ccs (2),--,--,--,Swapnil Suresh Metha / 9422553529,20.4470 kWh,"09-09-2024, 12:05:02 PM","09-09-2024, 12:39:16 PM",0:34:14,remote,Ahmednagar,Maharashtra
+--,khxpqf,13424812,1,ccs (1),--,--,--,Manoj / 8691022507,2.6290 kWh,"09-09-2024, 11:48:45 AM","09-09-2024, 12:05:50 PM",0:17:05,remote,Shirwade Wani,Maharashtra
+--,khxpqf,50603053,1,ccs (1),--,--,--,Manoj / 8691022507,12.7250 kWh,"09-09-2024, 11:01:09 AM","09-09-2024, 11:41:11 AM",0:40:02,remote,Shirwade Wani,Maharashtra
+--,54fa6q,16500097,1,ccs (1),--,--,--,Bhosale Dharrao Jaywantrao  / 9890934805,10.3750 kWh,"09-09-2024, 10:44:32 AM","09-09-2024, 11:22:07 AM",0:37:35,remote,Pune,Maharashtra
+--,5q99me,78234051,2,ccs (2),--,--,--,Dhanraj  / 9158656649,11.7640 kWh,"09-09-2024, 10:02:39 AM","09-09-2024, 10:42:08 AM",0:39:29,powerloss,Khandarmal,Maharashtra
+--,54fa6q,28833472,1,ccs (1),--,--,--,Bhooshan Rajpathak / 8888805700,6.8180 kWh,"09-09-2024, 09:49:15 AM","09-09-2024, 10:13:22 AM",0:24:07,powerloss,Pune,Maharashtra
+--,b9dk3e,46253730,1,industrial_three_pin (1),--,--,--,Arshad Shaikh  / 9028244797,9.2950 kWh,"09-09-2024, 09:32:55 AM","09-09-2024, 01:14:30 PM",3:41:35,remote,Pune,Maharashtra
+--,davd7c,26071020,2,ccs (2),--,--,--,Shubham / 8600704885,4.1300 kWh,"09-09-2024, 07:11:39 AM","09-09-2024, 07:41:47 AM",0:30:08,remote,Lonavala,Maharashtra
+--,davd7c,27019352,2,ccs (2),--,--,--,Shubham / 8600704885,4.0580 kWh,"09-09-2024, 06:39:15 AM","09-09-2024, 07:09:24 AM",0:30:09,remote,Lonavala,Maharashtra
+--,nya6sj,21423781,1,ccs (1),--,--,--,Avinash  / 9773352720,42.0500 kWh,"09-09-2024, 02:20:22 AM","09-09-2024, 03:20:26 AM",1:00:04,remote,Vangali,Maharashtra
+--,a4eb36,82259172,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,2.8700 kWh,"09-09-2024, 01:44:23 AM","09-09-2024, 06:12:01 AM",4:27:38,limit reached,Pimpri Chinchwad,Maharashtra
+--,brmuyf,34550594,1,industrial_three_pin (1),--,--,--,Saloni / 9359220251,1.3388 kWh,"08-09-2024, 11:39:02 PM","09-09-2024, 01:34:47 AM",1:55:45,evdisconnected,Pune,Maharashtra
+--,auf7cg,28732194,1,industrial_three_pin (1),--,--,--,Bluwheelz Mobility Service  / 9923065824,1.2610 kWh,"08-09-2024, 11:30:39 PM","09-09-2024, 12:30:40 AM",1:00:01,remote,Pimpri-Chinchwad,Maharashtra
+--,gfy681,14857811,2,ccs (2),--,--,--,Himanshu Pawar  / 9767588388,9.0260 kWh,"08-09-2024, 09:35:37 PM","08-09-2024, 10:09:00 PM",0:33:23,emergencystop,Ahmednagar,Maharashtra
+--,54fa6q,35894734,1,ccs (1),--,--,--,Vikas Pawar  / 9272486199,19.0980 kWh,"08-09-2024, 08:46:25 PM","08-09-2024, 09:12:55 PM",0:26:30,remote,Pune,Maharashtra
+--,a94a76,61877835,--,,--,--,--,Ujwala Dange  / 8806554554,0.0124 kWh,"08-09-2024, 08:43:44 PM","08-09-2024, 08:45:11 PM",0:01:27,start,Pimpri Chinchwad,Maharashtra
+--,54fa6q,64560700,1,ccs (1),--,--,--,Vikas Pawar  / 9272486199,19.3020 kWh,"08-09-2024, 08:22:32 PM","08-09-2024, 08:43:36 PM",0:21:04,remote,Pune,Maharashtra
+--,khxpqf,45835479,1,ccs (1),--,--,--,Sanjay Vijaysing Magar / 9422261847,10.1810 kWh,"08-09-2024, 07:27:07 PM","08-09-2024, 07:57:19 PM",0:30:12,remote,Shirwade Wani,Maharashtra
+--,nya6sj,82653350,1,ccs (1),--,--,--,SHRUTI VADOR / 7977738480,9.7230 kWh,"08-09-2024, 06:55:56 PM","08-09-2024, 07:17:26 PM",0:21:30,remote,Vangali,Maharashtra
+--,khxpqf,65529168,1,ccs (1),--,--,--,Nikhil  / 9967260466,3.4980 kWh,"08-09-2024, 06:04:35 PM","08-09-2024, 06:15:31 PM",0:10:56,remote,Shirwade Wani,Maharashtra
+--,davd7c,31487118,1,ccs (1),--,--,--,Rohan / 9960099222,5.1110 kWh,"08-09-2024, 03:52:29 PM","08-09-2024, 04:08:52 PM",0:16:23,remote,Lonavala,Maharashtra
+--,54fa6q,98422657,1,ccs (1),--,--,--,Nivas Adasule  / 8999455614,12.3120 kWh,"08-09-2024, 03:28:24 PM","08-09-2024, 04:04:39 PM",0:36:15,Ongoing,Pune,Maharashtra
+--,nya6sj,28409277,2,ccs (2),--,--,--,ROHIT GANIKAR / 8381044402,15.6640 kWh,"08-09-2024, 03:24:26 PM","08-09-2024, 04:23:30 PM",0:59:04,remote,Vangali,Maharashtra
+--,v9e66v,23395822,1,type_2 (1),--,--,--,ABHI GARUD / 7767979153,3.3340 kWh,"08-09-2024, 03:14:23 PM","08-09-2024, 04:14:27 PM",1:00:04,remote,Talegaon Dabhade,Maharashtra
+--,v9e66v,60348704,1,type_2 (1),--,--,--,ABHI GARUD / 7767979153,0.0000 kWh,"08-09-2024, 03:13:05 PM","08-09-2024, 03:13:13 PM",0:00:08,remote,Talegaon Dabhade,Maharashtra
+--,nya6sj,67296376,1,ccs (1),--,--,--,Arjun / +919158895888,26.2430 kWh,"08-09-2024, 02:56:09 PM","08-09-2024, 03:57:53 PM",1:01:44,remote,Vangali,Maharashtra
+--,v9e66v,45271873,1,type_2 (1),--,--,--,ABHI GARUD / 7767979153,1.4917 kWh,"08-09-2024, 02:41:00 PM","08-09-2024, 03:08:16 PM",0:27:16,evdisconnected,Talegaon Dabhade,Maharashtra
+--,davd7c,68879955,2,ccs (2),--,--,--,Anand Patil  / 9920383839,6.1950 kWh,"08-09-2024, 02:37:19 PM","08-09-2024, 02:49:29 PM",0:12:10,remote,Lonavala,Maharashtra
+--,nya6sj,45861782,2,ccs (2),--,--,--,Avinash  / 9773352720,15.8610 kWh,"08-09-2024, 02:24:49 PM","08-09-2024, 03:21:22 PM",0:56:33,evdisconnected,Vangali,Maharashtra
+--,nya6sj,59852345,2,ccs (2),--,--,--,Avinash  / 9773352720,0.0000 kWh,"08-09-2024, 02:15:13 PM","08-09-2024, 02:15:13 PM",0:00:00,powerloss,Vangali,Maharashtra
+--,54fa6q,65082450,1,ccs (1),--,--,--,Vikas Pawar  / 9272486199,3.2160 kWh,"08-09-2024, 02:00:13 PM","08-09-2024, 02:21:05 PM",0:20:52,other,Pune,Maharashtra
+--,davd7c,86997917,1,ccs (1),--,--,--,SHRUTI VADOR / 7977738480,4.2120 kWh,"08-09-2024, 01:43:12 PM","08-09-2024, 01:53:29 PM",0:10:17,remote,Lonavala,Maharashtra
+--,54fa6q,74056687,1,ccs (1),--,--,--,Vikas Pawar  / 9272486199,17.6170 kWh,"08-09-2024, 01:28:02 PM","08-09-2024, 01:58:04 PM",0:30:02,remote,Pune,Maharashtra
+--,54fa6q,13593817,1,ccs (1),--,--,--,Vikas Pawar  / 9272486199,4.1820 kWh,"08-09-2024, 01:09:56 PM","08-09-2024, 01:15:49 PM",0:05:53,remote,Pune,Maharashtra
+--,qbmdr2,39028956,1,ccs (1),--,--,--,Mahesh / 7387889254,5.2440 kWh,"08-09-2024, 01:07:13 PM","08-09-2024, 01:37:11 PM",0:29:58,remote,Pune,Maharashtra
+--,54fa6q,96074173,1,ccs (1),--,--,--,Vikas Pawar  / 9272486199,4.4740 kWh,"08-09-2024, 01:01:45 PM","08-09-2024, 01:07:36 PM",0:05:51,remote,Pune,Maharashtra
+--,qbmdr2,41108771,1,ccs (1),--,--,--,Mahesh / 7387889254,3.2370 kWh,"08-09-2024, 12:54:46 PM","08-09-2024, 01:04:55 PM",0:10:09,remote,Pune,Maharashtra
+--,qbmdr2,75179763,1,ccs (1),--,--,--,Vinod Shinde / 8983175253,0.7280 kWh,"08-09-2024, 12:49:52 PM","08-09-2024, 12:52:26 PM",0:02:34,remote,Pune,Maharashtra
+--,davd7c,74202917,2,ccs (2),--,--,--,Mahesh Gurav / 9320106090,12.5710 kWh,"08-09-2024, 12:18:13 PM","08-09-2024, 12:57:02 PM",0:38:49,remote,Lonavala,Maharashtra
+--,davd7c,12421813,1,ccs (1),--,--,--,Mahesh Gurav / 9320106090,0.9780 kWh,"08-09-2024, 11:55:23 AM","08-09-2024, 11:59:12 AM",0:03:49,powerloss,Lonavala,Maharashtra
+--,54fa6q,89799194,1,ccs (1),--,--,--,Wahid Khan / 9870429259,20.3240 kWh,"08-09-2024, 11:30:28 AM","08-09-2024, 12:30:48 PM",1:00:20,remote,Pune,Maharashtra
+--,oxj1rt,69400577,1,ccs (1),--,--,--,Arnesh / 8591353530,4.5400 kWh,"08-09-2024, 11:03:14 AM","08-09-2024, 11:20:10 AM",0:16:56,remote,Pune,Maharashtra
+--,b6pmf6,10390720,1,industrial_three_pin (1),--,--,--,SANKET UPADHYE / 9096039820,11.1600 kWh,"08-09-2024, 10:14:28 AM","08-09-2024, 02:44:30 PM",4:30:02,remote,Pune,Maharashtra
+--,khxpqf,69999040,1,ccs (1),--,--,--,Nikhil  / 9967260466,8.0920 kWh,"08-09-2024, 10:10:21 AM","08-09-2024, 10:37:33 AM",0:27:12,other,Shirwade Wani,Maharashtra
+--,oxj1rt,28036431,1,ccs (1),--,--,--,Arnesh / 8591353530,17.5300 kWh,"08-09-2024, 09:59:52 AM","08-09-2024, 10:59:57 AM",1:00:05,remote,Pune,Maharashtra
+--,bfy5fm,21981502,1,industrial_three_pin (1),--,--,--,SANKET UPADHYE / 9096039820,0.0000 kWh,"08-09-2024, 09:50:50 AM","08-09-2024, 09:52:31 AM",0:01:41,other,Pune,Maharashtra
+--,nya6sj,75261806,2,ccs (2),--,--,--,Avinash  / 9773352720,14.3850 kWh,"08-09-2024, 09:46:37 AM","08-09-2024, 10:41:10 AM",0:54:33,remote,Vangali,Maharashtra
+--,v15zix,40218290,1,ccs (1),--,--,--,Namit Bhankharia / 9833517360,18.9000 kWh,"08-09-2024, 09:42:35 AM","08-09-2024, 10:59:11 AM",1:16:36,other,Mumbai,Maharashtra
+--,nya6sj,69799831,2,ccs (2),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 09:16:57 AM","08-09-2024, 09:20:16 AM",0:03:19,other,Vangali,Maharashtra
+--,nya6sj,75502080,2,ccs (2),--,--,--,Avinash  / 9773352720,0.0000 kWh,"08-09-2024, 09:09:32 AM","08-09-2024, 09:13:29 AM",0:03:57,other,Vangali,Maharashtra
+--,nya6sj,11549177,1,ccs (1),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 08:46:23 AM","08-09-2024, 08:46:44 AM",0:00:21,evdisconnected,Vangali,Maharashtra
+--,nya6sj,59842249,1,ccs (1),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 08:45:08 AM","08-09-2024, 08:45:34 AM",0:00:26,evdisconnected,Vangali,Maharashtra
+--,nya6sj,71861729,2,ccs (2),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 08:43:45 AM","08-09-2024, 08:44:10 AM",0:00:25,evdisconnected,Vangali,Maharashtra
+--,nya6sj,45899032,1,ccs (1),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 08:37:23 AM","08-09-2024, 08:37:50 AM",0:00:27,evdisconnected,Vangali,Maharashtra
+--,nya6sj,47341323,2,ccs (2),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 08:34:21 AM","08-09-2024, 08:34:56 AM",0:00:35,evdisconnected,Vangali,Maharashtra
+--,nya6sj,44117817,2,ccs (2),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 08:33:06 AM","08-09-2024, 08:33:31 AM",0:00:25,evdisconnected,Vangali,Maharashtra
+--,nya6sj,10185423,2,ccs (2),--,--,--,Ravi  / 7972161638,0.0000 kWh,"08-09-2024, 08:31:32 AM","08-09-2024, 08:31:58 AM",0:00:26,evdisconnected,Vangali,Maharashtra
+--,davd7c,13587543,1,ccs (1),--,--,--,Ravi Goswami / 9619249745,16.7010 kWh,"08-09-2024, 01:46:06 AM","08-09-2024, 02:22:48 AM",0:36:42,remote,Lonavala,Maharashtra
+--,a4eb36,12279715,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,3.3300 kWh,"07-09-2024, 10:51:28 PM","08-09-2024, 04:40:44 AM",5:49:16,limit reached,Pimpri Chinchwad,Maharashtra
+--,a4eb36,81909834,1,three_pin (1),--,--,--,ABHIJIT VEDPATHAK / 8390574502,0.0000 kWh,"07-09-2024, 10:50:46 PM","07-09-2024, 10:51:03 PM",0:00:17,emergency stop,Pimpri Chinchwad,Maharashtra
+--,1s3jfm,32715527,2,three_pin (2),--,--,--,Nikhil  / 9579861714,1.0200 kWh,"07-09-2024, 04:53:35 PM","08-09-2024, 12:13:41 AM",7:20:06,evdisconnected,--,Maharashtra
+--,xvbonb,67341720,1,ccs (1),--,--,--,Prajakta Deshpande / 8830454215,9.0440 kWh,"07-09-2024, 10:06:09 PM","07-09-2024, 10:30:46 PM",0:24:37,remote,Shrirampur Rural,Maharashtra
+--,xvbonb,75771671,1,ccs (1),--,--,--,Prajakta Deshpande / 8830454215,17.5350 kWh,"07-09-2024, 09:15:19 PM","07-09-2024, 10:04:31 PM",0:49:12,remote,Shrirampur Rural,Maharashtra
+--,khxpqf,62577029,2,ccs (2),--,--,819BFF39,Chetan Bhalerao / 7741851734,20.1080 kWh,"07-09-2024, 07:55:36 PM","07-09-2024, 08:39:42 PM",0:44:06,emergencystop,Shirwade Wani,Maharashtra
+--,khxpqf,42596765,1,ccs (1),--,--,--,Rajesh  / 9909041112,0.0000 kWh,"07-09-2024, 07:53:42 PM","07-09-2024, 07:54:04 PM",0:00:22,other,Shirwade Wani,Maharashtra
+--,khxpqf,66530222,1,ccs (1),--,--,--,Rajesh  / 9909041112,0.0000 kWh,"07-09-2024, 07:51:47 PM","07-09-2024, 07:52:12 PM",0:00:25,other,Shirwade Wani,Maharashtra
+--,khxpqf,45882906,1,ccs (1),--,--,--,Rajesh  / 9909041112,0.0000 kWh,"07-09-2024, 07:48:11 PM","07-09-2024, 07:48:37 PM",0:00:26,other,Shirwade Wani,Maharashtra
+--,khxpqf,37400163,1,ccs (1),--,--,--,Rajesh  / 9909041112,0.0000 kWh,"07-09-2024, 07:46:36 PM","07-09-2024, 07:47:03 PM",0:00:27,other,Shirwade Wani,Maharashtra
+--,khxpqf,54446511,1,ccs (1),--,--,--,Rajesh  / 9909041112,0.0000 kWh,"07-09-2024, 07:45:07 PM","07-09-2024, 07:45:33 PM",0:00:26,other,Shirwade Wani,Maharashtra
+--,gfy681,35353599,1,ccs (1),--,--,--,Mayur / 8378070593,20.2520 kWh,"07-09-2024, 06:13:25 PM","07-09-2024, 07:24:54 PM",1:11:29,emergencystop,Ahmednagar,Maharashtra
+--,gfy681,44900407,1,ccs (1),--,--,--,Mayur / 8378070593,4.1950 kWh,"07-09-2024, 05:54:14 PM","07-09-2024, 06:07:32 PM",0:13:18,other,Ahmednagar,Maharashtra
+--,xvbonb,80926293,1,ccs (1),--,--,--,Abhay Chhajed  / 9665014361,8.9540 kWh,"07-09-2024, 04:28:55 PM","07-09-2024, 04:56:02 PM",0:27:07,remote,Shrirampur Rural,Maharashtra
+--,ughft5,10700938,1,ccs (1),--,--,--,Sunil Sasane / 9527109541,20.2000 kWh,"07-09-2024, 04:26:15 PM","07-09-2024, 07:21:32 PM",2:55:17,remote,--,Maharashtra
+--,gfy681,67855859,2,ccs (2),--,--,--,Nikhil Gote / 8888059111,19.1670 kWh,"07-09-2024, 03:22:54 PM","07-09-2024, 04:30:56 PM",1:08:02,remote,Ahmednagar,Maharashtra
+--,hkpu94,83337188,1,ccs (1),--,--,--,Ajinkya / 8768007772,3.0300 kWh,"07-09-2024, 02:57:51 PM","07-09-2024, 03:07:42 PM",0:09:51,remote,Kapurhol,Maharashtra
+--,auf7cg,63770164,1,industrial_three_pin (1),--,--,--,Bluwheelz Mobility Service  / 9923065824,0.0000 kWh,"07-09-2024, 02:46:33 PM","07-09-2024, 02:47:33 PM",0:01:00,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,auf7cg,15766845,1,industrial_three_pin (1),--,--,--,Bluwheelz Mobility Service  / 9923065824,0.0000 kWh,"07-09-2024, 02:44:38 PM","07-09-2024, 02:45:42 PM",0:01:04,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,auf7cg,86601691,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"07-09-2024, 02:35:06 PM","07-09-2024, 02:36:06 PM",0:01:00,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,auf7cg,48736172,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,0.0000 kWh,"07-09-2024, 02:21:43 PM","07-09-2024, 02:22:48 PM",0:01:05,evdisconnected,Pimpri-Chinchwad,Maharashtra
+--,54fa6q,96975738,1,ccs (1),--,--,--,Richie / 7507486326,6.0480 kWh,"07-09-2024, 01:03:31 PM","07-09-2024, 01:12:28 PM",0:08:57,remote,Pune,Maharashtra
+--,by2kjd,20019968,1,industrial (1),--,--,--,Minhaz Khan / 9708878206,1.1630 kWh,"07-09-2024, 12:29:36 PM","07-09-2024, 01:20:31 PM",0:50:55,powerloss,Talegaon Dabhade,Maharashtra
+--,54fa6q,61004540,2,ccs (2),--,--,--,Ravindra Pawar / 9820182194,18.9720 kWh,"07-09-2024, 12:22:11 PM","07-09-2024, 01:01:06 PM",0:38:55,other,Pune,Maharashtra
+--,54fa6q,66604263,2,ccs (2),--,--,--,Ravindra Pawar / 9820182194,8.6770 kWh,"07-09-2024, 11:55:43 AM","07-09-2024, 12:10:46 PM",0:15:03,remote,Pune,Maharashtra
+--,by2kjd,72276561,1,industrial (1),--,--,--,Minhaz Khan / 9708878206,1.3100 kWh,"07-09-2024, 11:27:24 AM","07-09-2024, 12:27:25 PM",1:00:01,remote,Talegaon Dabhade,Maharashtra
+--,khxpqf,42296297,2,ccs (2),--,--,--,Chandrashekhar / 7021150296,8.2070 kWh,"07-09-2024, 11:18:34 AM","07-09-2024, 11:37:11 AM",0:18:37,remote,Shirwade Wani,Maharashtra
+--,b9dk3e,85011075,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,5.0578 kWh,"07-09-2024, 11:05:41 AM","07-09-2024, 01:06:32 PM",2:00:51,evdisconnected,Pune,Maharashtra
+--,by2kjd,75864328,1,industrial (1),--,--,--,Minhaz Khan / 9708878206,0.1350 kWh,"07-09-2024, 10:54:18 AM","07-09-2024, 11:01:27 AM",0:07:09,powerloss,Talegaon Dabhade,Maharashtra
+--,davd7c,57032282,2,ccs (2),--,--,--,Kevin / 7977537132,13.2000 kWh,"07-09-2024, 10:15:11 AM","07-09-2024, 11:03:25 AM",0:48:14,remote,Lonavala,Maharashtra
+--,davd7c,39063131,2,ccs (2),--,--,--,Kevin / 7977537132,0.0000 kWh,"07-09-2024, 10:10:18 AM","07-09-2024, 10:10:18 AM",0:00:00,powerloss,Lonavala,Maharashtra
+--,5q99me,50193935,2,ccs (2),--,--,--,Sachin / 9860326688,11.6980 kWh,"07-09-2024, 09:27:25 AM","07-09-2024, 10:02:57 AM",0:35:32,remote,Khandarmal,Maharashtra
+--,54fa6q,72365469,2,ccs (2),--,--,--,Nilesh  / 7263045555,8.1260 kWh,"07-09-2024, 08:46:15 AM","07-09-2024, 08:56:17 AM",0:10:02,remote,Pune,Maharashtra
+--,54fa6q,54348322,2,ccs (2),--,--,--,Nilesh  / 7263045555,21.1050 kWh,"07-09-2024, 08:11:15 AM","07-09-2024, 08:34:28 AM",0:23:13,remote,Pune,Maharashtra
+--,khxpqf,41645269,1,ccs (1),--,--,--,Amol / +918888467773,10.2100 kWh,"07-09-2024, 08:01:03 AM","07-09-2024, 08:31:57 AM",0:30:54,remote,Shirwade Wani,Maharashtra
+--,v9e66v,12668824,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,5.3130 kWh,"07-09-2024, 05:58:19 AM","07-09-2024, 06:46:56 AM",0:48:37,evdisconnected,Talegaon Dabhade,Maharashtra
+--,v9e66v,87165241,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,0.0000 kWh,"07-09-2024, 05:55:50 AM","07-09-2024, 05:56:00 AM",0:00:10,evdisconnected,Talegaon Dabhade,Maharashtra
+--,tufvxw,18842078,1,ccs (1),--,--,--,Anuj  / 8796967878,2.7210 kWh,"07-09-2024, 12:52:05 AM","07-09-2024, 01:01:57 AM",0:09:52,other,Yavat,Maharashtra
+--,5q99me,83407983,2,ccs (2),--,--,--,Sagar  / 9028349294,12.2880 kWh,"07-09-2024, 12:38:14 AM","07-09-2024, 12:55:20 AM",0:17:06,remote,Khandarmal,Maharashtra
+--,khxpqf,55088505,1,ccs (1),--,--,--,Sachin Vende / 9860137554,1.8550 kWh,"06-09-2024, 11:49:32 PM","06-09-2024, 11:55:10 PM",0:05:38,remote,Shirwade Wani,Maharashtra
+--,ughft5,89727956,1,ccs (1),--,--,--,Abhimanyu Bhor / 9767980888,5.6800 kWh,"06-09-2024, 11:14:55 PM","06-09-2024, 11:28:58 PM",0:14:03,remote,--,Maharashtra
+--,ughft5,48977208,2,ccs (2),--,--,--,Sarthak  / 8237101333,8.1700 kWh,"06-09-2024, 11:12:56 PM","06-09-2024, 11:38:10 PM",0:25:14,remote,--,Maharashtra
+--,ughft5,20427623,2,ccs (2),--,--,--,Sarthak  / 8237101333,3.0800 kWh,"06-09-2024, 11:01:41 PM","06-09-2024, 11:11:09 PM",0:09:28,remote,--,Maharashtra
+--,v9e66v,82146997,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,14.8323 kWh,"06-09-2024, 10:57:13 PM","07-09-2024, 01:12:30 AM",2:15:17,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,77192909,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,1.6926 kWh,"06-09-2024, 10:39:29 PM","06-09-2024, 10:55:44 PM",0:16:15,evdisconnected,Talegaon Dabhade,Maharashtra
+--,ughft5,46461757,2,ccs (2),--,--,--,Abhimanyu Bhor / 9767980888,11.5500 kWh,"06-09-2024, 10:32:32 PM","06-09-2024, 10:59:20 PM",0:26:48,remote,--,Maharashtra
+--,ughft5,24270321,1,ccs (1),--,--,--,Sarthak  / 8237101333,5.4490 kWh,"06-09-2024, 10:30:38 PM","06-09-2024, 11:00:56 PM",0:30:18,remote,--,Maharashtra
+--,khxpqf,55274412,1,ccs (1),--,--,--,Tulshidas Jogpete  / 7030545862,4.1620 kWh,"06-09-2024, 10:00:54 PM","06-09-2024, 10:15:32 PM",0:14:38,remote,Shirwade Wani,Maharashtra
+--,v9e66v,48391697,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,4.6810 kWh,"06-09-2024, 09:53:22 PM","06-09-2024, 10:36:26 PM",0:43:04,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,87590834,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,0.9420 kWh,"06-09-2024, 09:40:12 PM","06-09-2024, 09:49:16 PM",0:09:04,other,Talegaon Dabhade,Maharashtra
+--,khxpqf,16029288,1,ccs (1),--,--,--,Tulshidas Jogpete  / 7030545862,8.2560 kWh,"06-09-2024, 09:12:06 PM","06-09-2024, 09:40:09 PM",0:28:03,remote,Shirwade Wani,Maharashtra
+--,1s3jfm,87893073,2,three_pin (2),--,--,--,Nikhil  / 9579861714,1.7100 kWh,"06-09-2024, 03:17:53 PM","06-09-2024, 11:51:37 PM",8:33:44,evdisconnected,--,Maharashtra
+--,gk6vko,68069082,2,three_pin (2),--,--,--,Akshay Shinde  / 8208438113,0.8490 kWh,"06-09-2024, 03:08:00 PM","06-09-2024, 09:53:36 PM",6:45:36,evdisconnected,Shirwade Wani,Maharashtra
+--,gk6vko,17140684,2,three_pin (2),--,--,--,Akshay Shinde  / 8208438113,0.1346 kWh,"06-09-2024, 02:42:35 PM","06-09-2024, 08:24:46 PM",5:42:11,remote,Shirwade Wani,Maharashtra
+--,54fa6q,20636920,2,ccs (2),--,--,--,Krushnat Jadhav / 9579209054,2.6450 kWh,"06-09-2024, 06:16:55 PM","06-09-2024, 06:57:21 PM",0:40:26,other,Pune,Maharashtra
+--,xvbonb,91154248,1,ccs (1),--,--,--,Sujay Pawar  / 9960550119,2.1990 kWh,"06-09-2024, 06:16:33 PM","06-09-2024, 06:29:17 PM",0:12:44,other,Shrirampur Rural,Maharashtra
+--,brmuyf,97724850,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.3655 kWh,"06-09-2024, 05:26:25 PM","06-09-2024, 06:07:58 PM",0:41:33,evdisconnected,Pune,Maharashtra
+--,brmuyf,95418889,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.0060 kWh,"06-09-2024, 05:25:16 PM","06-09-2024, 05:26:03 PM",0:00:47,remote,Pune,Maharashtra
+--,54fa6q,40298435,2,ccs (2),--,--,--,Krushnat Jadhav / 9579209054,16.0510 kWh,"06-09-2024, 05:16:21 PM","06-09-2024, 06:09:59 PM",0:53:38,remote,Pune,Maharashtra
+--,1s3jfm,75451471,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.8910 kWh,"06-09-2024, 11:45:06 AM","06-09-2024, 06:33:05 PM",6:47:59,emergencystop,--,Maharashtra
+--,xvbonb,45544308,1,ccs (1),--,--,--,Sujay Pawar  / 9960550119,25.3040 kWh,"06-09-2024, 05:02:44 PM","06-09-2024, 06:13:00 PM",1:10:16,remote,Shrirampur Rural,Maharashtra
+--,54fa6q,63583146,2,ccs (2),--,--,--,Krushnat Jadhav / 9579209054,8.1900 kWh,"06-09-2024, 04:59:25 PM","06-09-2024, 05:14:05 PM",0:14:40,other,Pune,Maharashtra
+--,a4eb36,54564630,--,,--,--,--,Vitthal / 9881150198,2.9595 kWh,"06-09-2024, 04:35:02 PM","06-09-2024, 09:44:54 PM",5:09:52,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,gfy681,30905986,1,ccs (1),--,--,--,Varun Babasaheb Adik  / 9067122001,4.2580 kWh,"06-09-2024, 03:50:22 PM","06-09-2024, 04:05:28 PM",0:15:06,remote,Ahmednagar,Maharashtra
+--,oxj1rt,48963730,1,ccs (1),--,--,--,Anuj  / 8796967878,18.2000 kWh,"06-09-2024, 03:46:15 PM","06-09-2024, 05:05:20 PM",1:19:05,remote,Pune,Maharashtra
+--,oxj1rt,50770550,1,ccs (1),--,--,--,Anuj  / 8796967878,0.0000 kWh,"06-09-2024, 03:45:22 PM","06-09-2024, 03:45:33 PM",0:00:11,local,Pune,Maharashtra
+--,ks6c6g,97124481,2,ccs (2),--,--,--,Ravindra Khairnar  / 8767194125,3.4030 kWh,"06-09-2024, 03:09:41 PM","06-09-2024, 03:39:49 PM",0:30:08,remote,Dindori,Maharashtra
+--,54fa6q,53265772,2,ccs (2),--,--,--,Ajinkya / 8768007772,5.1850 kWh,"06-09-2024, 02:23:13 PM","06-09-2024, 02:35:10 PM",0:11:57,remote,Pune,Maharashtra
+--,brmuyf,45665974,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,2.0640 kWh,"06-09-2024, 01:40:48 PM","06-09-2024, 04:40:49 PM",3:00:01,remote,Pune,Maharashtra
+--,davd7c,69599531,1,ccs (1),--,--,--,Sunil  / 7798025239,3.6680 kWh,"06-09-2024, 01:40:11 PM","06-09-2024, 01:58:08 PM",0:17:57,emergencystop,Lonavala,Maharashtra
+--,davd7c,41788651,1,ccs (1),--,--,--,Sunil  / 7798025239,4.2420 kWh,"06-09-2024, 01:17:58 PM","06-09-2024, 01:38:27 PM",0:20:29,remote,Lonavala,Maharashtra
+--,davd7c,86523426,2,ccs (2),--,--,--,Shashikant / 9890111040,16.2120 kWh,"06-09-2024, 12:15:47 PM","06-09-2024, 01:07:29 PM",0:51:42,remote,Lonavala,Maharashtra
+--,davd7c,64692887,2,ccs (2),--,--,--,Shashikant / 9890111040,4.7570 kWh,"06-09-2024, 11:55:00 AM","06-09-2024, 12:08:56 PM",0:13:56,powerloss,Lonavala,Maharashtra
+--,khxpqf,82947253,1,ccs (1),--,--,--,Manoj / 8691022507,7.3100 kWh,"06-09-2024, 11:30:16 AM","06-09-2024, 11:52:27 AM",0:22:11,powerloss,Shirwade Wani,Maharashtra
+--,b9dk3e,49890835,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,8.0913 kWh,"06-09-2024, 11:18:30 AM","06-09-2024, 02:27:02 PM",3:08:32,evdisconnected,Pune,Maharashtra
+--,brmuyf,63135605,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.6690 kWh,"06-09-2024, 11:07:35 AM","06-09-2024, 12:07:36 PM",1:00:01,remote,Pune,Maharashtra
+--,54fa6q,38738410,1,ccs (1),--,--,--,Pranav More / 7039912272,15.0200 kWh,"06-09-2024, 11:02:26 AM","06-09-2024, 11:50:38 AM",0:48:12,other,Pune,Maharashtra
+--,xvbonb,83835913,1,ccs (1),--,--,--,Sujay Pawar  / 9960550119,9.0650 kWh,"06-09-2024, 09:25:44 AM","06-09-2024, 09:50:53 AM",0:25:09,remote,Shrirampur Rural,Maharashtra
+--,xvbonb,45588864,1,ccs (1),--,--,--,Sujay Pawar  / 9960550119,4.7150 kWh,"06-09-2024, 09:10:27 AM","06-09-2024, 09:23:32 AM",0:13:05,remote,Shrirampur Rural,Maharashtra
+--,davd7c,66038649,2,ccs (2),--,--,--,Bhupesh  / 9623530970,15.3730 kWh,"06-09-2024, 09:02:17 AM","06-09-2024, 09:48:08 AM",0:45:51,emergencystop,Lonavala,Maharashtra
+--,davd7c,24437829,1,ccs (1),--,--,--,Sunil  / 7798025239,2.1260 kWh,"05-09-2024, 11:26:58 PM","05-09-2024, 11:37:44 PM",0:10:46,remote,Lonavala,Maharashtra
+--,8gs713,64580345,1,industrial (1),--,--,--,-- / --,0.0105 kWh,"05-09-2024, 10:42:08 PM","08-09-2024, 10:49:13 AM",12:07:05,power failed,Bengaluru,Karnataka
+--,1s3jfm,85877248,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.5372 kWh,"05-09-2024, 04:38:31 PM","05-09-2024, 11:04:28 PM",6:25:57,evdisconnected,--,Maharashtra
+--,1s3jfm,17725812,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.5903 kWh,"05-09-2024, 03:04:34 PM","05-09-2024, 09:36:12 PM",6:31:38,emergencystop,--,Maharashtra
+--,54fa6q,53304178,2,ccs (2),--,--,--,Bhavesh Mehta / 9420647777,0.0000 kWh,"05-09-2024, 07:41:33 PM","05-09-2024, 07:42:24 PM",0:00:51,other,Pune,Maharashtra
+--,54fa6q,37805562,1,ccs (1),--,--,--,Kunal Kshirsagar  / 8390854243,20.4070 kWh,"05-09-2024, 07:18:35 PM","05-09-2024, 08:08:28 PM",0:49:53,remote,Pune,Maharashtra
+--,54fa6q,49590792,1,ccs (1),--,--,--,Kunal Kshirsagar  / 8390854243,0.0000 kWh,"05-09-2024, 07:16:47 PM","05-09-2024, 07:17:48 PM",0:01:01,other,Pune,Maharashtra
+--,a94a76,51117415,--,,--,--,--,Ujwala Dange  / 8806554554,0.9323 kWh,"05-09-2024, 07:03:06 PM","07-09-2024, 10:49:09 PM",3:46:03,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,a94a76,26515397,--,,--,--,--,Ujwala Dange  / 8806554554,0.5270 kWh,----,"05-09-2024, 07:03:25 PM",0:00:29,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,54fa6q,42617666,2,ccs (2),--,--,--,Bhavesh Mehta / 9420647777,18.9750 kWh,"05-09-2024, 07:01:46 PM","05-09-2024, 07:31:49 PM",0:30:03,remote,Pune,Maharashtra
+--,nya6sj,16788538,2,ccs (2),--,--,--,Vishal Dilip Nikam / 8805253434,12.0490 kWh,"05-09-2024, 06:27:02 PM","05-09-2024, 07:10:50 PM",0:43:48,remote,Vangali,Maharashtra
+--,nya6sj,94573045,2,ccs (2),--,--,--,Avinash  / 9773352720,2.1000 kWh,"05-09-2024, 05:13:20 PM","05-09-2024, 05:20:12 PM",0:06:52,powerloss,Vangali,Maharashtra
+--,gfy681,91348026,2,ccs (2),--,--,--,Vishal Ingale / 9260699009,33.8720 kWh,"05-09-2024, 04:56:04 PM","05-09-2024, 06:19:47 PM",1:23:43,emergencystop,Ahmednagar,Maharashtra
+--,54fa6q,69103598,2,ccs (2),--,--,--,Sham / 9822269894,9.5010 kWh,"05-09-2024, 04:47:45 PM","05-09-2024, 05:03:47 PM",0:16:02,remote,Pune,Maharashtra
+--,gfy681,32418689,1,ccs (1),--,--,--,Mayur Chothe / 9970576085,5.4480 kWh,"05-09-2024, 04:38:03 PM","05-09-2024, 04:54:30 PM",0:16:27,remote,Ahmednagar,Maharashtra
+--,hkw2j3,21817772,1,type_2 (1),--,--,948CE8C9,Akshay  / 8855030312,0.1220 kWh,"05-09-2024, 04:36:17 PM","05-09-2024, 04:38:50 PM",0:02:33,local,Pune,Maharashtra
+--,5q99me,95273373,2,ccs (2),--,--,--,Dhanraj  / 9158656649,16.8420 kWh,"05-09-2024, 04:34:13 PM","05-09-2024, 05:30:55 PM",0:56:42,other,Khandarmal,Maharashtra
+--,5q99me,61430756,1,ccs (1),--,--,--,Ajabe / 8552005151,14.0900 kWh,"05-09-2024, 02:45:47 PM","05-09-2024, 03:30:02 PM",0:44:15,emergencystop,Khandarmal,Maharashtra
+--,eiqprj,98899772,2,ccs (2),--,--,--,Diptesh Anil Wakchaure / 7038672994,8.3500 kWh,"05-09-2024, 02:13:48 PM","05-09-2024, 02:40:54 PM",0:27:06,remote,Khopadi Kh.,Maharashtra
+--,hkw2j3,89739068,1,type_2 (1),--,--,--,Akshay  / 8855030312,0.3080 kWh,"05-09-2024, 02:03:30 PM","05-09-2024, 02:08:53 PM",0:05:23,emergencystop,Pune,Maharashtra
+--,khxpqf,57113526,1,ccs (1),--,--,--,Amit Pawar  / 9106585813,30.8810 kWh,"05-09-2024, 01:53:06 PM","05-09-2024, 03:20:35 PM",1:27:29,other,Shirwade Wani,Maharashtra
+--,hkw2j3,9243268,1,type_2 (1),--,--,--,Akshay  / 8855030312,0.7440 kWh,"05-09-2024, 01:49:35 PM","05-09-2024, 02:02:09 PM",0:12:34,emergencystop,Pune,Maharashtra
+--,54fa6q,90145829,1,ccs (1),--,--,--,Raj Patil / 9595011230,22.1040 kWh,"05-09-2024, 01:25:17 PM","05-09-2024, 01:52:26 PM",0:27:09,powerloss,Pune,Maharashtra
+--,1s3jfm,10657556,2,three_pin (2),--,--,--,Balasaheb Kale  / 9511041666,5.4576 kWh,"05-09-2024, 07:53:22 AM","05-09-2024, 03:46:34 PM",7:53:12,remote,--,Maharashtra
+--,1s3jfm,10839118,2,three_pin (2),--,--,--,Balasaheb Kale  / 9511041666,0.0003 kWh,"05-09-2024, 07:52:55 AM","05-09-2024, 01:23:13 PM",5:30:18,remote,--,Maharashtra
+--,1s3jfm,81309697,2,three_pin (2),--,--,--,Balasaheb Kale  / 9511041666,0.0000 kWh,"05-09-2024, 07:52:25 AM","05-09-2024, 01:22:47 PM",5:30:22,remote,--,Maharashtra
+--,hkw2j3,452150,1,type_2 (1),--,--,--,Akshay  / 8855030312,0.9895 kWh,"05-09-2024, 01:15:08 PM","05-09-2024, 01:46:33 PM",0:31:25,remote,Pune,Maharashtra
+--,hkw2j3,53960883,1,type_2 (1),--,--,--,Akshay  / 8855030312,0.1640 kWh,"05-09-2024, 01:10:58 PM","05-09-2024, 01:14:00 PM",0:03:02,emergencystop,Pune,Maharashtra
+--,hkw2j3,64054207,1,type_2 (1),--,--,--,Akshay  / 8855030312,0.0980 kWh,"05-09-2024, 01:08:37 PM","05-09-2024, 01:10:14 PM",0:01:37,remote,Pune,Maharashtra
+--,hkw2j3,65717236,1,type_2 (1),--,--,--,Akshay  / 8855030312,0.1990 kWh,"05-09-2024, 01:04:16 PM","05-09-2024, 01:07:32 PM",0:03:16,remote,Pune,Maharashtra
+--,54fa6q,32981205,1,ccs (1),--,--,--,Sagar Birnale / 8668978083,0.0000 kWh,"05-09-2024, 01:04:01 PM","05-09-2024, 01:05:02 PM",0:01:01,other,Pune,Maharashtra
+--,54fa6q,90962768,1,ccs (1),--,--,--,Sagar Birnale / 8668978083,0.0000 kWh,"05-09-2024, 01:02:33 PM","05-09-2024, 01:03:32 PM",0:00:59,other,Pune,Maharashtra
+--,54fa6q,95321679,1,ccs (1),--,--,--,Sagar Birnale / 8668978083,0.0000 kWh,"05-09-2024, 01:00:45 PM","05-09-2024, 01:01:44 PM",0:00:59,other,Pune,Maharashtra
+--,54fa6q,62176232,2,ccs (2),--,--,--,Raj Patil / 9595011230,0.8830 kWh,"05-09-2024, 12:50:37 PM","05-09-2024, 12:53:28 PM",0:02:51,powerloss,Pune,Maharashtra
+--,54fa6q,63803768,1,ccs (1),--,--,--,Sagar Birnale / 8668978083,17.3230 kWh,"05-09-2024, 12:29:58 PM","05-09-2024, 12:54:05 PM",0:24:07,powerloss,Pune,Maharashtra
+--,b9dk3e,64964727,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,6.5830 kWh,"05-09-2024, 11:43:45 AM","05-09-2024, 02:15:50 PM",2:32:05,evdisconnected,Pune,Maharashtra
+--,ks6c6g,21509060,2,ccs (2),--,--,--,JAYWANT D JANGAM / 9422943971,2.7850 kWh,"05-09-2024, 11:30:14 AM","05-09-2024, 11:54:51 AM",0:24:37,remote,Dindori,Maharashtra
+--,hkpu94,27889767,1,ccs (1),--,--,--,Richie / 7507486326,10.7700 kWh,"05-09-2024, 10:26:36 AM","05-09-2024, 10:48:48 AM",0:22:12,remote,Kapurhol,Maharashtra
+--,gfy681,24739872,1,ccs (1),--,--,--,Umesh Sitaram Sirsulwar  / 9422201442,4.2680 kWh,"05-09-2024, 10:19:45 AM","05-09-2024, 10:35:23 AM",0:15:38,remote,Ahmednagar,Maharashtra
+--,hkpu94,76690302,1,ccs (1),--,--,--,Richie / 7507486326,4.8500 kWh,"05-09-2024, 10:14:56 AM","05-09-2024, 10:25:29 AM",0:10:33,remote,Kapurhol,Maharashtra
+--,gfy681,44870276,1,ccs (1),--,--,--,Umesh Sitaram Sirsulwar  / 9422201442,9.0980 kWh,"05-09-2024, 09:43:00 AM","05-09-2024, 10:15:31 AM",0:32:31,remote,Ahmednagar,Maharashtra
+--,ughft5,82873580,1,ccs (1),--,--,--,Akshay  / 8888176665,23.9390 kWh,"05-09-2024, 09:17:15 AM","05-09-2024, 09:51:05 AM",0:33:50,remote,--,Maharashtra
+--,khxpqf,43610259,1,ccs (1),--,--,--,Nivrutti / 9823076895,3.8610 kWh,"05-09-2024, 09:14:04 AM","05-09-2024, 09:28:57 AM",0:14:53,remote,Shirwade Wani,Maharashtra
+--,ughft5,58831215,1,ccs (1),--,--,--,Akshay  / 8888176665,0.0000 kWh,"05-09-2024, 09:07:07 AM","05-09-2024, 09:08:44 AM",0:01:37,powerloss,--,Maharashtra
+--,ughft5,58866958,1,ccs (1),--,--,--,Akshay  / 8888176665,0.0000 kWh,"05-09-2024, 09:04:17 AM","05-09-2024, 09:06:00 AM",0:01:43,local,--,Maharashtra
+--,ughft5,72414207,1,ccs (1),--,--,--,Akshay  / 8888176665,8.9000 kWh,"05-09-2024, 08:47:13 AM","05-09-2024, 08:59:03 AM",0:11:50,local,--,Maharashtra
+--,54fa6q,32396407,2,ccs (2),--,--,--,Padmasani Ramji / 9819891391,23.5390 kWh,"05-09-2024, 08:23:06 AM","05-09-2024, 08:53:09 AM",0:30:03,remote,Pune,Maharashtra
+--,khxpqf,86065481,2,ccs (2),--,--,--,Nilesh Sabale  / 9422868750,8.8110 kWh,"05-09-2024, 01:20:32 AM","05-09-2024, 01:53:03 AM",0:32:31,other,Shirwade Wani,Maharashtra
+--,v9e66v,63456750,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,0.5498 kWh,"05-09-2024, 12:57:22 AM","05-09-2024, 01:02:35 AM",0:05:13,evdisconnected,Talegaon Dabhade,Maharashtra
+--,khxpqf,23526742,2,ccs (2),--,--,--,Nilesh Sabale  / 9422868750,27.2780 kWh,"05-09-2024, 12:36:03 AM","05-09-2024, 01:18:29 AM",0:42:26,other,Shirwade Wani,Maharashtra
+--,v9e66v,35708703,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,4.8130 kWh,"05-09-2024, 12:12:14 AM","05-09-2024, 12:56:14 AM",0:44:00,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,66071087,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,1.4590 kWh,"04-09-2024, 11:56:10 PM","05-09-2024, 12:09:59 AM",0:13:49,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,63212330,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,1.5180 kWh,"04-09-2024, 11:40:09 PM","04-09-2024, 11:54:03 PM",0:13:54,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,14766160,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,7.7010 kWh,"04-09-2024, 10:27:21 PM","04-09-2024, 11:37:43 PM",1:10:22,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,57590658,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,0.0000 kWh,"04-09-2024, 10:23:53 PM","04-09-2024, 10:24:03 PM",0:00:10,evdisconnected,Talegaon Dabhade,Maharashtra
+--,davd7c,70888183,1,ccs (1),--,--,--,Shubham Pise / 7887898085,7.9760 kWh,"04-09-2024, 09:07:02 PM","04-09-2024, 09:31:12 PM",0:24:10,remote,Lonavala,Maharashtra
+--,54fa6q,84283826,2,ccs (2),--,--,--,Bhavesh Mehta / 9420647777,26.2640 kWh,"04-09-2024, 08:47:13 PM","04-09-2024, 09:24:59 PM",0:37:46,remote,Pune,Maharashtra
+--,v9e66v,60187016,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,10.2941 kWh,"04-09-2024, 08:38:03 PM","04-09-2024, 10:12:18 PM",1:34:15,other,Talegaon Dabhade,Maharashtra
+--,v9e66v,54123133,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,0.0181 kWh,"04-09-2024, 08:27:32 PM","04-09-2024, 08:28:42 PM",0:01:10,evdisconnected,Talegaon Dabhade,Maharashtra
+--,gfy681,30448447,2,ccs (2),--,--,--,Rajendra / 9503059276,2.4180 kWh,"04-09-2024, 08:26:20 PM","04-09-2024, 08:34:23 PM",0:08:03,remote,Ahmednagar,Maharashtra
+--,gk6vko,36310363,2,three_pin (2),--,--,--,Manoj Sudhakar Bhalerao  / 7020970489,0.4560 kWh,"04-09-2024, 02:54:25 PM","04-09-2024, 09:19:10 PM",6:24:45,remote,Shirwade Wani,Maharashtra
+--,nya6sj,32768760,2,ccs (2),--,--,--,Jayaprakash  / 7030982433,19.3160 kWh,"04-09-2024, 08:14:38 PM","04-09-2024, 08:56:34 PM",0:41:56,remote,Vangali,Maharashtra
+--,gfy681,20248500,2,ccs (2),--,--,--,Rajendra / 9503059276,6.9350 kWh,"04-09-2024, 08:02:55 PM","04-09-2024, 08:24:15 PM",0:21:20,remote,Ahmednagar,Maharashtra
+--,gfy681,97022019,2,ccs (2),--,--,--,Rajendra / 9503059276,0.0000 kWh,"04-09-2024, 08:01:00 PM","04-09-2024, 08:02:03 PM",0:01:03,other,Ahmednagar,Maharashtra
+--,gfy681,10510065,2,ccs (2),--,--,--,Rajendra / 9503059276,0.0000 kWh,"04-09-2024, 07:42:46 PM","04-09-2024, 07:43:48 PM",0:01:02,other,Ahmednagar,Maharashtra
+--,gfy681,58679800,2,ccs (2),--,--,--,Rajendra / 9503059276,0.0000 kWh,"04-09-2024, 07:42:11 PM","04-09-2024, 07:42:17 PM",0:00:06,remote,Ahmednagar,Maharashtra
+--,1s3jfm,59535674,2,three_pin (2),--,--,--,Nikhil  / 9579861714,1.1759 kWh,"04-09-2024, 02:05:40 PM","04-09-2024, 09:42:21 PM",7:36:41,evdisconnected,--,Maharashtra
+--,ks6c6g,54148675,2,ccs (2),--,--,--,Dr Deep  / 9226161378,4.7910 kWh,"04-09-2024, 07:22:56 PM","04-09-2024, 07:52:07 PM",0:29:11,remote,Dindori,Maharashtra
+--,54fa6q,81387884,1,ccs (1),--,--,--,Kiran Kanse  / 8888440007,18.2850 kWh,"04-09-2024, 07:21:19 PM","04-09-2024, 08:43:46 PM",1:22:27,remote,Pune,Maharashtra
+--,1s3jfm,27658041,2,three_pin (2),--,--,--,Sunil Sasane / 9527109541,0.0843 kWh,"04-09-2024, 01:46:36 PM","04-09-2024, 07:33:21 PM",5:46:45,powerloss,--,Maharashtra
+--,1s3jfm,41237815,2,three_pin (2),--,--,--,Sunil Sasane / 9527109541,0.0009 kWh,"04-09-2024, 01:45:52 PM","04-09-2024, 07:16:26 PM",5:30:34,remote,--,Maharashtra
+--,1s3jfm,37498691,2,three_pin (2),--,--,--,Sunil Sasane / 9527109541,0.0000 kWh,"04-09-2024, 01:45:29 PM","04-09-2024, 07:15:46 PM",5:30:17,remote,--,Maharashtra
+--,1s3jfm,42920014,2,three_pin (2),--,--,--,Sunil Sasane / 9527109541,0.0000 kWh,"04-09-2024, 01:44:47 PM","04-09-2024, 07:15:01 PM",5:30:14,remote,--,Maharashtra
+--,a94a76,31461379,--,,--,--,--,Ujwala Dange  / 8806554554,1.1583 kWh,"04-09-2024, 06:46:30 PM","04-09-2024, 08:30:37 PM",1:44:07,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,1s3jfm,38361697,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.8159 kWh,"04-09-2024, 10:38:21 AM","04-09-2024, 05:23:39 PM",6:45:18,powerloss,--,Maharashtra
+--,davd7c,27108847,1,ccs (1),--,--,--,Mahesh Gurav / 9320106090,6.8940 kWh,"04-09-2024, 03:22:05 PM","04-09-2024, 03:46:20 PM",0:24:15,remote,Lonavala,Maharashtra
+--,brmuyf,14121859,1,industrial_three_pin (1),--,--,--,Pranavkumar  / 9096271291,1.3260 kWh,"04-09-2024, 03:19:32 PM","04-09-2024, 05:25:14 PM",2:05:42,remote,Pune,Maharashtra
+--,v9e66v,34843614,1,type_2 (1),--,--,--,ABHI GARUD / 7767979153,1.6162 kWh,"04-09-2024, 03:10:48 PM","04-09-2024, 03:40:08 PM",0:29:20,evdisconnected,Talegaon Dabhade,Maharashtra
+--,54fa6q,85767305,1,ccs (1),--,--,--,Ganesh Vairat  / 7410145496,20.7420 kWh,"04-09-2024, 02:34:29 PM","04-09-2024, 03:19:44 PM",0:45:15,remote,Pune,Maharashtra
+--,gfy681,37549687,1,ccs (1),--,--,--,Diptesh Anil Wakchaure / 7038672994,7.9210 kWh,"04-09-2024, 02:09:28 PM","04-09-2024, 02:50:53 PM",0:41:25,remote,Ahmednagar,Maharashtra
+--,1s3jfm,77175926,2,three_pin (2),--,--,--,Sunil Sasane / 9527109541,0.6427 kWh,"04-09-2024, 08:25:20 AM","04-09-2024, 02:41:05 PM",6:15:45,remote,--,Maharashtra
+--,fbccqb,47840543,1,three_pin (1),--,--,--,Prasad Mahajan  / 7083833817,0.0000 kWh,"04-09-2024, 01:53:34 PM","04-09-2024, 01:53:39 PM",0:00:05,remote,Nigave Dumala,Maharashtra
+--,54fa6q,91322703,1,ccs (1),--,--,--,Ajit / 9922277423,8.9840 kWh,"04-09-2024, 12:11:26 PM","04-09-2024, 12:41:57 PM",0:30:31,remote,Pune,Maharashtra
+--,khxpqf,60907967,1,ccs (1),--,--,--,Sachin Hiray  / 9158541139,12.7030 kWh,"04-09-2024, 11:51:16 AM","04-09-2024, 12:30:42 PM",0:39:26,remote,Shirwade Wani,Maharashtra
+--,khxpqf,52640580,2,ccs (2),--,--,--,Sachin Hiray  / 9158541139,0.0000 kWh,"04-09-2024, 11:47:46 AM","04-09-2024, 11:48:11 AM",0:00:25,other,Shirwade Wani,Maharashtra
+--,xvbonb,26220908,1,ccs (1),--,--,--,Mukund Bub / 9822282043,17.7100 kWh,"04-09-2024, 11:42:16 AM","04-09-2024, 12:31:28 PM",0:49:12,remote,Shrirampur Rural,Maharashtra
+--,nya6sj,41606094,2,ccs (2),--,--,--,Avinash  / 9773352720,12.8040 kWh,"04-09-2024, 11:08:03 AM","04-09-2024, 11:55:45 AM",0:47:42,evdisconnected,Vangali,Maharashtra
+--,khxpqf,31358371,1,ccs (1),--,--,--,Nilesh Sabale  / 9422868750,29.4590 kWh,"04-09-2024, 10:57:00 AM","04-09-2024, 11:46:31 AM",0:49:31,other,Shirwade Wani,Maharashtra
+--,b9dk3e,47082102,1,industrial_three_pin (1),--,--,--,SANKET UPADHYE / 9096039820,7.4070 kWh,"04-09-2024, 10:53:55 AM","04-09-2024, 01:53:56 PM",3:00:01,remote,Pune,Maharashtra
+--,1s3jfm,53520618,2,three_pin (2),--,--,--,Sunil Sasane / 9527109541,0.0001 kWh,"04-09-2024, 04:40:07 AM","04-09-2024, 10:10:24 AM",5:30:17,remote,--,Maharashtra
+--,1s3jfm,94648279,2,three_pin (2),--,--,--,Sunil Sasane / 9527109541,0.0000 kWh,"04-09-2024, 04:39:31 AM","04-09-2024, 10:09:49 AM",5:30:18,remote,--,Maharashtra
+--,davd7c,23664476,2,ccs (2),--,--,--,Mahesh Gurav / 9320106090,9.3380 kWh,"04-09-2024, 09:41:01 AM","04-09-2024, 10:10:58 AM",0:29:57,emergencystop,Lonavala,Maharashtra
+--,v15zix,39091324,1,ccs (1),--,--,--,Namit Bhankharia / 9833517360,21.1900 kWh,"04-09-2024, 09:35:41 AM","04-09-2024, 11:00:27 AM",1:24:46,other,Mumbai,Maharashtra
+--,davd7c,54438763,2,ccs (2),--,--,--,Mahesh Gurav / 9320106090,0.7620 kWh,"04-09-2024, 09:22:43 AM","04-09-2024, 09:26:13 AM",0:03:30,remote,Lonavala,Maharashtra
+--,davd7c,92652475,2,ccs (2),--,--,--,Avadhut Teli  / 9890076641,12.3490 kWh,"04-09-2024, 08:25:53 AM","04-09-2024, 09:03:36 AM",0:37:43,remote,Lonavala,Maharashtra
+--,a94a76,00576474,--,,--,--,--,Sonali Vitthal Renukar  / 9022963157,1.9561 kWh,"04-09-2024, 07:30:08 AM","04-09-2024, 11:17:16 AM",3:47:08,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,nya6sj,62496593,2,ccs (2),--,--,--,V / 9850254042,20.0600 kWh,"04-09-2024, 06:46:44 AM","04-09-2024, 07:30:36 AM",0:43:52,remote,Vangali,Maharashtra
+--,nya6sj,66022718,1,ccs (1),--,--,--,V / 9850254042,0.0000 kWh,"04-09-2024, 06:45:08 AM","04-09-2024, 06:45:51 AM",0:00:43,evdisconnected,Vangali,Maharashtra
+--,nya6sj,72025234,1,ccs (1),--,--,--,V / 9850254042,0.0000 kWh,"04-09-2024, 06:40:08 AM","04-09-2024, 06:40:35 AM",0:00:27,evdisconnected,Vangali,Maharashtra
+--,nya6sj,86274804,2,ccs (2),--,--,--,Avinash  / 9773352720,40.7420 kWh,"04-09-2024, 05:30:40 AM","04-09-2024, 06:39:43 AM",1:09:03,remote,Vangali,Maharashtra
+--,davd7c,73450321,2,ccs (2),--,--,--,Dipesh / 9820990979,8.8130 kWh,"03-09-2024, 11:39:35 PM","04-09-2024, 12:10:03 AM",0:30:28,evdisconnected,Lonavala,Maharashtra
+--,davd7c,10905677,2,ccs (2),--,--,--,Dipesh / 9820990979,0.0000 kWh,"03-09-2024, 11:37:43 PM","03-09-2024, 11:38:13 PM",0:00:30,evdisconnected,Lonavala,Maharashtra
+--,a4eb36,43555356,1,three_pin (1),--,--,--,Jyostna Jadhav / 9503022337,0.8954 kWh,"03-09-2024, 09:30:01 PM","03-09-2024, 10:30:03 PM",1:00:02,tx completed,Pimpri Chinchwad,Maharashtra
+--,1s3jfm,56899957,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.9959 kWh,"03-09-2024, 03:26:21 PM","03-09-2024, 10:44:26 PM",7:18:05,evdisconnected,--,Maharashtra
+--,brmuyf,74445944,1,industrial_three_pin (1),--,--,--,Pranavkumar  / 9096271291,0.4770 kWh,"03-09-2024, 08:19:09 PM","03-09-2024, 09:02:02 PM",0:42:53,remote,Pune,Maharashtra
+--,khxpqf,15958407,2,ccs (2),--,--,--,Jagdish Shekle / 9881857955,3.2130 kWh,"03-09-2024, 08:17:42 PM","03-09-2024, 08:33:20 PM",0:15:38,remote,Shirwade Wani,Maharashtra
+--,gfy681,97955373,2,ccs (2),--,--,--,Mahesh Zodge  / 9226312173,8.0780 kWh,"03-09-2024, 08:00:47 PM","03-09-2024, 08:29:15 PM",0:28:28,remote,Ahmednagar,Maharashtra
+--,1s3jfm,20084581,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.1940 kWh,"03-09-2024, 02:04:38 PM","03-09-2024, 07:51:52 PM",5:47:14,remote,--,Maharashtra
+--,1s3jfm,43621268,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.4520 kWh,"03-09-2024, 01:21:46 PM","03-09-2024, 07:32:02 PM",6:10:16,remote,--,Maharashtra
+--,1s3jfm,12180678,3,industrial (3),--,--,--,Om Wadgaonkar  / 8010639694,0.0000 kWh,"03-09-2024, 01:20:26 PM","03-09-2024, 06:51:04 PM",5:30:38,remote,--,Maharashtra
+--,gk6vko,12438067,2,three_pin (2),--,--,--,Sunil Purkar / 9623036633,6.1794 kWh,"03-09-2024, 01:01:52 PM","03-09-2024, 09:32:16 PM",8:30:24,evdisconnected,Shirwade Wani,Maharashtra
+--,54fa6q,48712710,1,ccs (1),--,--,--,Pankaj Pakhale  / 9168225802,2.1100 kWh,"03-09-2024, 06:18:01 PM","03-09-2024, 06:25:19 PM",0:07:18,remote,Pune,Maharashtra
+--,7djh9g,38912838,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,1.8450 kWh,"03-09-2024, 06:09:34 PM","10-09-2024, 02:12:49 PM",20:03:15,other,Thane,Maharashtra
+--,1s3jfm,53922717,2,three_pin (2),--,--,--,Om Wadgaonkar  / 8010639694,0.4077 kWh,"03-09-2024, 12:38:58 PM","03-09-2024, 06:50:41 PM",6:11:43,powerloss,--,Maharashtra
+--,54fa6q,59645958,1,ccs (1),--,--,--,Pankaj Pakhale  / 9168225802,5.1990 kWh,"03-09-2024, 05:59:15 PM","03-09-2024, 06:15:35 PM",0:16:20,remote,Pune,Maharashtra
+--,54fa6q,87979784,2,ccs (2),--,--,--,Pankaj Pakhale  / 9168225802,0.0000 kWh,"03-09-2024, 05:54:55 PM","03-09-2024, 05:55:20 PM",0:00:25,other,Pune,Maharashtra
+--,eiqprj,11386152,2,ccs (2),--,--,--,Pravin Ushir / 9373483344,5.6100 kWh,"03-09-2024, 05:28:36 PM","03-09-2024, 05:46:46 PM",0:18:10,remote,Khopadi Kh.,Maharashtra
+--,brmuyf,14953090,1,industrial_three_pin (1),--,--,--,Saloni / 9359220251,1.9071 kWh,"03-09-2024, 05:16:08 PM","03-09-2024, 07:49:28 PM",2:33:20,evdisconnected,Pune,Maharashtra
+--,eiqprj,39738993,2,ccs (2),--,--,--,Pravin Ushir / 9373483344,3.3900 kWh,"03-09-2024, 05:12:34 PM","03-09-2024, 05:22:26 PM",0:09:52,remote,Khopadi Kh.,Maharashtra
+--,davd7c,2498788,2,ccs (2),--,--,--,Avi Mohol  / 9673856668,22.9110 kWh,"03-09-2024, 04:18:05 PM","03-09-2024, 05:18:24 PM",1:00:19,remote,Lonavala,Maharashtra
+--,gk6vko,45350137,2,three_pin (2),--,--,--,Ashish Sable  / 7498344722,1.7250 kWh,"03-09-2024, 10:34:37 AM","03-09-2024, 04:49:15 PM",6:14:38,remote,Shirwade Wani,Maharashtra
+--,gk6vko,89621572,2,three_pin (2),--,--,--,Ashish Sable  / 7498344722,0.0006 kWh,"03-09-2024, 10:33:50 AM","03-09-2024, 04:04:03 PM",5:30:13,remote,Shirwade Wani,Maharashtra
+--,gk6vko,58781756,2,three_pin (2),--,--,--,Ashish Sable  / 7498344722,0.0006 kWh,"03-09-2024, 10:33:39 AM","03-09-2024, 04:03:49 PM",5:30:10,remote,Shirwade Wani,Maharashtra
+--,gk6vko,64811346,2,three_pin (2),--,--,--,Ashish Sable  / 7498344722,0.0000 kWh,"03-09-2024, 10:32:38 AM","03-09-2024, 04:03:07 PM",5:30:29,evdisconnected,Shirwade Wani,Maharashtra
+--,gk6vko,57070175,2,three_pin (2),--,--,--,Ashish Sable  / 7498344722,0.0000 kWh,"03-09-2024, 10:30:56 AM","03-09-2024, 04:01:24 PM",5:30:28,evdisconnected,Shirwade Wani,Maharashtra
+--,gk6vko,38849251,2,three_pin (2),--,--,--,Ashish Sable  / 7498344722,0.0000 kWh,"03-09-2024, 10:29:33 AM","03-09-2024, 04:00:01 PM",5:30:28,evdisconnected,Shirwade Wani,Maharashtra
+--,gk6vko,45540177,2,three_pin (2),--,--,--,Ashish Sable  / 7498344722,0.0001 kWh,"03-09-2024, 10:28:40 AM","03-09-2024, 03:58:51 PM",5:30:11,remote,Shirwade Wani,Maharashtra
+--,nya6sj,88581027,2,ccs (2),--,--,--,Avinash  / 9773352720,13.7990 kWh,"03-09-2024, 03:03:23 PM","03-09-2024, 03:33:43 PM",0:30:20,remote,Vangali,Maharashtra
+--,khxpqf,80686884,1,ccs (1),--,--,--,Vinod Sagarchand Tatiya / 9423094548,9.8240 kWh,"03-09-2024, 02:49:06 PM","03-09-2024, 03:04:28 PM",0:15:22,remote,Shirwade Wani,Maharashtra
+--,8gs713,96524273,1,industrial (1),--,--,--,Kishore nikol ev1 / 7483513449,0.0010 kWh,"03-09-2024, 02:28:58 PM","03-09-2024, 03:28:57 PM",0:59:59,tx completed,Bengaluru,Karnataka
+--,xvbonb,64584436,1,ccs (1),--,--,--,Navnath  / 9890647814,7.6020 kWh,"03-09-2024, 02:26:31 PM","03-09-2024, 02:59:22 PM",0:32:51,other,Shrirampur Rural,Maharashtra
+--,nya6sj,8147146,2,ccs (2),--,--,--,Sudhir V Shinde / 9820939969,11.1200 kWh,"03-09-2024, 02:19:55 PM","03-09-2024, 02:44:55 PM",0:25:00,remote,Vangali,Maharashtra
+--,brmuyf,53319025,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.0970 kWh,"03-09-2024, 02:12:35 PM","03-09-2024, 02:22:06 PM",0:09:31,remote,Pune,Maharashtra
+--,xvbonb,44190376,1,ccs (1),--,--,--,Navnath  / 9890647814,3.8730 kWh,"03-09-2024, 02:07:47 PM","03-09-2024, 02:24:47 PM",0:17:00,powerloss,Shrirampur Rural,Maharashtra
+--,gfy681,48146631,1,ccs (1),--,--,--,Vaishali / 9822223914,7.9460 kWh,"03-09-2024, 01:52:16 PM","03-09-2024, 02:20:35 PM",0:28:19,remote,Ahmednagar,Maharashtra
+--,1s3jfm,93246062,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.9852 kWh,"03-09-2024, 08:14:36 AM","03-09-2024, 03:31:04 PM",7:16:28,evdisconnected,--,Maharashtra
+--,khxpqf,19836180,2,ccs (2),--,--,--,Gaurav Rohidas Gare / 7350243956,6.2930 kWh,"03-09-2024, 01:20:12 PM","03-09-2024, 01:49:48 PM",0:29:36,emergencystop,Shirwade Wani,Maharashtra
+--,b9dk3e,59389509,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,7.7400 kWh,"03-09-2024, 01:06:06 PM","03-09-2024, 04:06:08 PM",3:00:02,remote,Pune,Maharashtra
+--,b9dk3e,80397591,1,industrial_three_pin (1),--,--,--,Apurva Nikol / 8789402815,0.1030 kWh,"03-09-2024, 01:01:23 PM","03-09-2024, 01:04:13 PM",0:02:50,remote,Pune,Maharashtra
+--,nya6sj,52950945,2,ccs (2),--,--,--,Avinash  / 9773352720,25.6450 kWh,"03-09-2024, 12:43:32 PM","03-09-2024, 01:19:53 PM",0:36:21,remote,Vangali,Maharashtra
+--,gfy681,20533383,2,ccs (2),--,--,--,Dinesh / 9762445061,5.3990 kWh,"03-09-2024, 12:43:31 PM","03-09-2024, 01:36:01 PM",0:52:30,other,Ahmednagar,Maharashtra
+--,khxpqf,38545529,1,ccs (1),--,--,--,Rajendra Salunkhe  / 9890982516,19.7150 kWh,"03-09-2024, 11:16:43 AM","03-09-2024, 12:18:08 PM",1:01:25,emergencystop,Shirwade Wani,Maharashtra
+--,auf7cg,19813626,1,industrial_three_pin (1),--,--,--,Asif Shaikh  / 7843094602,0.0130 kWh,"03-09-2024, 11:12:33 AM","03-09-2024, 11:13:33 AM",0:01:00,remote,Pimpri-Chinchwad,Maharashtra
+--,khxpqf,91486414,2,ccs (2),--,--,--,Rajendra Salunkhe  / 9890982516,2.9600 kWh,"03-09-2024, 10:53:36 AM","03-09-2024, 11:08:22 AM",0:14:46,remote,Shirwade Wani,Maharashtra
+--,brmuyf,72799213,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,1.6720 kWh,"03-09-2024, 10:51:37 AM","03-09-2024, 01:08:10 PM",2:16:33,remote,Pune,Maharashtra
+--,nya6sj,72746576,1,ccs (1),--,--,--,Jagdish  / 9960112200,11.9470 kWh,"03-09-2024, 09:20:24 AM","03-09-2024, 09:46:54 AM",0:26:30,remote,Vangali,Maharashtra
+--,54fa6q,88825523,1,ccs (1),--,--,--,Raj Patil / 9595011230,4.1330 kWh,"03-09-2024, 09:17:39 AM","03-09-2024, 09:40:12 AM",0:22:33,other,Pune,Maharashtra
+--,5q99me,28223665,1,ccs (1),--,--,--,Ajabe / 8552005151,12.8870 kWh,"03-09-2024, 08:40:48 AM","03-09-2024, 09:18:50 AM",0:38:02,remote,Khandarmal,Maharashtra
+--,54fa6q,85452874,1,ccs (1),--,--,--,Raj Patil / 9595011230,24.3150 kWh,"03-09-2024, 08:37:33 AM","03-09-2024, 09:11:42 AM",0:34:09,remote,Pune,Maharashtra
+--,5q99me,39010186,1,ccs (1),--,--,--,Sahebrao  / 9702634715,1.7640 kWh,"03-09-2024, 06:51:01 AM","03-09-2024, 07:16:32 AM",0:25:31,other,Khandarmal,Maharashtra
+--,5q99me,95891772,1,ccs (1),--,--,--,Sahebrao  / 9702634715,18.1780 kWh,"03-09-2024, 05:48:55 AM","03-09-2024, 06:49:05 AM",1:00:10,remote,Khandarmal,Maharashtra
+--,5q99me,29069666,1,ccs (1),--,--,--,Sahebrao  / 9702634715,0.0000 kWh,"03-09-2024, 05:46:47 AM","03-09-2024, 05:47:50 AM",0:01:03,other,Khandarmal,Maharashtra
+--,5q99me,33721741,2,ccs (2),--,--,--,Namdeo Patil / 9765559946,12.2410 kWh,"02-09-2024, 11:35:05 PM","03-09-2024, 12:11:58 AM",0:36:53,remote,Khandarmal,Maharashtra
+--,nya6sj,69342258,1,ccs (1),--,--,--,Jayaprakash  / 7030982433,18.5900 kWh,"02-09-2024, 09:57:57 PM","02-09-2024, 10:38:36 PM",0:40:39,remote,Vangali,Maharashtra
+--,nya6sj,11066434,2,ccs (2),--,--,--,Jayaprakash  / 7030982433,0.0000 kWh,"02-09-2024, 09:52:01 PM","02-09-2024, 09:52:19 PM",0:00:18,evdisconnected,Vangali,Maharashtra
+--,brmuyf,35612908,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,1.1080 kWh,"02-09-2024, 09:51:43 PM","02-09-2024, 11:51:44 PM",2:00:01,remote,Pune,Maharashtra
+--,nya6sj,24682518,2,ccs (2),--,--,--,Jayaprakash  / 7030982433,0.0000 kWh,"02-09-2024, 09:50:03 PM","02-09-2024, 09:50:18 PM",0:00:15,evdisconnected,Vangali,Maharashtra
+--,ughft5,71880076,1,ccs (1),--,--,--,Swapnil Narode  / 8668506784,8.5600 kWh,"02-09-2024, 08:24:30 PM","02-09-2024, 08:49:37 PM",0:25:07,remote,--,Maharashtra
+--,auf7cg,52927318,1,industrial_three_pin (1),--,--,--,Bluwheelz Mobility Service  / 9923065824,1.3220 kWh,"02-09-2024, 08:11:43 PM","02-09-2024, 09:11:44 PM",1:00:01,remote,Pimpri-Chinchwad,Maharashtra
+--,j66yuh,26311422,1,type_2 (1),--,--,--,Akshay Kotkar  / 9689181093,9.3874 kWh,"02-09-2024, 02:10:57 PM","02-09-2024, 09:16:43 PM",7:05:46,evdisconnected,Kamargaon,Maharashtra
+--,1s3jfm,4197723,2,three_pin (2),--,--,--,Nikhil  / 9579861714,1.0893 kWh,"02-09-2024, 02:05:00 PM","02-09-2024, 09:30:58 PM",7:25:58,evdisconnected,--,Maharashtra
+--,auf7cg,67465848,1,industrial_three_pin (1),--,--,--,Bluwheelz Mobility Service  / 9923065824,1.2640 kWh,"02-09-2024, 07:00:19 PM","02-09-2024, 08:00:20 PM",1:00:01,remote,Pimpri-Chinchwad,Maharashtra
+--,xoydry,28180567,1,ccs (1),--,--,--,Ratankumar Bhosale  / 9850991998,8.3290 kWh,"02-09-2024, 06:57:57 PM","02-09-2024, 07:23:04 PM",0:25:07,remote,Katphal,Maharashtra
+--,auf7cg,25911928,1,industrial_three_pin (1),--,--,--,Asif Shaikh  / 7843094602,0.4520 kWh,"02-09-2024, 06:28:06 PM","02-09-2024, 06:58:07 PM",0:30:01,remote,Pimpri-Chinchwad,Maharashtra
+--,7djh9g,78099894,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,1.6160 kWh,"02-09-2024, 05:59:54 PM","03-09-2024, 06:09:16 PM",0:09:22,other,Thane,Maharashtra
+--,by2kjd,49059719,1,industrial (1),--,--,--,Minhaz Khan / 9708878206,1.3525 kWh,"02-09-2024, 05:41:25 PM","02-09-2024, 06:41:17 PM",0:59:52,evdisconnected,Talegaon Dabhade,Maharashtra
+--,gfy681,49113514,2,ccs (2),--,--,--,Yogesh Bhoite  / 9552999599,7.1780 kWh,"02-09-2024, 04:46:12 PM","02-09-2024, 05:02:32 PM",0:16:20,remote,Ahmednagar,Maharashtra
+--,gfy681,21928779,2,ccs (2),--,--,--,Yogesh Bhoite  / 9552999599,0.0000 kWh,"02-09-2024, 04:43:47 PM","02-09-2024, 04:44:42 PM",0:00:55,other,Ahmednagar,Maharashtra
+--,1s3jfm,54214209,2,three_pin (2),--,--,--,Nikhil  / 9579861714,0.9623 kWh,"02-09-2024, 10:59:37 AM","02-09-2024, 06:10:45 PM",7:11:08,evdisconnected,--,Maharashtra
+--,5q99me,31184824,1,ccs (1),--,--,--,Shubham Bhamare  / 8087068955,6.3380 kWh,"02-09-2024, 04:24:41 PM","02-09-2024, 04:38:55 PM",0:14:14,remote,Khandarmal,Maharashtra
+--,5q99me,55222759,1,ccs (1),--,--,--,Shubham Bhamare  / 8087068955,5.7960 kWh,"02-09-2024, 04:09:14 PM","02-09-2024, 04:22:27 PM",0:13:13,other,Khandarmal,Maharashtra
+--,gfy681,35988641,2,ccs (2),--,--,--,Yogesh Bhoite  / 9552999599,13.5310 kWh,"02-09-2024, 04:03:33 PM","02-09-2024, 04:33:53 PM",0:30:20,remote,Ahmednagar,Maharashtra
+--,gfy681,93346712,2,ccs (2),--,--,--,Yogesh Bhoite  / 9552999599,0.0000 kWh,"02-09-2024, 03:49:21 PM","02-09-2024, 03:49:35 PM",0:00:14,other,Ahmednagar,Maharashtra
+--,eiqprj,13712083,2,ccs (2),--,--,--,Sachin Vende / 9860137554,10.2000 kWh,"02-09-2024, 03:09:59 PM","02-09-2024, 03:35:08 PM",0:25:09,remote,Khopadi Kh.,Maharashtra
+--,eiqprj,25557624,2,ccs (2),--,--,--,Sachin Vende / 9860137554,0.0000 kWh,"02-09-2024, 03:07:08 PM","02-09-2024, 03:08:56 PM",0:01:48,local,Khopadi Kh.,Maharashtra
+--,7djh9g,46023526,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,0.0000 kWh,"02-09-2024, 03:04:24 PM","02-09-2024, 05:59:36 PM",2:55:12,other,Thane,Maharashtra
+--,b9dk3e,5776889,1,industrial_three_pin (1),--,--,--,Arjun / +919158895888,4.3631 kWh,"02-09-2024, 02:58:24 PM","02-09-2024, 04:40:38 PM",1:42:14,evdisconnected,Pune,Maharashtra
+--,7djh9g,53470691,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,1.2100 kWh,"02-09-2024, 02:54:07 PM","02-09-2024, 03:03:58 PM",0:09:51,other,Thane,Maharashtra
+--,5q99me,71415098,2,ccs (2),--,--,--,Dhanraj  / 9158656649,4.0350 kWh,"02-09-2024, 02:11:09 PM","02-09-2024, 02:28:13 PM",0:17:04,other,Khandarmal,Maharashtra
+--,7djh9g,4890324,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,2.5180 kWh,"02-09-2024, 01:55:25 PM","02-09-2024, 02:53:48 PM",0:58:23,other,Thane,Maharashtra
+--,1s3jfm,45496391,1,type_2 (1),--,--,--,Vinod Nile  / 8208171413,0.9480 kWh,"02-09-2024, 08:11:52 AM","02-09-2024, 02:10:57 PM",5:59:05,powerloss,--,Maharashtra
+--,5q99me,64369370,2,ccs (2),--,--,--,Dhanraj  / 9158656649,10.0490 kWh,"02-09-2024, 01:35:31 PM","02-09-2024, 02:10:15 PM",0:34:44,remote,Khandarmal,Maharashtra
+--,5q99me,60491610,2,ccs (2),--,--,--,Dhanraj  / 9158656649,0.0000 kWh,"02-09-2024, 01:33:18 PM","02-09-2024, 01:33:45 PM",0:00:27,other,Khandarmal,Maharashtra
+--,5q99me,18142664,2,ccs (2),--,--,--,Dhanraj  / 9158656649,0.0000 kWh,"02-09-2024, 01:30:48 PM","02-09-2024, 01:31:51 PM",0:01:03,other,Khandarmal,Maharashtra
+--,54fa6q,57085990,2,ccs (2),--,--,--,Mohnish / 9892657437,10.2890 kWh,"02-09-2024, 01:04:01 PM","02-09-2024, 01:38:00 PM",0:33:59,remote,Pune,Maharashtra
+--,davd7c,27498915,1,ccs (1),--,--,--,Mahesh Gurav / 9320106090,12.0980 kWh,"02-09-2024, 12:26:44 PM","02-09-2024, 01:05:25 PM",0:38:41,remote,Lonavala,Maharashtra
+--,khxpqf,80982192,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,25.0250 kWh,"02-09-2024, 12:13:52 PM","02-09-2024, 01:07:28 PM",0:53:36,emergencystop,Shirwade Wani,Maharashtra
+--,khxpqf,6330243,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 12:13:08 PM","02-09-2024, 12:13:30 PM",0:00:22,other,Shirwade Wani,Maharashtra
+--,khxpqf,46998237,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 12:11:34 PM","02-09-2024, 12:11:55 PM",0:00:21,other,Shirwade Wani,Maharashtra
+--,khxpqf,63112253,1,ccs (1),--,--,--,Amit Pawar  / 9106585813,0.0000 kWh,"02-09-2024, 12:10:29 PM","02-09-2024, 12:10:55 PM",0:00:26,other,Shirwade Wani,Maharashtra
+--,khxpqf,50009487,1,ccs (1),--,--,--,Amit Pawar  / 9106585813,0.0000 kWh,"02-09-2024, 12:08:47 PM","02-09-2024, 12:09:14 PM",0:00:27,other,Shirwade Wani,Maharashtra
+--,khxpqf,68209987,1,ccs (1),--,--,--,Amit Pawar  / 9106585813,0.0000 kWh,"02-09-2024, 11:59:25 AM","02-09-2024, 11:59:51 AM",0:00:26,other,Shirwade Wani,Maharashtra
+--,khxpqf,36851323,2,ccs (2),--,--,--,Amit Pawar  / 9106585813,0.0000 kWh,"02-09-2024, 11:53:31 AM","02-09-2024, 11:53:56 AM",0:00:25,other,Shirwade Wani,Maharashtra
+--,khxpqf,86395588,1,ccs (1),--,--,--,Rajeev Ranjan  / 7798983145,20.2230 kWh,"02-09-2024, 10:42:03 AM","02-09-2024, 11:42:13 AM",1:00:10,remote,Shirwade Wani,Maharashtra
+--,khxpqf,64916663,2,ccs (2),--,--,--,Jagdish Shekle / 9881857955,6.4240 kWh,"02-09-2024, 10:23:32 AM","02-09-2024, 10:53:45 AM",0:30:13,remote,Shirwade Wani,Maharashtra
+--,davd7c,58340523,1,ccs (1),--,--,--,Avi Mohol  / 9673856668,9.9370 kWh,"02-09-2024, 09:24:20 AM","02-09-2024, 09:46:43 AM",0:22:23,emergencystop,Lonavala,Maharashtra
+--,khxpqf,68114838,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,4.0490 kWh,"02-09-2024, 09:12:53 AM","02-09-2024, 09:22:33 AM",0:09:40,local,Shirwade Wani,Maharashtra
+--,gk6vko,13552194,1,type_2 (1),--,--,--,Ashish Sable  / 7498344722,0.0003 kWh,"02-09-2024, 03:30:33 AM","02-09-2024, 09:00:42 AM",5:30:09,remote,Shirwade Wani,Maharashtra
+--,gk6vko,89432128,1,type_2 (1),--,--,--,Ashish Sable  / 7498344722,0.0000 kWh,"02-09-2024, 03:29:34 AM","02-09-2024, 08:59:44 AM",5:30:10,evdisconnected,Shirwade Wani,Maharashtra
+--,khxpqf,66116074,2,ccs (2),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 08:53:34 AM","02-09-2024, 08:54:02 AM",0:00:28,other,Shirwade Wani,Maharashtra
+--,khxpqf,89585299,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 08:52:28 AM","02-09-2024, 08:52:49 AM",0:00:21,other,Shirwade Wani,Maharashtra
+--,khxpqf,87203269,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 08:50:02 AM","02-09-2024, 08:50:23 AM",0:00:21,other,Shirwade Wani,Maharashtra
+--,khxpqf,16182476,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 08:35:09 AM","02-09-2024, 08:35:30 AM",0:00:21,other,Shirwade Wani,Maharashtra
+--,khxpqf,95557495,1,ccs (1),--,--,--,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 08:30:04 AM","02-09-2024, 08:30:24 AM",0:00:20,other,Shirwade Wani,Maharashtra
+--,khxpqf,23718226,1,ccs (1),--,--,--,Ketan Nikam / 8669161347,0.0000 kWh,"02-09-2024, 08:27:04 AM","02-09-2024, 08:27:24 AM",0:00:20,other,Shirwade Wani,Maharashtra
+--,khxpqf,14257612,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 08:24:45 AM","02-09-2024, 08:25:13 AM",0:00:28,other,Shirwade Wani,Maharashtra
+--,khxpqf,56848966,1,ccs (1),--,--,819BFF39,Chetan Bhalerao / 7741851734,0.0000 kWh,"02-09-2024, 08:22:10 AM","02-09-2024, 08:22:39 AM",0:00:29,other,Shirwade Wani,Maharashtra
+--,khxpqf,41710587,2,ccs (2),--,--,--,Ketan Nikam / 8669161347,0.0000 kWh,"02-09-2024, 08:17:10 AM","02-09-2024, 08:17:36 AM",0:00:26,other,Shirwade Wani,Maharashtra
+--,khxpqf,30372138,1,ccs (1),--,--,--,Ketan Nikam / 8669161347,0.0000 kWh,"02-09-2024, 08:15:44 AM","02-09-2024, 08:16:10 AM",0:00:26,other,Shirwade Wani,Maharashtra
+--,khxpqf,70040761,1,ccs (1),--,--,--,Ketan Nikam / 8669161347,0.0000 kWh,"02-09-2024, 08:14:33 AM","02-09-2024, 08:15:00 AM",0:00:27,other,Shirwade Wani,Maharashtra
+--,a94a76,36825860,1,three_pin (1),--,--,--,Ujwala Dange  / 8806554554,1.8673 kWh,"02-09-2024, 08:04:01 AM","02-09-2024, 11:01:30 AM",2:57:29,plug disconnected,Pimpri Chinchwad,Maharashtra
+--,5q99me,87159916,2,ccs (2),--,--,--,Moses Bhandare  / 8624995304,7.9870 kWh,"02-09-2024, 04:25:17 AM","02-09-2024, 04:52:56 AM",0:27:39,remote,Khandarmal,Maharashtra
+--,5q99me,53027266,2,ccs (2),--,--,--,Moses Bhandare  / 8624995304,5.8570 kWh,"02-09-2024, 03:04:42 AM","02-09-2024, 03:25:08 AM",0:20:26,remote,Khandarmal,Maharashtra
+--,5q99me,30786374,2,ccs (2),--,--,--,Moses Bhandare  / 8624995304,0.0000 kWh,"02-09-2024, 03:03:13 AM","02-09-2024, 03:03:40 AM",0:00:27,other,Khandarmal,Maharashtra
+--,eiqprj,47749633,2,ccs (2),--,--,--,Arun Agone  / 9923117740,6.0000 kWh,"02-09-2024, 03:01:47 AM","02-09-2024, 03:19:25 AM",0:17:38,remote,Khopadi Kh.,Maharashtra
+--,5q99me,59194100,2,ccs (2),--,--,--,Moses Bhandare  / 8624995304,2.1360 kWh,"02-09-2024, 02:05:22 AM","02-09-2024, 02:13:13 AM",0:07:51,powerloss,Khandarmal,Maharashtra
+--,5q99me,31293214,2,ccs (2),--,--,--,Moses Bhandare  / 8624995304,0.0000 kWh,"02-09-2024, 02:03:20 AM","02-09-2024, 02:03:42 AM",0:00:22,other,Khandarmal,Maharashtra
+--,davd7c,79538743,1,ccs (1),--,--,--,Arya Salvi / 7304555007,8.0890 kWh,"02-09-2024, 12:29:55 AM","02-09-2024, 12:48:14 AM",0:18:19,remote,Lonavala,Maharashtra
+--,davd7c,65431137,1,ccs (1),--,--,--,Arya Salvi / 7304555007,0.0000 kWh,"02-09-2024, 12:29:19 AM","02-09-2024, 12:29:33 AM",0:00:14,evdisconnected,Lonavala,Maharashtra
+--,davd7c,24274786,1,ccs (1),--,--,--,Arya Salvi / 7304555007,0.0000 kWh,"02-09-2024, 12:27:32 AM","02-09-2024, 12:28:35 AM",0:01:03,evdisconnected,Lonavala,Maharashtra
+--,5q99me,7043427,1,ccs (1),--,--,--,Ramakrishna Srikant Deshpande / 9623960446,8.0310 kWh,"01-09-2024, 11:22:55 PM","01-09-2024, 11:42:20 PM",0:19:25,remote,Khandarmal,Maharashtra
+--,a94a76,94550603,1,three_pin (1),--,--,--,Ujwala Dange  / 8806554554,2.0443 kWh,"01-09-2024, 10:09:40 PM","02-09-2024, 01:09:40 AM",3:00:00,tx completed,Pimpri Chinchwad,Maharashtra
+--,brmuyf,15877663,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.7100 kWh,"01-09-2024, 10:04:20 PM","02-09-2024, 12:04:21 AM",2:00:01,remote,Pune,Maharashtra
+--,nya6sj,48269240,2,ccs (2),--,--,--,Sarvadnya ElectroTech pvt ltd / 9766071378,19.8170 kWh,"01-09-2024, 09:46:50 PM","01-09-2024, 10:30:56 PM",0:44:06,remote,Vangali,Maharashtra
+--,nya6sj,68007082,1,ccs (1),--,--,--,Sarvadnya ElectroTech pvt ltd / 9766071378,0.0000 kWh,"01-09-2024, 09:44:57 PM","01-09-2024, 09:45:59 PM",0:01:02,evdisconnected,Vangali,Maharashtra
+--,nya6sj,54113673,1,ccs (1),--,--,--,Sarvadnya ElectroTech pvt ltd / 9766071378,0.0000 kWh,"01-09-2024, 09:43:53 PM","01-09-2024, 09:44:18 PM",0:00:25,evdisconnected,Vangali,Maharashtra
+--,5q99me,95272666,1,ccs (1),--,--,--,Mahesh  / 9881125151,10.1140 kWh,"01-09-2024, 09:42:03 PM","01-09-2024, 10:05:31 PM",0:23:28,remote,Khandarmal,Maharashtra
+--,5q99me,64156583,1,ccs (1),--,--,--,Mahesh  / 9881125151,0.0000 kWh,"01-09-2024, 09:40:39 PM","01-09-2024, 09:41:02 PM",0:00:23,other,Khandarmal,Maharashtra
+--,hkpu94,20055743,1,ccs (1),--,--,--,Vikrant Patil / 9922008182,11.2000 kWh,"01-09-2024, 09:29:04 PM","01-09-2024, 10:03:25 PM",0:34:21,remote,Kapurhol,Maharashtra
+--,khxpqf,71040845,1,ccs (1),--,--,--,Sanjay Mudbakhe / 9822819171,1.8290 kWh,"01-09-2024, 09:25:18 PM","01-09-2024, 09:31:38 PM",0:06:20,emergencystop,Shirwade Wani,Maharashtra
+--,ughft5,55117692,1,ccs (1),--,--,--,Rajesh Dhanad / 9421307135,5.1500 kWh,"01-09-2024, 08:44:48 PM","01-09-2024, 09:00:23 PM",0:15:35,remote,--,Maharashtra
+--,khxpqf,66555463,1,ccs (1),--,--,--,Parikshit  / 9970762478,13.7160 kWh,"01-09-2024, 08:13:12 PM","01-09-2024, 09:01:14 PM",0:48:02,remote,Shirwade Wani,Maharashtra
+--,khxpqf,53129571,1,ccs (1),--,--,--,Parikshit  / 9970762478,0.0000 kWh,"01-09-2024, 08:09:34 PM","01-09-2024, 08:10:02 PM",0:00:28,other,Shirwade Wani,Maharashtra
+--,by2kjd,21373258,1,industrial (1),--,--,--,Arvind Kumar Pandey  / 9711858109,0.0000 kWh,"01-09-2024, 08:08:16 PM","01-09-2024, 08:09:18 PM",0:01:02,evdisconnected,Talegaon Dabhade,Maharashtra
+--,khxpqf,66293475,2,ccs (2),--,--,--,Sanjay Vijaysing Magar / 9422261847,5.2010 kWh,"01-09-2024, 07:49:32 PM","01-09-2024, 08:15:17 PM",0:25:45,remote,Shirwade Wani,Maharashtra
+--,brmuyf,83515063,1,industrial_three_pin (1),--,--,--,Dipendra Parmar / 8668635582,0.8310 kWh,"01-09-2024, 07:44:15 PM","01-09-2024, 09:46:41 PM",2:02:26,remote,Pune,Maharashtra
+--,1s3jfm,482441,2,three_pin (2),--,--,--,Nikhil  / 9579861714,1.2646 kWh,"01-09-2024, 02:04:17 PM","01-09-2024, 09:50:29 PM",7:46:12,evdisconnected,--,Maharashtra
+--,54fa6q,89797398,1,ccs (1),--,--,--,Jaywant  / 7303481666,25.7370 kWh,"01-09-2024, 07:11:25 PM","01-09-2024, 07:46:46 PM",0:35:21,other,Pune,Maharashtra
+--,by2kjd,53489896,1,industrial (1),--,--,--,Arvind Kumar Pandey  / 9711858109,2.3870 kWh,"01-09-2024, 07:07:52 PM","01-09-2024, 08:07:55 PM",1:00:03,remote,Talegaon Dabhade,Maharashtra
+--,5q99me,52521464,2,ccs (2),--,--,--,Moses Bhandare  / 8624995304,6.0070 kWh,"01-09-2024, 05:23:43 PM","01-09-2024, 05:44:13 PM",0:20:30,remote,Khandarmal,Maharashtra
+--,ks6c6g,5148488,2,ccs (2),--,--,--,Tukaram / 9149664241,3.3280 kWh,"01-09-2024, 05:18:36 PM","01-09-2024, 05:48:51 PM",0:30:15,remote,Dindori,Maharashtra
+--,khxpqf,85562623,1,ccs (1),--,--,--,Sanjay Bhamare  / 9823056528,8.0580 kWh,"01-09-2024, 04:59:33 PM","01-09-2024, 05:28:04 PM",0:28:31,remote,Shirwade Wani,Maharashtra
+--,5q99me,57511899,2,ccs (2),--,--,--,Moses Bhandare  / 8624995304,5.2720 kWh,"01-09-2024, 04:53:46 PM","01-09-2024, 05:12:07 PM",0:18:21,remote,Khandarmal,Maharashtra
+--,gfy681,80736992,1,ccs (1),--,--,--,Mayur / 8378070593,21.2270 kWh,"01-09-2024, 03:45:16 PM","01-09-2024, 04:56:17 PM",1:11:01,remote,Ahmednagar,Maharashtra
+--,nya6sj,532276,1,ccs (1),--,--,--,Mahesh / 9028928108,25.0680 kWh,"01-09-2024, 03:24:52 PM","01-09-2024, 04:53:27 PM",1:28:35,evdisconnected,Vangali,Maharashtra
+--,nya6sj,20225277,2,ccs (2),--,--,--,Mahesh / 9028928108,0.0000 kWh,"01-09-2024, 03:22:12 PM","01-09-2024, 03:23:14 PM",0:01:02,evdisconnected,Vangali,Maharashtra
+--,v9e66v,83891684,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,4.5910 kWh,"01-09-2024, 02:46:28 PM","01-09-2024, 03:28:35 PM",0:42:07,evdisconnected,Talegaon Dabhade,Maharashtra
+--,ks6c6g,94433551,2,ccs (2),--,--,--,Naresh / 9966333790,12.2610 kWh,"01-09-2024, 02:31:42 PM","01-09-2024, 03:44:42 PM",1:13:00,remote,Dindori,Maharashtra
+--,davd7c,91939330,1,ccs (1),--,--,--,Salony Shah / 9820576602,9.5700 kWh,"01-09-2024, 02:27:55 PM","01-09-2024, 03:29:12 PM",1:01:17,emergencystop,Lonavala,Maharashtra
+--,v9e66v,87850624,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,2.7120 kWh,"01-09-2024, 02:17:37 PM","01-09-2024, 02:42:08 PM",0:24:31,other,Talegaon Dabhade,Maharashtra
+--,gfy681,54119694,1,ccs (1),--,--,--,Sunil Surwade  / 9272326596,12.3750 kWh,"01-09-2024, 02:03:39 PM","01-09-2024, 02:35:29 PM",0:31:50,remote,Ahmednagar,Maharashtra
+--,gfy681,61227170,1,ccs (1),--,--,--,Sunil Surwade  / 9272326596,0.0000 kWh,"01-09-2024, 02:02:16 PM","01-09-2024, 02:03:18 PM",0:01:02,other,Ahmednagar,Maharashtra
+--,gfy681,25166401,1,ccs (1),--,--,--,Sunil Surwade  / 9272326596,0.0000 kWh,"01-09-2024, 01:59:38 PM","01-09-2024, 02:00:40 PM",0:01:02,other,Ahmednagar,Maharashtra
+--,b9dk3e,63013554,1,industrial_three_pin (1),--,--,--,SANKET UPADHYE / 9096039820,5.2740 kWh,"01-09-2024, 01:50:22 PM","01-09-2024, 03:50:24 PM",2:00:02,remote,Pune,Maharashtra
+--,davd7c,14810007,1,ccs (1),--,--,--,Salony Shah / 9820576602,10.7210 kWh,"01-09-2024, 01:41:25 PM","01-09-2024, 02:18:49 PM",0:37:24,remote,Lonavala,Maharashtra
+--,davd7c,85332970,1,ccs (1),--,--,--,Salony Shah / 9820576602,0.5630 kWh,"01-09-2024, 01:33:11 PM","01-09-2024, 01:36:35 PM",0:03:24,remote,Lonavala,Maharashtra
+--,davd7c,91131275,1,ccs (1),--,--,--,Salony Shah / 9820576602,0.2750 kWh,"01-09-2024, 01:30:11 PM","01-09-2024, 01:32:25 PM",0:02:14,remote,Lonavala,Maharashtra
+--,v9e66v,8029440,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,5.5350 kWh,"01-09-2024, 01:18:50 PM","01-09-2024, 02:09:30 PM",0:50:40,other,Talegaon Dabhade,Maharashtra
+--,by2kjd,33547261,1,industrial (1),--,--,--,Prasanna Patil  / 8999651062,0.8480 kWh,"01-09-2024, 01:16:04 PM","01-09-2024, 02:30:15 PM",1:14:11,powerloss,Talegaon Dabhade,Maharashtra
+--,davd7c,77334263,1,ccs (1),--,--,--,Salony Shah / 9820576602,3.8730 kWh,"01-09-2024, 01:10:41 PM","01-09-2024, 01:25:44 PM",0:15:03,evdisconnected,Lonavala,Maharashtra
+--,davd7c,25618820,2,ccs (2),--,--,--,Shirish Sinalkar / 9920098020,9.1460 kWh,"01-09-2024, 12:58:12 PM","01-09-2024, 01:32:42 PM",0:34:30,remote,Lonavala,Maharashtra
+--,davd7c,51026331,2,ccs (2),--,--,--,Shirish Sinalkar / 9920098020,0.0000 kWh,"01-09-2024, 12:56:31 PM","01-09-2024, 12:57:35 PM",0:01:04,evdisconnected,Lonavala,Maharashtra
+--,davd7c,35913113,2,ccs (2),--,--,--,Shirish Sinalkar / 9920098020,0.4840 kWh,"01-09-2024, 12:49:33 PM","01-09-2024, 12:52:20 PM",0:02:47,powerloss,Lonavala,Maharashtra
+--,davd7c,67859526,1,ccs (1),--,--,--,Ejew / 9820646284,5.0230 kWh,"01-09-2024, 11:28:43 AM","01-09-2024, 11:41:41 AM",0:12:58,remote,Lonavala,Maharashtra
+--,v9e66v,17519337,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,2.5529 kWh,"01-09-2024, 11:26:32 AM","01-09-2024, 12:43:59 PM",1:17:27,powerloss,Talegaon Dabhade,Maharashtra
+--,ughft5,95051858,1,ccs (1),--,--,--,Rajesh Dhanad / 9421307135,2.8900 kWh,"01-09-2024, 11:18:18 AM","01-09-2024, 11:28:22 AM",0:10:04,local,--,Maharashtra
+--,nya6sj,84438829,1,ccs (1),--,--,--,Rajkumar Ganacharya  / 9822516899,13.3140 kWh,"01-09-2024, 11:18:08 AM","01-09-2024, 11:52:49 AM",0:34:41,remote,Vangali,Maharashtra
+--,gfy681,44278107,2,ccs (2),--,--,--,Chandrakant Misal  / 8208302706,11.9670 kWh,"01-09-2024, 11:11:35 AM","01-09-2024, 11:54:02 AM",0:42:27,powerloss,Ahmednagar,Maharashtra
+--,nya6sj,91066714,2,ccs (2),--,--,--,Avinash  / 9773352720,16.3440 kWh,"01-09-2024, 11:00:11 AM","01-09-2024, 12:03:31 PM",1:03:20,evdisconnected,Vangali,Maharashtra
+--,v9e66v,72113110,1,type_2 (1),--,--,--,Amit Nikam / 8208533859,5.8928 kWh,"01-09-2024, 10:25:39 AM","01-09-2024, 11:19:46 AM",0:54:07,other,Talegaon Dabhade,Maharashtra
+--,ks6c6g,56375526,2,ccs (2),--,--,--,Tukaram / 9149664241,3.9700 kWh,"01-09-2024, 07:46:24 AM","01-09-2024, 08:21:49 AM",0:35:25,remote,Dindori,Maharashtra
+--,nya6sj,72848180,1,ccs (1),--,--,--,Manohar Gaikwad  / 8999340455,3.5570 kWh,"01-09-2024, 01:53:46 AM","01-09-2024, 02:40:10 AM",0:46:24,evdisconnected,Vangali,Maharashtra
+--,nya6sj,83982361,1,ccs (1),--,--,--,Manohar Gaikwad  / 8999340455,26.8740 kWh,"01-09-2024, 12:50:06 AM","01-09-2024, 01:49:12 AM",0:59:06,remote,Vangali,Maharashtra
+--,khxpqf,36960770,1,ccs (1),--,--,--,Ramakrishna Srikant Deshpande / 9623960446,8.4670 kWh,"01-09-2024, 12:24:46 AM","01-09-2024, 12:45:05 AM",0:20:19,remote,Shirwade Wani,Maharashtra
+--,khxpqf,92233478,1,ccs (1),--,--,--,Ramakrishna Srikant Deshpande / 9623960446,0.0000 kWh,"01-09-2024, 12:22:45 AM","01-09-2024, 12:23:46 AM",0:01:01,other,Shirwade Wani,Maharashtra
+--,ughft5,95640155,2,ccs (2),--,--,--,Sarthak  / 8237101333,1.1400 kWh,"31-08-2024, 11:11:30 PM","01-09-2024, 04:48:52 AM",4:48:52,powerloss,--,Maharashtra
+--,a94a76,56222962,1,three_pin (1),--,--,--,Vitthal / 9881150198,3.3301 kWh,"31-08-2024, 07:09:49 PM","01-09-2024, 12:27:43 AM",0:27:43,limit reached,Pimpri Chinchwad,Maharashtra
+--,7djh9g,65767340,1,gbt (1),--,--,dd8c13a2,Abhishek Singh  / 8796573403,0.5660 kWh,"30-08-2024, 05:51:47 PM","02-09-2024, 01:55:07 PM",13:55:07,other,Thane,Maharashtra
+--,8gs713,378540371711,--,,--,--,--,Kushan Kapoor / 1234567890,0.0000 kWh,----,----,15:05:56,tx completed,Bengaluru,Karnataka

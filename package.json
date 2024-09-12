@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "test": "npx playwright test ../tests/alltests.spec.js"
+    "test": "npx playwright test ../tests/alltests.spec.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@aternus/csv-to-xlsx": "^2.1.5",
+    "allure-playwright": "^3.0.0-beta.12",
     "exceljs": "^4.4.0",
     "fs-extra": "^11.2.0",
     "playwright": "^1.46.1",

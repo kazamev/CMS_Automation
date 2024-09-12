@@ -1,12 +1,15 @@
 const { test } = require('@playwright/test');
 const LoginPage = require('../pages/LoginPage');
 const DashboardPage = require('../pages/DashboardPage');
+const { chromium } = require('playwright'); 
+const path = require('path');
 
 let context;
 let page;
 
 // Define DashboardValidation as an async function
 const DashboardValidation = async () => {
+    let dashboardValue,dashboardUsageValue;
     // First test for login setup
     test('Login and navigate to Nikol EV', async ({ browser }) => {
         // Launch a new browser context and page
@@ -23,20 +26,23 @@ const DashboardValidation = async () => {
 
         // Save the logged-in state (optional, useful for debugging)
         await context.storageState({ path: 'logged-in-state.json' });
-        await page.waitForTimeout(5000);
+        await page.waitForTimeout(10000);
     });
 
     // Second test for dashboard validation
     test('Dashboard validation', async () => {
         // Initialize the DashboardPage with the page instance
     const dashboardPage = new DashboardPage(page);
+    await page.waitForTimeout(5000)
 
     // Get and print dashboard session value
-    const dashboardValue = await dashboardPage.getDashboardValue();
+    dashboardValue = await dashboardPage.getDashboardValue();
+    await page.waitForTimeout(2000);
     console.log(`Total no of sessions(From Dashboard): ${dashboardValue}`);
+    await page.waitForTimeout(2000);
 
     // Get and print dashboard usage value
-    const dashboardUsageValue = await dashboardPage.getDashboardUsageValue();
+    dashboardUsageValue = await dashboardPage.getDashboardUsageValue();
     console.log(`Total Usage (From Dashboard In kWh): ${dashboardUsageValue}`);
 
     // Click on the session value to open details
@@ -44,37 +50,15 @@ const DashboardValidation = async () => {
     await page.waitForTimeout(5000); // Wait for details to load
 
     // Apply filter
-    await dashboardPage.applyFilter();
-    await page.waitForTimeout(6000); // Wait for filter to apply
-
-    // Download the report
+    await dashboardPage.filterButton();
+    await page.waitForTimeout(2000);
+    await dashboardPage.selectFilter();
+    await page.waitForTimeout(2000);
+    await dashboardPage.threeDots();
+    await page.waitForTimeout(2000);
     await dashboardPage.downloadReport();
     await page.waitForTimeout(10000); // Wait for the download to complete
     });
-
-    test('Email download', async () => {
-    
-        // Initialize the GmailPage with the page instance
-        const gmailPage = new GmailPage(page);
-        const email = "akhilesh@kazam.in";
-        const password = "Akbl@1724";
-        const localDownloadPath = "C:/Users/Admin/Downloads";
-    
-        // Navigate to Gmail and perform login
-        await gmailPage.gotoGmail();
-        await gmailPage.login(email, password);
-    
-        // Open the first email in the inbox
-        await gmailPage.openFirstEmail();
-    
-        // Download the report from the email
-        await gmailPage.downloadReport(localDownloadPath);
-    
-        // Wait to ensure download is complete
-        await page.waitForTimeout(5000);
-        console.log(await page.title());
-    });
-
 };
 
 // Export the DashboardValidation function to be used elsewhere

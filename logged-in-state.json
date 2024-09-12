@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "auth",
+      "value": "7f2f49f3d9aa59f339edc1cba3cbd243ed4e043ce76d6553c5974efc983e90948c767893af2517695875ceada170c9617ac4dce400b19e02f3bbb71789aafdb9aa77159f7d7074d556386322b19838cb633e3dbef311b84131edd0529cd5273f54c751a2fc47161277441a4203e867bf48d81764dc53d82e57d8b76d7927eb0009bb25b5799f9716e36aa0357f065f9e6c213c8c928d42e774b5715519fb3d4530c98a40c6c3aaccb57c5286e2680660",
+      "domain": "novo.kazam.in",
+      "path": "/",
+      "expires": 1726739790.177522,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Strict"
+    }
+  ],
+  "origins": []
+}
