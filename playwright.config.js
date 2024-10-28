@@ -11,6 +11,7 @@ const config = {
   use: {
     browserName: "chromium",
     headless: false,
+    channel: 'chrome',  // Specify the full Chrome browser
   },
 };
 
