@@ -6,6 +6,7 @@ const { exec } = require('child_process');
 const { chromium } = require('playwright');
 const {convertCsvToXlsx} = require ('@aternus/csv-to-xlsx');
 const { text } = require('stream/consumers');
+const { abort } = require('process');
 //const { console } = require('inspector');
 const localDownloadPath = 'C:\Users\msg4a\Downloads';
 let downloadFilename
@@ -25,7 +26,7 @@ const filePath ='C:\Users\msg4a\Downloads\aa1';
       await page.fill('#large-input','akhilesh@kazam.in');
       await page.fill('#password','Akbl@1724');
       await page.click("button[type='submit']");
-      await page.click("//p[normalize-space()='ZYNETIC ELECTRIC VEHICLE CHARGING LLC']");
+      await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
     // Wait for a few seconds
       await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
@@ -226,7 +227,7 @@ test("Online percentage validation",async ({ page }) => {
 });
 
 
-test.only('Add charger flow validation', async ({ page}) => {
+test('Add charger flow validation', async ({ page}) => {
   
     global.content=''
     const filepath1 = '.upload/aa1.png'
@@ -253,7 +254,7 @@ test.only('Add charger flow validation', async ({ page}) => {
     // select host details
     const hostfield = page.locator("(//input[@placeholder='Select'])[1]");
       await hostfield.click();
-      await hostfield.type("9495644454");
+      await hostfield.type("testing");
       await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
       await page.click("li:nth-child(1) div:nth-child(1)");
   
@@ -476,7 +477,7 @@ test.only('Add charger flow validation', async ({ page}) => {
 });
 
 
-test.only("Newly added charger validation",async ({ page }) => {
+test("Newly added charger validation",async ({ page }) => {
     // Navigate to the login page
     await page.goto('https://novo.kazam.in');
 
@@ -507,7 +508,7 @@ test.only("Newly added charger validation",async ({ page }) => {
     // Print Device name
   const dataSelectors1 = {
     "Device_name" : "//p[contains(@title,'Kazam_Automation_test')]",
-    "Host_name" : "//p[@title='Akhilesh - 9495644454']",
+    "Host_name"   : "//p[@title='Akhilesh - 9495644454']",
     "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
     "Charger_status": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-red-600/10 text-red-600']",
     "Connector_1" : "(//div[contains(@class,'grid grid-cols-6 items-center text-xs py-1')])[1]",
@@ -1039,151 +1040,186 @@ test('Revenue Validation', async ({ page}) => {
 
 
 
-test("Validation of Charging fees",async ({ page }) => {
+test("Creating Charging fees",async ({ page }) => {
     
-  // Navigate to the login page
-      await page.goto('https://novo.kazam.in');
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
 
-  // Login
-      await page.fill('#large-input','akhilesh@kazam.in');
-      await page.fill('#password','Akbl@1724');
-      await page.click("button[type='submit']");
-      await page.click("(//div[@class='flex flex-col gap-2 p-4'])[3]");
-  // Wait for a few seconds
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
-  // Go to RM Module
-    const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
-      await rmmodule.click();
-      await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+    // Go to RM Module
+      const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+        await rmmodule.click();
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
-  // Select tariff section from the RM Module
-    const tariff = page.locator("//span[normalize-space()='Charger Tariffs']");
-      await tariff.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Select tariff section from the RM Module
+      const tariff = page.locator("//span[normalize-space()='Charger Tariffs']");
+        await tariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // Click on create tariff butoon
-    const createtariff = page.locator(
-    "//button[normalize-space()='Create Tariff']"
-    );
-      await createtariff.click();
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
-
-  // Click and Enter the tariff name
-    const tariffname = page.locator("(//input[@id='large-input'])[1]");
-      await tariffname.click();
-      await tariffname.fill("Flat Tariff");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Enter tariff validity 
-    const validity = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
-      await validity.click();
-    const selectdate = page.locator("//div[normalize-space()='29']");
-      await selectdate.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Add Description
-    const description = page.locator("(//input[@id='large-input'])[4]");
-      await description.click();
-      await description.type("Flat Tariff validation");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-   
-  //Select tariff
-    const flattariff = page.locator("(//button[contains(@type,'button')])[1]");
-      await flattariff.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
-
-  // click next button
-    const nextbutton4 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton4.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Enter amount
-    const amount1 = page.locator("input[placeholder='Enter Amount']");
-      await amount1.click();
-      await amount1.type("5");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Add amount 
-    const addamount = page.locator("(//button[normalize-space()='Add Price'])[1]");
-      await addamount.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
-      
-  // Enter amount
-    const enteramount2 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[2]");
-      await enteramount2.click();
-      await enteramount2.fill("4");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      
-  // Add amount 
-    const addamount1 = page.locator("(//button[normalize-space()='Add Price'])[1]");
-      await addamount1.click();
-      await page.waitForTimeout(1000);  // 1000 millisecond = 1 second 
-      
-  // Enter amount
-    const enteramount3 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[3]");
-      await enteramount3.click();
-      await enteramount3.fill("3");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Parking fee
-    const parkingfee = page.locator("//input[@id='link-checkbox']");
-      await parkingfee.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      
-  // Enter amount
-    const enteramount4 = page.locator("//input[@placeholder='0']");
-      await enteramount4.click();
-      await enteramount4.fill("2")
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Click next button
-    const nextbutton5 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton5.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Enter search button
-    const searchbar1 = page.locator("div[class='flex px-4 items-center border border-gray-300 focus:border-kazamGray-300 focus:border-2 rounded-lg'] input[placeholder='Search']");
-      await searchbar1.click();
-      await searchbar1.type("1ti4kt");
-      await page.waitForTimeout(2000); // 1000 millisecond = 1 second
-
-  // click the check box
-    const chargercheckbox1 = page.locator("(//input[@id='link-checkbox'])[2]");
-      await chargercheckbox1.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  //click next button
-    const nextbutton6 =page.locator("//button[normalize-space()='Next']");
-      await nextbutton6.click();
-      await page.waitForTimeout(2000); // 2000 millisecinds = 2 seconds
-
-      console.log("Charger Tariff(Flat Tariff) Created Successfully");
-
-  // Click back button
-    const backbutton = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
-      await backbutton.click();    
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
-
-  // // Click create tariff button
-  //   const createbutton = page.locator("(//button[normalize-space()='Create'])");
-  //     await createbutton.click();
-  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-  //       console.log("Charger tariff created successfully")
-  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-
-  // Fast charging
     // Click on create tariff butoon
-    const createtariff1 = page.locator(
+      const createtariff = page.locator(
       "//button[normalize-space()='Create Tariff']"
       );
-        await createtariff1.click();
+        await createtariff.click();
         await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+
+    // Click and Enter the tariff name
+      const tariffname = page.locator("(//input[@id='large-input'])[1]");
+        await tariffname.click();
+        await tariffname.fill("Flat_Tariff");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Enter tariff validity 
+      const validity = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
+        await validity.click();
+      const selectdate = page.locator("//div[normalize-space()='29']");
+        await selectdate.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Add Description
+      const description = page.locator("(//input[@id='large-input'])[4]");
+        await description.click();
+        await description.type("Flat Tariff validation");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+   
+    //Select tariff
+      const flattariff = page.locator("(//button[contains(@type,'button')])[1]");
+        await flattariff.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
+
+    // click next button
+      const nextbutton4 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton4.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Enter amount
+      const amount1 = page.locator("input[placeholder='Enter Amount']");
+        await amount1.click();
+        await amount1.type("5");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Add amount 
+      const addamount = page.locator("(//button[normalize-space()='Add Price'])[1]");
+        await addamount.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
+      
+    // Enter amount
+      const enteramount2 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[2]");
+        await enteramount2.click();
+        await enteramount2.fill("4");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+      
+    // Add amount 
+      const addamount1 = page.locator("(//button[normalize-space()='Add Price'])[1]");
+        await addamount1.click();
+        await page.waitForTimeout(1000);  // 1000 millisecond = 1 second 
+      
+    // Enter amount
+      const enteramount3 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[3]");
+        await enteramount3.click();
+        await enteramount3.fill("3");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Parking fee
+      const parkingfee = page.locator("//input[@id='link-checkbox']");
+        await parkingfee.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+      
+    // Enter amount
+      const enteramount4 = page.locator("//input[@placeholder='0']");
+        await enteramount4.click();
+        await enteramount4.fill("2")
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Click next button
+      const nextbutton5 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton5.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Enter search button
+      const searchbar1 = page.locator("div[class='flex px-4 items-center border border-gray-300 focus:border-kazamGray-300 focus:border-2 rounded-lg'] input[placeholder='Search']");
+        await searchbar1.click();
+        await searchbar1.type("1ti4kt");
+        await page.waitForTimeout(2000); // 1000 millisecond = 1 second
+
+    // click the check box
+      const chargercheckbox1 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+
+    // Select hub 
+      const hub = page.locator("//span[normalize-space()='Hubs']");
+        await hub.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar02 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar02.click();
+        await searchbar02.type("Sikandarpur");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
   
+    // Check box
+      const chargercheckbox00 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox00.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Select state
+      const state = page.locator("//span[normalize-space()='State']");
+        await state.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar3 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar3.click();
+        await searchbar3.type("Assam");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second  
+
+    // Check box
+      const chargercheckbox2 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox2.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Click next button
+      const nextbutton6 =page.locator("//button[normalize-space()='Next']");
+        await nextbutton6.click();
+        await page.waitForTimeout(2000); // 2000 millisecinds = 2 seconds
+
+      // console.log("Charger Tariff(Flat Tariff) Created Successfully");
+
+  // // Click back button
+  //   const backbutton = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
+  //     await backbutton.click();    
+  //     await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+  // Click create tariff button
+    const createbutton = page.locator("(//button[normalize-space()='Create'])");
+      await createbutton.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+        console.log("Charger Tariff(Flat Tariff) Created Successfully")
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+  // Fast charging
+
+    // Click on create tariff butoon
+      const createtariff1 = page.locator(
+       "//button[normalize-space()='Create Tariff']"
+       );
+      await createtariff1.click();
+      await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+
+   
     // Click and Enter the tariff name
       const tariffname1 = page.locator("(//input[@id='large-input'])[1]");
         await tariffname1.click();
-        await tariffname1.fill("Fast Charging");
+        await tariffname1.fill("Fast_Charging");
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
   
     // Enter tariff validity 
@@ -1215,675 +1251,1258 @@ test("Validation of Charging fees",async ({ page }) => {
       await amount2.type("6");
       await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Add amount 
-    const addamount3 = page.locator("(//button[normalize-space()='Add Price'])[1]");
-      await addamount3.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
+    // Add amount 
+      const addamount3 = page.locator("(//button[normalize-space()='Add Price'])[1]");
+        await addamount3.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
       
-  // Enter amount
-    const enteramount5 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[2]");
-      await enteramount5.click();
-      await enteramount5.fill("5");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter amount
+      const enteramount5 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[2]");
+        await enteramount5.click();
+        await enteramount5.fill("5");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
       
-  // Add amount 
-    const addamount2 = page.locator("(//button[normalize-space()='Add Price'])[1]");
-      await addamount2.click();
-      await page.waitForTimeout(1000);  // 1000 millisecond = 1 second 
+    // Add amount 
+      const addamount2 = page.locator("(//button[normalize-space()='Add Price'])[1]");
+        await addamount2.click();
+        await page.waitForTimeout(1000);  // 1000 millisecond = 1 second 
       
-  // Enter amount
-    const enteramount6 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[3]");
-      await enteramount6.click();
-      await enteramount6.fill("4");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter amount
+      const enteramount6 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[3]");
+        await enteramount6.click();
+        await enteramount6.fill("4");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Parking fee
-    const parkingfee1 = page.locator("//input[@id='link-checkbox']");
-      await parkingfee1.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Parking fee
+      const parkingfee1 = page.locator("//input[@id='link-checkbox']");
+        await parkingfee1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
       
-  // Enter amount
-    const enteramount7 = page.locator("//input[@placeholder='0']");
-      await enteramount7.click();
-      await enteramount7.fill("3")
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter amount
+      const enteramount7 = page.locator("//input[@placeholder='0']");
+        await enteramount7.click();
+        await enteramount7.fill("3")
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Click next button
-    const nextbutton14 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton14.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Click next button
+      const nextbutton14 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton14.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Enter search button
-    const searchbar2 = page.locator(
+    // Enter search button
+      const searchbar2 = page.locator(
       "div[class='flex px-4 items-center border border-gray-300 focus:border-kazamGray-300 focus:border-2 rounded-lg'] input[placeholder='Search']"
-    );
-      await searchbar2.click();
-      await searchbar2.fill("au32ho");
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+      );
+        await searchbar2.click();
+        await searchbar2.fill("au32ho");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
 
-  // click the check box
-    const chargercheckbox2 = page.locator("(//input[@id='link-checkbox'])[2]");
-      await chargercheckbox2.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  //click next button
-    const nextbutton15 =page.locator("//button[normalize-space()='Next']");
-      await nextbutton15.click();
-      await page.waitForTimeout(2000); // 2000 millisecinds = 2 seconds
-
-      console.log("Charger Tariff(Flat Tariff) Created Successfully");
-
-  // Click back button
-    const backbutton2 = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
-      await backbutton2.click();    
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds    
-    
-    
-  // Aggregation Fee creation
-    const Aggregationfee = page.locator("//span[normalize-space()='Aggregation Fee']");
-      await Aggregationfee.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Click Create Aggregation button
-   const createaggregation = page.locator("//button[normalize-space()='Create Aggregation Fee']");
-      await createaggregation.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Enter Fee name 
-    const feename = page.locator("//input[@id='large-input']");
-      await feename.click();
-      await feename.fill("Automation Aggregation Fee")
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Select fee type
-    const feetype = page.locator(
-      "//body//div//div[@role='dialog']//div//div//div//div//div//div[2]//div[1]//div[1]//*[name()='svg']"
-    );
-      await feetype.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Select percentage from dropdown
-    const percentagefee = page.locator("//div[normalize-space()='Percentage']");
-      await percentagefee.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // set percentage
-    const setpercentage = page.locator("input[type='number']");
-      await setpercentage.click();
-      await setpercentage.fill("9");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // click on next button
-    const Aggregationnextbutton = page.locator("//button[normalize-space()='Next']");
-      await Aggregationnextbutton.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // select charger
-    const searchbar = page.locator("//input[@placeholder='Search by device id']");
-      await searchbar.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      await searchbar.fill("1ti4kt");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // click the check box 
-    const chargercheckbox = page.locator("(//input[@id='link-checkbox'])[2]");
-      await chargercheckbox.click();
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+    // click the check box
+      const chargercheckbox01 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox01.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
   
-  // close button
-    const closebutton2 = page.locator("//button[@aria-label='Close modal']//*[name()='svg']");
-      await closebutton2.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Select hub 
+      const hub1 = page.locator("//span[normalize-space()='Hubs']");
+        await hub1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // // Create Tariff
-  //   const createtariff4 = page.locator("(//button[normalize-space()='Create'])");
-  //     await createtariff4.click();
-  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Search bar
+      const searchbar03 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar03.click();
+        await searchbar03.type("Sikandarpur");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
 
+    // Check box
+      const chargercheckbox02 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox02.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Select state
+      const state01 = page.locator("//span[normalize-space()='State']");
+        await state01.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar04 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar04.click();
+        await searchbar04.type("Assam");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second  
+
+    // Check box
+      const chargercheckbox03 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox03.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
+
+    //click next button
+      const nextbutton15 =page.locator("//button[normalize-space()='Next']");
+        await nextbutton15.click();
+        await page.waitForTimeout(2000); // 2000 millisecinds = 2 seconds
+
+    // Click create tariff button
+      const createbutton11 = page.locator("(//button[normalize-space()='Create'])");
+        await createbutton11.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+        console.log("Charger Tariff(Fast charging) Created Successfully");
+
+  // // Click back button
+  //   const backbutton2 = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
+  //     await backbutton2.click();    
+  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds    
     
+    
+    // Aggregation Fee creation
+      const Aggregationfee = page.locator("//span[normalize-space()='Aggregation Fee']");
+        await Aggregationfee.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // // click next button
-  //   const selectcharger = page.locator(
-  //     "//div[@class='mt-auto flex items-center gap-4 ml-auto']//button[@type='submit'][normalize-space()='Create Aggregation Fee']"
-  //   );
-  //     await selectcharger.click();
-  //     await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds 
-        console.log("Aggregation fee created Successfully");
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Click Create Aggregation button
+      const createaggregation = page.locator("//button[normalize-space()='Create Aggregation Fee']");
+        await createaggregation.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Enter Fee name 
+      const feename = page.locator("//input[@id='large-input']");
+        await feename.click();
+        await feename.fill("Automation Aggregation Fee")
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Select fee type
+      const feetype = page.locator(
+      "//body//div//div[@role='dialog']//div//div//div//div//div//div[2]//div[1]//div[1]//*[name()='svg']"
+      );
+        await feetype.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Select percentage from dropdown
+      const percentagefee = page.locator("//div[normalize-space()='Percentage']");
+        await percentagefee.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // set percentage
+      const setpercentage = page.locator("input[type='number']");
+        await setpercentage.click();
+        await setpercentage.fill("9");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // click on next button
+      const Aggregationnextbutton = page.locator("//button[normalize-space()='Next']");
+        await Aggregationnextbutton.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+   // select charger
+      const searchbar = page.locator("//input[@placeholder='Search by device id']");
+        await searchbar.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+        await searchbar.fill("1ti4kt");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+
+    // click the check box 
+      const chargercheckbox04 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox04.click();
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+
+    // Select hub 
+      const hub2 = page.locator("//span[normalize-space()='Hub - wise']");
+        await hub2.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar05 = page.locator("//input[@placeholder='Search by hub name']");
+        await searchbar05.click();
+        await searchbar05.type("Driver tariff");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+
+    // Check box
+      const chargercheckbox05= page.locator("//input[@id='link-checkbox']");
+        await chargercheckbox05.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Select state
+      const state02 = page.locator("//span[normalize-space()='State']");
+        await state02.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar06 = page.locator("//input[@placeholder='Search by state name']");
+        await searchbar06.click();
+        await searchbar06.type("Assam");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second  
+
+    // Check box
+      const chargercheckbox06 = page.locator("//input[@id='link-checkbox']");
+        await chargercheckbox06.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
+  
+    
+    // click next button
+      const selectcharger = page.locator(
+      "//div[@class='mt-auto flex items-center gap-4 ml-auto']//button[@type='submit'][normalize-space()='Create Aggregation Fee']"
+      );
+        await selectcharger.click();
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds 
+          console.log("Aggregation fee created Successfully");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
 
-  // create tax 
-    const clicktaxbutton = page.locator("li:nth-child(5) div:nth-child(1) span:nth-child(2)");
-      await clicktaxbutton.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+    // create tax 
+      const clicktaxbutton = page.locator("//span[normalize-space()='Tax']");
+        await clicktaxbutton.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
-  // click create a tax system
-    const createtaxsystem = page.locator("//button[normalize-space()='Create Tax System']");
-      await createtaxsystem.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+    // click create a tax system
+      const createtaxsystem = page.locator("//button[normalize-space()='Create Tax System']");
+        await createtaxsystem.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
-  // tax system name
-    const taxsystemname = page.locator("(//input[@id='large-input'])[1]");
-      await taxsystemname.click();
-      await taxsystemname.fill ("Kazam Automation Tax");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+    // tax system name
+      const taxsystemname = page.locator("(//input[@id='large-input'])[1]");
+        await taxsystemname.click();
+        await taxsystemname.fill ("Kazam Automation Tax");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
-  // clcik tax policy
-    const taxpolicy = page.locator("(//*[name()='svg'])[21]");
-      await taxpolicy.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+    // clcik tax policy
+      const taxpolicy = page.locator("(//*[name()='svg'])[21]");
+        await taxpolicy.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
-  // select tax policy
-    const taxpolicyselect = page.locator("//div[normalize-space()='GST']");
-      await taxpolicyselect.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // select tax policy
+      const taxpolicyselect = page.locator("//div[normalize-space()='GST']");
+        await taxpolicyselect.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Enter tax number
-    const taxnumber = page.locator("//input[contains(@placeholder,'tax number')]");
-      await taxnumber.click();
-      await taxnumber.fill("29KANSJ123KDNRJ3");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter tax number
+      const taxnumber = page.locator("//input[contains(@placeholder,'tax number')]");
+        await taxnumber.click();
+        await taxnumber.fill("29KANSJ123KDNRJ3");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Enter Business name
-    const businessname = page.locator("//input[@placeholder='tax name']");
-      await businessname.click();
-      await businessname.fill("Automation Tax System");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter Business name
+      const businessname = page.locator("//input[@placeholder='tax name']");
+        await businessname.click();
+        await businessname.fill("Automation Tax System");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Tax address
-    const taxaddress = page.locator("(//input[@id='large-input'])[4]");
-      await taxaddress.click();
-      await taxaddress.fill("Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangala,Bangalore,Karnataka");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 seconds
+    // Tax address
+      const taxaddress = page.locator("(//input[@id='large-input'])[4]");
+        await taxaddress.click();
+        await taxaddress.fill("Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangala,Bangalore,Karnataka");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 seconds
 
-  // Tax Template1
-    const subcategory = page.locator("(//select[@class='text-xs border border-gray-300 rounded-md focus:border-kazamGray-300 focus:ring-kazamGray-300'])[1]");
-      await subcategory.click();
-      await page.waitForTimeout(1000); //1000 millisecond =  1second
-      await subcategory.type("gst");
-      await subcategory.press('Enter');
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Tax Template1
+      const subcategory = page.locator("(//select[@class='text-xs border border-gray-300 rounded-md focus:border-kazamGray-300 focus:ring-kazamGray-300'])[1]");
+        await subcategory.click();
+        await page.waitForTimeout(1000); //1000 millisecond =  1second
+        await subcategory.type("cgst");
+        await subcategory.press('Enter');
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Enter the amount 
-    const valueamount = page.locator("//input[@placeholder='amount']");
-      await valueamount.click();
-      await valueamount.fill("9");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter the amount 
+      const valueamount = page.locator("//input[@placeholder='amount']");
+        await valueamount.click();
+        await valueamount.fill("9");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // select type
-    const type = page.locator("//select[contains(@placeholder,'Select Type')]");
-      await type.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second 
-      await type.type("Percentage");
-      await type.press('Enter');
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // select type
+      const type = page.locator("//select[contains(@placeholder,'Select Type')]");
+        await type.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second 
+        await type.type("Percentage");
+        await type.press('Enter');
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  //  Click on Next button 
-    const nextbutton3 = page.locator("(//button[normalize-space()='Next'])[1]");
-      await nextbutton3.click();
-      await page.waitForTimeout(2000); // 1000 millisecond = 1 second
+    // Tax Template 2
+      const clickaddcategory = page.locator(".feather.feather-plus[xmlns='http://www.w3.org/2000/svg'][width='0.9em']");
+        await clickaddcategory.click();
+        await page.waitForTimeout(1000); //1000 millisecond = 1 second
+      
 
-  // locate search bar
-    const locatesearch = page.locator("//input[@placeholder='Search by device id']");    
-      await locatesearch.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      await locatesearch.fill("1ti4kt");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+      const subcategory1 = page.locator(
+      "//body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/main[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[2]/select[1]"
+      );
+        await subcategory1.click();
+        await page.waitForTimeout(1000);
+        await subcategory1.type("sgst");
+        await subcategory1.press('Enter');
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second 
+      
+    // Enter the amount1 
+      const valueamount1 = page.locator("(//input[@placeholder='amount'])[2]");
+        await valueamount1.click();
+        await valueamount1.fill("9");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // locate check box
-    const checkbox4 = page.locator("(//input[@id='link-checkbox'])[2]");
-      await checkbox4.click();
-      await page.waitForTimeout(1000); // 1000 millis  second = 1 second 
+    // select type
+      const type1 = page.locator(
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(5) > select:nth-child(1)"
+    );
+        await type1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second 
+        await type1.type("Percentage");
+        await type1.press('Enter');
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // //  Click Create tax system 
-  //   const createtaxbutton = page.locator("(//button[@type='submit'][normalize-space()='Create Tax System'])[2]");
-  //     await createtaxbutton.click();
-  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
 
-  // close button
-    const closebutton1 = page.locator("//button[@aria-label='Close modal']//*[name()='svg']");
-      await closebutton1.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    //  Click on Next button 
+      const nextbutton3 = page.locator("(//button[normalize-space()='Next'])[1]");
+        await nextbutton3.click();
+        await page.waitForTimeout(2000); // 1000 millisecond = 1 second
 
-      console.log("Tax created Successfully");
+    // locate search bar
+      const locatesearch = page.locator("//input[@placeholder='Search by device id']");    
+        await locatesearch.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+        await locatesearch.fill("1ti4kt");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // locate check box
+      const checkbox4 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await checkbox4.click();
+        await page.waitForTimeout(1000); // 1000 millis  second = 1 second 
+
+    // Select hub 
+      const hub3 = page.locator("//span[normalize-space()='Hub - wise']");
+        await hub3.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar07 = page.locator("//input[@placeholder='Search by hub name']");
+        await searchbar07.click();
+        await searchbar07.type("Driver tariff");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+
+    // Check box
+      const chargercheckbox07= page.locator("//input[@id='link-checkbox']");
+        await chargercheckbox07.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Select state
+      const state03 = page.locator("//span[normalize-space()='State']");
+        await state03.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar08 = page.locator("//input[@placeholder='Search by state name']");
+        await searchbar08.click();
+        await searchbar08.type("Madhya Pradesh");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second  
+
+    // Check box
+      const chargercheckbox08 = page.locator("//input[@id='link-checkbox']");
+        await chargercheckbox08.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
+  
+
+    //  Click Create tax system 
+      const createtaxbutton = page.locator("(//button[@type='submit'][normalize-space()='Create Tax System'])[2]");
+        await createtaxbutton.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+
+
+        console.log("Tax created Successfully");
+
+});
+
+test.only("Charging fee validation",async ({ page }) => {
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
+
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+    // Go to RM Module
+      const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+        await rmmodule.click();
+        await page.waitForTimeout(3000);
+
+    // Select tariff section from the RM Module
+      const tariff = page.locator("//span[normalize-space()='Charger Tariffs']");
+        await tariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // click on the search result
+      const searchresult = page.locator("//input[@placeholder='Search']");
+        await searchresult.click();
+        await searchresult.type("Flat_Tariff"); 
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+    // Click charger
+      const charger = page.locator("//h2[1]//button[1]");
+        await charger.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+        
+      // const hub07 =page.locator("//span[contains(text(),'Hubs')]")
+      //   await hub07.click();
+      //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+      // const states = page.locator("//p[normalize-space()='STATE']");
+      //   await states.click();
+      //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second    
+
+    // Print Flat Tariff details
+      const FlattariffSelectors = {
+      "NAME" : "//p[@class='text-sm truncate'][normalize-space()='Flat_Tariff']",
+      "DESCRIPTION" : "//p[@class='text-sm truncate'][normalize-space()='Flat Tariff validation']",
+      "TARIFF TYPE": "//p[@class='text-sm'][normalize-space()='Flat Tariff']",
+      "VALIDITY":"//p[contains(text(),'29')]",
+      "Fixed" : "//p[normalize-space()='INR 5']",
+      "Per kWh" : "//p[normalize-space()='INR 4']",
+      "Per hr" : "//p[normalize-space()='INR 3']",
+      "Parking" : "//p[normalize-space()='2']",
+      "Chargers" : "//p[normalize-space()='1ti4kt']",
+      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
+      //"States" : "//p[normalize-space()='Assam']"
+
+};
+
+      const texts = [];
+      const flattariff = {
+     'NAME' : 'Flat_Tariff', 
+     'DESCRIPTION' : 'Flat Tariff validation',
+     'TARIFF TYPE' : 'Flat Tariff',
+     'VALIDITY' : '29/01/2025  --  Forever',
+     'Fixed' : 'INR 5',
+     'Per kWh' : 'INR 4',
+     'Per hr' : 'INR 3',
+     'Parking' : '2',
+     'Chargers' : '1ti4kt',
+     //'Hubs' : 'Sikandarpur',
+     //'States' : 'Assam'
+  }
+    //console.log('comparison is ',comparison1)
+    // Extract and print data from each selector
+      const extractedTexts = {};
+
+      for (const [key, selector] of Object.entries(FlattariffSelectors)) {
+      const elements = await page.$$(selector);
+      const texts = [];
+      for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+          console.log(`${key} from the details page: ${trimmedText}`);
+      texts.push(trimmedText); // Accumulate text for each selector
+}
+      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+}
+
+      let flattenedText = {};
+
+      for (let key in extractedTexts) {
+      if (Array.isArray(extractedTexts[key])) {
+      flattenedText[key] = extractedTexts[key][0];
+} else {
+  flattenedText[key] = extractedTexts[key];
+}
+}
+
+    //console.log("Data from charger details page is",flattenedText);
+          console.log("comparison text is",flattariff)
+      if (JSON.stringify(flattenedText) == JSON.stringify(flattariff)){
+          console.log("Added data and created Flat tariff data are matching")
+      }else{
+          console.log("Added data and created Flat tariff data are Not matching")
+}
+
+
+    // Fast Charging added data validation
+
+    // click on the search result
+      const searchresult1 = page.locator("//input[@placeholder='Search']");
+        await searchresult1.click();
+        await searchresult1.clear();
+        await page.waitForTimeout(2000);
+        await searchresult1.type("Fast_Charging"); 
+        await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
+
+    // Click charger
+      const charger1 = page.locator("//h2[1]//button[1]");
+        await charger1.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+
+    // const hub07 =page.locator("//span[contains(text(),'Hubs')]")
+    //   await hub07.click();
+    //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // const states = page.locator("//p[normalize-space()='STATE']");
+    //   await states.click();
+    //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second    
+
+    // Print Fast charging Tariff details
+      const fasttariffSelectors = {
+      "NAME" : "(//p[@class='text-sm truncate'][normalize-space()='Fast_Charging'])[1]",
+      "DESCRIPTION" : "//p[@class='text-sm truncate'][normalize-space()='Fast Charging validation']",
+      "TARIFF TYPE": "//p[@class='text-sm'][normalize-space()='Fast Charging']",
+      "VALIDITY":"//p[contains(text(),'29')]",
+      "Fixed" : "//p[normalize-space()='INR 6']",
+      "Per kWh" : "//p[normalize-space()='INR 5']",
+      "Per hr" : "//p[normalize-space()='INR 4']",
+      "Parking" : "//p[normalize-space()='3']",
+      "Chargers" : "//p[normalize-space()='au32ho']",
+      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
+      //"States" : "//p[normalize-space()='Assam']"
+
+};
+
+      const texts1 = [];
+      const fastchargingtariff = {
+      'NAME' : 'Fast_Charging', 
+      'DESCRIPTION' : 'Fast Charging validation',
+      'TARIFF TYPE' : 'Fast Charging',
+      'VALIDITY' : '29/01/2025  --  Forever',
+      'Fixed' : 'INR 6',
+      'Per kWh' : 'INR 5',
+      'Per hr' : 'INR 4',
+      'Parking' : '3',
+      'Chargers' : 'au32ho',
+      //'Hubs' : 'Sikandarpur',
+      //'States' : 'Assam'
+}
+    //console.log('comparison is ',comparison1)
+    // Extract and print data from each selector
+      const extractedTexts01 = {};
+
+      for (const [key, selector] of Object.entries(fasttariffSelectors)) {
+      const elements = await page.$$(selector);
+      const texts = [];
+      for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+          console.log(`${key} from the details page: ${trimmedText}`);
+      texts.push(trimmedText); // Accumulate text for each selector
+}
+      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+}
+
+      let flattenedText01 = {};
+
+      for (let key in extractedTexts) {
+      if (Array.isArray(extractedTexts[key])) {
+      flattenedText[key] = extractedTexts[key][0];
+      } else {
+      flattenedText[key] = extractedTexts[key];
+}
+}
+
+    //console.log("Data from charger details page is",flattenedText);
+          console.log("comparison text is",fastchargingtariff)
+      if (JSON.stringify(flattenedText) == JSON.stringify(fastchargingtariff)){
+          console.log("Added data and created Fast charging tariff data are matching")
+      }else{
+          console.log("Added data and created Fast charging tariff data are Not matching")
+}
+
+    // Aggregation fee data validation
+
+    // Click on aggregation fee
+      const aggregationfee = page.locator("//span[normalize-space()='Aggregation Fee']");
+        await aggregationfee.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // click on the search result
+      const searchresult2 = page.locator("//input[@placeholder='Search by aggregation fee name']");
+        await searchresult2.click();
+        await searchresult2.clear();
+        await page.waitForTimeout(2000);
+        await searchresult2.type("Automation Aggregation Fee"); 
+        await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
+
+    // Click charger
+      const charger2 = page.locator("//h2[1]//button[1]");
+        await charger2.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+  
+
+    // Print Fast charging Tariff details
+      const AggregationfeeSelectors = {
+      "NAME" : "//p[@class='text-xl']",
+      "Type" : "//p[normalize-space()='percentage']",
+      "Value" : "(//p[@class='text-xl font-medium'])[1]",
+      "Chargers" : "//p[normalize-space()='1ti4kt']",
+      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
+      //"States" : "//p[normalize-space()='Assam']"
+
+};
+
+      const texts2 = [];
+      const Aggregationfee = {
+      "NAME" :'Automation Aggregation Fee',
+      "Type" :'percentage',
+      "Value" :'9 %',
+      "Chargers" :'1ti4kt',
+      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
+      //"States" : "//p[normalize-space()='Assam']"
+
+}
+    //console.log('comparison is ',comparison1)
+    // Extract and print data from each selector
+      const extractedTexts02 = {};
+
+      for (const [key, selector] of Object.entries(AggregationfeeSelectors)) {
+      const elements = await page.$$(selector);
+      const texts = [];
+      for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+          console.log(`${key} from the details page: ${trimmedText}`);
+      texts.push(trimmedText); // Accumulate text for each selector
+      }
+      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+      }
+
+      let flattenedText02 = {};
+
+      for (let key in extractedTexts) {
+      if (Array.isArray(extractedTexts[key])) {
+      flattenedText[key] = extractedTexts[key][0];
+      } else {
+      flattenedText[key] = extractedTexts[key];
+}
+}
+
+    //console.log("Data from charger details page is",flattenedText);
+          console.log("comparison text is",Aggregationfee)
+      if (JSON.stringify(flattenedText) == JSON.stringify(Aggregationfee)){
+          console.log("Added data and created Aggregation fee data are matching")
+      }else{
+          console.log("Added data and created Aggregation fee data are Not matching")
+      }
+
+    // Tax data validation
+
+    // Click on aggregation fee
+      const Tax = page.locator("//span[normalize-space()='Tax']");
+        await Tax.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // click on the search result
+      const searchresult3 = page.locator("input[placeholder='Search by tax system']");
+        await searchresult3.click();
+        await searchresult3.clear();
+        await page.waitForTimeout(2000);
+        await searchresult3.type("Kazam Automation Tax"); 
+        await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
+
+    // Click charger
+      const charger3 = page.locator("//h2[1]//button[1]");
+        await charger3.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+
+    // const hub07 =page.locator("//span[contains(text(),'Hubs')]")
+    //   await hub07.click();
+    //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // const states = page.locator("//p[normalize-space()='STATE']");
+    //   await states.click();
+    //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second    
+
+    // Print Fast charging Tariff details
+      const taxSelectors = {
+      "NAME" : "//p[@class='text-xl']",
+      "Business Name" : "div[class='flex flex-col gap-2'] p:nth-child(1)",
+      "Tax id": "//p[normalize-space()='Tax id : 29KANSJ123KDNRJ3']",
+      "Address":"//p[contains(text(),'Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangal')]",
+      "Tax items1":"div[class='w-full flex flex-col overflow-y-auto divide-y'] div:nth-child(1)",
+      "Tax items2":"div[class='w-full flex flex-col overflow-y-auto divide-y'] div:nth-child(1)",
+      "Chargers":"//p[normalize-space()='c267e8']",
+      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
+      //"States" : "//p[normalize-space()='Assam']"
+
+};
+
+      const texts3 = [];
+      const tax = {
+      "NAME" : "Kazam Automation Tax",
+      "Business Name" : "Business Name : Automation Tax System",
+      "Tax id": "Tax id : 29KANSJ123KDNRJ3",
+      "Address":"Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangala,Bangalore,Karnataka",
+      "Tax items1" : "gst cgst CGST 9 Percentage",
+      "Tax items2" : "gst Sgst SGST 9 Percentage",
+      "Chargers" : 'c267e8',
+      //'Hubs' : 'Sikandarpur',
+      //'States' : 'Assam'
+}
+    //console.log('comparison is ',comparison1)
+    // Extract and print data from each selector
+      const extractedTexts03 = {};
+
+      for (const [key, selector] of Object.entries(taxSelectors)) {
+      const elements = await page.$$(selector);
+      const texts = [];
+      for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+      console.log(`${key} from the details page: ${trimmedText}`);
+      texts.push(trimmedText); // Accumulate text for each selector
+}
+      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+}
+
+      let flattenedText03 = {};
+
+      for (let key in extractedTexts) {
+      if (Array.isArray(extractedTexts[key])) {
+      flattenedText[key] = extractedTexts[key][0];
+      } else {
+      flattenedText[key] = extractedTexts[key];
+}
+}
+
+    //console.log("Data from charger details page is",flattenedText);
+        console.log("comparison text is",tax)
+      if (JSON.stringify(flattenedText) == JSON.stringify(tax)){
+        console.log("Added data and created Tax data are matching")
+      }else{
+        console.log("Added data and created Tax data are Not matching")
+}
+
+
 
 });
 
 
 test("Dynamic Tariff validation",async ({ page }) => {
 
-  // Navigate to the login page
-  await page.goto('https://novo.kazam.in');
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
 
-  // Login
-      await page.fill('#large-input','akhilesh@kazam.in');
-      await page.fill('#password','Akbl@1724');
-      await page.click("button[type='submit']");
-      await page.click("(//div[@class='flex flex-col gap-2 p-4'])[3]");
-  // Wait for a few seconds
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
   
   
-  // Go to RM Module
-    const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
-      await rmmodule.click();
-      await page.waitForTimeout(3000);
+    // Go to RM Module
+      const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+        await rmmodule.click();
+        await page.waitForTimeout(3000);
 
-  // Select tariff section from the RM Module
-    const tariff = page.locator("//span[normalize-space()='Charger Tariffs']");
-      await tariff.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Select tariff section from the RM Module
+      const tariff = page.locator("//span[normalize-space()='Charger Tariffs']");
+        await tariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // Click on create tariff butoon
-    const createtariff = page.locator(
-  "//button[normalize-space()='Create Tariff']"
-  );
-      await createtariff.click();
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+    // Click on create tariff butoon
+      const createtariff = page.locator(
+     "//button[normalize-space()='Create Tariff']"
+      );
+        await createtariff.click();
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
 
-  // Click and Enter the tariff name
-    const tariffname = page.locator("(//input[@id='large-input'])[1]");
-      await tariffname.click();
-      await tariffname.fill("Time of Day");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Click and Enter the tariff name
+      const tariffname = page.locator("(//input[@id='large-input'])[1]");
+        await tariffname.click();
+        await tariffname.fill("Time of Day");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Enter tariff validity 
-    const validity = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
-      await validity.click();
-    const selectdate = page.locator("//div[normalize-space()='29']");
-      await selectdate.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter tariff validity 
+      const validity = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
+        await validity.click();
+      const selectdate = page.locator("//div[normalize-space()='29']");
+        await selectdate.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Add Description
-    const description = page.locator("(//input[@id='large-input'])[4]");
-      await description.click();
-      await description.type("Time of Day validation");
-      await page.waitForTimeout(2000); // 1000 millisecond = 1 second
+    // Add Description
+      const description = page.locator("(//input[@id='large-input'])[4]");
+        await description.click();
+        await description.type("Time of Day validation");
+        await page.waitForTimeout(2000); // 1000 millisecond = 1 second
 
-  // Select Tariff type
-    const tarifftype = page.locator("//body//div//button[3]");
-      await tarifftype.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Select Tariff type
+      const tarifftype = page.locator("//body//div//button[3]");
+        await tarifftype.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // click Next button
-    const nextbutton7 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton7.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // click Next button
+      const nextbutton7 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton7.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // Set time range
-    const timerange1 = page.locator(
-      "(//button[contains(@class,'text-kazamGray-700 w-full focus:border-kazamGray-300 border-y border-x border-gray-300 rounded-l-lg px-4 py-2 flex justify-between items-center false')])[1]");    
-      await timerange1.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Set time range
+      const timerange1 = page.locator(
+      "(//button[contains(@class,'text-kazamGray-700 w-full focus:border-kazamGray-300 border-y border-x border-gray-300 rounded-l-lg px-4 py-2 flex justify-between items-center false')])[1]"
+        );    
+        await timerange1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
     
-  // Select start time
-    const starttime4 = page.locator("//button[normalize-space()='10:00 hrs']");
-      await starttime4.click();    
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Select start time
+      const starttime4 = page.locator("//button[normalize-space()='10:00 hrs']");
+        await starttime4.click();    
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // End time
-    const timerange2 = page.locator("button[class='text-kazamGray-700 w-full focus:border-kazamGray-300 border-y border-r border-gray-300 rounded-r-lg px-4 py-2 flex justify-between items-center focus:border-kazamRed-600 border-kazamRed-600']");
-      await timerange2.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // End time
+      const timerange2 = page.locator("button[class='text-kazamGray-700 w-full focus:border-kazamGray-300 border-y border-r border-gray-300 rounded-r-lg px-4 py-2 flex justify-between items-center focus:border-kazamRed-600 border-kazamRed-600']");
+        await timerange2.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
       
-  // select end time
-    const endtime4 =page.locator("//button[normalize-space()='12:00 hrs']");    
-      await endtime4.click();
-      await page.waitForTimeout(1000); // 1000 milliseconnd = 1 second
+    // select end time
+      const endtime4 =page.locator("//button[normalize-space()='12:00 hrs']");    
+        await endtime4.click();
+        await page.waitForTimeout(1000); // 1000 milliseconnd = 1 second
 
-  // set day of week
-    const dayofweek = page.locator("//button[normalize-space()='----']");
-      await dayofweek.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // set day of week
+      const dayofweek = page.locator("//button[normalize-space()='----']");
+        await dayofweek.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // select date 1
-    const day1 = page.locator("(//input[@id='link-checkbox'])[3]");
-      await day1.click();    
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // select date 1
+      const day1 = page.locator("(//input[@id='link-checkbox'])[3]");
+        await day1.click();    
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // select date 2
-    const day2 = page.locator("(//input[@id='link-checkbox'])[5]");
-      await day2.click();    
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // select date 2
+      const day2 = page.locator("(//input[@id='link-checkbox'])[5]");
+        await day2.click();    
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // select date 3
-    const day3 = page.locator("(//input[@id='link-checkbox'])[7]");
-      await day3.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+    // select date 3
+      const day3 = page.locator("(//input[@id='link-checkbox'])[7]");
+        await day3.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
   
-  // Enter amount
-    const enteramount = page.locator("//input[contains(@placeholder,'Enter Amount')]");
-      await enteramount.click();
-      await enteramount.fill("5");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
+    // Enter amount
+      const enteramount = page.locator("//input[contains(@placeholder,'Enter Amount')]");
+        await enteramount.click();
+        await enteramount.fill("5");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
 
-  // Add parking fee
-    const parkingfee = page.locator("//input[@id='link-checkbox']");
-      await parkingfee.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Add parking fee
+      const parkingfee = page.locator("//input[@id='link-checkbox']");
+        await parkingfee.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Enter amount
-    const parkingamount = page.locator("//input[@placeholder='0']");
-      await parkingamount.click();
-      await parkingamount.fill("2")
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter amount
+      const parkingamount = page.locator("//input[@placeholder='0']");
+        await parkingamount.click();
+        await parkingamount.fill("2")
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Click next button
-    const nextbutton8 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton8.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
+    // Click next button
+      const nextbutton8 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton8.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
 
-  // Asset selection
-    const searchbar2 = page.locator("(//input[contains(@placeholder,'Search')])[1]");
-      await searchbar2.click();
-      await searchbar2.fill("37fckj");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Asset selection
+      const searchbar2 = page.locator("(//input[contains(@placeholder,'Search')])[1]");
+        await searchbar2.click();
+        await searchbar2.fill("37fckj");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Select charger
-    const selectcharger1 = page.locator("(//input[@id='link-checkbox'])[2]");
-      await selectcharger1.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+    // Select charger
+      const selectcharger1 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await selectcharger1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
+      
+    // Select hub 
+      const hub4 = page.locator("//span[normalize-space()='Hubs']");
+        await hub4.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar09 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar09.click();
+        await searchbar09.type("Driver tariff");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+
+    // Check box
+      const chargercheckbox08= page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox08.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Select state
+      const state04 = page.locator("//span[normalize-space()='State']");
+        await state04.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar10 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar10.click();
+        await searchbar10.type("Tamil Nadu");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+      
+      
+    // Check box
+      const chargercheckbox06 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox06.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
+  
        
-  // Click next button
-    const nextbutton9 = page.locator("(//button[normalize-space()='Next'])[1]");
-      await nextbutton9.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second  
+    // Click next button
+      const nextbutton9 = page.locator("(//button[normalize-space()='Next'])[1]");
+        await nextbutton9.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second  
       
-  // Click back button
-    const backbutton = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
-      await backbutton.click();    
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+  // // Click back button
+  //   const backbutton = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
+  //     await backbutton.click();    
+  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // // Create Tariff
-  //   const createtimeofday = page.locator("(//button[normalize-space()='Create'])");
-  //     await createtimeofday.click();
-  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds   
+    // Create Tariff
+      const createtimeofday = page.locator("(//button[normalize-space()='Create'])");
+        await createtimeofday.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds   
       
-      console.log("Tariff (TOD) Created Successfully")
+          console.log("Tariff (TOD) Created Successfully")
 
-  // Charge by Hour
+    // Charge by Hour
 
-  // Select tariff section from the RM Module
-    const tariff1 = page.locator("//span[normalize-space()='Charger Tariffs']");
-      await tariff1.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Select tariff section from the RM Module
+      const tariff1 = page.locator("//span[normalize-space()='Charger Tariffs']");
+        await tariff1.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // Click on create tariff butoon
-    const createtariff1 = page.locator(
-    "//button[normalize-space()='Create Tariff']"
-    );
-      await createtariff1.click();
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+    // Click on create tariff butoon
+      const createtariff1 = page.locator(
+      "//button[normalize-space()='Create Tariff']"
+      );
+        await createtariff1.click();
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
 
-  // Click and Enter the tariff name
-    const tariffname1 = page.locator("(//input[@id='large-input'])[1]");
-      await tariffname1.click();
-      await tariffname1.fill("Charge by Hour");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Click and Enter the tariff name
+      const tariffname1 = page.locator("(//input[@id='large-input'])[1]");
+        await tariffname1.click();
+        await tariffname1.fill("Charge by Hour");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Enter tariff validity 
-    const validity1 = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
-      await validity1.click();
-    const selectdate1 = page.locator("//div[normalize-space()='29']");
-      await selectdate1.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Enter tariff validity 
+      const validity1 = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
+        await validity1.click();
+      const selectdate1 = page.locator("//div[normalize-space()='29']");
+        await selectdate1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Add Description
-    const description1 = page.locator("(//input[@id='large-input'])[4]");
-      await description1.click();
-      await description1.type("Charge by Hour validation");
-      await page.waitForTimeout(2000); // 1000 millisecond = 1 second
+    // Add Description
+      const description1 = page.locator("(//input[@id='large-input'])[4]");
+        await description1.click();
+        await description1.type("Charge by Hour validation");
+        await page.waitForTimeout(2000); // 1000 millisecond = 1 second
 
-  // Select tariff type
-    const tarifftype1 = page.locator("(//button[contains(@type,'button')])[4]");
-      await tarifftype1.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Select tariff type
+      const tarifftype1 = page.locator("(//button[contains(@type,'button')])[4]");
+        await tarifftype1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Click Next button
-    const next = page.locator("//button[normalize-space()='Next']");
-      await next.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Click Next button
+      const next = page.locator("//button[normalize-space()='Next']");
+        await next.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
   
-  // Condition one 
-  // Select hour range   
-    const hourrange = page.locator("//div[@id='PlusIcon']//*[name()='svg']//*[name()='path' and contains(@d,'M5.59668 1')]");
-      await hourrange.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Condition one 
+    // Select hour range   
+      const hourrange = page.locator("//div[@id='PlusIcon']//*[name()='svg']//*[name()='path' and contains(@d,'M5.59668 1')]");
+        await hourrange.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
       
-  // Price 1
-    const price1 = page.locator("(//input[@placeholder='Enter Amount'])[1]")
-      await price1.click();
-      await price1.fill("5");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Price 1
+      const price1 = page.locator("(//input[@placeholder='Enter Amount'])[1]")
+        await price1.click();
+        await price1.fill("5");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
       
-  // Add price 
-    const addprice = page.locator("(//button[contains(text(),'Add Price')])[1]");
-      await addprice.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Add price 
+      const addprice = page.locator("(//button[contains(text(),'Add Price')])[1]");
+        await addprice.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
       
-  // Price 2
-    const price2 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[2]");
-      await price2.click(); 
-      await price2.fill("4");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Price 2
+      const price2 = page.locator("(//input[contains(@placeholder,'Enter Amount')])[2]");
+        await price2.click(); 
+        await price2.fill("4");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Condition 2
-  // Select hour range
-    const Condition = page.locator("//button[normalize-space()='Add Condition'] ");
-      await Condition.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Condition 2
+    // Select hour range
+      const Condition = page.locator("//button[normalize-space()='Add Condition'] ");
+        await Condition.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Add second hour rangr
-    const secondhour = page.locator(
+    // Add second hour rangr
+      const secondhour = page.locator(
       "//div//div//div//div//div//div//div//div//div//div//div//div//div[2]//div[1]//div[1]//div[1]//div[1]//div[2]//div[2]//*[name()='svg']"
-    );
-      await secondhour.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+      );
+        await secondhour.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
   
-  // Add price
-    const addprice1 = page.locator(
+    // Add price
+      const addprice1 = page.locator(
       "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > input:nth-child(2)"
-    );
-      await addprice1.click();
-      await addprice1.fill("3");    
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+      );
+        await addprice1.click();
+        await addprice1.fill("3");    
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
   
-  // Add second price
-    const price2click = page.locator("(//button[contains(text(),'Add Price')])[2]");
-      await price2click.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Add second price
+      const price2click = page.locator("(//button[contains(text(),'Add Price')])[2]");
+        await price2click.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Add price
-    const addprice2 = page.locator(
+    // Add price
+      const addprice2 = page.locator(
       "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > input:nth-child(2)"
-    );
-      await addprice2.click();
-      await addprice2.fill("2");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+      );
+        await addprice2.click();
+        await addprice2.fill("2");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
       
-  // Condition 3
-  // Select hour range
-    const thirdhour = page.locator(
+    // Condition 3
+    // Select hour range
+      const thirdhour = page.locator(
       "button[class='flex items-center justify-between w-full font-medium text-left group-first:rounded-t-xl border-gray-200 dark:border-gray-700 border-l border-r group-first:border-t border-b rounded-b-lg group-first:!rounded-t-lg border-gray-200 dark:border-gray-700 p-0 text-gray-500 dark:text-gray-400 hover:bg-gray-100 hover:dark:bg-gray-800 text-gray-900 bg-[#F7F9FB] hover:!bg-[#F7F9FB]'] div[class='p-5'] svg"
-    );   
-      await thirdhour.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+      );   
+        await thirdhour.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Add price 
-    const price3 = page.locator("(//input[@placeholder='Enter Amount'])[5]");
-      await price3.click();
-      await price3.fill("1");
-      await page.waitForTimeout(1000); // 1000 millosecond = 1 second   
+    // Add price 
+      const price3 = page.locator("(//input[@placeholder='Enter Amount'])[5]");
+        await price3.click();
+        await price3.fill("1");
+        await page.waitForTimeout(1000); // 1000 millosecond = 1 second   
 
-  // Click Next button
-    const nextbutton10 = page.locator("(//button[normalize-space()='Next'])[1]");
-      await nextbutton10.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Click Next button
+      const nextbutton10 = page.locator("(//button[normalize-space()='Next'])[1]");
+        await nextbutton10.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Asset selection
-    const searchbar3 = page.locator("(//input[@placeholder='Search'])[1]");   
-      await searchbar3.click();
-      await searchbar3.fill("37fckj");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Asset selection
+      const searchbar3 = page.locator("(//input[@placeholder='Search'])[1]");   
+        await searchbar3.click();
+        await searchbar3.fill("37fckj");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Select charger
-    const selectcharger2 = page.locator("(//input[@id='link-checkbox'])[2]");
-      await selectcharger2.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+    // Select charger
+      const selectcharger2 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await selectcharger2.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Select hub 
+      const hub5 = page.locator("//span[normalize-space()='Hubs']");
+        await hub5.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar11 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar11.click();
+        await searchbar11.type("Driver tariff");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+
+    // Check box
+      const chargercheckbox09= page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox09.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Select state
+      const state05 = page.locator("//span[normalize-space()='State']");
+        await state05.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar12 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar12.click();
+        await searchbar12.type("Tamil Nadu");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
   
-  // Click next button
-    const nextbutton11 = page.locator("(//button[normalize-space()='Next'])[1]");
-      await nextbutton11.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+  
+    // Check box
+      const chargercheckbox07 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox07.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
+  
+  
+    // Click next button
+      const nextbutton11 = page.locator("(//button[normalize-space()='Next'])[1]");
+        await nextbutton11.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
-  // Click back button
-    const backbutton1 = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
-      await backbutton1.click();    
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+  // // Click back button
+  //   const backbutton1 = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
+  //     await backbutton1.click();    
+  //     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
 
-  // // Create tariff
-  //   const createtariff2 = page.locator("(//button[normalize-space()='Create'])");
-  //     await createtariff2.click();
+    // Create tariff
+      const createtariff2 = page.locator("(//button[normalize-space()='Create'])");
+        await createtariff2.click();
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second 
+
+          console.log("Tariff Charge by Hour(CBH) Created Successfully");
+
+    // State of charge
+
+    // Select tariff section from the RM Module
+      const tariff2 = page.locator("//span[normalize-space()='Charger Tariffs']");
+        await tariff2.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Click on create tariff butoon
+      const createtariff3 = page.locator(
+        "//button[normalize-space()='Create Tariff']"
+        );
+        await createtariff3.click();
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
+
+    // Click and Enter the tariff name
+      const tariffname2 = page.locator("(//input[@id='large-input'])[1]");
+        await tariffname2.click();
+        await tariffname2.fill("State of Charge");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Enter tariff validity 
+      const validity2 = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
+        await validity2.click();
+      const selectdate2 = page.locator("//div[normalize-space()='29']");
+        await selectdate2.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Add Description
+      const description2 = page.locator("(//input[@id='large-input'])[4]");
+        await description2.click();
+        await description2.type("State of Charge validation");
+        await page.waitForTimeout(2000); // 1000 millisecond = 1 second
+
+    // Select tariff type
+      const tarifftype2 = page.locator("(//button[@type='button'])[5]");
+        await tarifftype2.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Click Next button
+      const next1 = page.locator("//button[normalize-space()='Next']");
+        await next1.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Condition 1
+    // Enter amount
+      const enteramount1 = page.locator("//input[contains(@placeholder,'Enter Amount')]");
+        await enteramount1.click();
+        await enteramount1.fill("5");  
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Add condition
+      const addcondition = page.locator("//button[normalize-space()='Add Condition']")
+        await addcondition.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Add SOC range
+      const socranage = page.locator(
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > svg:nth-child(1)"
+      );
+        await socranage.dblclick();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Condition 2    
+    // Add condition 
+      const addcondition1 = page.locator("(//button[normalize-space()='Add Condition'])[1]"); 
+        await addcondition.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
+
+    // Second SOC range
+      const secondsoc = page.locator(
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > svg:nth-child(1)"
+      );  
+        await secondsoc.dblclick();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Enter amount
+      const secondamount = page.locator("(//input[@placeholder='Enter Amount'])[2]");
+        await secondamount.click();
+        await secondamount.fill("2")
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Condition 3
+      const thirdamount = page.locator("(//input[@placeholder='Enter Amount'])[3]");
+        await thirdamount.click();
+        await thirdamount.fill("1");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Condition 4
+      const fourthsoc = page.locator(
+      "button[class='flex items-center justify-between w-full font-medium text-left group-first:rounded-t-xl border-gray-200 dark:border-gray-700 border-l border-r group-first:border-t border-b rounded-b-lg group-first:!rounded-t-lg border-gray-200 dark:border-gray-700 p-0 text-gray-500 dark:text-gray-400 hover:bg-gray-100 hover:dark:bg-gray-800 text-gray-900 bg-[#F7F9FB] hover:!bg-[#F7F9FB]'] div[class='p-5']"
+      );
+        await fourthsoc.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Enter amount
+      const fourthamount = page.locator("(//input[@placeholder='Enter Amount'])[4]");
+        await fourthamount.click();
+        await fourthamount.fill("1");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Next button
+      const nextbutton12 = page.locator("(//button[normalize-space()='Next'])[1]");
+        await nextbutton12.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Asset selection
+      const searchbar4 = page.locator("(//input[contains(@placeholder,'Search')])[1]");
+        await searchbar4.click();
+        await searchbar4.fill("au32ho");
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Select charger
+      const selectcharger4 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await selectcharger4.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Select hub 
+      const hub6 = page.locator("//span[normalize-space()='Hubs']");
+        await hub6.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar13 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar13.click();
+        await searchbar13.type("Driver tariff");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+
+    // Check box
+      const chargercheckbox10= page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox10.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second    
+
+    // Select state
+      const state06 = page.locator("//span[normalize-space()='State']");
+        await state06.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+    // Search bar
+      const searchbar14 = page.locator("(//input[@placeholder='Search'])[1]");
+        await searchbar14.click();
+        await searchbar14.type("Tamil Nadu");
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+  
+  
+    // Check box
+      const chargercheckbox11 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await chargercheckbox11.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second     
+  
+  
+    // Click next button
+      const nextbutton13 = page.locator("(//button[normalize-space()='Next'])[1]");
+        await nextbutton13.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+
+  // Create Tariff
+    const createtariff4 = page.locator("(//button[normalize-space()='Create'])");
+      await createtariff4.click();
+      await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+
+
+  // // Click back button
+  //   const backbutton2 = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
+  //     await backbutton2.click();    
   //     await page.waitForTimeout(2000); // 2000 millisecond = 2 second 
 
-      console.log("Tariff Charge by Hour(CBH) Created Successfully")
-
-  // State of charge
-
-  // Select tariff section from the RM Module
-    const tariff2 = page.locator("//span[normalize-space()='Charger Tariffs']");
-      await tariff2.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Click on create tariff butoon
-    const createtariff3 = page.locator(
-    "//button[normalize-space()='Create Tariff']"
-   );
-      await createtariff3.click();
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 seconds
-
-  // Click and Enter the tariff name
-    const tariffname2 = page.locator("(//input[@id='large-input'])[1]");
-      await tariffname2.click();
-      await tariffname2.fill("State of Charge");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Enter tariff validity 
-    const validity2 = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
-      await validity2.click();
-    const selectdate2 = page.locator("//div[normalize-space()='29']");
-      await selectdate2.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Add Description
-    const description2 = page.locator("(//input[@id='large-input'])[4]");
-      await description2.click();
-      await description2.type("State of Charge validation");
-      await page.waitForTimeout(2000); // 1000 millisecond = 1 second
-
-  // Select tariff type
-    const tarifftype2 = page.locator("(//button[@type='button'])[5]");
-      await tarifftype2.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Click Next button
-    const next1 = page.locator("//button[normalize-space()='Next']");
-      await next1.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Condition 1
-  // Enter amount
-    const enteramount1 = page.locator("//input[contains(@placeholder,'Enter Amount')]");
-      await enteramount1.click();
-      await enteramount1.fill("5");  
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Add condition
-    const addcondition = page.locator("//button[normalize-space()='Add Condition']")
-      await addcondition.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Add SOC range
-    const socranage = page.locator(
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > svg:nth-child(1)"
-    );
-      await socranage.dblclick();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Condition 2    
-  // Add condition 
-    const addcondition1 = page.locator("(//button[normalize-space()='Add Condition'])[1]"); 
-      await addcondition.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second   
-
-  // Second SOC range
-    const secondsoc = page.locator(
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > svg:nth-child(1)"
-    );  
-      await secondsoc.dblclick();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Enter amount
-    const secondamount = page.locator("(//input[@placeholder='Enter Amount'])[2]");
-      await secondamount.click();
-      await secondamount.fill("2")
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Condition 3
-    const thirdamount = page.locator("(//input[@placeholder='Enter Amount'])[3]");
-      await thirdamount.click();
-      await thirdamount.fill("1");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Condition 4
-    const fourthsoc = page.locator(
-      "button[class='flex items-center justify-between w-full font-medium text-left group-first:rounded-t-xl border-gray-200 dark:border-gray-700 border-l border-r group-first:border-t border-b rounded-b-lg group-first:!rounded-t-lg border-gray-200 dark:border-gray-700 p-0 text-gray-500 dark:text-gray-400 hover:bg-gray-100 hover:dark:bg-gray-800 text-gray-900 bg-[#F7F9FB] hover:!bg-[#F7F9FB]'] div[class='p-5']"
-    );
-      await fourthsoc.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Enter amount
-    const fourthamount = page.locator("(//input[@placeholder='Enter Amount'])[4]");
-      await fourthamount.click();
-      await fourthamount.fill("1");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Next button
-    const nextbutton12 = page.locator("(//button[normalize-space()='Next'])[1]");
-      await nextbutton12.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Asset selection
-    const searchbar4 = page.locator("(//input[contains(@placeholder,'Search')])[1]");
-      await searchbar4.click();
-      await searchbar4.fill("au32ho");
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // Select charger
-    const selectcharger4 = page.locator("(//input[@id='link-checkbox'])[2]");
-      await selectcharger4.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-  
-  // Click next button
-    const nextbutton13 = page.locator("(//button[normalize-space()='Next'])[1]");
-      await nextbutton13.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-
-  // // Create Tariff
-  //   const createtariff4 = page.locator("(//button[normalize-space()='Create'])");
-  //     await createtariff4.click();
-  //     await page.waitForTimeout(2000); // 2000 millisecond = 2 second
-
-
-  // Click back button
-    const backbutton2 = page.locator("(//div[@class='flex cursor-pointer pb-4'])[1]");
-      await backbutton2.click();    
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 second 
-
-
+        console.log("State of Charge(SOC) Created Successfully");
 
 });
 
@@ -1990,5 +2609,6 @@ test("download and validate revenue Report",async ({ page }) => {
     );
   }
 }
+
 
 });
