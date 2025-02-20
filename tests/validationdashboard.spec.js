@@ -14,150 +14,141 @@ const filePath ='C:\Users\msg4a\Downloads\aa1';
  
  test('Session validation', async ({ page}) => {
 
-    const fs = require('fs');
-    const xlsx = require('xlsx');
-    const path = require('path');
+      const fs = require('fs');
+      const xlsx = require('xlsx');
+      const path = require('path');
 
   
     // Navigate to the login page
-      await page.goto('https://novo.kazam.in');
+        await page.goto('https://novo.kazam.in');
   
     // Login
-      await page.fill('#large-input','akhilesh@kazam.in');
-      await page.fill('#password','Akbl@1724');
-      await page.click("button[type='submit']");
-      await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
     // Wait for a few seconds
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
     // Print dashboard No of session value
-    const dashboardValueSelector = (
+      const dashboardValueSelector = (
       "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-9'] p[class='text-base font-medium']"
-    );
+      );
         global.dashboardValue = await page.$eval(dashboardValueSelector, el => parseFloat(el.innerText));
 
         console.log(`Total no of sessions(From Dashboard): ${dashboardValue}`);
 
     // Print dashboard Usage value
-    const dashboardusageValueSelector = "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-8'] p[class='text-base font-medium']";
-    global.dashboardusageValue = await page.$eval(dashboardusageValueSelector, el => parseFloat(el.innerText));
+      const dashboardusageValueSelector = "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-8'] p[class='text-base font-medium']";
+      global.dashboardusageValue = await page.$eval(dashboardusageValueSelector, el => parseFloat(el.innerText));
 
-       console.log(`Total Usage (From Dashboard In kWh): ${dashboardusageValue}`);
+        console.log(`Total Usage (From Dashboard In kWh): ${dashboardusageValue}`);
 
-      await page.click("div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-9'] p[class='text-sm text-gray-800 font-normal']");
+        await page.click(
+          "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-9'] p[class='text-sm text-gray-800 font-normal']"
+        );
     // Wait for a few seconds
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
     
-    // Example: Applying a filter through an input field
-      await page.click(
+    // Applying a filter through an input field
+        await page.click(
         "(//*[name()='svg'][contains(@class,'feather feather-chevron-down transform duration-500 $')])[1]"
-      );
-      await page.click("//div[contains(text(),'This month')]"); // Replace with actual selector
+        );
+        await page.click("//div[contains(text(),'This month')]");
     // Wait for a few seconds
-      await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
+        await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
     // Click on the three dots menu
-      await page.click("//div[@id='download']//*[name()='svg']");
-      await page.waitForTimeout(4000);
-    // await page.click(".text-sm.text-kazamGray-900");
-    // await page.waitForTimeout(8000);
+        await page.click("//div[@id='download']//*[name()='svg']");
+        await page.waitForTimeout(4000);
 
     // Set up download listener and trigger download
-    const [download] = await Promise.all([
+      const [download] = await Promise.all([
       page.waitForEvent('download'), // wait for download event
       page.click(".text-sm.text-kazamGray-900")   // Download button selector
 ]);
 
     // Save the downloaded file to a specific path
-    const filePath = path.join(__dirname, 'downloaded_file.xlsx');
-      await download.saveAs(filePath);
+      const filePath = path.join(__dirname, 'downloaded_file.xlsx');
+        await download.saveAs(filePath);
 
     // Read and parse the Excel file
-    const workbook = xlsx.readFile(filePath);
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
+      const workbook = xlsx.readFile(filePath);
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
 
     // Convert sheet to JSON to easily access rows and columns
-    const sheetJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+      const sheetJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
     // Count non-empty cells in the second column excluding the first cell
-    let nonEmptyCellCount = 0;
-     for (let i = 1; i < sheetJson.length; i++) {
+      let nonEmptyCellCount = 0;
+      for (let i = 1; i < sheetJson.length; i++) {
       if (sheetJson[i][1]) { // Index 1 corresponds to the second column
       nonEmptyCellCount++;
     }
   }
 
       console.log(`Total no of sessions(From Report): ${nonEmptyCellCount}`);
+      global.Noofsessions = nonEmptyCellCount
       console.log(`Total no of sessions(From dashboard): ${global.dashboardValue}`);
-    if (global.dashboardValue == nonEmptyCellCount) {
-       console.log('The no of sessions in the report is equal to the No of sessions on the dashbaoard.');
-}   else {
-    console.log('The no of sessions in the report is Not equal to the No of sessions on the dashbaoard.');
+      if (global.dashboardValue == nonEmptyCellCount) {
+      console.log('The no of sessions in the report is equal to the No of sessions on the dashbaoard');
+}     else {
+      console.log('The no of sessions in the report is Not equal to the No of sessions on the dashbaoard');
 }
 
     // Convert the worksheet to JSON format
-    const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+      const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
 
     // Ensure there are at least 9 columns to avoid index errors
-  if (jsonData[0].length >= 9) {
+      if (jsonData[0].length >= 9) {
     // Initialize sum and iterate over rows starting from the second row (index 1)
-    let sum = 0;
-    for (let i = 1; i < jsonData.length; i++) {
+      let sum = 0;
+      for (let i = 1; i < jsonData.length; i++) {
       const cellValue = jsonData[i][8]; // 9th column, as index starts from 0
       if (typeof cellValue === 'number') { // ensure cell contains a number
         sum += cellValue;
       }
     }
 
-  // Divide the sum by 1000
-  global.result = sum / 1000;
-  console.log(`Total Usage (From Report In kWh): ${global.result}`);
+    // Divide the sum by 1000
+      global.result = sum / 1000;
+      console.log(`Total Usage (From Report In kWh): ${global.result}`);
   }
-
-  console.log(
-    `Total usage (From Dashboard In kWh): ${global.dashboardusageValue}`
+      console.log(`Total usage (From Dashboard In kWh): ${global.dashboardusageValue}`);
+      const final_value = Math.abs(
+       Math.round(global.dashboardusageValue, 0) - Math.round(global.result, 0)
   );
-  const final_value = Math.abs(
-    Math.round(global.dashboardusageValue, 0) - Math.round(global.result, 0)
-  );
-  if (final_value <= 1) {
-    console.log(
-      "The sum of usage in the excel is equal to the total usage of dashboard value."
-    );
+      if (final_value <= 1) {
+    console.log("The sum of usage in the excel is equal to the total usage of dashboard value");
   } else {
-    console.log(
-      "The sum of usage in the excel is NOT equal to the total usage of dashboard value."
-    );
+    console.log("The sum of usage in the excel is Not equal to the total usage of dashboard value");
   }
-
-
-    // Cleanup (optional): delete the downloaded file after processing
+    // Delete the downloaded file after processing
       fs.unlinkSync(filePath);
 });
-  
-     
+      
 test("Online percentage validation",async ({ page }) => {
-    const fs = require('fs');
-    const xlsx = require('xlsx');
-    const path = require('path');
+      const fs = require('fs');
+      const xlsx = require('xlsx');
+      const path = require('path');
 
 
     // Navigate to the login page
-      await page.goto('https://novo.kazam.in');
+        await page.goto('https://novo.kazam.in');
 
     // Login
-      await page.fill('#large-input','akhilesh@kazam.in');
-      await page.fill('#password','Akbl@1724');
-      await page.click("button[type='submit']");
-      await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
     // Wait for a few seconds
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
     // Print dashboard No of session value
-    const dashboarduptimeSelector = (
+      const dashboarduptimeSelector = (
   "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-7'] p[class='text-base font-medium']"
 );
-    global.dashboarduptimeValue = await page.$eval(dashboarduptimeSelector, el => parseFloat(el.innerText));
+        global.dashboarduptimeValue = await page.$eval(dashboarduptimeSelector, el => parseFloat(el.innerText));
 
         console.log(` Online percentage (From Dashboard in %): ${dashboarduptimeValue}`);
 
@@ -166,272 +157,553 @@ test("Online percentage validation",async ({ page }) => {
     "div[class='bg-white w-full flex flex-col h-full p-4 rounded-lg drop-shadow-sm border border-white hover:cursor-pointer hover:border-gray-200 z-7'] p[class='text-base font-medium']"
   );
     // Wait for a few seconds
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
  
-    // Example: Applying a filter through an input field
-    const dayfliter = page.locator("(//*[name()='svg'][contains(@class,'feather feather-chevron-down transform duration-500 $')])[2]");
-      await dayfliter.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+    // Applying a filter through an input field
+      const dayfliter = page.locator("(//*[name()='svg'][contains(@class,'feather feather-chevron-down transform duration-500 $')])[2]");
+        await dayfliter.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
-      await page.click("//div[contains(text(),'This month')]"); // Replace with actual selector
+        await page.click("//div[contains(text(),'This month')]"); 
     // Wait for a few seconds
-      await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
+        await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
     // Click on the three dots menu
-      await page.click(".feather.feather-more-vertical");
-      await page.waitForTimeout(4000);
+        await page.click(".feather.feather-more-vertical");
+        await page.waitForTimeout(4000);
 
     // Set up download listener and trigger download
-    const [download] = await Promise.all([
+      const [download] = await Promise.all([
       page.waitForEvent('download'), // wait for download event
-      page.click(
-        "//div[contains(text(),'Download Report')]"
-      )   // replace with actual download button selector
+      page.click("//div[contains(text(),'Download Report')]")   
 ]);
 
     // Save the downloaded file to a specific path
-    const filePath = path.join(__dirname, 'downloaded_file.xlsx');
+      const filePath = path.join(__dirname, 'downloaded_file.xlsx');
 
-    await download.saveAs(filePath);
+        await download.saveAs(filePath);
     
     // Load the Excel file
-    const workbook = xlsx.readFile(filePath);
+      const workbook = xlsx.readFile(filePath);
     
     // Get the first worksheet
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
     
     // Convert the worksheet to JSON for easier processing
-    const data = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+      const data = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
 
     // Exclude the header row and calculate for the 6th column (index 5 in 0-based indexing)
-    const columnIndex = 5;
-    const values = data.slice(1) // Skip the first row
+      const columnIndex = 5;
+      const values = data.slice(1) // Skip the first row
         .map(row => row[columnIndex]) // Extract the 6th column
         .filter(value => !isNaN(value) && value !== undefined); // Filter valid numeric values
 
     // Calculate the sum and average
-    const sum = values.reduce((acc, val) => acc + parseFloat(val), 0);
-    const average = (sum / values.length) * 100;
+      const sum = values.reduce((acc, val) => acc + parseFloat(val), 0);
+      const average = (sum / values.length) * 100;
 
-    console.log(`The calculated result is: ${average}`);
+        console.log(`The calculated result is: ${average}`);
 
-    if(dashboarduptimeValue==average){
-  console.log('Online percentage from dashboard is equal the online percentage from  the downloaded report.')
-    }else{
-  console.log('Online percentage from dashboard is Not equal the online percentage from  the downloaded report.')
+      if(dashboarduptimeValue==average){
+      console.log('Online percentage from dashboard is equal the online percentage from  the downloaded report')
+      }else{
+      console.log('Online percentage from dashboard is Not equal the online percentage from  the downloaded report')
+
+    // Convert the worksheet to JSON format
+      const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+
+    // Ensure there are at least 9 columns to avoid index errors
+      if (jsonData[0].length >= 9) {
+    // Initialize sum and iterate over rows starting from the second row (index 1)
+      let sum = 0;
+      for (let i = 1; i < jsonData.length; i++) {
+      const cellValue = jsonData[i][3]; // 4th column, as index starts from 0
+      if (typeof cellValue === 'number') { // ensure cell contains a number
+      sum += cellValue;
+    }
+  }
+
+    // Divide the sum by 1000
+      global.chargerusage = sum / 1000;
+      console.log(`Total Usage (From Charger Report In kWh): ${global.chargerusage}`);
+
+    // Process the Excel file
+      const workbook = xlsx.readFile(filePath);
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+
+    // Convert sheet to JSON for easier manipulation
+      const data = xlsx.utils.sheet_to_json(sheet, { header: 1 }); // Use header: 1 for a 2D array
+
+    // Calculate the sum of the 3th column (index 2), skipping the first row
+      const Totalsessions = data.slice(1).reduce((acc, row) => acc + (parseFloat(row[2]) || 0), 0);
+
+      console.log('Total Sessions(From the charger report):', Totalsessions);
+      global.Totalsessions = Totalsessions;
+}
+}
+    // Cleanup (optional): delete the downloaded file after processing
+      fs.unlinkSync(filePath);
+});
+
+test("Report and analytics: Session Report validation",async ({ page }) => {
+
+      const fs = require('fs');
+      const xlsx = require('xlsx');
+      const path = require('path');
+
+
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
+
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
+    // Wait for a few seconds
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+
+    // Click on the Analytics card
+      const analyticsCard = page.locator("//span[normalize-space()='Reports & Analytics']");
+        await analyticsCard.click();
+        await page.waitForTimeout(1000); // 3000 milliseconds = 3 seconds
+
+    // click hub name
+      const hubName = page.locator("//h3[normalize-space()='Preview of the selected report']");
+        await hubName.click();
+        await page.waitForTimeout(1000); // 3000 milliseconds = 3 seconds
+
+    // click on Anomaly check box
+      const anomalyCheckBox = page.locator("//input[@id='withAnomalyTxn']");
+        await anomalyCheckBox.click();
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+    // Scroll down 5 times in intervals
+        for (let i = 0; i < 5; i++) {
+        await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+        await page.waitForTimeout(1000); // Wait for 1 second (adjust as needed)
+
+    // Select the 1st day of the current month
+        await page.click('text="1"'); // Clicks on '1' if it's visible
+
+    // Get today's date dynamically
+      const today = new Date().getDate().toString(); // Extract the day as a string
+
+    // Select today's date dynamically
+        await page.click(`text="${today}"`); // Clicks on the current day
+
 }
 
-  // Cleanup (optional): delete the downloaded file after processing
-    fs.unlinkSync(filePath);
+    // Set up download listener and trigger download
+      const [download] = await Promise.all([
+      page.waitForEvent('download'), // wait for download event
+      page.click("//button[normalize-space()='Generate Report']")
+]);
+
+    // Save the downloaded file to a specific path
+      const filePath = path.join(__dirname, 'downloaded_file.xlsx');
+        await download.saveAs(filePath);
+
+    // Read and parse the Excel file
+      const workbook = xlsx.readFile(filePath);
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+
+    // Convert sheet to JSON to easily access rows and columns
+      const sheetJson = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+    // Count non-empty cells in the second column excluding the first cell
+     let nonEmptyCellCount = 0;
+      for (let i = 1; i < sheetJson.length; i++) {
+      if (sheetJson[i][1]) { // Index 1 corresponds to the second column
+   nonEmptyCellCount++;
+}
+}
+
+        console.log(`Total no of sessions(From Report and Analytics): ${nonEmptyCellCount}`);
+        console.log(`Total no of sessions(From Session Report): ${global.Noofsessions}`);
+        if (global.Noofsessions == nonEmptyCellCount) {
+        console.log('The no of sessions in the Session report is equal to the No of sessions from the Report and Anlaytics module');
+}       else {
+        console.log('The no of sessions in the Session report is Not equal to the No of sessions from the Report and Anlaytics module');
+}
+
+    // Convert the worksheet to JSON format
+      const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+
+    // Ensure there are at least 9 columns to avoid index errors
+      if (jsonData[0].length >= 9) {
+    // Initialize sum and iterate over rows starting from the second row (index 1)
+      let sum = 0;
+
+      for (let i = 1; i < jsonData.length; i++) {
+      const cellValue = jsonData[i][9]; // 10th column, as index starts from 0
+      if (typeof cellValue === 'number') { // ensure cell contains a number
+      sum += cellValue;
+  }
+}
+
+    // Divide the sum by 1000
+      global.resultreportandanalytics = sum / 1000;
+      console.log(`Total Usage (From Session Report In kWh): ${global.result}`);
+}
+
+      console.log(`Total usage (From Report and Analytics kWh): ${global.resultreportandanalytics}`
+);
+      const final_value = Math.abs(
+      Math.round(global.dashboardusageValue, 0) - Math.round(global.result, 0)
+);
+      if (final_value <= 1) {
+      console.log("Total Usage in the Session report is equal to the Total Usage from the Report and Anlaytics module");
+}     else {
+      console.log("Total Usage in the Session report is Not equal to the Total Usage from the Report and Anlaytics module");
+}
+
+    // Cleanup (optional): delete the downloaded file after processing
+      fs.unlinkSync(filePath);
+});
+
+test("Report and analytics: Charger Report validation",async ({ page }) => {
+
+      const fs = require('fs');
+      const xlsx = require('xlsx');
+      const path = require('path');
+
+
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
+
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
+    // Wait for a few seconds
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click on the Analytics card
+      const analyticsCard = page.locator("//span[normalize-space()='Reports & Analytics']");
+        await analyticsCard.click();
+        await page.waitForTimeout(1000); // 3000 milliseconds = 3 seconds
+
+    // click hub name
+      const hubName = page.locator("//h3[normalize-space()='Preview of the selected report']");
+        await hubName.click();
+        await page.waitForTimeout(1000); // 3000 milliseconds = 3 seconds
+
+    // select charger
+      const charger = page.locator(
+    "select[class='block w-full text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 text-sm p-2 bg-white px-6 focus:border-kazamGray-300 focus:ring-kazamGray-300 ']"
+  );
+        await charger.click();
+        await charger.selectOption({ label: 'Chargers' });
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+    // Scroll down 5 times in intervals
+        for (let i = 0; i < 5; i++) {
+        await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+        await page.waitForTimeout(1000); // Wait for 1 second (adjust as needed)
+
+    // Select the 1st day of the current month
+        await page.click('text="1"'); // Clicks on '1' if it's visible
+
+    // Get today's date dynamically
+      const today = new Date().getDate().toString(); // Extract the day as a string
+
+    // Select today's date dynamically
+        await page.click(`text="${today}"`); // Clicks on the current day
+}
+
+    // click Table field
+      const tableField = page.locator("//button[normalize-space()='Table Fields']");
+        await tableField.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // select usage 
+      const usagecheckbox = page.locator("#device_usage");
+        await usagecheckbox.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // select sessions
+      const sessioncheckbox = page.locator("#device_sessions");
+        await sessioncheckbox.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // click apply button
+      const applyButton = page.locator("//button[normalize-space()='Apply']");
+        await applyButton.click();
+        await page.waitForTimeout(5000); // 5000 milliseconds = 3 seconds
+
+    // Set up download listener and trigger download
+      const [download] = await Promise.all([
+      page.waitForEvent('download'), // wait for download event
+      page.click("//button[normalize-space()='Generate Report']")   // Download button selector
+]);
+
+    // Save the downloaded file to a specific path
+      const filePath = path.join(__dirname, 'downloaded_file.xlsx');
+        await download.saveAs(filePath);
+
+    // Read and parse the Excel file
+      const workbook = xlsx.readFile(filePath);
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+
+    // Convert the worksheet to JSON format
+      const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+
+    // Ensure there are at least 9 columns to avoid index errors
+      if (jsonData[0].length >= 9) {
+    // Initialize sum and iterate over rows starting from the second row (index 1)
+      let sum = 0;
+      for (let i = 1; i < jsonData.length; i++) {
+      const cellValue = jsonData[i][13]; // 14th column, as index starts from 0
+      if (typeof cellValue === 'number') { // ensure cell contains a number
+      sum += cellValue;
+  }
+}
+
+    // Divide the sum by 1000
+      global.resultreportandanalyticschargers = sum / 1000;
+        console.log(`Total Usage (From charger Report In kWh): ${global.resultreportandanalyticschargers}`);
+}
+
+        console.log(`Total usage (From Report and Analytics kWh): ${global.chargerusage}`);
+
+        const final_value = Math.abs(
+          Math.round(global.resultreportandanalyticschargers, 0) - Math.round(global.chargerusage, 0)
+    );
+          if (final_value <= 1) {
+        console.log('Total Usage in the Charger report is equal to the Total Usage from the Report and Anlaytics charger module');
+}     else {
+        console.log('Total Usage in the Charger report is Not equal to the Total Usage from the Report and Anlaytics charger module');
+
+}
+          
+
+      const sheet = workbook.Sheets[sheetName];
+    // Convert sheet to JSON for easier manipulation
+      const data = xlsx.utils.sheet_to_json(sheet, { header: 1 }); // Use header: 1 for a 2D array
+
+    // Calculate the sum of the 15th column (index 14), skipping the first row
+      const sessions = data.slice(1).reduce((acc, row) => acc + (parseFloat(row[14]) || 0), 0);
+
+        console.log('Total Sessions(From the Report and Anlaytics charger report):', sessions);
+        console.log('Total Sessions(From the charger report):', global.Totalsessions);
+
+      if (sessions == global.Totalsessions) {
+        console.log('Total No of sesssions in the Charger report is equal to the Total No of sessions from the Report and Anlaytics charger module');
+}     else {
+        console.log('Total No of sesssions in the Charger report is Not equal to the Total No of sessions from the Report and Anlaytics charger module');
+}
+
+    // Cleanup (optional): delete the downloaded file after processing
+      fs.unlinkSync(filePath);
 
 });
 
 
 test('Add charger flow validation', async ({ page}) => {
-  
-    global.content=''
-    const filepath1 = '.upload/aa1.png'
+
+      global.content=''
+      const filepath1 = '.upload/aa1.png'
     // Navigate to the login page
-      await page.goto('https://novo.kazam.in');
+        await page.goto('https://novo.kazam.in');
 
     // Login
-      await page.fill('#large-input','akhilesh@kazam.in');
-      await page.fill('#password','Akbl@1724');
-      await page.click("button[type='submit']");
-      await page.click("(//div[@class='flex flex-col gap-2 p-4'])[3]");
-   // Wait for a few seconds
-      await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
-   //click charger session module
-      await page.click("//span[normalize-space()='Chargers & Sessions']");
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-      await page.click("//button[normalize-space()='Add Charger']");
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    //click charger session module
+        await page.click("//span[normalize-space()='Chargers & Sessions']");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+        await page.click("//button[normalize-space()='Add Charger']");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
     // enter charger name
-      await page.locator("#large-input").fill("Kazam_Automation_test");
+        await page.locator("#large-input").fill("Kazam_Automation_test");
 
     // select host details
-    const hostfield = page.locator("(//input[@placeholder='Select'])[1]");
-      await hostfield.click();
-      await hostfield.type("testing");
-      await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
-      await page.click("li:nth-child(1) div:nth-child(1)");
-  
+      const hostfield = page.locator("(//input[@placeholder='Select'])[1]");
+        await hostfield.click();
+        await hostfield.fill("testing");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      const dropdown = page.locator("(//button[contains(@class,'h-[40px] text-sm')])[1]");
+        await dropdown.dblclick();
+        await page.click("li:nth-child(1) div:nth-child(1)");
+      
     // select segment 
-    const segmentfield = page.locator("(//*[name()='svg'])[15]");
-      await segmentfield.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await page.click("//div[normalize-space()='Fleet']");
+      const segmentfield = page.locator("(//*[name()='svg'])[16]");
+        await segmentfield.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await page.click("//div[normalize-space()='Fleet']");
 
     // select subsegment
-    const subsegment = page.locator("(//div[contains(@class,'flex flex-col gap-2 w-full')])[4]");
-      await subsegment.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await page.click("//div[normalize-space()='Kazam Hub']");
+      const subsegment = page.locator("(//div[contains(@class,'flex flex-col gap-2 w-full')])[4]");
+        await subsegment.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await page.click("//div[normalize-space()='Kazam Hub']");
     
     // enter total capacity
-    const totalcapacity = page.locator("//input[contains(@placeholder,'eg: 3.3, 7.4. 22')]")
-      await totalcapacity.click();
-      await totalcapacity.clear();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await totalcapacity.type("7.4");
+      const totalcapacity = page.locator("//input[contains(@placeholder,'eg: 3.3, 7.4. 22')]")
+        await totalcapacity.click();
+        await totalcapacity.clear();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await totalcapacity.type("7.4");
 
     // charger type
-    const chargertype = page.locator("//p[normalize-space()='AC']");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await chargertype.click();
+      const chargertype = page.locator("//p[normalize-space()='AC']");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await chargertype.click();
    
 
     // select parking type
-    const parktype = page.locator("//input[@placeholder='Select Parking Type']");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await parktype.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await page.click("(//span[normalize-space()='2W'])[1]");
+      const parktype = page.locator("//input[@placeholder='Select Parking Type']");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await parktype.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await page.click("(//span[normalize-space()='2W'])[1]");
 
     // click on next button
-    const nextbutton = page.locator("//button[normalize-space()='Next']");
-      await nextbutton.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      const nextbutton = page.locator("//button[normalize-space()='Next']");
+        await nextbutton.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
 
     // connectors page 
-    const noofconnectors = page.locator("//p[normalize-space()='2']");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await noofconnectors.click();
+      const noofconnectors = page.locator("//p[normalize-space()='2']");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await noofconnectors.click();
     
     // connector 1 details
-    const connector1 = page.locator("(//input[contains(@placeholder,'Select')])[1]");
-      await connector1.click();
-      await page.click("//div[normalize-space()='3 Pin Socket']");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+      const connector1 = page.locator("(//input[contains(@placeholder,'Select')])[1]");
+        await connector1.click();
+        await page.click("//div[normalize-space()='3 Pin Socket']");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
    
 
-    const totalcapacity1 = page.locator("(//input[contains(@placeholder,'eg: 3.3, 7.4. 22')])[1]");
-      await totalcapacity1.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await totalcapacity1.type("3.3");
+      const totalcapacity1 = page.locator("(//input[contains(@placeholder,'eg: 3.3, 7.4. 22')])[1]");
+        await totalcapacity1.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await totalcapacity1.type("3.3");
     
-
     // connector 2 details
-    const connector2 = page.locator("//input[contains(@placeholder,'Select')]");
-      await connector2.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await page.click("//div[normalize-space()='3 Pin Socket']");
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      const connector2 = page.locator("//input[contains(@placeholder,'Select')]");
+        await connector2.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await page.click("//div[normalize-space()='3 Pin Socket']");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-    const totalcapacity2 = page.locator("(//input[@placeholder='eg: 3.3, 7.4. 22'])[2]");
-      await totalcapacity2.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await totalcapacity2.type("3.3");
+      const totalcapacity2 = page.locator("(//input[@placeholder='eg: 3.3, 7.4. 22'])[2]");
+        await totalcapacity2.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await totalcapacity2.type("3.3");
    
     // click on next button
-    const nextbutton1 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton1.click();
-   
+      const nextbutton1 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton1.click();
 
     // Select location and longitude
-    const latitude =  page.locator("//input[@placeholder='Latitude']");
-      await latitude.click();
-      await latitude.clear();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await latitude.type("12.923");
+      const latitude =  page.locator("//input[@placeholder='Latitude']");
+        await latitude.click();
+        await latitude.clear();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await latitude.type("12.923");
    
-
-    const longitude = page.locator("//input[@placeholder='Longitude']");
-      await longitude.click();
-      await longitude.clear();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await longitude.type("77.462");
-      await page.waitForTimeout(1000); // 11000 milliseconds = 1 seconds
-
+      const longitude = page.locator("//input[@placeholder='Longitude']");
+        await longitude.click();
+        await longitude.clear();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await longitude.type("77.462");
+        await page.waitForTimeout(1000); // 11000 milliseconds = 1 seconds
 
     // get address
-    const getaddress = page.locator("//button[normalize-space()='Get Address']");
-      await getaddress.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      const getaddress = page.locator("//button[normalize-space()='Get Address']");
+        await getaddress.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
     // click on next button
-    const nextbutton2 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton2.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      const nextbutton2 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton2.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
     // Additional details
-    const privatecharger = page.locator("(//input[@placeholder='Select'])[1]");
-      await privatecharger.click();
-      await page.click("//div[normalize-space()='Yes']");
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-
+      const privatecharger = page.locator("(//input[@placeholder='Select'])[1]");
+        await privatecharger.click();
+        await page.click("//div[normalize-space()='Yes']");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
     // charger timings
-    const timings = page.locator("(//*[name()='svg'])[18]");    
-      await timings.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await page.click("//div[normalize-space()='No']");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+      const timings = page.locator("//body/div/div/div/div/div/div/main/div/div/div/div/div/div/div[2]/div[2]/div[1]//*[name()='svg']");    
+        await timings.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await page.click("//div[normalize-space()='No']");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
     
-
-  
     // select timing
-    const checkbox1 = page.locator("(//input[contains(@type,'checkbox')])[1]");
-      await checkbox1.click();
-    const starttime1 = page.locator("(//input[contains(@type,'time')])[1]"); 
-      await starttime1.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await starttime1.type("08:00");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+      const checkbox1 = page.locator("(//input[contains(@type,'checkbox')])[1]");
+        await checkbox1.click();
+      const starttime1 = page.locator("(//input[contains(@type,'time')])[1]"); 
+        await starttime1.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await starttime1.type("08:00");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
 
-    const endtime1 = page.locator("(//input[contains(@type,'time')])[2]");
-      await endtime1.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await endtime1.type("18:00");
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+       const endtime1 = page.locator("(//input[contains(@type,'time')])[2]");
+        await endtime1.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await endtime1.type("18:00");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-    const checkbox2 = page.locator("(//input[contains(@type,'checkbox')])[3]");
-      await checkbox2.click();
-    const starttime2 = page.locator("(//input[contains(@type,'time')])[5]");
-      await starttime2.click(); 
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds 
-      await starttime2.type("08:00");
+      const checkbox2 = page.locator("(//input[contains(@type,'checkbox')])[3]");
+        await checkbox2.click();
+      const starttime2 = page.locator("(//input[contains(@type,'time')])[5]");
+        await starttime2.click(); 
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds 
+        await starttime2.type("08:00");
+    
+      const endtime2 = page.locator("(//input[contains(@type,'time')])[6]"); 
+        await endtime2.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await endtime2.type("18:00");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+
+      const checkbox3 = page.locator("(//input[@id='link-checkbox'])[5]");
+        await checkbox3.click();
+      const starttime3 = page.locator("(//input[@type='time'])[9]");
+        await starttime3.click(); 
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await starttime3.type("08:00");
+      const endtime3 = page.locator("(//input[contains(@type,'time')])[10]");
+        await endtime3.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await endtime3.type("18:00");
     
 
-    const endtime2 = page.locator("(//input[contains(@type,'time')])[6]"); 
-      await endtime2.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await endtime2.type("18:00");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-
-    const checkbox3 = page.locator("(//input[@id='link-checkbox'])[5]");
-      await checkbox3.click();
-    const starttime3 = page.locator("(//input[@type='time'])[9]");
-      await starttime3.click(); 
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await starttime3.type("08:00");
-    const endtime3 = page.locator("(//input[contains(@type,'time')])[10]");
-      await endtime3.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await endtime3.type("18:00");
-    
-
-    const uploadimage = page.locator("//label[normalize-space()='Click to upload']"); 
-      await uploadimage.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      const uploadimage = page.locator("//label[normalize-space()='Click to upload']"); 
+        await uploadimage.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
     
     // const imagePath = "C:\\Users\\Admin\\aa1.png"
-    const path = require('path');
-    const filePath = path.resolve('C:\\Users\\msg4a\\Downloads\\aa1.png');
+      const path = require('path');
+      const filePath = path.resolve('C:\\Users\\msg4a\\Downloads\\aa1.png');
   // if (!fs.existsSync(filePath)) {
   //   console.error('File does not exist:', filePath);
   //   return;
     
   // }
 
-        console.log('File exists:', filePath);
-      await page.setInputFiles('input[type="file"]',filePath); 
-      await page.waitForTimeout(2000);
-      await page.keyboard.press('Enter');
-      await page.waitForTimeout(3000);
+          console.log('File exists:', filePath);
+        await page.setInputFiles('input[type="file"]',filePath); 
+        await page.waitForTimeout(2000);
+        await page.keyboard.press('Enter');
+        await page.waitForTimeout(3000);
   
   // // Execute the AutoIt script to press the Esc key
   //   exec('pressEsc.exe', (error, stdout, stderr) => {
@@ -450,494 +722,487 @@ test('Add charger flow validation', async ({ page}) => {
   //   await page.waitForTimeout(2000);
  
   // Add charger button
-    const addcharger = page.locator("//button[normalize-space()='Add Charger']");
-      await addcharger.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      const addcharger = page.locator("//button[normalize-space()='Add Charger']");
+        await addcharger.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
         console.log("charger configured successfully");
 
     // Set up the download event listener
-    const [download] = await Promise.all([
-    page.waitForEvent('download'), // Wait for the download to start
-    page.click("//button[normalize-space()='Download QR Code']")
+      const [download] = await Promise.all([
+      page.waitForEvent('download'), // Wait for the download to start
+      page.click("//button[normalize-space()='Download QR Code']")
     
   ]);
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
   
     // Print the suggested file name
-    const filename = download.suggestedFilename()
-    const start = filename.indexOf('(') + 1
-    const end = filename.indexOf(')');
-    content = filename.slice(start, end);
-    console.log('Newly added charger:', content);
+      const filename = download.suggestedFilename()
+      const start = filename.indexOf('(') + 1
+      const end = filename.indexOf(')');
+      content = filename.slice(start, end);
+      console.log('Newly added charger:', content);
 
-      await page.waitForTimeout(2000); // 2000 milliseconds = 5 seconds
+        await page.waitForTimeout(2000); // 2000 milliseconds = 5 seconds
 
 });
 
 
 test("Newly added charger validation",async ({ page }) => {
     // Navigate to the login page
-    await page.goto('https://novo.kazam.in');
+        await page.goto('https://novo.kazam.in');
 
-  // Login
-    await page.fill('#large-input','akhilesh@kazam.in');
-    await page.fill('#password','Akbl@1724');
-    await page.click("button[type='submit']");
-    await page.click("(//div[@class='flex flex-col gap-2 p-4'])[3]");
-  // Wait for a few seconds
-    await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
-  //click charger session module
-    await page.click("//span[normalize-space()='Chargers & Sessions']");
-    await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    //click charger session module
+        await page.click("//span[normalize-space()='Chargers & Sessions']");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // Go to the search bar
-    const search = page.locator("//input[@placeholder='Search']");
-     await search.click();
-     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-     await search.fill(content);
-     await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Go to the search bar
+      const search = page.locator("//input[@placeholder='Search']");
+        await search.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+        await search.fill(content);
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // clcik on the search result
-    const searchresult = page.locator("td:nth-child(3)");
-    await searchresult.click(); 
-    await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    // clcik on the search result
+      const searchresult = page.locator("td:nth-child(3)");
+        await searchresult.click(); 
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
     // Print Device name
-  const dataSelectors1 = {
-    "Device_name" : "//p[contains(@title,'Kazam_Automation_test')]",
-    "Host_name"   : "//p[@title='Akhilesh - 9495644454']",
-    "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
-    "Charger_status": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-red-600/10 text-red-600']",
-    "Connector_1" : "(//div[contains(@class,'grid grid-cols-6 items-center text-xs py-1')])[1]",
-    "Connector_2" : "(//div[@class='grid grid-cols-6 items-center text-xs py-1'])[2]"
-  };
+      const dataSelectors1 = {
+      "Device_name" : "//p[contains(@title,'Kazam_Automation_test')]",
+      "Host_name"   : "//p[contains(@title,'Testing - 9495644454')]",
+      "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
+      "Charger_status": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-red-600/10 text-red-600']",
+       "Connector_1" : "(//div[contains(@class,'grid grid-cols-6 items-center text-xs py-1')])[1]",
+      "Connector_2" : "(//div[@class='grid grid-cols-6 items-center text-xs py-1'])[2]"
+    };
 
-  const texts = [];
-  const comparison = {
-    'Device_name' : 'Kazam_Automation_test', 
-    'Host_name' : 'testing (9495644454)',
-    'Charger_type' : 'Private',
-    'Charger_status': 'Offline',
-    'Connector_1' : '1  three_pin 3.3 Unavailable ----',
-    'Connector_2' : '2  three_pin 3.3 Unavailable ----'
+      const texts = [];
+      const comparison = {
+      'Device_name' : 'Kazam_Automation_test', 
+      'Host_name' : 'Testing (9495644454)',
+      'Charger_type' : 'Private',
+      'Charger_status': 'Offline',
+      'Connector_1' : '1  three_pin 3.3 Unavailable ----',
+      'Connector_2' : '2  three_pin 3.3 Unavailable ----'
     }
-  //console.log('comparison is ',comparison)
-  // Extract and print data from each selector
-  const extractedTexts = {};
+  
+    // Extract and print data from each selector
+      const extractedTexts = {};
 
-for (const [key, selector] of Object.entries(dataSelectors1)) {
-  const elements = await page.$$(selector);
-  const texts = [];
-  for (const element of elements) {
+    for (const [key, selector] of Object.entries(dataSelectors1)) {
+    const elements = await page.$$(selector);
+    const texts = [];
+    for (const element of elements) {
     const text = await element.textContent();
     const trimmedText = String(text).trim();
     console.log(`${key} from the details page: ${trimmedText}`);
     texts.push(trimmedText); // Accumulate text for each selector
   }
-  extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+    extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
 }
 
-let flattenedText = {};
+    let flattenedText = {};
 
-for (let key in extractedTexts) {
-  if (Array.isArray(extractedTexts[key])) {
+    for (let key in extractedTexts) {
+    if (Array.isArray(extractedTexts[key])) {
     flattenedText[key] = extractedTexts[key][0];
   } else {
     flattenedText[key] = extractedTexts[key];
   }
 }
 
-//console.log("Data from charger details page is",flattenedText);
-  console.log("comparison text is",comparison)
-  if (JSON.stringify(flattenedText) == JSON.stringify(comparison)){
-    console.log("Added data and charger detail page data are matching")
-  }else{
-    console.log("Added data and charger detail page data are Not matching")
-  }
- 
-  
+    //console.log("Data from charger details page is",flattenedText);
+    console.log("comparison text is",comparison)
+    if (JSON.stringify(flattenedText) == JSON.stringify(comparison)){
+    console.log("Added data and Configured charger detail page data are matching")
+    }else{
+    console.log("Added data and Configured charger detail page data are Not matching")
+  } 
 });
 
 
-test("Reconfiguration Validation",async ({ page }) => 
+test("Reconfiguration Inspection",async ({ page }) => {
 
-  {
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
 
-  // Navigate to the login page
-      await page.goto('https://novo.kazam.in');
-
-  // Login
-      await page.fill('#large-input','akhilesh@kazam.in');
-      await page.fill('#password','Akbl@1724');
-      await page.click("button[type='submit']");
-      await page.click("(//div[@class='flex flex-col gap-2 p-4'])[3]");
-  // Wait for a few seconds
-      await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
-  //click charger session module
-      await page.click("//span[normalize-space()='Chargers & Sessions']");
-      await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+    //click charger session module
+        page.click("//span[normalize-space()='Chargers & Sessions']");
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
 
-   // Go to the search bar
-    const search = page.locator("//input[@placeholder='Search']");
-      await search.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-      await search.fill(content);
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Go to the search bar
+      const search = page.locator("//input[@placeholder='Search']");
+        await search.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+        await search.fill(content);
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // clcik on the search result
-    const searchresult = page.locator("td:nth-child(3)");
-      await searchresult.click(); 
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    // clcik on the search result
+      const searchresult = page.locator("td:nth-child(3)");
+        await searchresult.click(); 
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
-  // click on reconfiguration button 
-  const reconfigurationcharger = page.locator("//button[normalize-space()='Reconfigure Charger']");
-      await reconfigurationcharger.click();
-      await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+    // click on reconfiguration button 
+      const reconfigurationcharger = page.locator("//button[normalize-space()='Reconfigure Charger']");
+        await reconfigurationcharger.click();
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
-  // enter charger name
-  const chargername = page.locator("#large-input");
-      await chargername.click();
-      await chargername.clear();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await chargername.type("Kazam_Automation")
+    // enter charger name
+      const chargername = page.locator("#large-input");
+        await chargername.click();
+        await chargername.clear();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await chargername.type("Kazam_Automation")
     
-  // enter total capacity
-  const totalcapacity = page.locator("//input[contains(@placeholder,'eg: 3.3, 7.4. 22')]")
-    totalcapacity.click();
-      await totalcapacity.clear ();
-      await totalcapacity.clear ();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      await totalcapacity.type("22");
+    // enter total capacity
+      const totalcapacity = page.locator("//input[contains(@placeholder,'eg: 3.3, 7.4. 22')]")
+      totalcapacity.click();
+        await totalcapacity.clear ();
+        await totalcapacity.clear ();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+        await totalcapacity.type("22");
 
-  // click on next button
-  const nextbutton = page.locator("//button[normalize-space()='Next']");
-      await nextbutton.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds 
+    // click on next button
+      const nextbutton = page.locator("//button[normalize-space()='Next']");
+        await nextbutton.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds 
     
-  // change the connector 1 total capacity
-  const totalcapacity1 = page.locator("(//input[contains(@placeholder,'eg: 3.3, 7.4. 22')])[1]");
-      await totalcapacity1.click();
-      await totalcapacity1.clear();
-      await totalcapacity1.clear();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      await totalcapacity1.type("7.7");
+    // change the connector 1 total capacity
+      const totalcapacity1 = page.locator("(//input[contains(@placeholder,'eg: 3.3, 7.4. 22')])[1]");
+        await totalcapacity1.click();
+        await totalcapacity1.clear();
+        await totalcapacity1.clear();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+        await totalcapacity1.type("7.7");
 
-  // change connector 2 total capacity
-  const totalcapacity2 = page.locator("(//input[@placeholder='eg: 3.3, 7.4. 22'])[2]");
-      await totalcapacity2.click();
-      await totalcapacity2.clear();
-      await totalcapacity2.clear();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      await totalcapacity2.type("7.7");
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // change connector 2 total capacity
+      const totalcapacity2 = page.locator("(//input[@placeholder='eg: 3.3, 7.4. 22'])[2]");
+        await totalcapacity2.click();
+        await totalcapacity2.clear();
+        await totalcapacity2.clear();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+        await totalcapacity2.type("7.7");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // click on next button
-  const nextbutton1 = page.locator("//button[normalize-space()='Next']");
-      await nextbutton1.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // click on next button
+      const nextbutton1 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton1.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // click on next button
-  const nextbutton2 = page.locator("//button[normalize-space()='Next']");
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await nextbutton2.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // click on next button
+      const nextbutton2 = page.locator("//button[normalize-space()='Next']");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await nextbutton2.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // Additional details
-  const privatecharger = page.locator("(//input[@placeholder='Select'])[1]");
-      await privatecharger.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await page.click("//div[normalize-space()='Yes']");
+    // Additional details
+      const privatecharger = page.locator("(//input[@placeholder='Select'])[1]");
+        await privatecharger.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await page.click("//div[normalize-space()='Yes']");
 
-  // charger timings
-  const timings = page.locator("(//*[name()='svg'])[18]");    
-      await timings.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await page.click("//div[normalize-space()='No']");
+    // charger timings
+      const timings = page.locator(
+        "//body/div/div/div/div/div/div/main/div/div/div/div/div/div/div[2]/div[2]/div[1]//*[name()='svg']"
+        );    
+        await timings.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await page.click("//div[normalize-space()='No']");
 
-  // select timing
-  const checkbox1 = page.locator("(//input[contains(@type,'checkbox')])[1]");
-      await checkbox1.click();
-    page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-  const starttime1 = page.locator("(//input[contains(@type,'time')])[1]"); 
-      await starttime1.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await starttime1.type("09:00");
-  const endtime1 = page.locator("(//input[contains(@type,'time')])[2]");
-      await endtime1.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await endtime1.type("19:00");
+    // select timing
+      const checkbox1 = page.locator("(//input[contains(@type,'checkbox')])[1]");
+        await checkbox1.click();
+      page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+      const starttime1 = page.locator("(//input[contains(@type,'time')])[1]"); 
+        await starttime1.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await starttime1.type("09:00");
+      const endtime1 = page.locator("(//input[contains(@type,'time')])[2]");
+        await endtime1.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await endtime1.type("19:00");
 
-  const checkbox2 = page.locator("(//input[contains(@type,'checkbox')])[3]");
-      await checkbox2.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-  const starttime2 = page.locator("(//input[contains(@type,'time')])[5]");
-      await starttime2.click();  
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await starttime2.type("09:00");
-  const endtime2 = page.locator("(//input[contains(@type,'time')])[6]"); 
-      await endtime2.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await endtime2.type("19:00");
+      const checkbox2 = page.locator("(//input[contains(@type,'checkbox')])[3]");
+        await checkbox2.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+      const starttime2 = page.locator("(//input[contains(@type,'time')])[5]");
+        await starttime2.click();  
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await starttime2.type("09:00");
+      const endtime2 = page.locator("(//input[contains(@type,'time')])[6]"); 
+        await endtime2.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await endtime2.type("19:00");
 
-  const checkbox3 = page.locator("(//input[@id='link-checkbox'])[5]");
-      await checkbox3.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-  const starttime3 = page.locator("(//input[@type='time'])[9]");
-      await starttime3.click(); 
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
-      await starttime3.type("09:00");
-  const endtime3 = page.locator("(//input[contains(@type,'time')])[10]");
-     endtime3.click();
-      await page.waitForTimeout(1000); // 1000 millisecond = 1 second
-      await endtime3.type("19:00");
+      const checkbox3 = page.locator("(//input[@id='link-checkbox'])[5]");
+        await checkbox3.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+      const starttime3 = page.locator("(//input[@type='time'])[9]");
+        await starttime3.click(); 
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 seconds
+        await starttime3.type("09:00");
+      const endtime3 = page.locator("(//input[contains(@type,'time')])[10]");
+        await endtime3.click();
+        await page.waitForTimeout(1000); // 1000 millisecond = 1 second
+        await endtime3.type("19:00");
 
-  // Add charger button
-  const addcharger = page.locator("//button[normalize-space()='Configure Charger']");
-      await addcharger.click();
-      await page.waitForTimeout(5000); // 2000 milliseconds = 2 seconds
-   console.log("charger reconfigured successfully");
+    // Add charger button
+      const addcharger = page.locator("//button[normalize-space()='Configure Charger']");
+        await addcharger.click();
+        await page.waitForTimeout(5000); // 2000 milliseconds = 2 seconds
+          console.log("charger reconfigured successfully");
 
-   // Set up the download event listener
-  const [download] = await Promise.all([
-    page.waitForEvent('download'), // Wait for the download to start
-    page.click("//button[normalize-space()='Download QR Code']")
+    // Set up the download event listener
+      const [download] = await Promise.all([
+      page.waitForEvent('download'), // Wait for the download to start
+      page.click("//button[normalize-space()='Download QR Code']")
     
   ]);
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
   
-  // Print the suggested file name
-  const filename = download.suggestedFilename()
-  const start = filename.indexOf('(') + 1
-  const end = filename.indexOf(')');
-  content = filename.slice(start, end);
-  console.log('Reconfigured charger name:', content);
+    // Print the suggested file name
+      const filename = download.suggestedFilename()
+      const start = filename.indexOf('(') + 1
+      const end = filename.indexOf(')');
+      content = filename.slice(start, end);
+          console.log('Reconfigured charger name:', content);
 
 });
 
 
 test("Reconfigured charger validation",async ({ page }) => {
-  // Navigate to the login page
-  await page.goto('https://novo.kazam.in');
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
 
-// Login
-  await page.fill('#large-input','akhilesh@kazam.in');
-  await page.fill('#password','Akbl@1724');
-  await page.click("button[type='submit']");
-  await page.click("(//div[@class='flex flex-col gap-2 p-4'])[3]");
-// Wait for a few seconds
-  await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
 
-//click charger session module
-  await page.click("//span[normalize-space()='Chargers & Sessions']");
-  await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    //click charger session module
+        await page.click("//span[normalize-space()='Chargers & Sessions']");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-// Go to the search bar
-  const search = page.locator("//input[@placeholder='Search']");
-   await search.click();
-   await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-   await search.fill(content);
-   await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    // Go to the search bar
+      const search = page.locator("//input[@placeholder='Search']");
+        await search.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+        await search.fill(content);
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-// clcik on the search result
-  const searchresult = page.locator("td:nth-child(3)");
-  await searchresult.click(); 
-  await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    // clcik on the search result
+      const searchresult = page.locator("td:nth-child(3)");
+        await searchresult.click(); 
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
-  // Print Device name
-const dataSelectors2 = {
-  "Device_name" : "//p[@title='Kazam_Automation']",
-  "Host_name" : "//p[contains(@title,'testing - 9495644454')]",
-  "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
-  "Charger_status":"//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-red-600/10 text-red-600']",
-  "Connector_1" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)",
-  "Connector_2" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)"
+    // Print Device name
+      const dataSelectors2 = {
+      "Device_name" : "//p[@title='Kazam_Automation']",
+      "Host_name" : "//p[contains(@title,'Testing - 9495644454')]",
+      "Charger_type": "//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-sky-600/10 text-sky-600']",
+      "Charger_status":"//div[@class='text-sm rounded-lg px-3 py-1 font-medium bg-red-600/10 text-red-600']",
+      "Connector_1" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1)",
+      "Connector_2" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)"
 };
 
-const texts = [];
-const comparison1 = {
-  'Device_name' : 'Kazam_Automation', 
-  'Host_name' : 'testing (9495644454)',
-  'Charger_type' : 'Private',
-  'Charger_status' : 'Offline',
-  'Connector_1' : '1  three_pin 7.7 Unavailable ----',
-  'Connector_2' : '2  three_pin 7.7 Unavailable ----'
+      const texts = [];
+      const comparison1 = {
+      'Device_name' : 'Kazam_Automation', 
+      'Host_name' : 'Testing (9495644454)',
+      'Charger_type' : 'Private',
+      'Charger_status' : 'Offline',
+      'Connector_1' : '1  three_pin 7.7 Unavailable ----',
+      'Connector_2' : '2  three_pin 7.7 Unavailable ----'
   }
-//console.log('comparison is ',comparison1)
-// Extract and print data from each selector
-const extractedTexts = {};
 
-for (const [key, selector] of Object.entries(dataSelectors2)) {
-const elements = await page.$$(selector);
-const texts = [];
-for (const element of elements) {
-  const text = await element.textContent();
-  const trimmedText = String(text).trim();
-  console.log(`${key} from the details page: ${trimmedText}`);
-  texts.push(trimmedText); // Accumulate text for each selector
-}
-extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
-}
+    // Extract and print data from each selector
+      const extractedTexts = {};
 
-let flattenedText = {};
-
-for (let key in extractedTexts) {
-if (Array.isArray(extractedTexts[key])) {
-  flattenedText[key] = extractedTexts[key][0];
-} else {
-  flattenedText[key] = extractedTexts[key];
+      for (const [key, selector] of Object.entries(dataSelectors2)) {
+      const elements = await page.$$(selector);
+      const texts = [];
+      for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+          console.log(`${key} from the details page: ${trimmedText}`);
+      texts.push(trimmedText); // Accumulate text for each selector
 }
+      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
 }
 
-//console.log("Data from charger details page is",flattenedText);
-console.log("comparison text is",comparison1)
-if (JSON.stringify(flattenedText) == JSON.stringify(comparison1)){
-  console.log("Added data and charger detail page data are matching")
-}else{
-  console.log("Added data and charger detail page data are Not matching")
+      let flattenedText = {};
+
+      for (let key in extractedTexts) {
+      if (Array.isArray(extractedTexts[key])) {
+      flattenedText[key] = extractedTexts[key][0];
+}     else {
+      flattenedText[key] = extractedTexts[key];
+}
 }
 
-
+    //console.log("Data from charger details page is",flattenedText);
+        console.log("comparison text is",comparison1)
+      if (JSON.stringify(flattenedText) == JSON.stringify(comparison1)){
+        console.log("Added data and Reconfigured charger detail page data are matching")
+}     else{
+        console.log("Added data and Reconfigured charger detail page data are Not matching")
+}
 });
 
 test('Revenue Validation', async ({ page}) => {
 
-  global.transaction=''
+      global.transaction=''
   
-  // Navigate to the login page
-      await page.goto('https://novo.kazam.in');
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
 
-  // Login
-      await page.fill('#large-input','akhilesh@kazam.in');
-      await page.fill('#password','Akbl@1724');
-      await page.click("button[type='submit']");
-      await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
-  // Wait for a few seconds
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
+    // Wait for a few seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
 
-  // Print dashboard revenue
+    // Print dashboard revenue
  
-    global.dashboardRevenue = await page.innerText("(//p[@class='text-base font-medium'])[1]");
-        console.log(`Total Revenue(From Dashboard): ${global.dashboardRevenue}`);
+      global.dashboardRevenue = await page.innerText("(//p[@class='text-base font-medium'])[1]");
+          console.log(`Total Revenue(From Dashboard): ${global.dashboardRevenue}`);
   
-  // click on the revenue card
-    const revenuecard = page.locator("//p[normalize-space()='Revenue']");
-      await revenuecard.click();
-      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+    // click on the revenue card
+      const revenuecard = page.locator("//p[normalize-space()='Revenue']");
+        await revenuecard.click();
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
    
-  // Total Revenue from the RM Module
-    const rmrevenue = await page.innerText("//body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/main[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/h6[1]");
-        console.log(`Total Revenue(From RM Module): ${rmrevenue}`);
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+    // Total Revenue from the RM Module
+      const rmrevenue = await page.innerText("(//h6[contains(text(),'₹')])[1]");
+          console.log(`Total Revenue(From RM Module): ${rmrevenue}`);
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
-      if(global.dashboardRevenue==rmrevenue){
-        console.log('Total Revenue in dashboard is equal to the Total revenue in RM Module')
-      }else{
-        console.log('Total Revenue in dashboard is Not equal to the Total revenue in RM Module')
+        if(global.dashboardRevenue==rmrevenue){
+          console.log('Total Revenue in dashboard is equal to the Total revenue in RM Module')
+      } else{
+          console.log('Total Revenue in dashboard is Not equal to the Total revenue in RM Module')
       }
-  // Total transactions from the   
-    const totaltransaction = await page.innerText("button[class='flex items-center gap-1 w-full h-full px-4 py-2 rounded-l-lg bg-black text-white'] span"); 
-    const start = totaltransaction.indexOf('(') + 1
-    const end = totaltransaction.indexOf(')');
+    // Total transactions from the   
+      const totaltransaction = await page.innerText(
+        "button[class='flex items-center gap-1 w-full h-full px-4 py-2 rounded-l-lg bg-black text-white'] span"
+      ); 
+      const start = totaltransaction.indexOf('(') + 1
+      const end = totaltransaction.indexOf(')');
       transaction = totaltransaction.slice(start, end);
-        console.log(`Total Transaction(From RM Module): ${transaction}`);
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+          console.log(`Total Transaction(From RM Module): ${transaction}`);
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
+    // withdrawal amount
+      const withdrawalamount = await page.innerText("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > h6:nth-child(2)");
+          console.log(`Withdrawal amount : ${withdrawalamount}`);
 
-  // withdrawal amount
-    const withdrawalamount = await page.innerText("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > h6:nth-child(2)");
-        console.log(`Withdrawal amount : ${withdrawalamount}`);
+    // Print Payout pending 
+      const totalrevenue = await page.innerText('//div[3]//div[1]//div[1]//h6[1]');
+          console.log(`Wallet balance: ${totalrevenue}`);
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
 
-  // Print Payout pending 
-    const totalrevenue = await page.innerText('//div[3]//div[1]//div[1]//h6[1]');
-        console.log(`Wallet balance: ${totalrevenue}`);
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
-
-  // Download revenue report
-    const revenuereport = page.locator(".feather.feather-more-vertical");
-      await revenuereport.click();
-      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+    // Download revenue report
+      const revenuereport = page.locator(".feather.feather-more-vertical");
+        await revenuereport.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
       
-      
-  // click Download buttton
-    const downloadclick = page.locator("(//div[contains(text(),'Download Report')])[1]");
-      await downloadclick.click();
-      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+    // click Download buttton
+      const downloadclick = page.locator("(//div[contains(text(),'Download Report')])[1]");
+        await downloadclick.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
+    // Find the first row containing the text "success"
+      const successRow1 = page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)");
+        await successRow1.click();
+        await page.waitForTimeout(1000);
 
- // Find the first row containing the text "success"
-    const successRow1 = page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)");
-      await successRow1.click();
-      await page.waitForTimeout(1000);
-
-
- // Data from the overview page 
-    const overviewSelectors = {
+    // Data from the overview page 
+ const overviewSelectors = {
  "Transaction id" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(2)",
  "Billed Amount" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3)",
  "Host Details": "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(9) > span:nth-child(1) > span:nth-child(1)",
  "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(10) > span:nth-child(1)",
  "Time stamp" : "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(11) > span:nth-child(1)",
   };
-    const extractedTexts0 = {};
+      const extractedTexts0 = {};
 
-  for (const [key, selector] of Object.entries(overviewSelectors)) {
-    const elements = await page.$$(selector);
-    const texts = [];
-  for (const element of elements) {
-    const text = await element.textContent();
-    const trimmedText = String(text).trim();
-    console.log(`${key} from the Overview page: ${trimmedText}`);
-    texts.push(trimmedText); // Accumulate text for each selector
+      for (const [key, selector] of Object.entries(overviewSelectors)) {
+      const elements = await page.$$(selector);
+      const texts = [];
+      for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+          console.log(`${key} from the Overview page: ${trimmedText}`);
+      texts.push(trimmedText); // Accumulate text for each selector
   }
-  extractedTexts0[key] = texts; // Store the accumulated texts in the dictionary
+      extractedTexts0[key] = texts; // Store the accumulated texts in the dictionary
   }
 
-  await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // Find the first row containing the text "success"
+      const successRow = page.locator("(//span[normalize-space()='Success'])[1]");
+
+    // Debug: Print the HTML content of the success row to verify the correct row is found
+        console.log(await successRow.innerHTML());
 
 
- // Find the first row containing the text "success"
- const successRow = page.locator("(//span[normalize-space()='Success'])[1]");
+    // Getting all transactions count
+      const allTransactions = page.locator(
+      "(//button[@class='flex items-center gap-1 w-full h-full px-4 py-2 rounded-l-lg bg-black text-white'])[1]//span"
+      );
+      const innerHTML = await allTransactions.innerHTML(); // Await innerHTML() because it is an asynchronous operation
+      let allTransactions_count = innerHTML;
+      let allTransactions_result = allTransactions_count.replace(/[()]/g, ""); // Removes both ( and )
+          console.log("All Transaction count is : " + allTransactions_result);
 
- // Debug: Print the HTML content of the success row to verify the correct row is found
- console.log(await successRow.innerHTML());
+    // Scroll until the element is visible or the maximum scrolling height is reached
+      let previousHeight = await page.evaluate(() => document.body.scrollHeight);
+      let totalTransactions = parseInt(allTransactions_result); // Convert count to integer
 
-
-  // Getting all transactions count
-  const allTransactions = page.locator(
-    "(//button[@class='flex items-center gap-1 w-full h-full px-4 py-2 rounded-l-lg bg-black text-white'])[1]//span"
-  );
-  const innerHTML = await allTransactions.innerHTML(); // Await innerHTML() because it is an asynchronous operation
-  let allTransactions_count = innerHTML;
-  let allTransactions_result = allTransactions_count.replace(/[()]/g, ""); // Removes both ( and )
-  console.log("All Transaction count is : " + allTransactions_result);
-
-  // Scroll until the element is visible or the maximum scrolling height is reached
-  let previousHeight = await page.evaluate(() => document.body.scrollHeight);
-  let totalTransactions = parseInt(allTransactions_result); // Convert count to integer
-
-  // Loop through all transactions from 1 to totalTransactions
-  for (let i = 1; i <= totalTransactions; i++) {
-    try {
-      // Construct paths dynamically
+    // Loop through all transactions from 1 to totalTransactions
+      for (let i = 1; i <= totalTransactions; i++) {
+      try {
+    // Construct paths dynamically
       let success_path = `(//div[@class='flex items-center p-4 gap-2 cursor-pointer hover:bg-gray-50 duration-150 w-full'])[${i}]//div[2]//span`;
       const successElement = page.locator(success_path);
 
       let billed_path = `(//div[@class='flex items-center p-4 gap-2 cursor-pointer hover:bg-gray-50 duration-150 w-full'])[${i}]//div[3]`;
       const billed = page.locator(billed_path);
 
-      // Scroll down by a fixed amount
-      await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+    // Scroll down by a fixed amount
+        await page.evaluate(() => window.scrollBy(0, window.innerHeight));
 
-      // Wait for a short time for content to load
-      await page.waitForTimeout(1000);
+    // Wait for a short time for content to load
+        await page.waitForTimeout(1000);
 
-      // Check if the element is visible in the viewport
+    // Check if the element is visible in the viewport
       const isVisible = await successElement.isVisible();
       if (isVisible) {
         const success = await successElement.innerHTML();
@@ -969,7 +1234,7 @@ test('Revenue Validation', async ({ page}) => {
             "Transaction id":
               "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)",
             "Billed Amount":
-              "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > div:nth-child(2) > div:nth-child(4) > p:nth-child(2)",
+              "div[class='flex items-center justify-between'] span[class='font-mono']",
             "Host Details":
               "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > p:nth-child(2)",
             "Driver Details":
@@ -1038,7 +1303,187 @@ test('Revenue Validation', async ({ page}) => {
   }
 });
 
+test("download and validate revenue Report",async ({ page }) => {
 
+      const fs = require('fs');
+      const path = require('path');
+      const xlsx = require('xlsx');
+
+      const downloadDir = path.join(__dirname, 'downloads'); // Directory for downloads
+
+    // Ensure the download directory exists
+      if (!fs.existsSync(downloadDir)) {
+      fs.mkdirSync(downloadDir);
+  }
+
+    // Start a Playwright browser instance
+      const browser = await chromium.launch({ headless: true });
+      const context = await browser.newContext({
+      acceptDownloads: true
+  });
+    //const page = await context.newPage();
+
+      const email = "akhilesh@kazam.in";
+        await page.goto("https://mail.google.com");
+
+    // Wait for the user to login
+        await page.waitForSelector('input[type="email"]', { visible: true });
+        await page.fill('input[type="email"]', "akhilesh@kazam.in");
+        await page.click('div[id="identifierNext"]');
+
+        await page.waitForTimeout(2000); // Waiting for next page to load
+
+        await page.waitForSelector('input[type="password"]', { visible: true });
+        await page.fill('input[type="password"]', "Akbl@1724");
+        await page.click('div[id="passwordNext"]');
+
+        await page.waitForNavigation(); // Waiting for login to complete
+
+    // Click on the first email in the inbox
+        await page.waitForSelector('table[role="grid"] tr.zA', { visible: true });
+      const firstEmail = await page.$('table[role="grid"] tr.zA');
+      if (firstEmail) {
+      await firstEmail.click();
+  }    else {
+          console.log("No emails found in the inbox.");
+  }
+
+    // Wait for email content to load
+        await page.waitForSelector(".a3s", { visible: true });
+
+    // Find and click the first link in the email
+      const firstLink = await page.$(".a3s a");
+
+      const [download] = await Promise.all([
+      page.waitForEvent('download'),
+        await page.getByRole("link", { name: "Download Report" }).click()
+
+]);
+  // // Trigger the download
+  // await page.getByRole("link", { name: "Download Report" }).click();
+
+    // Save the downloaded file
+      const filePath = path.join(downloadDir, await download.suggestedFilename());
+        await download.saveAs(filePath);
+
+    // Process the Excel file
+      const workbook = xlsx.readFile(filePath);
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+
+    // Convert sheet to JSON for easier manipulation
+      const data = xlsx.utils.sheet_to_json(sheet, { header: 1 }); // Use header: 1 for a 2D array
+
+    // Calculate the sum of the 16th column (index 15), skipping the first row
+      const sum = data.slice(1).reduce((acc, row) => acc + (parseFloat(row[15]) || 0), 0);
+
+        console.log('Total Revenue(From the report):', sum);
+        global.revenue = sum;
+  
+        console.log(`Total Revenue(From Dashboard): ${global.dashboardRevenue}`);
+
+      const final_value = Math.abs(
+      Math.round(global.dashboardRevenue, 0) - Math.round(sum, 0)
+      );
+      if (final_value <= 1) {
+        console.log("Total Revenue in the RM Module is equal to the Total revenue from the report");
+  }   else {
+        console.log("Total Revenue in the RM Module is Not equal to the Total revenue from the report");
+  }
+
+    // Cleanup (optional): delete the downloaded file after processing
+      fs.unlinkSync(filePath);
+
+});
+
+test("Report and analytics: Revenue Report validation",async ({ page }) => {
+
+      const fs = require('fs');
+      const xlsx = require('xlsx');
+      const path = require('path');
+
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
+
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Nikol Automotive Private Limited']");
+    // Wait for a few seconds
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click on the Analytics card
+      const analyticsCard = page.locator("//span[normalize-space()='Reports & Analytics']");
+        await analyticsCard.click();
+        await page.waitForTimeout(1000); // 3000 milliseconds = 3 seconds
+
+    // Click revenue card
+      const revenueCard = page.locator("//button[normalize-space()='Revenue']");
+        await revenueCard.click();
+        await page.waitForTimeout(1000); // 3000 milliseconds = 3 seconds 
+
+    // Scroll down 5 times in intervals
+        for (let i = 0; i < 5; i++) {
+        await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+        await page.waitForTimeout(1000); // Wait for 1 second (adjust as needed)
+
+    // Select the 1st day of the current month
+        await page.click('text="1"'); // Clicks on '1' if it's visible
+
+    // Get today's date dynamically
+      const today = new Date().getDate().toString(); // Extract the day as a string
+
+    // Select today's date dynamically
+        await page.click(`text="${today}"`); // Clicks on the current day
+
+}
+    // Set up download listener and trigger download
+      const [download] = await Promise.all([
+      page.waitForEvent('download'), // wait for download event
+      page.click("//button[normalize-space()='Generate Report']")   // Download button selector
+]);
+
+    // Save the downloaded file to a specific path
+      const filePath = path.join(__dirname, 'downloaded_file.xlsx');
+        await download.saveAs(filePath);
+
+    // Read and parse the Excel file
+      const workbook = xlsx.readFile(filePath);
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+
+    // Convert the worksheet to JSON format
+      const jsonData = xlsx.utils.sheet_to_json(worksheet, { header: 1 });
+
+    // Ensure there are at least 9 columns to avoid index errors
+      if (jsonData[0].length >= 15) {
+    // Initialize sum and iterate over rows starting from the second row (index 1)
+      let sum = 0;
+
+      for (let i = 1; i < jsonData.length; i++) {
+      const cellValue = jsonData[i][15]; // 16th column, as index starts from 0
+      if (typeof cellValue === 'number') { // ensure cell contains a number
+      sum += cellValue;
+  }
+}
+
+    // Divide the sum by 1000
+      global.revenuereportandanalytics = sum;
+          console.log(`Total Revenue (From RM Module): ${global.revenue}`);
+}
+          console.log(`Total Revenue (From Report and Analytics ): ${global.revenuereportandanalytics}`);
+
+      if (global.revenuereportandanalytics == global.revenue) {
+          console.log('Total revnue in the RM Module report is equal to the Total revenue from the Report and Anlaytics revenue report');
+}     else {
+          console.log('Total revnue in the RM Module report is Not equal to the Total revenue from the Report and Anlaytics revenue report');
+}
+
+    // Cleanup (optional): delete the downloaded file after processing
+      fs.unlinkSync(filePath);
+});
+ 
 
 test("Creating Charging fees",async ({ page }) => {
     
@@ -1079,7 +1524,7 @@ test("Creating Charging fees",async ({ page }) => {
     // Enter tariff validity 
       const validity = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
         await validity.click();
-      const selectdate = page.locator("//div[normalize-space()='29']");
+      const selectdate = page.locator("//div[normalize-space()='28']");
         await selectdate.click();
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
@@ -1225,7 +1670,7 @@ test("Creating Charging fees",async ({ page }) => {
     // Enter tariff validity 
       const validity1 = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
         await validity1.click();
-      const selectdate1 = page.locator("//div[normalize-space()='29']");
+      const selectdate1 = page.locator("//div[normalize-space()='28']");
         await selectdate1.click();
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
   
@@ -1412,7 +1857,7 @@ test("Creating Charging fees",async ({ page }) => {
     // Search bar
       const searchbar05 = page.locator("//input[@placeholder='Search by hub name']");
         await searchbar05.click();
-        await searchbar05.type("Driver tariff");
+        await searchbar05.type("Zone 100");
         await page.waitForTimeout(2000); // 2000 millisecond = 2 second
 
     // Check box
@@ -1428,7 +1873,7 @@ test("Creating Charging fees",async ({ page }) => {
     // Search bar
       const searchbar06 = page.locator("//input[@placeholder='Search by state name']");
         await searchbar06.click();
-        await searchbar06.type("Assam");
+        await searchbar06.type("Delhi");
         await page.waitForTimeout(2000); // 2000 millisecond = 2 second  
 
     // Check box
@@ -1463,8 +1908,8 @@ test("Creating Charging fees",async ({ page }) => {
         await taxsystemname.fill ("Kazam Automation Tax");
         await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
-    // clcik tax policy
-      const taxpolicy = page.locator("(//*[name()='svg'])[21]");
+    // click tax policy
+      const taxpolicy = page.locator("//input[@placeholder='Select']");
         await taxpolicy.click();
         await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
 
@@ -1605,7 +2050,7 @@ test("Creating Charging fees",async ({ page }) => {
 
 });
 
-test.only("Charging fee validation",async ({ page }) => {
+test("Charging fee validation",async ({ page }) => {
     // Navigate to the login page
         await page.goto('https://novo.kazam.in');
 
@@ -1651,7 +2096,7 @@ test.only("Charging fee validation",async ({ page }) => {
       "NAME" : "//p[@class='text-sm truncate'][normalize-space()='Flat_Tariff']",
       "DESCRIPTION" : "//p[@class='text-sm truncate'][normalize-space()='Flat Tariff validation']",
       "TARIFF TYPE": "//p[@class='text-sm'][normalize-space()='Flat Tariff']",
-      "VALIDITY":"//p[contains(text(),'29')]",
+      "VALIDITY":"//p[contains(text(),'28')]",
       "Fixed" : "//p[normalize-space()='INR 5']",
       "Per kWh" : "//p[normalize-space()='INR 4']",
       "Per hr" : "//p[normalize-space()='INR 3']",
@@ -1659,15 +2104,14 @@ test.only("Charging fee validation",async ({ page }) => {
       "Chargers" : "//p[normalize-space()='1ti4kt']",
       //"Hubs" : "//p[normalize-space()='Sikandarpur']",
       //"States" : "//p[normalize-space()='Assam']"
-
 };
 
       const texts = [];
-      const flattariff = {
+      const expectedFlattariff = {
      'NAME' : 'Flat_Tariff', 
      'DESCRIPTION' : 'Flat Tariff validation',
      'TARIFF TYPE' : 'Flat Tariff',
-     'VALIDITY' : '29/01/2025  --  Forever',
+     'VALIDITY' : '28/02/2025  --  Forever',
      'Fixed' : 'INR 5',
      'Per kWh' : 'INR 4',
      'Per hr' : 'INR 3',
@@ -1678,36 +2122,44 @@ test.only("Charging fee validation",async ({ page }) => {
   }
     //console.log('comparison is ',comparison1)
     // Extract and print data from each selector
-      const extractedTexts = {};
+      // Function to normalize extracted text
+function normalizeText(text) {
+  return String(text)
+      .trim()                      // Remove leading and trailing spaces
+      .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+      .replace(/\u00A0/g, '')      // Remove non-breaking spaces (if any)
+      .toLowerCase();              // Convert to lowercase for case-insensitive comparison
+}
 
-      for (const [key, selector] of Object.entries(FlattariffSelectors)) {
-      const elements = await page.$$(selector);
-      const texts = [];
-      for (const element of elements) {
+// Extract data from UI
+const extractedTexts = {};
+
+for (const [key, selector] of Object.entries(FlattariffSelectors)) {
+  const elements = await page.$$(selector);
+  const texts = [];
+  for (const element of elements) {
       const text = await element.textContent();
-      const trimmedText = String(text).trim();
-          console.log(`${key} from the details page: ${trimmedText}`);
-      texts.push(trimmedText); // Accumulate text for each selector
-}
-      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
+      const normalizedText = normalizeText(text);
+      console.log(`${key} from the details page: ${normalizedText}`);
+      texts.push(normalizedText);
+  }
+  extractedTexts[key] = texts.length > 0 ? texts[0] : ''; // Store only the first value
 }
 
-      let flattenedText = {};
+// Normalize expected data
+const normalizedExpectedData = {};
+for (const key in expectedFlattariff) {
+  normalizedExpectedData[key] = normalizeText(expectedFlattariff[key]);
+}
 
-      for (let key in extractedTexts) {
-      if (Array.isArray(extractedTexts[key])) {
-      flattenedText[key] = extractedTexts[key][0];
+// Compare both datasets
+console.log("Extracted Data:", extractedTexts);
+console.log("Expected Data:", normalizedExpectedData);
+
+if (JSON.stringify(extractedTexts) === JSON.stringify(normalizedExpectedData)) {
+  console.log("Added data and created Flat tariff data are matching");
 } else {
-  flattenedText[key] = extractedTexts[key];
-}
-}
-
-    //console.log("Data from charger details page is",flattenedText);
-          console.log("comparison text is",flattariff)
-      if (JSON.stringify(flattenedText) == JSON.stringify(flattariff)){
-          console.log("Added data and created Flat tariff data are matching")
-      }else{
-          console.log("Added data and created Flat tariff data are Not matching")
+  console.log("Added data and created Flat tariff data are NOT matching");
 }
 
 
@@ -1734,69 +2186,74 @@ test.only("Charging fee validation",async ({ page }) => {
     //   await states.click();
     //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second    
 
-    // Print Fast charging Tariff details
-      const fasttariffSelectors = {
-      "NAME" : "(//p[@class='text-sm truncate'][normalize-space()='Fast_Charging'])[1]",
-      "DESCRIPTION" : "//p[@class='text-sm truncate'][normalize-space()='Fast Charging validation']",
+    const fasttariffSelectors = {
+      "NAME": "(//p[@class='text-sm truncate'][normalize-space()='Fast_Charging'])[1]",
+      "DESCRIPTION": "//p[@class='text-sm truncate'][normalize-space()='Fast Charging validation']",
       "TARIFF TYPE": "//p[@class='text-sm'][normalize-space()='Fast Charging']",
-      "VALIDITY":"//p[contains(text(),'29')]",
-      "Fixed" : "//p[normalize-space()='INR 6']",
-      "Per kWh" : "//p[normalize-space()='INR 5']",
-      "Per hr" : "//p[normalize-space()='INR 4']",
-      "Parking" : "//p[normalize-space()='3']",
-      "Chargers" : "//p[normalize-space()='au32ho']",
-      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
-      //"States" : "//p[normalize-space()='Assam']"
-
-};
-
-      const texts1 = [];
-      const fastchargingtariff = {
-      'NAME' : 'Fast_Charging', 
-      'DESCRIPTION' : 'Fast Charging validation',
-      'TARIFF TYPE' : 'Fast Charging',
-      'VALIDITY' : '29/01/2025  --  Forever',
-      'Fixed' : 'INR 6',
-      'Per kWh' : 'INR 5',
-      'Per hr' : 'INR 4',
-      'Parking' : '3',
-      'Chargers' : 'au32ho',
-      //'Hubs' : 'Sikandarpur',
-      //'States' : 'Assam'
-}
-    //console.log('comparison is ',comparison1)
-    // Extract and print data from each selector
-      const extractedTexts01 = {};
-
-      for (const [key, selector] of Object.entries(fasttariffSelectors)) {
+      "VALIDITY": "//p[contains(text(),'28')]",
+      "Fixed": "//p[normalize-space()='INR 6']",
+      "Per kWh": "//p[normalize-space()='INR 5']",
+      "Per hr": "//p[normalize-space()='INR 4']",
+      "Parking": "//p[normalize-space()='3']",
+      "Chargers": "//p[normalize-space()='au32ho']",
+      // "Hubs": "//p[normalize-space()='Sikandarpur']",
+      // "States": "//p[normalize-space()='Assam']"
+  };
+  
+  const expectedFastChargingTariff = {
+      'NAME': 'Fast_Charging',
+      'DESCRIPTION': 'Fast Charging validation',
+      'TARIFF TYPE': 'Fast Charging',
+      'VALIDITY': '28/02/2025 -- Forever',
+      'Fixed': 'INR 6',
+      'Per kWh': 'INR 5',
+      'Per hr': 'INR 4',
+      'Parking': '3',
+      'Chargers': 'au32ho',
+      // 'Hubs': 'Sikandarpur',
+      // 'States': 'Assam'
+  };
+  
+  // Function to normalize extracted text
+  function normalizeText(text) {
+      return String(text)
+          .trim()                      // Remove leading/trailing spaces
+          .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+          .replace(/\u00A0/g, '')      // Remove non-breaking spaces (if any)
+          .toLowerCase();              // Convert to lowercase for comparison
+  }
+  
+  // Extract data from UI
+  const extractedTexts01 = {};
+  
+  for (const [key, selector] of Object.entries(fasttariffSelectors)) {
       const elements = await page.$$(selector);
       const texts = [];
       for (const element of elements) {
-      const text = await element.textContent();
-      const trimmedText = String(text).trim();
-          console.log(`${key} from the details page: ${trimmedText}`);
-      texts.push(trimmedText); // Accumulate text for each selector
-}
-      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
-}
-
-      let flattenedText01 = {};
-
-      for (let key in extractedTexts) {
-      if (Array.isArray(extractedTexts[key])) {
-      flattenedText[key] = extractedTexts[key][0];
-      } else {
-      flattenedText[key] = extractedTexts[key];
-}
-}
-
-    //console.log("Data from charger details page is",flattenedText);
-          console.log("comparison text is",fastchargingtariff)
-      if (JSON.stringify(flattenedText) == JSON.stringify(fastchargingtariff)){
-          console.log("Added data and created Fast charging tariff data are matching")
-      }else{
-          console.log("Added data and created Fast charging tariff data are Not matching")
-}
+          const text = await element.textContent();
+          const normalizedText = normalizeText(text);
+          console.log(`${key} from the details page: ${normalizedText}`);
+          texts.push(normalizedText);
+      }
+      extractedTexts01[key] = texts.length > 0 ? texts[0] : ''; // Store only the first value
+  }
+  
+  // Normalize expected data
+  const normalizedExpectedData01 = {};
+  for (const key in expectedFastChargingTariff) {
+      normalizedExpectedData01[key] = normalizeText(expectedFastChargingTariff[key]);
+  }
+  
+  // Compare extracted vs expected data
+  console.log("Extracted Data:", extractedTexts01);
+  console.log("Expected Data:", normalizedExpectedData01);
+  
+  if (JSON.stringify(extractedTexts01) === JSON.stringify(normalizedExpectedData01)) {
+      console.log("Added data and created Fast charging tariff data are matching");
+  } else {
+      console.log("Added data and created Fast charging tariff data are NOT matching");
+  }
+  
 
     // Aggregation fee data validation
 
@@ -1820,59 +2277,64 @@ test.only("Charging fee validation",async ({ page }) => {
   
 
     // Print Fast charging Tariff details
-      const AggregationfeeSelectors = {
-      "NAME" : "//p[@class='text-xl']",
-      "Type" : "//p[normalize-space()='percentage']",
-      "Value" : "(//p[@class='text-xl font-medium'])[1]",
-      "Chargers" : "//p[normalize-space()='1ti4kt']",
-      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
-      //"States" : "//p[normalize-space()='Assam']"
-
-};
-
-      const texts2 = [];
-      const Aggregationfee = {
-      "NAME" :'Automation Aggregation Fee',
-      "Type" :'percentage',
-      "Value" :'9 %',
-      "Chargers" :'1ti4kt',
-      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
-      //"States" : "//p[normalize-space()='Assam']"
-
-}
-    //console.log('comparison is ',comparison1)
-    // Extract and print data from each selector
-      const extractedTexts02 = {};
-
-      for (const [key, selector] of Object.entries(AggregationfeeSelectors)) {
+    const aggregationFeeSelectors = {
+      "NAME": "//p[@class='text-xl']",
+      "Type": "//p[normalize-space()='percentage']",
+      "Value": "(//p[@class='text-xl font-medium'])[1]",
+      "Chargers": "//p[normalize-space()='1ti4kt']",
+      // "Hubs": "//p[normalize-space()='Sikandarpur']",
+      // "States": "//p[normalize-space()='Assam']"
+  };
+  
+  const expectedAggregationFee = {
+      "NAME": "Automation Aggregation Fee",
+      "Type": "percentage",
+      "Value": "9 %",
+      "Chargers": "1ti4kt",
+      // "Hubs": "Sikandarpur",
+      // "States": "Assam"
+  };
+  
+  // Function to normalize extracted text
+  function normalizeText(text) {
+      return String(text)
+          .trim()                      // Remove leading/trailing spaces
+          .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+          .replace(/\u00A0/g, '')      // Remove non-breaking spaces (if any)
+          .toLowerCase();              // Convert to lowercase for comparison
+  }
+  
+  // Extract data from UI
+  const extractedTexts02 = {};
+  
+  for (const [key, selector] of Object.entries(aggregationFeeSelectors)) {
       const elements = await page.$$(selector);
       const texts = [];
       for (const element of elements) {
-      const text = await element.textContent();
-      const trimmedText = String(text).trim();
-          console.log(`${key} from the details page: ${trimmedText}`);
-      texts.push(trimmedText); // Accumulate text for each selector
+          const text = await element.textContent();
+          const normalizedText = normalizeText(text);
+          console.log(`${key} from the details page: ${normalizedText}`);
+          texts.push(normalizedText);
       }
-      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
-      }
-
-      let flattenedText02 = {};
-
-      for (let key in extractedTexts) {
-      if (Array.isArray(extractedTexts[key])) {
-      flattenedText[key] = extractedTexts[key][0];
-      } else {
-      flattenedText[key] = extractedTexts[key];
-}
-}
-
-    //console.log("Data from charger details page is",flattenedText);
-          console.log("comparison text is",Aggregationfee)
-      if (JSON.stringify(flattenedText) == JSON.stringify(Aggregationfee)){
-          console.log("Added data and created Aggregation fee data are matching")
-      }else{
-          console.log("Added data and created Aggregation fee data are Not matching")
-      }
+      extractedTexts02[key] = texts.length > 0 ? texts[0] : ''; // Store only the first value
+  }
+  
+  // Normalize expected data
+  const normalizedExpectedData02 = {};
+  for (const key in expectedAggregationFee) {
+      normalizedExpectedData02[key] = normalizeText(expectedAggregationFee[key]);
+  }
+  
+  // Compare extracted vs expected data
+  console.log("Extracted Data:", extractedTexts02);
+  console.log("Expected Data:", normalizedExpectedData02);
+  
+  if (JSON.stringify(extractedTexts02) === JSON.stringify(normalizedExpectedData02)) {
+      console.log("Added data and created Aggregation fee data are matching");
+  } else {
+      console.log("Added data and created Aggregation fee data are NOT matching");
+  }
+  
 
     // Tax data validation
 
@@ -1903,71 +2365,77 @@ test.only("Charging fee validation",async ({ page }) => {
     //   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second    
 
     // Print Fast charging Tariff details
-      const taxSelectors = {
-      "NAME" : "//p[@class='text-xl']",
-      "Business Name" : "div[class='flex flex-col gap-2'] p:nth-child(1)",
+    const taxSelectors = {
+      "NAME": "//p[@class='text-xl']",
+      "Business Name": "div[class='flex flex-col gap-2'] p:nth-child(1)",
       "Tax id": "//p[normalize-space()='Tax id : 29KANSJ123KDNRJ3']",
-      "Address":"//p[contains(text(),'Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangal')]",
-      "Tax items1":"div[class='w-full flex flex-col overflow-y-auto divide-y'] div:nth-child(1)",
-      "Tax items2":"div[class='w-full flex flex-col overflow-y-auto divide-y'] div:nth-child(1)",
-      "Chargers":"//p[normalize-space()='c267e8']",
-      //"Hubs" : "//p[normalize-space()='Sikandarpur']",
-      //"States" : "//p[normalize-space()='Assam']"
-
-};
-
-      const texts3 = [];
-      const tax = {
-      "NAME" : "Kazam Automation Tax",
-      "Business Name" : "Business Name : Automation Tax System",
+      "Address": "//p[contains(text(),'Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangal')]",
+      "Tax items1": "div[class='flex flex-col items-start max-h-[30vh] w-full rounded-md border'] div[class='w-full flex flex-col overflow-y-auto divide-y'] div:nth-child(1)",
+      "Tax items2": "(//div[@class='grid grid-cols-5 gap-4 w-full p-5 text-sm text-black'])[2]",
+      "Chargers": "//p[normalize-space()='124aj7']",
+      // "Hubs": "//p[normalize-space()='Sikandarpur']",
+      // "States": "//p[normalize-space()='Assam']"
+  };
+  
+  const expectedTaxData = {
+      "NAME": "Kazam Automation Tax",
+      "Business Name": "Business Name : Automation Tax System",
       "Tax id": "Tax id : 29KANSJ123KDNRJ3",
-      "Address":"Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangala,Bangalore,Karnataka",
-      "Tax items1" : "gst cgst CGST 9 Percentage",
-      "Tax items2" : "gst Sgst SGST 9 Percentage",
-      "Chargers" : 'c267e8',
-      //'Hubs' : 'Sikandarpur',
-      //'States' : 'Assam'
-}
-    //console.log('comparison is ',comparison1)
-    // Extract and print data from each selector
-      const extractedTexts03 = {};
-
-      for (const [key, selector] of Object.entries(taxSelectors)) {
+      "Address": "Kazam EV Tech Pvt Ltd,Enzyeme Tech park,Koramangala,Bangalore,Karnataka",
+      "Tax items1": "gst cgst CGST 9 Percentage",
+      "Tax items2": "gst sgst SGST 9 Percentage",
+      "Chargers": "124aj7",
+      // "Hubs": "Sikandarpur",
+      // "States": "Assam"
+  };
+  
+  // Function to normalize extracted text
+  function normalizeText(text) {
+      return String(text)
+          .trim()                      // Remove leading/trailing spaces
+          .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+          .replace(/\u00A0/g, '')      // Remove non-breaking spaces (if any)
+          .toLowerCase();              // Convert to lowercase for comparison
+  }
+  
+  // Extract data from UI
+  const extractedTexts03 = {};
+  
+  for (const [key, selector] of Object.entries(taxSelectors)) {
       const elements = await page.$$(selector);
       const texts = [];
       for (const element of elements) {
-      const text = await element.textContent();
-      const trimmedText = String(text).trim();
-      console.log(`${key} from the details page: ${trimmedText}`);
-      texts.push(trimmedText); // Accumulate text for each selector
-}
-      extractedTexts[key] = texts; // Store the accumulated texts in the dictionary
-}
-
-      let flattenedText03 = {};
-
-      for (let key in extractedTexts) {
-      if (Array.isArray(extractedTexts[key])) {
-      flattenedText[key] = extractedTexts[key][0];
-      } else {
-      flattenedText[key] = extractedTexts[key];
-}
-}
-
-    //console.log("Data from charger details page is",flattenedText);
-        console.log("comparison text is",tax)
-      if (JSON.stringify(flattenedText) == JSON.stringify(tax)){
-        console.log("Added data and created Tax data are matching")
-      }else{
-        console.log("Added data and created Tax data are Not matching")
-}
+          const text = await element.textContent();
+          const normalizedText = normalizeText(text);
+          console.log(`${key} from the details page: ${normalizedText}`);
+          texts.push(normalizedText);
+      }
+      extractedTexts03[key] = texts.length > 0 ? texts[0] : ''; // Store only the first value
+  }
+  
+  // Normalize expected data
+  const normalizedExpectedData03 = {};
+  for (const key in expectedTaxData) {
+      normalizedExpectedData03[key] = normalizeText(expectedTaxData[key]);
+  }
+  
+  // Compare extracted vs expected data
+  console.log("Extracted Data:", extractedTexts03);
+  console.log("Expected Data:", normalizedExpectedData03);
+  
+  if (JSON.stringify(extractedTexts03) === JSON.stringify(normalizedExpectedData03)) {
+      console.log("Added data and created Tax data are matching");
+  } else {
+      console.log("Added data and created Tax data are NOT matching");
+  }
+  
 
 
 
 });
 
 
-test("Dynamic Tariff validation",async ({ page }) => {
+test("Create Dynamic Tariff",async ({ page }) => {
 
     // Navigate to the login page
         await page.goto('https://novo.kazam.in');
@@ -2001,13 +2469,13 @@ test("Dynamic Tariff validation",async ({ page }) => {
     // Click and Enter the tariff name
       const tariffname = page.locator("(//input[@id='large-input'])[1]");
         await tariffname.click();
-        await tariffname.fill("Time of Day");
+        await tariffname.fill("Time_of_Day");
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
     // Enter tariff validity 
       const validity = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
         await validity.click();
-      const selectdate = page.locator("//div[normalize-space()='29']");
+      const selectdate = page.locator("//div[normalize-space()='28']");
         await selectdate.click();
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
@@ -2170,13 +2638,13 @@ test("Dynamic Tariff validation",async ({ page }) => {
     // Click and Enter the tariff name
       const tariffname1 = page.locator("(//input[@id='large-input'])[1]");
         await tariffname1.click();
-        await tariffname1.fill("Charge by Hour");
+        await tariffname1.fill("Charge_by_Hour");
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
     // Enter tariff validity 
       const validity1 = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
         await validity1.click();
-      const selectdate1 = page.locator("//div[normalize-space()='29']");
+      const selectdate1 = page.locator("//div[normalize-space()='28']");
         await selectdate1.click();
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
@@ -2353,13 +2821,13 @@ test("Dynamic Tariff validation",async ({ page }) => {
     // Click and Enter the tariff name
       const tariffname2 = page.locator("(//input[@id='large-input'])[1]");
         await tariffname2.click();
-        await tariffname2.fill("State of Charge");
+        await tariffname2.fill("State_of_Charge");
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
     // Enter tariff validity 
       const validity2 = page.locator("div[class='p-2 px-4 cursor-pointer'] svg");
         await validity2.click();
-      const selectdate2 = page.locator("//div[normalize-space()='29']");
+      const selectdate2 = page.locator("//div[normalize-space()='28']");
         await selectdate2.click();
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
@@ -2492,9 +2960,9 @@ test("Dynamic Tariff validation",async ({ page }) => {
         await page.waitForTimeout(1000); // 1000 millisecond = 1 second
 
   // Create Tariff
-    const createtariff4 = page.locator("(//button[normalize-space()='Create'])");
-      await createtariff4.click();
-      await page.waitForTimeout(2000); // 2000 millisecond = 2 second
+      const createtariff4 = page.locator("(//button[normalize-space()='Create'])");
+        await createtariff4.click();
+        await page.waitForTimeout(2000); // 2000 millisecond = 2 second
 
 
   // // Click back button
@@ -2506,109 +2974,1228 @@ test("Dynamic Tariff validation",async ({ page }) => {
 
 });
 
-
-test("download and validate revenue Report",async ({ page }) => {
-
-  const fs = require('fs');
-  const path = require('path');
-  const xlsx = require('xlsx');
-
-  const downloadDir = path.join(__dirname, 'downloads'); // Directory for downloads
-
-  // Ensure the download directory exists
-  if (!fs.existsSync(downloadDir)) {
-      fs.mkdirSync(downloadDir);
-  }
-
-  // Start a Playwright browser instance
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({
-      acceptDownloads: true
-  });
-  //const page = await context.newPage();
-
-  const email = "akhilesh@kazam.in";
-  await page.goto("https://mail.google.com");
-
-  // Wait for the user to login
-  await page.waitForSelector('input[type="email"]', { visible: true });
-  await page.fill('input[type="email"]', "akhilesh@kazam.in");
-  await page.click('div[id="identifierNext"]');
-
-  await page.waitForTimeout(2000); // Waiting for next page to load
-
-  await page.waitForSelector('input[type="password"]', { visible: true });
-  await page.fill('input[type="password"]', "Akbl@1724");
-  await page.click('div[id="passwordNext"]');
-
-  await page.waitForNavigation(); // Waiting for login to complete
-
-  // Click on the first email in the inbox
-  await page.waitForSelector('table[role="grid"] tr.zA', { visible: true });
-  const firstEmail = await page.$('table[role="grid"] tr.zA');
-  if (firstEmail) {
-    await firstEmail.click();
-  } else {
-    console.log("No emails found in the inbox.");
-  }
-
-  // Wait for email content to load
-  await page.waitForSelector(".a3s", { visible: true });
-
-  // Find and click the first link in the email
-  const firstLink = await page.$(".a3s a");
-
-  const [download] = await Promise.all([
-    page.waitForEvent('download'),
-    await page.getByRole("link", { name: "Download Report" }).click()
-
-     // Replace with the actual selector for the download button
-]);
-  // // Trigger the download
-  // await page.getByRole("link", { name: "Download Report" }).click();
-
-  // Save the downloaded file
-  const filePath = path.join(downloadDir, await download.suggestedFilename());
-  await download.saveAs(filePath);
-
-  // Process the Excel file
-  const workbook = xlsx.readFile(filePath);
-  const sheetName = workbook.SheetNames[0];
-  const sheet = workbook.Sheets[sheetName];
-
-  // Convert sheet to JSON for easier manipulation
-  const data = xlsx.utils.sheet_to_json(sheet, { header: 1 }); // Use header: 1 for a 2D array
-
-  // Calculate the sum of the 16th column (index 15), skipping the first row
-  const sum = data.slice(1).reduce((acc, row) => acc + (parseFloat(row[15]) || 0), 0);
-
-  console.log('Total Revenue(From the report):', sum);
-
-  // Delete the downloaded file
-  fs.unlinkSync(filePath);
-
-  // Close browser
-  await browser.close();
-
-  // Cleanup the download directory if needed
-  if (fs.existsSync(downloadDir) && fs.readdirSync(downloadDir).length === 0) {
-      fs.rmdirSync(downloadDir);
+test("Dynamic Tariff validation",async ({ page }) => {
   
-  console.log(`Total Revenue(From Dashboard): ${global.dashboardRevenue}`);
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
 
-  const final_value = Math.abs(
-    Math.round(global.dashboardRevenue, 0) - Math.round(sum, 0)
-  );
-  if (final_value <= 1) {
-    console.log(
-      "Total Revenue in the RM Module is equal to the Total revenue from the report"
-    );
-  } else {
-    console.log(
-      "Total Revenue in the RM Module is Not equal to the Total revenue from the report"
-    );
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+
+    // Go to RM Module
+      const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+        await rmmodule.click();
+        await page.waitForTimeout(3000);
+
+    // Select tariff section from the RM Module
+      const tariff = page.locator("//span[normalize-space()='Charger Tariffs']");
+        await tariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Search Tariff
+      const searchbar = page.locator("//input[@placeholder='Search']");
+        await searchbar.click();
+        await searchbar.fill("Time_of_Day");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+        
+    // Click charger
+      const charger = page.locator("//h2[1]//button[1]");
+        await charger.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+          
+
+// Print Tariff details
+const timeofdayfSelectors = {
+  "NAME": "//p[@class='text-sm truncate'][normalize-space()='Time_of_Day']",
+  "DESCRIPTION": "//p[@class='text-sm truncate'][normalize-space()='Time of Day validation']",
+  "TARIFF TYPE": "//p[@class='text-sm'][normalize-space()='Time of Day']",
+  "VALIDITY": "//p[contains(text(),'28')]",
+  "Fixed": "p[class='text-[#2B3139] text-sm']",
+  "Time Range": "//p[normalize-space()='10:00 hrs -- 12:00 hrs']",
+  "Day of Week": "div[class='flex flex-col gap-4'] div:nth-child(2)",
+  "Parking": "//p[normalize-space()='2']",
+  "Chargers": "//p[normalize-space()='37fckj']",
+  // "Hubs": "//p[normalize-space()='Sikandarpur']",
+  // "States": "//p[normalize-space()='Assam']"
+};
+
+const expectedTimeOfDayTariff = {
+  "NAME": "Time_of_Day",
+  "DESCRIPTION": "Time of Day validation",
+  "TARIFF TYPE": "Time of Day",
+  "VALIDITY": "28/02/2025 -- Forever",
+  "Fixed": "INR 5",
+  "Time Range": "10:00 hrs -- 12:00 hrs",
+  "Day of Week": "Day of Week Monday Wednesday Friday",
+  "Parking": "2",
+  "Chargers": "37fckj",
+  // "Hubs": "Sikandarpur",
+  // "States": "Assam"
+};
+
+// Function to normalize extracted text
+function normalizeText(text) {
+  return String(text)
+      .trim()                      // Remove leading/trailing spaces
+      .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+      .replace(/\u00A0/g, '')      // Remove non-breaking spaces (if any)
+      .toLowerCase();              // Convert to lowercase for comparison
+}
+
+// Extract data from UI
+const extractedTexts = {};
+
+for (const [key, selector] of Object.entries(timeofdayfSelectors)) {
+  const elements = await page.$$(selector);
+  const texts = [];
+  for (const element of elements) {
+      const text = await element.textContent();
+      const normalizedText = normalizeText(text);
+      console.log(`${key} from the details page: ${normalizedText}`);
+      texts.push(normalizedText);
   }
+  extractedTexts[key] = texts.length > 0 ? texts[0] : ''; // Store only the first value
+}
+
+// Normalize expected data
+const normalizedExpectedData = {};
+for (const key in expectedTimeOfDayTariff) {
+  normalizedExpectedData[key] = normalizeText(expectedTimeOfDayTariff[key]);
+}
+
+// Compare extracted vs expected data
+console.log("Extracted Data:", extractedTexts);
+console.log("Expected Data:", normalizedExpectedData);
+
+if (JSON.stringify(extractedTexts) === JSON.stringify(normalizedExpectedData)) {
+  console.log("Added data and created Time of Day tariff data are matching");
+} else {
+  console.log("Added data and created Time of Day tariff data are NOT matching");
 }
 
 
+    // Charge by Hour added data validation
+
+    // click on the search result
+    const searchresult1 = page.locator("//input[@placeholder='Search']");
+    await searchresult1.click();
+    await searchresult1.clear();
+    await page.waitForTimeout(2000);
+    await searchresult1.type("Charge_by_Hour"); 
+    await page.waitForTimeout(4000); // 4000 milliseconds = 4 seconds
+
+// Click charger
+  const charger1 = page.locator("//h2[1]//button[1]");
+    await charger1.click();
+    await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+
+// const hub07 =page.locator("//span[contains(text(),'Hubs')]")
+//   await hub07.click();
+//   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+// const states = page.locator("//p[normalize-space()='STATE']");
+//   await states.click();
+//   await page.waitForTimeout(1000); // 1000 milliseconds = 1 second    
+
+// Print Charge by hour Tariff details
+const fasttariffSelectors = {
+  "NAME": "//p[@class='text-sm truncate'][normalize-space()='Charge_by_Hour']",
+  "DESCRIPTION": "//p[normalize-space()='Charge by Hour validatio...']",
+  "TARIFF TYPE": "//p[@class='text-sm'][normalize-space()='Charge by Hour']",
+  "VALIDITY": "//p[contains(text(),'28')]",
+  "Condition 0(Fixed)": "div div div div div div div div div div div div div:nth-child(1) div:nth-child(2) div:nth-child(1) div:nth-child(2)",
+  "Condition 0(Per kWh)": "//div//div//div//div//div//div//div//div//div//div//div//div//div[1]//div[2]//div[1]//div[3]",
+  "Condition 1(Fixed)": "div div div div div div div div div div div div div:nth-child(1) div:nth-child(2) div:nth-child(1) div:nth-child(3)",
+  "Condition 1(Per kWh)": "//div//div//div//div//div//div//div//div//div//div//div//div//div[1]//div[2]//div[1]//div[3]",
+  "Condition 2(Fixed)": "//p[normalize-space()='INR 1']",
+  "Chargers": "//p[normalize-space()='37fckj']",
+  // "Hubs": "//p[normalize-space()='Sikandarpur']",
+  // "States": "//p[normalize-space()='Assam']"
+};
+
+const expectedFastChargingTariff = {
+  "NAME": "Charge_by_Hour",
+  "DESCRIPTION": "Charge by Hour validatio...",
+  "TARIFF TYPE": "Charge by Hour",
+  "VALIDITY": "28/02/2025 -- Forever",
+  "Condition 0(Fixed)": "Fixed INR 5",
+  "Condition 0(Per kWh)": "Per kWh INR 4",
+  "Condition 1(Fixed)": "Per kWh INR 4",
+  "Condition 1(Per kWh)": "Per kWh INR 4",
+  "Condition 2(Fixed)": "INR 1",
+  "Chargers": "37fckj"
+  // "Hubs": "Sikandarpur",
+  // "States": "Assam"
+};
+
+// Function to normalize extracted text
+function normalizeText(text) {
+  return String(text)
+      .trim()                      // Remove leading/trailing spaces
+      .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+      .replace(/\u00A0/g, '')      // Remove non-breaking spaces
+      .toLowerCase();              // Convert to lowercase for comparison
+}
+
+// Extract data from UI
+const extractedTexts04 = {};
+
+for (const [key, selector] of Object.entries(fasttariffSelectors)) {
+  const elements = await page.$$(selector);
+  const texts = [];
+  for (const element of elements) {
+      const text = await element.textContent();
+      const normalizedText = normalizeText(text);
+      console.log(`${key} from the details page: ${normalizedText}`);
+      texts.push(normalizedText);
+  }
+  extractedTexts04[key] = texts.length > 0 ? texts[0] : ''; // Store only the first value
+}
+
+// Normalize expected data
+const normalizedExpectedData04 = {};
+for (const key in expectedFastChargingTariff) {
+  normalizedExpectedData04[key] = normalizeText(expectedFastChargingTariff[key]);
+}
+
+// Compare extracted vs expected data
+console.log("Extracted Data:", extractedTexts04);
+console.log("Expected Data:", normalizedExpectedData04);
+
+if (JSON.stringify(extractedTexts04) === JSON.stringify(normalizedExpectedData04)) {
+  console.log("Added data and created Fast Charging tariff data are matching");
+} else {
+  console.log("Added data and created Fast Charging tariff data are NOT matching");
+}
+
+
+// State of charge validation   
+
+// click on the search result
+  const searchresult = page.locator("//input[@placeholder='Search']");
+    await searchresult.click();
+    await searchresult.clear();
+    await searchresult.type("State_of_Charge"); 
+    await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+// Click charger
+  const charger06 = page.locator("//h2[1]//button[1]");
+    await charger06.click();
+    await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds 
+        
+
+// Print SOC Tariff details
+const soctariffSelectors = {
+  "NAME": "//p[contains(@class,'text-sm truncate')][normalize-space()='State_of_Charge']",
+  "DESCRIPTION": "//p[normalize-space()='State of Charge validati...']",
+  "TARIFF TYPE": "//p[contains(@class,'text-sm')][normalize-space()='State of Charge']",
+  "VALIDITY": "//p[contains(text(),'28')]",
+  "Condition 0": "//p[normalize-space()='0 -- 20 %']",
+  "Fixed 0": "//p[normalize-space()='INR 5']",
+  "Condition 1": "//p[normalize-space()='21 -- 40 %']",
+  "Fixed 1": "//p[normalize-space()='INR 2']",
+  "Condition 2": "//p[normalize-space()='41 -- 100 %']",
+  "Fixed 2": "(//p[contains(text(),'INR 1')])[1]",
+  "Condition 3": "//p[normalize-space()='After 100 %']",
+  "Fixed 3": "(//p[contains(text(),'INR 1')])[2]",
+  "Chargers": "//p[normalize-space()='au32ho']",
+  // "Hubs": "//p[normalize-space()='Sikandarpur']",
+  // "States": "//p[normalize-space()='Assam']"
+};
+
+const expectedSocTariff = {
+  "NAME": "State_of_Charge",
+  "DESCRIPTION": "State of Charge validati...",
+  "TARIFF TYPE": "State of Charge",
+  "VALIDITY": "28/02/2025 -- Forever",
+  "Condition 0": "0 -- 20 %",
+  "Fixed 0": "INR 5",
+  "Condition 1": "21 -- 40 %",
+  "Fixed 1": "INR 2",
+  "Condition 2": "41 -- 100 %",
+  "Fixed 2": "INR 1",
+  "Condition 3": "After 100 %",
+  "Fixed 3": "INR 1",
+  "Chargers": "au32ho"
+  // "Hubs": "Sikandarpur",
+  // "States": "Assam"
+};
+
+// Function to normalize extracted text
+function normalizeText(text) {
+  return String(text)
+      .trim()                      // Remove leading/trailing spaces
+      .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+      .replace(/\u00A0/g, '')      // Remove non-breaking spaces
+      .toLowerCase();              // Convert to lowercase for comparison
+}
+
+// Extract data from UI
+const extractedTexts00 = {};
+
+for (const [key, selector] of Object.entries(soctariffSelectors)) {
+  const elements = await page.$$(selector);
+  const texts = [];
+  for (const element of elements) {
+      const text = await element.textContent();
+      const normalizedText = normalizeText(text);
+      console.log(`${key} from the details page: ${normalizedText}`);
+      texts.push(normalizedText);
+  }
+  extractedTexts00[key] = texts.length > 0 ? texts[0] : ''; // Store only the first value
+}
+
+// Normalize expected data
+const normalizedExpectedData05 = {};
+for (const key in expectedSocTariff) {
+  normalizedExpectedData05[key] = normalizeText(expectedSocTariff[key]);
+}
+
+// Compare extracted vs expected data
+console.log("Extracted Data:", extractedTexts00);
+console.log("Expected Data:", normalizedExpectedData05);
+
+if (JSON.stringify(extractedTexts00) === JSON.stringify(normalizedExpectedData05)) {
+  console.log("Added data and created State of Charge tariff data are matching");
+} else {
+  console.log("Added data and created State of Charge tariff data are NOT matching");
+}
+
 });
+
+
+test("Create Driver group",async ({ page }) => {
+ 
+  // Navigate to the login page
+  await page.goto('https://novo.kazam.in');
+
+  // Login
+    await page.fill('#large-input','akhilesh@kazam.in');
+    await page.fill('#password','Akbl@1724');
+    await page.click("button[type='submit']");
+    await page.click("//p[normalize-space()='Apr 20th 2023']");
+  // Wait for a few seconds
+    await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+    // Go to Drivers & Vehicles
+    const drivers = page.locator("//span[normalize-space()='Drivers & Vehicles']");
+      await drivers.click();
+      await page.waitForTimeout(3000);
+      
+    // Click on the Driver group
+    const drivergroup = page.locator("//span[normalize-space()='Driver Groups']");
+      await drivergroup.click();
+      await page.waitForTimeout(3000);
+      
+    // Create a new driver group
+    const newgroup = page.locator("//button[normalize-space()='Create Driver Group']");
+      await newgroup.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Enter group name
+    const groupname = page.locator("(//input[@id='large-input'])[1]");
+      await groupname.click();
+      await groupname.fill("Test Driver Group");
+      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      
+    // Description
+    const description = page.locator("(//input[@id='large-input'])[2]");
+      await description.click();
+      await description.fill("Test Driver Group Description");
+      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      
+    // Click on next button
+    const nextbutton16 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton16.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+      // Select Driver
+      const driver = page.locator("//tbody/tr[2]/td[1]/div[1]/input[1]");
+      await driver.click();
+      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      
+    // Click on create button
+    const createbutton = page.locator("//button[normalize-space()='Create']");
+      await createbutton.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+      console.log("Driver Group created successfully");
+
+});
+
+
+test("Create Driver tariff",async ({ page }) => {
+
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
+
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+
+    // Wait for a few seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+     
+    // Go to RM Module
+      const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+        await rmmodule.click();
+        await page.waitForTimeout(3000);
+
+    // Click on Driver Tariff
+      const drivertariff = page.locator("//span[normalize-space()='Driver Tariffs']");
+        await drivertariff.click();
+        await page.waitForTimeout(3000);
+      
+    // Search Driver Group
+      const searchbar = page.locator("//input[@placeholder='Search by group name']");
+        await searchbar.click();
+        await searchbar.fill("Test Driver Group");
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+      // Click on the first group
+      const firsttariff = page.locator("//p[@class='text-lg']");
+        await firsttariff.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      
+    // Click on Add Tariff
+      const addtariff = page.locator("//button[normalize-space()='Add Tariff']");
+        await addtariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Select tariff from the dropdown
+      const selecttariff = page.locator("//div[@role='dialog']//div[2]//div[1]//div[1]//div[1]//*[name()='svg']");
+        await selecttariff.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      
+    // Enter fee name
+      const feename = page.locator("//input[contains(@placeholder,'Select')]");
+        await feename.click();
+        await feename.type("Test_Flat");
+        await feename.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 second
+      
+    // select the first dropdown
+      const selectdropdown = page.locator("//div[contains(text(),'Test_Flat')]");
+        await selectdropdown.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // Click on Next button
+      const nextbutton17 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton17.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // search bar
+      const searchbar1 = page.locator("//input[contains(@placeholder,'Search by device id')]");
+        await searchbar1.click();
+        await searchbar1.fill("1ti4kt");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Select the charger
+      const charger = page.locator("(//input[@id='link-checkbox'])[2]");
+        await charger.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // Select hub
+      const hub = page.locator("//span[normalize-space()='Hub - wise']");
+        await hub.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+           
+    // Click on the hub
+    const hubsearch = page.locator("//input[@placeholder='Search by hub name']");
+        await hubsearch.click();
+        await hubsearch.fill("tyagi hub");
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+        const hubselect = page.locator("(//input[@id='link-checkbox'])[1]");
+        await hubselect.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      
+    // Click on Add Tariff button
+      const addtariffbutton = page.locator("(//button[@class='text-center font-medium focus:ring-4 focus:outline-none inline-flex items-center justify-center px-5 py-2.5 text-sm text-white bg-purple-700 hover:bg-purple-800 dark:bg-purple-600 dark:hover:bg-purple-700 focus:ring-purple-300 dark:focus:ring-purple-900 rounded-lg w-full flex gap-2 items-center border-gray-300 relative text-nowrap '])[1]");
+        await addtariffbutton.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+    
+          console.log("Driver Tariff created successfully"); 
+});
+
+test("Driver Tariff Validation",async ({ page }) => {
+ 
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
+
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+
+    // Go to RM Module
+      const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+        await rmmodule.click();
+        await page.waitForTimeout(3000);
+
+    // Select Driver Tariff from the RM Module
+      const tariff = page.locator("//span[normalize-space()='Driver Tariffs']");
+        await tariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Search Tariff
+      const searchbar = page.locator("//input[@placeholder='Search by group name']");
+        await searchbar.click();
+        await searchbar.fill("Test Driver Group");
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+      
+    // Click on the first group
+      const firsttariff = page.locator("//p[@class='text-lg']");
+        await firsttariff.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // click on the charger dropdown
+      const charger = page.locator("//h2[1]//button[1]//*[name()='svg']");
+        await charger.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+      
+        
+    // Print Flat Tariff details
+    const drivertariffSelectors = {
+    "NAME" : "//p[@title='Test Driver Group']",
+    "DESCRIPTION" : "//p[@title='Test Driver Group Description']",
+    "Total Drivers": "//p[normalize-space()='1']",
+    "Tariff Name": "//p[@title='Test_Flat']",
+    "Tariff Description" : "//p[@title='Driver tariff testing']",
+    "Tariff Type" : "//p[normalize-space()='Flat Tariff']",
+    "Tariff Validity" : "//p[contains(text(),'14')]",
+    "Tariff price(Fixed)" : "(//p[@class='text-[#2B3139] text-sm'])[1]",
+    "Chargers" : "//p[normalize-space()='1ti4kt']"
+
+};
+
+    const texts01 = [];
+    const drivertariff = {
+    'NAME' :'Test Driver Group', 
+    'DESCRIPTION' :'Test Driver Group Description',
+    'Total Drivers' :'1',
+    'Tariff Name' :'Test_Flat',
+    'Tariff Description' :'Driver tariff testing',
+    'Tariff Type' : 'Flat Tariff',
+    'Tariff Validity' : '14/02/2025 -- Forever',
+    'Tariff price(Fixed)' : 'INR 1',
+     'Chargers' : '1ti4kt'
+
+}
+  //console.log('comparison is ',comparison1)
+  // Extract and print data from each selector
+   // Function to normalize text (trim spaces, remove extra spaces, handle numbers)
+function normalizeText(text) {
+  return String(text)
+      .trim()                      // Remove leading and trailing spaces
+      .replace(/\s+/g, ' ')        // Replace multiple spaces with a single space
+      .replace(/\u00A0/g, '')      // Remove non-breaking spaces
+      .toLowerCase();              // Convert to lowercase for case-insensitive comparison
+}
+
+// Extract and print data from each selector
+const extractedTexts = {};
+
+for (const [key, selector] of Object.entries(drivertariffSelectors)) {
+  const elements = await page.$$(selector);
+  const texts = [];
+  for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = normalizeText(text);
+      console.log(`${key} from the details page: ${trimmedText}`);
+      texts.push(trimmedText);
+  }
+  extractedTexts[key] = texts.length > 0 ? texts[0] : ''; // Take the first matching value
+}
+
+// Normalize expected data
+const normalizedExpectedData = {};
+for (const key in drivertariff) {
+  normalizedExpectedData[key] = normalizeText(drivertariff[key]);
+}
+
+// Compare both datasets
+console.log("Extracted Data:", extractedTexts);
+console.log("Expected Data:", normalizedExpectedData);
+
+if (JSON.stringify(extractedTexts) === JSON.stringify(normalizedExpectedData)) {
+  console.log("Added data and created Driver tariff data are matching");
+} else {
+  console.log("Added data and created Driver tariff data are NOT matching");
+}
+
+  
+});
+
+test("Delete Driver Tariff",async ({ page }) => {
+
+  // Navigate to the login page
+  await page.goto('https://novo.kazam.in');
+
+  // Login
+      await page.fill('#large-input','akhilesh@kazam.in');
+      await page.fill('#password','Akbl@1724');
+      await page.click("button[type='submit']");
+      await page.click("//p[normalize-space()='Apr 20th 2023']");
+  // Wait for a few seconds
+      await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+
+  // Go to RM Module
+    const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+      await rmmodule.click();
+      await page.waitForTimeout(3000);
+
+  // Select Driver Tariff from the RM Module
+    const tariff = page.locator("//span[normalize-space()='Driver Tariffs']");
+      await tariff.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+  // Search Tariff
+    const searchbar = page.locator("//input[@placeholder='Search by group name']");
+      await searchbar.click();
+      await searchbar.fill("Test Driver Group");
+      await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+      
+    // Click on the first group
+      const firsttariff = page.locator("//p[@class='text-lg']");
+        await firsttariff.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // click on the charger dropdown
+    const charger = page.locator("//h2[1]//button[1]//*[name()='svg']");
+      await charger.click();
+      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // Edit Asset button
+    const editbutton = page.locator(".feather.feather-edit-2");
+      await editbutton.click();
+      await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // Unselect the charger
+      const charger07 = page.locator("(//input[@id='link-checkbox'])[2]");
+        await charger07.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+
+    // Select hub
+      const hub = page.locator("//span[normalize-space()='Hub - wise']");
+        await hub.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+       
+    // Unselect the hub
+      const hubselect = page.locator("(//input[@id='link-checkbox'])[1]");
+        await hubselect.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second 
+    
+    // Update Assets
+      const updatebutton = page.locator("//button[normalize-space()='Update Assets']");
+        await updatebutton.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+          console.log("Tariff Assest updated successfully");
+
+    // Delete Driver tariff
+      const deletetariff = page.locator(".feather.feather-trash");
+        await deletetariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Confirmation
+      const confirmation = page.locator("//button[normalize-space()='Confirm']");
+        await confirmation.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds    
+
+          console.log("Driver Tariff deleted successfully");
+        
+    // Delete Driver grpoup
+    // Go to the Driver and Vehicle module
+      const drivervehiclemodule = page.locator("//section[4]//a[1]//div[2]//p[1]//*[name()='svg']");
+        await drivervehiclemodule.click();
+        await page.waitForTimeout(3000);
+
+    // Select Driver group
+       const drivergroup = page.locator("//span[normalize-space()='Driver Groups']");
+        await drivergroup.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Search Driver Groups  
+      const searchdrivergroup = page.locator("//input[@placeholder='Search by group name']");
+        await searchdrivergroup.click();
+        await searchdrivergroup.fill("Test Driver Group");
+        await page.waitForTimeout(3000); // 3000 milliseconds = 3 seconds
+
+    // Open the driver group
+      const firstdrivergroup = page.locator("//span[@class='one_line_wrapper']");
+        await firstdrivergroup.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second  
+
+    // Unselect Driver
+      const driverselect = page.locator("//input[@id='link-checkbox']");
+        await driverselect.click();
+        await page.waitForTimeout(1000); // 1000 milliseconds = 1 second
+        
+    // Remove driver
+    const removebutton = page.locator("//button[normalize-space()='Remove Drivers']");
+      await removebutton.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Confirmation
+    const confirmbutton = page.locator("//button[normalize-space()='Confirm']");
+      await confirmbutton.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Delete Driver group
+      const deletegroup = page.locator("body div button:nth-child(2) svg path");
+        await deletegroup.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Confirmation
+      const deleteconfirmbutton = page.locator("//button[normalize-space()='Confirm']");
+        await deleteconfirmbutton.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds   
+
+        console.log("Driver Group deleted successfully"); 
+  
+});
+
+test("Delete created charging fee",async ({ page }) => {
+
+    // Navigate to the login page
+        await page.goto('https://novo.kazam.in');
+
+    // Login
+        await page.fill('#large-input','akhilesh@kazam.in');
+        await page.fill('#password','Akbl@1724');
+        await page.click("button[type='submit']");
+        await page.click("//p[normalize-space()='Apr 20th 2023']");
+    // Wait for a few seconds
+        await page.waitForTimeout(5000); // 5000 milliseconds = 5 seconds
+
+    // Go to RM Module
+      const rmmodule = page.locator("//span[normalize-space()='Revenue Management']");
+        await rmmodule.click();
+        await page.waitForTimeout(3000);
+
+    // Select tariff section from the RM Module
+      const tariff = page.locator("//span[normalize-space()='Charger Tariffs']");
+        await tariff.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Search Tariff
+      const searchbar = page.locator("//input[@placeholder='Search']");
+        await searchbar.click();
+        await searchbar.fill("Flat_Tariff");
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click edit button
+      const editbutton = page.locator("//div[@class='edit-button cursor-pointer']//*[name()='svg']");
+        await editbutton.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click next button
+      const nextbutton = page.locator("//button[normalize-space()='Next']");
+        await nextbutton.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click next button again
+      const nextbutton2 = page.locator("//button[normalize-space()='Next']");
+        await nextbutton2.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Unclick the selected charger
+      const unselectcharger = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+        await unselectcharger.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Click Hub view
+      const hubview = page.locator("//span[normalize-space()='Hubs']");
+        await hubview.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Unclick the selected charger
+      const unselecthub = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+       await unselecthub.click();
+       await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click state view
+      const stateview = page.locator("//span[normalize-space()='State']");
+        await stateview.click();
+        await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Unclick the selected charger
+      const unselectstate = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectstate.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Click next button
+      const nextbutton3 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton3.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click update button
+      const updatebutton = page.locator("//button[normalize-space()='Update']");
+      await updatebutton.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+        console.log("Flat Tariff updated successfully");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+      // Dlelete Flat Tariff
+      const deletetariff = page.locator("svg[width='18'][height='20']");
+      await deletetariff.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+      const confirmdelete = page.locator("//button[normalize-space()='Yes']");
+      await confirmdelete.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+      console.log("Flat Tariff deleted successfully");
+
+    // Delete Flat Tariff
+    
+    // Seaech tariff name 
+      const searchbar00 = page.locator("//input[@placeholder='Search']");
+      await searchbar00.click();
+      await searchbar00.clear();
+      await searchbar00.fill("Fast_Charging");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click edit button
+      const editbutton00 = page.locator("//div[@class='edit-button cursor-pointer']//*[name()='svg']");
+      await editbutton00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click next button
+      const nextbutton00 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click next button again
+      const nextbutton200 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton200.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Unclick the selected charger
+      const unselectcharger00 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectcharger00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Click Hub view
+      const hubview00 = page.locator("//span[normalize-space()='Hubs']");
+      await hubview00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Unclick the selected charger
+      const unselecthub00 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselecthub00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click state view
+      const stateview00 = page.locator("//span[normalize-space()='State']");
+      await stateview00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Unclick the selected charger
+      const unselectstate00 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectstate00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+    // Click next button
+      const nextbutton300 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton300.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click update button
+      const updatebutton00 = page.locator("//button[normalize-space()='Update']");
+      await updatebutton00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+      console.log("Fast Charging Tariff updated successfully");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+      // Dlelete Flat Tariff
+      const deletetariff00 = page.locator("svg[width='18'][height='20']");
+      await deletetariff00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+      const confirmdelete00 = page.locator("//button[normalize-space()='Yes']");
+      await confirmdelete00.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+      
+      console.log("Fast Charging deleted successfully");
+
+    // Delete Time of Day Tariff
+   
+    // Seaech tariff name 
+      const searchbar01 = page.locator("//input[@placeholder='Search']");
+      await searchbar01.click();
+      await searchbar01.clear();
+      await searchbar01.fill("Time_of_Day");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click edit button
+      const editbutton01 = page.locator("//div[@class='edit-button cursor-pointer']//*[name()='svg']");
+      await editbutton01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click next button
+      const nextbutton01 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click next button again
+      const nextbutton201 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton201.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Unclick the selected charger
+      const unselectcharger01 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectcharger01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Click Hub view
+      const hubview01 = page.locator("//span[normalize-space()='Hubs']");
+      await hubview01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Unclick the selected charger
+      const unselecthub01 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselecthub01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click state view
+      const stateview01 = page.locator("//span[normalize-space()='State']");
+      await stateview01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Unclick the selected charger
+      const unselectstate01 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectstate01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Click next button
+      const nextbutton301 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton301.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click update button
+      const updatebutton01 = page.locator("//button[normalize-space()='Update']");
+      await updatebutton01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      console.log("Time of Day Tariff updated successfully");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Dlelete Flat Tariff
+      const deletetariff01 = page.locator("svg[width='18'][height='20']");
+      await deletetariff01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      const confirmdelete01 = page.locator("//button[normalize-space()='Yes']");
+      await confirmdelete01.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      console.log("Time of Day deleted successfully");
+    
+    // Delete Charge by Hour Tariff
+   
+    // Seaech tariff name 
+      const searchbar02 = page.locator("//input[@placeholder='Search']");
+      await searchbar02.click();
+      await searchbar02.clear();
+      await searchbar02.fill("Charge_by_Hour");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click edit button
+      const editbutton02 = page.locator("//div[@class='edit-button cursor-pointer']//*[name()='svg']");
+      await editbutton02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click next button
+      const nextbutton02 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click next button again
+      const nextbutton202 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton202.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Unclick the selected charger
+      const unselectcharger02 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectcharger02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Click Hub view
+      const hubview02 = page.locator("//span[normalize-space()='Hubs']");
+      await hubview02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Unclick the selected charger
+      const unselecthub02 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselecthub02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click state view
+      const stateview02 = page.locator("//span[normalize-space()='State']");
+      await stateview02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Unclick the selected charger
+      const unselectstate02 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectstate02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Click next button
+      const nextbutton302 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton302.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click update button
+      const updatebutton02 = page.locator("//button[normalize-space()='Update']");
+      await updatebutton02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      console.log("Charge by Hour Tariff is updated successfully");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Dlelete Flat Tariff
+      const deletetariff02 = page.locator("svg[width='18'][height='20']");
+      await deletetariff02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      const confirmdelete02 = page.locator("//button[normalize-space()='Yes']");
+      await confirmdelete02.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      console.log("Charge by Hour Tariff is deleted successfully"); 
+
+    // Delete State of Charge Tariff
+   
+    // Seaech tariff name 
+      const searchbar03 = page.locator("//input[@placeholder='Search']");
+      await searchbar03.click();
+      await searchbar03.clear();
+      await searchbar03.fill("State_of_Charge");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click edit button
+      const editbutton03 = page.locator("//div[@class='edit-button cursor-pointer']//*[name()='svg']");
+      await editbutton03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click next button
+      const nextbutton03 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click next button again
+      const nextbutton203 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton203.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Unclick the selected charger
+      const unselectcharger03 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectcharger03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Click Hub view
+      const hubview03 = page.locator("//span[normalize-space()='Hubs']");
+      await hubview03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Unclick the selected charger
+      const unselecthub03 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselecthub03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click state view
+      const stateview03 = page.locator("//span[normalize-space()='State']");
+      await stateview03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Unclick the selected charger
+      const unselectstate03 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectstate03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+   // Click next button
+      const nextbutton303 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton303.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click update button
+      const updatebutton03 = page.locator("//button[normalize-space()='Update']");
+      await updatebutton03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      console.log("State of Charge Tariff is updated successfully");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Dlelete Flat Tariff
+      const deletetariff03 = page.locator("svg[width='18'][height='20']");
+      await deletetariff03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      const confirmdelete03 = page.locator("//button[normalize-space()='Yes']");
+      await confirmdelete03.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+     
+      console.log("State of Charge Tariff is deleted successfully");
+
+
+    // Delete Aggregation Fee
+
+    // Click Aggregation fee
+      const aggregationfee = page.locator("//span[normalize-space()='Aggregation Fee']");
+      await aggregationfee.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds  
+   
+    // Seaech tariff name 
+      const searchbar04 = page.locator("//input[@placeholder='Search by aggregation fee name']");
+      await searchbar04.click();
+      await searchbar04.clear();
+      await searchbar04.fill("Automation Aggregation Fee");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click edit button
+      const editbutton04 = page.locator(".feather.feather-edit-2");
+      await editbutton04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click next button
+      const nextbutton04 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Unclick the selected charger
+      const unselectcharger04 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectcharger04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+    // Click Hub view
+      const hubview04 = page.locator("//span[normalize-space()='Hub - wise']");
+      await hubview04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+    // Unclick the selected charger
+      const unselecthub04 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselecthub04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click state view
+      const stateview04 = page.locator("//span[normalize-space()='State']");
+      await stateview04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+    // Unclick the selected charger
+      const unselectstate04 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectstate04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click update button
+      const updatebutton04 = page.locator("//button[normalize-space()='Update Aggregation Fee']");
+      await updatebutton04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+      console.log("Aggregation Fee is updated successfully");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Dlelete Flat Tariff
+      const deletetariff04 = page.locator(".feather.feather-trash");
+      await deletetariff04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+      const confirmdelete04 = page.locator("//button[normalize-space()='Confirm']");
+      await confirmdelete04.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+      console.log("Aggregation Fee is deleted successfully");
+      
+
+    // Delete Tax
+
+    // Click Tax
+      const Tax = page.locator("//span[normalize-space()='Tax']");
+      await Tax.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds  
+   
+    // Seaech tariff name 
+      const searchbar05 = page.locator("//input[@placeholder='Search by tax system']");
+      await searchbar05.click();
+      await searchbar05.clear();
+      await searchbar05.fill("Automation Aggregation Fee");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+   // Click edit button
+      const editbutton05 = page.locator(".feather.feather-edit-2");
+      await editbutton05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click next button
+      const nextbutton05 = page.locator("//button[normalize-space()='Next']");
+      await nextbutton05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Unclick the selected charger
+      const unselectcharger05 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectcharger05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+    // Click Hub view
+      const hubview05 = page.locator("//span[normalize-space()='Hub - wise']");
+      await hubview05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+    // Unclick the selected charger
+      const unselecthub05 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselecthub05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click state view
+      const stateview05 = page.locator("//span[normalize-space()='State']");
+      await stateview05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+   // Unclick the selected charger
+      const unselectstate05 = page.locator("//tbody/tr[1]/td[1]/div[1]/input[1]");
+      await unselectstate05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Click update button
+      const updatebutton05 = page.locator("//button[normalize-space()='Update Tax System']");
+      await updatebutton05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+      console.log("Tax System updated successfully");
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+
+    // Dlelete Flat Tariff
+      const deletetariff05 = page.locator(".feather.feather-trash");
+      await deletetariff05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+      const confirmdelete05 = page.locator("//button[normalize-space()='Confirm']");
+      await confirmdelete05.click();
+      await page.waitForTimeout(2000); // 2000 milliseconds = 2 seconds
+   
+      console.log("Tax System deleted successfully");
+      
+
+
+});
+
+
+
+  
