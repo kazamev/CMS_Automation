@@ -1,4 +1,4 @@
-import { test, expect } from '../Fixtures/loginFixture';
+import { test, expect } from '../fixtures/login.fixture';
 import { ChargerTariffPage } from "../pages/ChargerTariff";
 
 test.describe("Charger Tariff Flow", () => {

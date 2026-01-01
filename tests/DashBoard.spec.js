@@ -1,4 +1,4 @@
-import { test, expect } from '../Fixtures/loginFixture';
+import { test, expect } from '../fixtures/login.fixture';
 import { DashboardPage } from '../pages/DashBoard';
 
 test('Verify dashboard values', async ({ loggedInPage }) => {

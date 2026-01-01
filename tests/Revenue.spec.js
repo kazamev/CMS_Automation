@@ -1,4 +1,4 @@
-import { test, expect } from '../Fixtures/loginFixture';
+import { test, expect } from '../fixtures/login.fixture';
 import { RevenuePage } from "../pages/RevenuePage";
 
 test.describe("Revenue Validation", () => {

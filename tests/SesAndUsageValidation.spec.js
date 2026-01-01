@@ -1,4 +1,4 @@
-import { test, expect } from "../Fixtures/loginFixture";
+import { test, expect } from '../fixtures/login.fixture';
 import { DashboardSessionsPage } from "../pages/SesAndUsageValidation";
 
 test.describe("Dashboard Sessions KPI vs UI vs Excel Validation", () => {
