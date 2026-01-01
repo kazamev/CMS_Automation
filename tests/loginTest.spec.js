@@ -3,7 +3,7 @@ const { LoginPage } = require('../pages/loginPage');
 
 test('Valid Login', async ({ page }) => {
     const username="shilpa@kazam.in";
-    const password="Shilpa@123450";
+    const password="Shilpa@1234567890";
     const loginpage =new LoginPage(page);
     await loginpage.goTo();
     await loginpage.validLogin(username,password);
