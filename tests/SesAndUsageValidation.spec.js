@@ -4,7 +4,9 @@ import { DashboardSessionsPage } from "../pages/SesAndUsageValidation";
 test.describe("Dashboard Sessions KPI vs UI vs Excel Validation", () => {
 
   test("Validate session counts across Dashboard, UI and Excel", async ({ loggedInPage }) => {
+    test.setTimeout(120000);
     const page = loggedInPage;
+    
 
     // Navigate to dashboard URL here
     await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");

@@ -17,7 +17,7 @@ export class RevenuePage {
 
     // Calendar dropdowns
     this.yearSelect = page.locator("(//select[@class='focus:ring-0 focus:outline-none border-none p-1'])[2]");
-    this.monthSelect = page.locator("(//select[@class='focus:ring-0 focus:outline-none border-none p-1'])[1]");
+    this.monthSelect = page.locator("(//select[@class='focus:ring-0 focus:outline-none border-none p-1'])[1])");
     this.submitDateBtn = page.locator("//button[normalize-space()='Submit']");
      this.DashBoardTimeFilter= page.locator("//button[@class='w-full flex gap-1 items-center bg-black py-2 px-3 border rounded-md bg-white']");
    
@@ -27,8 +27,8 @@ export class RevenuePage {
     this.firstRow = page.locator("(//p[@class='text-base font-medium'])[1])");
 
     // Download
-     this.MenuButton= page.locator("svg.feather-more-vertical");
-    this.downloadReport= page.locator("//div[text()='Download Report']");
+     this.MenuButton= page.locator("//div[@id='download']//*[name()='svg']");
+    this.downloadReport= page.locator("(//div[contains(text(),'Download Report')])[1]");
 
     
   }
@@ -60,6 +60,7 @@ return DashboardRevenue;
 }
 // Navigate to Revenue Page
 async goto() {
+
     await this.page.goto(this.revenueUrl);
     await this.page.waitForLoadState("networkidle");
   }
@@ -82,7 +83,8 @@ async printRevenueValues() {
 // Calendar: select single date
 async selectSingleDate(day) {
   await this.calendarBtn.click();
-  const dateBtn = this.page.locator(`//button[normalize-space()='${day}']`);
+  const dateBtn = this.page.locator(`//div[normalize-space()='${day}']`);
+
   await dateBtn.waitFor({ timeout: 30000 });
   await dateBtn.click();
   await dateBtn.click();
@@ -98,75 +100,102 @@ async selectSingleDate(day) {
   //   await this.page.click(`//button[normalize-space()='${lastDay}']`);
   // }
 
-// Search Invoice and print first row with column names
-async searchInvoiceAndPrint(invoiceNumber) {
-  await this.searchBox.waitFor({ timeout: 30000 });
-  await this.searchBox.fill(invoiceNumber);
-  await this.page.waitForTimeout(1500);
- // Header block
-  const headerBlock = this.page.locator(
-    "//*[@id='cms-app-main-content']/div/div[2]/div[2]/div[2]/div/div/div[1]"
-  );
-// First row
-  const rowBlock = this.page.locator(
-    "//*[@id='cms-app-main-content']/div/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/div"
-  );
-  await rowBlock.waitFor({ timeout: 30000 });
-// Extract text
-  const headerText = (await headerBlock.innerText()).trim();
-  const rowText = (await rowBlock.innerText()).trim();
+async openSuccessTransactionAndGetOverview() {
+  const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
 
-// Split into arrays
-  const headers = headerText
-    .split("\n")
-    .map(h => h.trim())
-    .filter(Boolean);
+// wait for overview to load (Transaction ID appears)
+await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  // await this.page.waitForTimeout(1000);
+  const overviewSelectors = {
+    "Transaction id":
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(2)",
 
-  const values = rowText
-    .split("\n")
-    .map(v => v.trim())
-    .filter(Boolean);
+    "Billed Amount":
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3)",
 
-  // Map header → value
-  const rowData = {};
-  headers.forEach((header, columns) => {
-    rowData[header] = values[columns] ?? "N/A";
-  });
+    "Host Details":
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(9) > span:nth-child(1) > span:nth-child(1)",
 
-  // Print output
-  console.log("Searched Invoice Result:");
-  console.table(rowData);
-  return rowData;
+    "Driver Details":
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(10) > span:nth-child(1)",
+
+    "Time stamp":
+      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(11) > span:nth-child(1)",
+  };
+
+  const extractedTexts = {};
+
+  for (const [key, selector] of Object.entries(overviewSelectors)) {
+    const elements = await this.page.$$(selector);
+    const values = [];
+
+    for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+      console.log(`${key}: ${trimmedText}`);
+      values.push(trimmedText);
+    }
+
+    extractedTexts[key] = values;
+
+  }
+  return extractedTexts;
 }
+
 // Download Report
   async downloadReportFile() {
     await this.downloadReport.click();
   }
 
-//Revenue Excel
 async downloadExcelFile() {
-    const downloadPromise = this.page.waitForEvent("download");
-    await this.page.waitForTimeout(1000);
-    //Click download on 3dots menu
-    await this.MenuButton.click();
-    await this.page.waitForTimeout(1000);
-    await this.downloadReport.waitFor({ state: "visible", timeout: 5000 });
-    await this.page.waitForTimeout(1000);
-    await this.downloadReport.click();
-    const download = await downloadPromise;
+  console.log("Starting Excel download");
 
-  //Check "downloads" folder exists in current directory
+  await this.MenuButton.waitFor({ state: "visible", timeout: 20000 });
+  await this.MenuButton.click();
+
+  await this.downloadReport.waitFor({ state: "visible", timeout: 20000 });
+
+  // Try normal download first
+  try {
+    const [download] = await Promise.all([
+      this.page.waitForEvent("download", { timeout: 20000 }),
+      this.downloadReport.click()
+    ]);
+
     const downloadDir = path.join(__dirname, "downloads");
     if (!fs.existsSync(downloadDir)) {
-        fs.mkdirSync(downloadDir);
+      fs.mkdirSync(downloadDir, { recursive: true });
     }
 
-  //Save the file
-    const filePath4 = path.join(downloadDir, "Revenue.xlsx");
-    await download.saveAs(filePath4);
-    console.log("Excel Downloaded ", filePath4);
-    return filePath4;
+    const filePath = path.join(downloadDir, "Revenue.xlsx");
+    await download.saveAs(filePath, { timeout: 60000 });
+
+    console.log("Excel Downloaded:", filePath);
+    return filePath;
+
+  } catch (e) {
+    console.log("Download event not fired, checking new tab...");
+
+    const [newPage] = await Promise.all([
+      this.page.context().waitForEvent("page"),
+      this.downloadReport.click()
+    ]);
+
+    await newPage.waitForLoadState("networkidle");
+
+    const response = await this.page.request.get(newPage.url());
+    const buffer = await response.body();
+
+    const filePath = path.join(__dirname, "downloads", "Revenue.xlsx");
+    fs.writeFileSync(filePath, buffer);
+
+    console.log("Excel Downloaded via new tab:", filePath);
+    return filePath;
+  }
 }
+
+
+
 //Sum of Revenue(Excel)
 async sumOfRevenue(filePath4) {
     const wb = excel.readFile(filePath4);

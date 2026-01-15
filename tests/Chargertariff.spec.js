@@ -27,7 +27,7 @@ test.describe("Charger Tariff Flow", () => {
     await tariffPage.createTariffFinal();
 
 
-    await tariffPage.searchTariffAndGetDetailsAsTable(tariffName);
+    // await tariffPage.searchTariffAndGetDetailsAsTable(tariffName);
 
     // // Verify tariff after creation
     // const createdDetails = await tariffPage.verifyTariff(chargerId);

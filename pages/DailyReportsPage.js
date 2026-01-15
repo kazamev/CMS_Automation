@@ -1,3 +1,4 @@
+import { expect } from "@playwright/test";
 import fs from "fs";
 import path from "path";
 import * as excel from "xlsx";
@@ -11,6 +12,7 @@ export class DailyReportsPage {
     this.ApplyBtn= page.locator("//button[normalize-space()='Apply']");
     this.MonthlyReportsTab = page.locator("//button[normalize-space()='Monthly Report']");
     this.UsageColumnCheckbox =page.locator("//input[@id='device_usage']");
+
 
     this.url =
       "https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports";
@@ -28,28 +30,36 @@ export class DailyReportsPage {
 
   //select report from dropdown
   async selectReportDropdown(value) {
-    await this.reportDropdown.waitFor({ timeout: 30000 });
-    await this.reportDropdown.selectOption(value);
-    await this.page.waitForTimeout(2000);
-  }
+  await this.reportDropdown.waitFor({ state: "visible", timeout: 20000 });
+  await this.reportDropdown.selectOption(value);
 
-  //select date from kazam calendar
+  // wait for Generate Report button to be enabled after dropdown change
+  await this.generateBtn.waitFor({ state: "visible", timeout: 20000 });
+}
+
+//select date from kazam calendar
   async selectKazamCalendarDate(userDate) {
-    const [day, month, year] = userDate.split("/");
-    await this.page.selectOption(
-      "select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(1)",
-      year
-    );
-    await this.page.selectOption(
-      "select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(2)",
-      String(Number(month) - 1)
-    );
-    const dayBtn = this.page.locator(
-      `//button[.//div[text()='${Number(day)}']]`
-    );
-    await dayBtn.click();
-    await dayBtn.click();
-  }
+  const [day, month, year] = userDate.split("/");
+
+  const yearSelect = this.page.locator(
+    "select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(1)"
+  );
+  const monthSelect = this.page.locator(
+    "select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(2)"
+  );
+
+  await yearSelect.waitFor({ state: "visible" });
+  await yearSelect.selectOption(year);
+  await monthSelect.selectOption(String(Number(month) - 1));
+
+  const dayBtn = this.page.locator(
+    `//button[.//div[text()='${Number(day)}']]`
+  );
+
+  await dayBtn.waitFor({ state: "visible" });
+  await dayBtn.dblclick(); // replaces two clicks
+}
+
 
 
 async sumOfUsage(filePath) {
@@ -69,56 +79,57 @@ async sumOfUsage(filePath) {
 
 //edit table fields
   async editTableFields() {
-    await this.EditTable.waitFor({ state: "visible" });
-    await this.EditTable.click();
-    await this.page.waitForTimeout(2000);
-    await this.sessionCheckbox.waitFor({ state: "visible" });
-    const isChecked = await this.sessionCheckbox.isChecked();
-    if (!isChecked) {
-      await this.sessionCheckbox.click();
-    } else {
-      console.log("Sessions checkbox is already checked.");
-    } 
-    await this.UsageColumnCheckbox.waitFor({ state: "visible" });
-    const isUsageChecked = await this.UsageColumnCheckbox.isChecked(); 
-    if (!isUsageChecked) {
-      await this.UsageColumnCheckbox.click();
-    } else {
-      console.log("Usage checkbox is already checked.");
-    } 
-    await this.page.waitForTimeout(2000);
-    await this.ApplyBtn.click();  
-    await this.page.waitForLoadState("networkidle");     
+  await this.EditTable.waitFor({ state: "visible" });
+  await this.EditTable.click();
+
+  await this.sessionCheckbox.waitFor({ state: "visible" });
+  await this.sessionCheckbox.scrollIntoViewIfNeeded();
+  if (!(await this.sessionCheckbox.isChecked())) {
+    await this.sessionCheckbox.click();
   }
+
+  await this.UsageColumnCheckbox.waitFor({ state: "visible" });
+  await this.UsageColumnCheckbox.scrollIntoViewIfNeeded();
+  if (!(await this.UsageColumnCheckbox.isChecked())) {
+    await this.UsageColumnCheckbox.click();
+  }
+
+  await this.ApplyBtn.waitFor({ state: "visible" });
+  await this.ApplyBtn.click();
+
+  await this.page.waitForLoadState("networkidle");
+}
 
 
 
   //download daily report
-  async downloadDailyReport(fileName) {
-  const downloadPromise = this.page.waitForEvent("download", {
-    timeout: 90000,
-  });
+//download daily report
+async downloadDailyReport(fileName) {
+    // 1. Setup the listener BEFORE clicking
+    const downloadPromise = this.page.waitForEvent("download", { timeout: 30000 });
 
-  const downloadBtn = this.page.locator(
-    "//button[normalize-space()='Generate Report']"
-  );
+    const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
+    
+    // 2. Click the button
+    await downloadBtn.click();
 
-  await downloadBtn.waitFor({ timeout: 60000 });
-  await downloadBtn.click();
-  await this.page.waitForTimeout(2000);
+    // 3. Await the download (No sleep needed, waitForEvent handles the wait)
+    const download = await downloadPromise;
 
-  const download = await downloadPromise;
+    const downloadDir = path.join(__dirname, "../downloads");
+    if (!fs.existsSync(downloadDir)) {
+      fs.mkdirSync(downloadDir);
+    }
 
-  const downloadDir = path.join(__dirname, "../downloads");
-  if (!fs.existsSync(downloadDir)) {
-    fs.mkdirSync(downloadDir);
+    const filePath = path.join(downloadDir, fileName);
+    await download.saveAs(filePath);
+
+    return filePath;
   }
 
-  const filePath = path.join(downloadDir, fileName);
-  await download.saveAs(filePath);
 
-  return filePath;
-}
+
+
 
 //count sessions in Sessions report)
   async countTxnIdsDailyReport(filePath) {
@@ -155,13 +166,20 @@ async sumOfUsageInChargerReport(filePath) {
    return formattedTotal;
 }
 
-
-//Revenue Tab Click
+  
 async RevenueClick() {
-  await this.RevenueTab.waitFor({ state: "visible" });
-  await this.RevenueTab.click();
-  await this.page.waitForTimeout(2000);
+  await this.RevenueTab.waitFor({ state: "visible", timeout: 30000 });
+
+  await Promise.all([
+    this.page.waitForLoadState("networkidle"),
+    this.RevenueTab.click()
+  ]);
+
+  // Wait for report dropdown as proof Revenue page loaded
+  await this.reportDropdown.waitFor({ state: "visible", timeout: 30000 });
 }
+
+
 
 //download daily report
 // async downloadDailyReport(fileName) {
@@ -229,47 +247,44 @@ async MonthlyReport(){
 
 //Select Previous Month
 async selectPreviousMonth() {
-  const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-  ];
+    const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
 
-  const today = new Date();
-  let targetMonthIndex = today.getMonth() - 1;
-  let targetYear = today.getFullYear();
+    const today = new Date();
+    let targetMonthIndex = today.getMonth() - 1;
+    let targetYear = today.getFullYear();
 
-  // Handle Jan to Dec of previous year
-  if (targetMonthIndex < 0) {
-    targetMonthIndex = 11;
-    targetYear -= 1;
-  }
+    if (targetMonthIndex < 0) {
+        targetMonthIndex = 11;
+        targetYear -= 1;
+    }
 
-  const targetMonth = monthNames[targetMonthIndex];
-  //LOCATORS
-  const yearLabel = this.page.locator("//span[@class='font-semibold text-lg text-gray-900']");
-  const prevYearBtn = this.page.locator("//button[normalize-space()='<']");
-  const nextYearBtn = this.page.locator("//button[normalize-space()='>']");
-  const monthBtn = this.page.locator(`//button[normalize-space()='${targetMonth}']`);
+    const targetMonth = monthNames[targetMonthIndex];
 
-  //ADJUST YEAR
-  let displayedYear = Number((await yearLabel.innerText()).trim());
-  while (displayedYear > targetYear) {
-    await prevYearBtn.click();
-    await this.page.waitForTimeout(2000);
-    displayedYear = Number((await yearLabel.innerText()).trim());
-  }
+    const yearLabel = this.page.locator("//span[@class='font-semibold text-lg text-gray-900']");
+    const prevYearBtn = this.page.locator("//button[normalize-space()='<']");
+    const monthBtn = this.page.locator(`//button[normalize-space()='${targetMonth}']`);
 
-  while (displayedYear < targetYear) {
-    await nextYearBtn.click();
-    displayedYear = Number((await yearLabel.innerText()).trim());
-  }
+    await yearLabel.waitFor({ state: "visible", timeout: 20000 });
 
-  //SELECT MONTH
-  await monthBtn.waitFor({ timeout: 10000 });
-  await monthBtn.click();
-  await this.page.waitForTimeout(2000);
-  console.log(`Selected Previous Month: ${targetMonth} ${targetYear}`);
-  await this.page.waitForTimeout(2000);
+    let displayedYear = Number((await yearLabel.textContent()).trim());
+
+    while (displayedYear > targetYear) {
+        await prevYearBtn.click();
+
+        // FIX STARTS HERE -----------------------------------------
+        // Instead of waitForFunction, we wait until the text is NO LONGER the old year
+        await expect(yearLabel).not.toHaveText(String(displayedYear), { timeout: 5000 });
+        // FIX ENDS HERE -------------------------------------------
+
+        displayedYear = Number((await yearLabel.textContent()).trim());
+    }
+
+    await monthBtn.waitFor({ state: "visible", timeout: 10000 });
+    await monthBtn.click();
+
+    console.log(`Selected Previous Month: ${targetMonth} ${targetYear}`);
 }
-
 }

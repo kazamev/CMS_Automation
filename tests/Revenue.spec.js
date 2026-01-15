@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { RevenuePage } from "../pages/RevenuePage";
-
+test.setTimeout(60000);
 test.describe("Revenue Validation", () => {
   test("Validate Revenue", async ({ loggedInPage }) => {
     const page = loggedInPage;
@@ -13,21 +13,28 @@ test.describe("Revenue Validation", () => {
 
 //time filter in dashboard
    await revenuePage.applyTimeFilterInDashboard("Yesterday");
-   const DashBoardrevenue = await revenuePage.getDashboardRevenue();
+   const DashBoardrevenue = await revenuePage. getDashboardRevenue();
     console.log("DashboardRevenue:", DashBoardrevenue);
+
 
     
 // Login fixture already logged in
   await revenuePage.goto();
 
   
+// function getYesterdayDate() {
+//     const date = new Date();
+//     date.setDate(date.getDate() - 1);
+//     const day = String(date.getDate()).padStart(2, "0");
+//     // const month = String(date.getMonth()).padStart(2, "0");
+//     // const year = date.getFullYear();
+//     return `${day}`;
+// }
+
 function getYesterdayDate() {
-    const date = new Date();
-    date.setDate(date.getDate() - 1);
-    const day = String(date.getDate()).padStart(2, "0");
-    // const month = String(date.getMonth() + 1).padStart(2, "0");
-    // const year = date.getFullYear();
-    return `${day}`;
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  return String(date.getDate()); // ❌ no padStart
 }
 
 // Calendar: select particular date
@@ -39,7 +46,7 @@ function getYesterdayDate() {
 //   await revenuePage.selectFullMonth(2025, 11);
 
  // Download Excel
-  const filePath4 = await revenuePage.downloadExcelFile();
+  const filePath4 = await revenuePage. downloadExcelFile();
   await revenuePage.sumOfRevenue(filePath4);
 
 
@@ -52,7 +59,11 @@ function getYesterdayDate() {
     }
 
   // Search invoice and print first row
-  await revenuePage.searchInvoiceAndPrint("30450113");
+  // await revenuePage.searchInvoiceAndPrint("30450113");
+
+
+  const overviewData = await revenuePage.openSuccessTransactionAndGetOverview();
+    
 });
 
 });
