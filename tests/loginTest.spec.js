@@ -9,6 +9,7 @@ test('Valid Login', async ({ page }) => {
     await loginpage.validLogin(username,password);
     await page.waitForLoadState('networkidle');
     await expect(page).toHaveURL("https://novo.kazam.in/org");
+    console.log("Login Successful, URL Verified");
   
 });
 

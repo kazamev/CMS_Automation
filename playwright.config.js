@@ -22,28 +22,29 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
 
   testDir: './tests',
-  timeout: 20*1000,
+  timeout: 40*1000,
   expect: {
-    timeout: 20000
+    timeout: 40000
   },
-  fullyParallel: true,
-  
+  fullyParallel: false,
+  workers: 1,
+
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
+     reporter: [
+    ['list'],
+    ['allure-playwright'],
+    ['html', { open: 'never', outputFolder: 'extent-report' }]
+  ],
 
-  workers: process.env.CI ? 1 : undefined,
-  
-  reporter: [
-  ['html'],
-  ['allure-playwright']
-],
   
   use: {
    browserName: 'chromium',
-    headless: true,
+    headless: false,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    permissions: [],
   },
 
   

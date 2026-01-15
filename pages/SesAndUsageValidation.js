@@ -102,26 +102,19 @@ async getSessionTabCounts() {
 
 // Download Excel Report
 async downloadExcel() {
-    const downloadPromise = this.page.waitForEvent("download");
-    await this.page.waitForTimeout(1000);
-    //Click download on 3dots menu
+    // Start listener
+    const downloadPromise = this.page.waitForEvent("download", { timeout: 60000 });
+
     await this.menuButton.click();
-    await this.page.waitForTimeout(1000);
-    await this.downloadBtn.waitFor({ state: "visible", timeout: 5000 });
-    await this.page.waitForTimeout(1000);
+    await this.downloadBtn.waitFor({ state: "visible" });
     await this.downloadBtn.click();
+
     const download = await downloadPromise;
-
-    //Check "downloads" folder exists in current directory
     const downloadDir = path.join(__dirname, "downloads");
-    if (!fs.existsSync(downloadDir)) {
-        fs.mkdirSync(downloadDir);
-    }
+    if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
 
-    //Save the file
     const filePath = path.join(downloadDir, "sessions.xlsx");
     await download.saveAs(filePath);
-    console.log("Excel Downloaded ", filePath);
     return filePath;
 }
 
@@ -246,26 +239,27 @@ async openDailyReportsPage() {
 // Select dropdown value in Daily Reports
 async selectReportDropdown(value) {
     const dropdown = this.page.locator("//div[@class='grid gap-2']//select[1]");
-    await dropdown.waitFor();
+    await dropdown.waitFor({ state: "visible" });
     await dropdown.selectOption(value);
-    await this.page.waitForTimeout(1000);
+    // Remove waitForTimeout. If the page loads data after selection:
+    await this.page.waitForLoadState("networkidle");
 }
 
 
 // Calendar date selection (uses your function logic)
 async selectKazamCalendarDate(userDate) {
     const [day, month, year] = userDate.split("/");
-    // YEAR
-    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(1)",year);
+    
+    // Select Year and Month
+    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(1)", year);
+    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(2)", String(Number(month) - 1));
 
-    // MONTH (0-based)
-    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(2)",String(Number(month) - 1));
-    // await this.page.waitForTimeout(1000);
-
-    // DAY
-    await this.page.click(`//button[.//div[text()='${Number(day)}']]`);
-    // await this.page.waitForTimeout(1000);
-    await this.page.click(`//button[.//div[text()='${Number(day)}']]`);
+    // Wait for the specific day to be visible
+    const dayBtn = this.page.locator(`//button[.//div[text()='${Number(day)}']]`);
+    await dayBtn.waitFor({ state: "visible" });
+    
+    // Perform a double click to select
+    await dayBtn.dblclick(); 
     console.log(`Selected date: ${userDate}`);
 }
 
