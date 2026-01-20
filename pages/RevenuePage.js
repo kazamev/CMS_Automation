@@ -30,6 +30,10 @@ export class RevenuePage {
      this.MenuButton= page.locator("//div[@id='download']//*[name()='svg']");
     this.downloadReport= page.locator("(//div[contains(text(),'Download Report')])[1]");
 
+    //Invoice Search
+    this.Invoicefirstclick = page.locator("//div[@class='flex flex-col w-full h-full relative']//div[1]//div[1]//div[1]//button[1]//*[name()='svg']");
+    this.InvoiceDownload= page.locator("//*[@id='cms-app-main-content']/div/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/p[2]/button");
+
     
   }
 
@@ -138,9 +142,112 @@ await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-ch
 
     extractedTexts[key] = values;
 
+
+
   }
   return extractedTexts;
 }
+
+async downloadInvoiceFile() {
+  const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
+  // wait for overview to load (Transaction ID appears)
+await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  // await this.page.waitForTimeout(1000);
+    await this.Invoicefirstclick.click();
+    await this.page.waitForTimeout(2000);
+    await this.InvoiceDownload.click();
+    await this.page.waitForTimeout(8000);
+  // Data from the invoice page
+          const invoiceSelectors = {
+            "Transaction id":
+              "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)",
+            "Billed Amount":
+              "div[class='flex items-center justify-between'] span[class='font-mono']",
+            "Host Details":
+              "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > p:nth-child(2)",
+            "Driver Details":
+              "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > p:nth-child(2)",
+            "Time stamp": "p[class='text-black'] span[class='text-gray-600']",
+          };
+          const ExtractedTexts = {};
+
+          for (const [key, selector] of Object.entries(invoiceSelectors)) {
+    const elements = await this.page.$$(selector);
+    const values = [];
+
+    for (const element of elements) {
+      const text = await element.textContent();
+      const trimmedText = String(text).trim();
+      console.log(`${key}: ${trimmedText}`);
+      values.push(trimmedText);
+       }
+       ExtractedTexts[key] = values;
+          }
+          return ExtractedTexts;
+  }
+
+async compareOverviewWithInvoice(overviewData, invoiceData) {
+  const keysToCompare = ["Transaction id", "Billed Amount", "Host Details", "Driver Details", "Time stamp"];
+  let mismatchFound = false;
+  const results = [];
+
+  console.log("\n Comparison Report");
+
+  for (const key of keysToCompare) {
+    let overviewVal = (overviewData[key] ? overviewData[key][0] : "NOT FOUND").trim();
+    let invoiceVal = (invoiceData[key] ? invoiceData[key][0] : "NOT FOUND").trim();
+
+    let isMatch = false;
+
+    if (key === "Driver Details") {
+      // Remove dashes and extra spaces: "Limousine - 123" -> "Limousine 123"
+      const clean = (val) => val.replace(/[-\s]+/g, " ").trim();
+      isMatch = clean(overviewVal) === clean(invoiceVal);
+    } 
+    else if (key === "Time stamp") {
+      // Convert both strings to Date objects to compare actual time
+      // Overview: "14/01/2026 11:56:01 pm"
+      // Invoice: "Jan 14 2026, 11:56:01 pm"
+      const dateO = new Date(overviewVal.replace(/\//g, "-")); 
+      const dateI = new Date(invoiceVal.replace(/,/g, ""));
+      
+      isMatch = dateO.getTime() === dateI.getTime();
+      
+      // Fallback: If Date object fails, check if time part matches
+      if (!isMatch) {
+          const timeO = overviewVal.match(/\d{2}:\d{2}:\d{2}/);
+          const timeI = invoiceVal.match(/\d{2}:\d{2}:\d{2}/);
+          isMatch = timeO && timeI && timeO[0] === timeI[0];
+      }
+    } 
+    else if (key === "Billed Amount") {
+      // Remove currency symbols and compare numbers
+      const numO = overviewVal.replace(/[^0-9.]/g, "");
+      const numI = invoiceVal.replace(/[^0-9.]/g, "");
+      isMatch = numO === numI;
+    } 
+    else {
+      // Exact match for other fields
+      isMatch = overviewVal === invoiceVal;
+    }
+
+    if (isMatch) {
+      results.push(`${key}: MATCHED`);
+    } else {
+      results.push(`${key}: MISMATCH! (Overview: "${overviewVal}" vs Invoice: "${invoiceVal}")`);
+      mismatchFound = true;
+    }
+  }
+
+  results.forEach(res => console.log(res));
+
+  return { 
+    success: !mismatchFound, 
+    message: mismatchFound ? "Mismatch found" : "Invoice and Overview are same" 
+  };
+}
+
+
 
 // Download Report
   async downloadReportFile() {

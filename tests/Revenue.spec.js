@@ -63,7 +63,11 @@ function getYesterdayDate() {
 
 
   const overviewData = await revenuePage.openSuccessTransactionAndGetOverview();
-    
-});
 
+  // Download Invoice PDF
+  const invoiceData = await revenuePage.downloadInvoiceFile();
+
+  const comparison = revenuePage.compareOverviewWithInvoice(overviewData, invoiceData);
+    
+}); 
 });

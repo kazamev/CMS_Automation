@@ -19,7 +19,9 @@
     "Chargers:allure": "npm run clean:allure && (npx playwright test tests/Chargers.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "SesAndUsg:allure": "npm run clean:allure && (npx playwright test tests/SesAndUsageValidation.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "Reports:allure": "npm run clean:allure && (npx playwright test tests/Reports_Analytics.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
-    "Revenue:allure": "npm run clean:allure && (npx playwright test tests/Revenue.spec.js || cmd /c exit 0) && npm run allure:generate && npm run playwright:pdf && npm run allure:pdf && npm run allure:email"
+    "Revenue:allure": "npm run clean:allure && (npx playwright test tests/Revenue.spec.js || cmd /c exit 0) && npm run allure:generate && npm run playwright:pdf && npm run allure:pdf && npm run allure:email",
+    "DriverTariff:allure": "npm run clean:allure && (npx playwright test tests/driverTariff.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
+    "OnlinePer:allure": "npm run clean:allure && (npx playwright test tests/OnlinePer.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email"
   },
   "keywords": [],
   "author": "",

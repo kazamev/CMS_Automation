@@ -241,9 +241,21 @@ async selectReportDropdown(value) {
     const dropdown = this.page.locator("//div[@class='grid gap-2']//select[1]");
     await dropdown.waitFor({ state: "visible" });
     await dropdown.selectOption(value);
+    await this.page.waitForTimeout(2000);
     // Remove waitForTimeout. If the page loads data after selection:
     await this.page.waitForLoadState("networkidle");
 }
+
+//// Select dropdown value in Daily Reports
+async selectConfigureDropdown(value) {
+    const dropdown = this.page.locator("//*[@id='cms-app-main-content']/section/div[1]/section/div/div[5]/select");
+    await dropdown.waitFor({ state: "visible" });
+    await dropdown.selectOption(value);
+    await this.page.waitForTimeout(2000);
+    // Remove waitForTimeout. If the page loads data after selection:
+    await this.page.waitForLoadState("networkidle");
+}
+
 
 
 // Calendar date selection (uses your function logic)
@@ -303,7 +315,7 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     // Compare Daily Report Count vs Dashboard KPI
     if (txnIds !== sessionKpi) {
         errors.push(
-            `Daily Report Session (${txnIds}) does NOT match KPI Sessions (${sessionKpi})`
+            `Daily Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi})`
         );
     } else {
         console.log(
@@ -314,7 +326,7 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     // Compare Daily Report Count vs Excel Sessions Count
     if (txnIds !== excelCount) {
         errors.push(
-            `Daily Report Session (${txnIds}) does NOT match Excel Sessions Count (${excelCount})`
+            `Daily Report Session (${txnIds}) does not match Excel Sessions Count (${excelCount})`
         );
     } else {
         console.log(

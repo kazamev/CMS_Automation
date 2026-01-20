@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","50926","Validate session counts across Dashboard, UI and Excel","chromium","2026-01-15","passed","2026-01-15","Dashboard Sessions KPI vs UI vs Excel Validation","SesAndUsageValidation.spec.js","",""
+"","38437","Verify dashboard values","chromium","2026-01-20","passed","2026-01-20","","OnlinePer.spec.js","",""

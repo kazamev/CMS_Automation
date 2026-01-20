@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "access-token",
+      "value": "41965339-4c01-4831-809c-cfbb52042ab9.248bfe13e40190b5713cb42993e00857738314a53c5ae79016820602c8a1cb68",
+      "domain": "novo.kazam.in",
+      "path": "/",
+      "expires": 1769518455.90352,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Strict"
+    }
+  ],
+  "origins": []
+}

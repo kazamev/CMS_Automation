@@ -128,7 +128,8 @@ console.log("Excel Usage (MW):", excelUsageMW);
 console.log("Excel Sessions:", excelSessions);
 
 
-await sessionPage.verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi);  
+await sessionPage.verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi);
+  
   });
 
   
