@@ -30,8 +30,6 @@ export class DashboardSessionsPage {
         this.chargertimeperiod = page.locator("//button[.//div[normalize-space()='Today']]");
  
     }
-
-
     // Fetch KPI values from Dashboard
     async getKPIValues() {
     const sessionText = await this.sessionsValue.textContent();
@@ -129,8 +127,6 @@ async countSessionIdsInExcel(filePath) {
         .filter(id => id);
     return sessionIDs.length;
 }
-
-
  async verifyCounts(filePath, allCount, sessionKpi) {
     //Extract count from Excel
     const excelCount = await this.countSessionIdsInExcel(filePath);
@@ -146,15 +142,7 @@ async countSessionIdsInExcel(filePath) {
     //Compare UI All Count with Excel
     if (allCount !== excelCount) {
         errors.push(`UI All Count (${allCount}) does NOT match Excel Count (${excelCount})`);
-
-        //compare report analytics and  excel count
-
-
-
-
-
-
-        
+ 
     }
     //Return structured result
     if (errors.length === 0) {
@@ -176,8 +164,6 @@ async countSessionIdsInExcel(filePath) {
     }
 }
 
-
-
 async sumOfUsage(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -191,8 +177,6 @@ async sumOfUsage(filePath) {
     // console.log("Excel Usage Sum (kWh):", totalUsageKwh);
     return totalUsageKwh;
 }
-
-
 async verifyUsageFromExcel(filePath, usageKpi) {
     //Sum usage from Excel (kWh)
     const excelUsageKwh = await this.sumOfUsage(filePath);
@@ -531,10 +515,3 @@ async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
 }
 
 }
-
-
-
-
-//charger and session module validation
-//charger module and charger report_ana (count ,usage,ava)
-//

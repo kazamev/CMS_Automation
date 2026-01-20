@@ -3,13 +3,8 @@ import { expect } from '@playwright/test';
 export class TariffPage {
     constructor(page) {
         this.page = page;
-        // Navigation & Search
-        // this.rmModule = page.locator("//span[normalize-space()='Revenue Management']");
+    
         this.driverTariffTab = page.locator("//span[normalize-space()='Driver Tariffs']");
-        // this.searchBar = page.locator("//input[@placeholder='Search by group name']");
-        // this.firstTariffRow = page.locator("//p[@class='text-lg']").first();
-        // this.chargerDropdown = page.locator("//h2[1]//button[1]//*[name()='svg']");
-        
         // Driver Group Creation Locators
         this.driversVehiclesModule = page.locator("//span[normalize-space()='Drivers & Vehicles']");
         this.driverGroupsTab = page.locator("//span[normalize-space()='Driver Groups']");
@@ -50,16 +45,6 @@ export class TariffPage {
         this.confirmBtn=page.locator("//button[normalize-space()='Confirm']");
         this.GroupdltBtn=page.locator("(//*[name()='svg'][contains(@class,'feather feather-trash text-gray-500 hover:text-black')])[1]");
         this.ConfirmDeleteBtn=page.locator("//button[normalize-space()='Confirm']");
-        
-        
-        // // Actions (Delete/Edit)
-        // this.editAssetBtn = page.locator(".feather.feather-edit-2");
-        // this.chargerCheckbox = page.locator("(//input[@id='link-checkbox'])[2]");
-        // this.hubWiseTab = page.locator("//span[normalize-space()='Hub - wise']");
-        // // this.hubCheckbox = page.locator("(//input[@id='link-checkbox'])[1]");
-        // this.updateAssetsBtn = page.locator("//button[normalize-space()='Update Assets']");
-        // this.deleteTariffBtn = page.locator(".feather.feather-trash");
-        // this.confirmBtn = page.locator("//button[normalize-space()='Confirm']");
 
         // Cleanup Locators
         this.removeDriversBtn = page.locator("//button[normalize-space()='Remove Drivers']");
@@ -67,10 +52,10 @@ export class TariffPage {
     }
 
    
-    // NEW: Create Driver Group Method
+    //Create Driver Group Method
     async createDriverGroupFlow(name, desc) {
         await this.driversVehiclesModule.click();
-          await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(2000);
         await this.driverGroupsTab.click();
         await this.page.waitForTimeout(2000);
         await this.createDriverGroupBtn.click();
@@ -106,16 +91,16 @@ export class TariffPage {
 
     // 1. Search and open group
     await this.driverGroupSearchBar.click();
-      await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     await this.driverGroupSearchBar.fill(""); 
-      await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     await this.driverGroupSearchBar.fill(groupName);
     await this.page.keyboard.press('Enter');
     const groupRow = this.page.locator(`//p[normalize-space()='${groupName}']`).first();
     try {
         await groupRow.waitFor({ state: 'visible', timeout: 15000 });
         await groupRow.click();
-          await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(2000);
         console.log(`Successfully opened Driver Group: ${groupName}`);
     } catch (error) {
         console.log(`Group "${groupName}" did not appear in search results.`);
@@ -123,11 +108,11 @@ export class TariffPage {
     }
 
     
-    // 2. Select Tariff
+    //Select Tariff
     await this.AddTariffBtn.click();
-      await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     await this.TariffSelectionDropdown.click();
-      await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     const firstTariffOption = this.page.locator("div.flex-col.gap-2 ul li").nth(2);
     await firstTariffOption.waitFor({ state: 'visible', timeout: 10000 });
     
@@ -136,21 +121,21 @@ export class TariffPage {
     console.log(`Selecting available tariff: ${tariffName}`);
     await firstTariffOption.click(); 
 
-    // 3. Charger Selection
+    //Charger Selection
     await this.NextButton.click();
-      await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     await this.page.waitForLoadState('networkidle');
     const firstChargerCheckbox = this.page.locator("input[id='link-checkbox']").nth(1);
     await firstChargerCheckbox.waitFor({ state: 'visible', timeout: 10000 });
     await firstChargerCheckbox.click();
 
-    // 4. Finalize
+    //Finalize
     await this.AddTariffBtnFinal.click();
-      await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
     await this.page.waitForLoadState('networkidle');
     console.log("Driver Tariff linked successfully.");
     
-    // 5. RETURN BOTH VALUES AS AN OBJECT
+   
     return {
         tariffName: tariffName,
     };
@@ -161,9 +146,9 @@ export class TariffPage {
   async getDriverDetailsAsTables(groupName,title = "Driver Group Details") {
   // Open Driver Group
   await this.driverGroupSearchBar.click();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
   await this.driverGroupSearchBar.fill(groupName);
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
   await this.page.keyboard.press("Enter");
 
   const groupRow = this.page
@@ -172,7 +157,7 @@ export class TariffPage {
 
   await groupRow.waitFor({ state: "visible", timeout: 15000 });
   await groupRow.click();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
   console.log(`Successfully opened Driver Group: ${groupName}`);
 
   // Driver Group Container ONLY 
@@ -205,13 +190,13 @@ export class TariffPage {
 async tariffDeletionFlow() {
   // Open Assigned Chargers section
   await this.AssignedChargerBtn.click();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
   await this.page.waitForLoadState('networkidle');
 
   // Grab all charger checkboxes
   const allChargers = this.page.locator("input[id='link-checkbox']");
   const count = await allChargers.count();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
 //   console.log(`Found ${count} chargers.`);
 
   // Uncheck all checked chargers until first unchecked
@@ -240,9 +225,9 @@ async tariffDeletionFlow() {
 
   // Delete tariff
   await this.TariffDltBtn.click();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
   await this.DltConfirmBtn.click();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
   await this.page.waitForLoadState('networkidle');
 
   console.log("Driver Tariff deleted successfully.");
@@ -266,7 +251,7 @@ async DriverGroupDltion(groupName) {
      await this.page.waitForTimeout(4000);
   console.log(`Successfully opened Driver Group: ${groupName}`);
 
-  // ---------- Remove all drivers ----------
+  //Remove all drivers
   await this.page.locator("//input[@id='link-checkbox']").click();
 //   const driverCheckboxes = this.page.locator("input[type='checkbox']"); 
 //   const count = await driverCheckboxes.count();
@@ -296,11 +281,11 @@ async DriverGroupDltion(groupName) {
 
   console.log("All drivers removed from the group.");
 
-  // ---------- Delete Driver Group ----------
+  // Delete Driver Group
   await this.GroupdltBtn.click();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
   await this.ConfirmDeleteBtn.click();
-    await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(2000);
 //   await this.page.waitForLoadState("networkidle");
   console.log("Driver Group deleted successfully.");
     // await this.page.waitForTimeout(6000);
@@ -308,9 +293,6 @@ async DriverGroupDltion(groupName) {
 
 
 }
-
-
-
 
 
 //    async validateTariffDetails(expectedData) {
@@ -337,31 +319,6 @@ async DriverGroupDltion(groupName) {
 //             }
 //         }
 //     }
-
-//     async deleteTariffFlow() {
-//         await this.editAssetBtn.click();
-//         await this.chargerCheckbox.click();
-//         await this.hubWiseTab.click();
-//         await this.hubCheckbox.click();
-//         await this.updateAssetsBtn.click();
-//         await this.deleteTariffBtn.click();
-//         await this.confirmBtn.click();
-//         console.log("Tariff deleted successfully");
-//     }
-
-//     async deleteDriverGroup(groupName) {
-//         await this.driversVehiclesModule.click();
-//         await this.driverGroupsTab.click();
-//         await this.searchBar.fill(groupName);
-//         await this.page.locator("//span[@class='one_line_wrapper']").first().click();
-//         await this.page.locator("//input[@id='link-checkbox']").click();
-//         await this.removeDriversBtn.click();
-//         await this.confirmBtn.click();
-//         await this.deleteGroupBtn.click();
-//         await this.confirmBtn.click();
-//         console.log("Driver Group deleted successfully");
-//     }
-// }
 
 
 

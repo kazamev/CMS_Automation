@@ -26,9 +26,6 @@ class LoginPage {
         await this.loginButton.click();  
     }
 
-
-
-
 }
 
 module.exports = { LoginPage };

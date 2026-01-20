@@ -100,17 +100,13 @@ async sumOfUsage(filePath) {
   await this.page.waitForLoadState("networkidle");
 }
 
-
-
-  //download daily report
 //download daily report
 async downloadDailyReport(fileName) {
-    // 1. Setup the listener BEFORE clicking
+    //listener BEFORE clicking
     const downloadPromise = this.page.waitForEvent("download", { timeout: 30000 });
-
     const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
     
-    // 2. Click the button
+    //Click the button
     await downloadBtn.click();
 
     // 3. Await the download (No sleep needed, waitForEvent handles the wait)
@@ -126,10 +122,6 @@ async downloadDailyReport(fileName) {
 
     return filePath;
   }
-
-
-
-
 
 //count sessions in Sessions report)
   async countTxnIdsDailyReport(filePath) {
@@ -178,32 +170,6 @@ async RevenueClick() {
   // Wait for report dropdown as proof Revenue page loaded
   await this.reportDropdown.waitFor({ state: "visible", timeout: 30000 });
 }
-
-
-
-//download daily report
-// async downloadDailyReport(fileName) {
-//   const downloadPromise = this.page.waitForEvent("download", {
-//     timeout: 90000,
-//   });
-
-//   await this.generateBtn.waitFor({ timeout: 60000 });
-//   await this.generateBtn.click();
-//   await this.page.waitForTimeout(2000);
-
-//   const download = await downloadPromise;
-
-//   const downloadDir = path.join(__dirname, "../downloads");
-//   if (!fs.existsSync(downloadDir)) {
-//     fs.mkdirSync(downloadDir);
-//   }
-
-//   const filePath = path.join(downloadDir, fileName);
-//   await download.saveAs(filePath);
-
-//   return filePath;
-// }
-
 
 //Sum of Revenue(Excel)
 async sumOfRevenue(filePath) {
@@ -274,10 +240,10 @@ async selectPreviousMonth() {
     while (displayedYear > targetYear) {
         await prevYearBtn.click();
 
-        // FIX STARTS HERE -----------------------------------------
+        // FIX STARTS HERE
         // Instead of waitForFunction, we wait until the text is NO LONGER the old year
         await expect(yearLabel).not.toHaveText(String(displayedYear), { timeout: 5000 });
-        // FIX ENDS HERE -------------------------------------------
+        // FIX ENDS HERE
 
         displayedYear = Number((await yearLabel.textContent()).trim());
     }

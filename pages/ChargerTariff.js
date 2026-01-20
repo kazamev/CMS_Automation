@@ -51,13 +51,13 @@ export class ChargerTariffPage {
   await this.page.locator(`//button[normalize-space()='${startDate}'] | //div[normalize-space()='${startDate}']`).first().click();
    await this.page.waitForTimeout(2000)
 
-//   // ---------- END DATE (Today + 3 Days) ----------
+//   //END DATE (Today + 3 Days)
 //   await this.endDateCalendar.click();
 //   await this.page.locator(
 //     //button[normalize-space()='${endDate}'] | //div[normalize-space()='${endDate}']
 //   ).first().click();
 
-//   // If end date is in next month → move calendar
+//   // If end date is in next month - move calendar
 //   if (isNextMonth) {
 //     await this.page.locator(
 //       "//button[@aria-label='Next Month'] | //svg[contains(@class,'chevron-right')]"
@@ -81,9 +81,7 @@ async addPrice(amount) {
     await this.nextBtn.click();
   }
 
-  //collect charger id from list then pass the same charer id to searchAndLinkCharger function
-  //next update
-
+  // Search and link charger
   async searchAndLinkCharger(chargerId) {
     await this.searchChargerInput.fill(chargerId);
      
@@ -97,6 +95,7 @@ async addPrice(amount) {
     await this.nextBtn.click();
   }
 
+  // Get review and confirm details as table
  async getReviewAndConfirmDetailsAsTable(title = "Review & Confirm Tariff Details") {
   // Right-side review container (stable)
   const container = this.page.locator(
@@ -131,15 +130,15 @@ async addPrice(amount) {
   console.table(table);
   return table;
 }
-  // async createTariffFinal() {
-  //   //  await this.page.waitForTimeout(2000)
-  //   await this.createBtn.click();
-  //   await this.page.waitForTimeout(8000)
-  // }
+ 
+// Final create tariff
 async createTariffFinal() {
   await this.createBtn.click();
 }
 }
+
+
+
 
 //   const successToast = this.page.locator(
 //     "//div[contains(@class,'toast') and contains(text(),'Tariff')]"

@@ -1,23 +1,18 @@
-import { on } from "events";
 import fs from "fs";
 import path from "path";
 import * as excel from "xlsx";
 
 export class OnlinePercentagePage {
-
-    constructor(page) {
+constructor(page) {
         this.page = page;
 
         // Online percentage
         this.onlinePercent = page.locator("(//p[@class='text-base font-medium'])[4]");
-          this.downloadButton = page.locator("//div[@id='download']//*[name()='svg']");
+        this.downloadButton = page.locator("//div[@id='download']//*[name()='svg']");
         this.excelOption = page.locator("(//div[@class='flex items-center gap-2 m-1 hover:bg-kazamGray-100 p-2 rounded-md'])[2]");
-          this.DashBoardTimeFilter= page.locator("//button[@class='w-full flex gap-1 items-center bg-black py-2 px-3 border rounded-md bg-white']");
+        this.DashBoardTimeFilter= page.locator("//button[@class='w-full flex gap-1 items-center bg-black py-2 px-3 border rounded-md bg-white']");
 
     }
-
-
-
  // Apply Time Filter in Dashboard
     async applyTimeFilterInDashboard(period) {
     await this.DashBoardTimeFilter.click();
@@ -30,10 +25,9 @@ export class OnlinePercentagePage {
 }
 
 
-   async getOnlinePercentage() {
+async getOnlinePercentage() {
        const onlineText = await this.onlinePercent.textContent();
        const OnlineKpi = Number(onlineText.replace(/[^0-9.]/g, ""));
-
        return OnlineKpi;
     }
 
@@ -73,15 +67,10 @@ async getAverageOnlinePercentFromExcel(filePath) {
   if (!filePath) {
     throw new Error("Excel file path is undefined for Online % calculation");
   }
-
   const wb = excel.readFile(filePath);
   const sheet = wb.Sheets[wb.SheetNames[0]];
   const data = excel.utils.sheet_to_json(sheet, { header: 1 });
-
   const rows = data.slice(1);
-
-  
-
   const values = rows
     .map(row =>
       parseFloat(
@@ -90,9 +79,7 @@ async getAverageOnlinePercentFromExcel(filePath) {
     )
     .filter(v => !isNaN(v));
 
-  const avgOnline =
-    values.reduce((a, b) => a + b, 0) / values.length;
-
+  const avgOnline =values.reduce((a, b) => a + b, 0) / values.length;
   return Number(avgOnline.toFixed(2));
 }
 
