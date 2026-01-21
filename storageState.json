@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": "access-token",
+      "value": "5ad433cd-998e-469a-a92c-00f61c704335.3909c8542bb86693a092728b32b30e64c6bb8de60b107c75769ff377af401c1a",
+      "domain": "novo.kazam.in",
+      "path": "/",
+      "expires": 1769594750.771183,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "mp_811465ce4e3a8cdd85a4f4e406c3f1c0_mixpanel",
+      "value": "%7B%22distinct_id%22%3A%22%24device%3A980f19c6-1166-4adc-a6bc-3a0a5b7d2852%22%2C%22%24device_id%22%3A%22980f19c6-1166-4adc-a6bc-3a0a5b7d2852%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22__mps%22%3A%7B%7D%2C%22__mpso%22%3A%7B%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%7D%2C%22__mpus%22%3A%7B%7D%2C%22__mpa%22%3A%7B%7D%2C%22__mpu%22%3A%7B%7D%2C%22__mpr%22%3A%5B%5D%2C%22__mpap%22%3A%5B%5D%7D",
+      "domain": ".kazam.in",
+      "path": "/",
+      "expires": 1800525953,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

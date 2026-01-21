@@ -31,7 +31,6 @@ export class ChargersPage {
         this.DCcharger = page.locator("(//p[@class=\"mx-auto\"])[2]");
         this.parkingTypeDropdown = page.locator("(//input[@type=\"text\"])[4]");
         this.nextButton1 = page.locator("//button[@type='submit']");
-
         this.numberOfConnectors = page.locator("(//p[@class=\"mx-auto\"])[1]");
         // this.numberOfConnectors = page.locator("(//p[@class=\"mx-auto\"])[2]");
         // this.numberOfConnectors = page.locator("(//p[@class=\"mx-auto\"])[3]");
@@ -40,14 +39,11 @@ export class ChargersPage {
         this.TotalCapacity = page.locator("(//input[@placeholder=\"eg: 3.3, 7.4. 22\"])[1]");
         this.nextButton2 = page.locator("//button[text()=\"Next\"]");
         this.PreviousButton1 = page.locator("//button[text()=\"Previous step\"]");
-
         this.inputLatitude = page.locator("(//input[@type=\"number\"])[1]");
         this.inputLongitude = page.locator("(//input[@type=\"number\"])[2]");
         this.GetAddressBtn = page.locator("//button[text()=\"Get Address\"]");  
-         this.NextButton3 = page.locator("//button[text()=\"Next\"]");
+        this.NextButton3 = page.locator("//button[text()=\"Next\"]");
         this.PreviousButton2 = page.locator("//button[text()=\"Previous step\"]");
-
-
 
         this.PrivateChargerDropDown = page.locator("(//input[@placeholder='Select'])[1]");
         this.Open24_7 = page.locator("(//input[@type=\"text\"])[2]");
@@ -71,8 +67,6 @@ export class ChargersPage {
         this.ConfigureClosebtn= page.locator("(//*[name()='path'][@clip-rule='evenodd'])[1]");
         this.downloadButton = page.locator("//div[@id='download']//*[name()='svg']");
         this.excelOption = page.locator("(//div[@class='flex items-center gap-2 m-1 hover:bg-kazamGray-100 p-2 rounded-md'])[2]");
-
-
     }
 
 
@@ -91,7 +85,7 @@ export class ChargersPage {
 }
 
 
-
+// Get charger counts after adding/reconfiguring charger
    async getAfterChargerCounts() {
     await this.sessionbtn.click();
     await this.page.waitForLoadState("networkidle");
@@ -104,9 +98,9 @@ export class ChargersPage {
 }
 
     
-    // Connector status count
-    async getConnectorStatusCounts() {
-        return {
+// Connector status count
+async getConnectorStatusCounts() {
+    return {
             All: await this.btnAll.textContent(),
             Busy: await this.btnBusy.textContent(),
             Available: await this.btnAvailable.textContent(),
@@ -115,12 +109,12 @@ export class ChargersPage {
     }
 
     
-    // Add charger flow
-    async openAddCharger() {
+// Add charger flow
+async openAddCharger() {
         await this.btnAddCharger.click();
     }
 
-   async fillChargerDetails(data) {
+async fillChargerDetails(data) {
     //Basic Charger Information
     await this.inputChargerName.fill(data.name);
     await this.inputHostPhoneNumber.type(data.hostPhone, { delay: 300 });
@@ -185,22 +179,15 @@ export class ChargersPage {
     await this.page.waitForTimeout(1000);
     await this.Open24_7.click();
     await this.page.locator(`//div[text()="${data.open247}"]`).click();
-    
 
     // Image Upload
     await this.imageUpload.setInputFiles(data.imagePath);
   
-
     // Save/Add Charger
     await this.AddChargerbtn.click();
     await this.page.waitForLoadState("networkidle");
     await this.page.waitForTimeout(1000);
     // await this.page.pause();
-
-
-
-
-
 }
 
 // Fetch Charger ID from the URL input
@@ -212,10 +199,6 @@ async getChargerId() {
     return chargerId;
 }
 
-
-
-
-
 async ChargerReconfiguration(data){
     await this.reconfigureButton.waitFor({ state: "visible" });
    await this.reconfigureButton.click();
@@ -223,8 +206,8 @@ async ChargerReconfiguration(data){
 // Wait for the reconfiguration form fields to appear
 await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
     await this.inputChargerName.click();
-   await this.inputChargerName.fill("");
-await this.inputChargerName.fill(data.newChargerName);
+    await this.inputChargerName.fill("");
+    await this.inputChargerName.fill(data.newChargerName);
     await this.page.waitForTimeout(1000);
     
 
@@ -249,7 +232,6 @@ await this.inputChargerName.fill(data.newChargerName);
 }
 
 async Validateconfiguration(chargerId, data) {
-
     // Search charger
     const searchField = this.page.locator('//input[@type="search"]');
     await searchField.fill(chargerId);
@@ -283,7 +265,6 @@ async Validateconfiguration(chargerId, data) {
     }
 }
 
-
 async ReconfigurationDates() {
     // Click the reconfigure tool button
     await this.reconfiguretoolButton.click();
@@ -301,8 +282,6 @@ async ReconfigurationDates() {
     await this.page.waitForLoadState("networkidle");
     return { installDate, reconfigDate };
 }
-
-  
 
 async downloadExcel() {
     const downloadPromise = this.page.waitForEvent("download");
@@ -328,6 +307,7 @@ async downloadExcel() {
     return filePath;
 }
 
+// Count Charger IDs in Excel
 async countChargerIdsInExcel(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -339,6 +319,8 @@ async countChargerIdsInExcel(filePath) {
     console.log("Excel Charger ID Count :", chargerIDs.length);
     return chargerIDs.length;
 }
+
+// Verify Excel count matches UI count
  async verifyExcelCountMatchesUI(afterCount) {
         const filePath = await this.downloadExcel();
         const excelCount = await this.countChargerIdsInExcel(filePath);

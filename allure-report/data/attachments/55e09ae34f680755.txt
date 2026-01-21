@@ -1,0 +1,7 @@
+Charger Counts: { chargers: '560', connectors: '775', nonConfigured: '72' }
+Status Counts: {
+  All: 'All(775)',
+  Busy: ' Busy (19)  ',
+  Available: ' Available (88)  ',
+  Error: ' Error (668)  '
+}

@@ -14,7 +14,7 @@ export class ChargerTariffPage {
     this.nextBtn = page.locator("//button[normalize-space()='Next']");
     this.amountInput = page.locator("//input[contains(@placeholder,'Enter Amount')]");
     this.addPriceBtn = page.locator("//button[normalize-space()='Add Price']");
-    this.searchChargerInput = page.locator("//div[contains(@class,'flex gap-x-4')]//input[contains(@placeholder,'Search')]");
+    this.searchChargerInput = page.locator("(//input[@placeholder='Search'])[1]");
     this.linkCheckbox = page.locator("(//input[@id='link-checkbox'])[2]");
     this.reviewDetailsDiv = page.locator("(//div[contains(@class,'flex flex-col gap-4')])[1]");
     this.createBtn = page.locator("//button[text()='Create']");
@@ -51,13 +51,13 @@ export class ChargerTariffPage {
   await this.page.locator(`//button[normalize-space()='${startDate}'] | //div[normalize-space()='${startDate}']`).first().click();
    await this.page.waitForTimeout(2000)
 
-//   // ---------- END DATE (Today + 3 Days) ----------
+//   //END DATE (Today + 3 Days)
 //   await this.endDateCalendar.click();
 //   await this.page.locator(
 //     //button[normalize-space()='${endDate}'] | //div[normalize-space()='${endDate}']
 //   ).first().click();
 
-//   // If end date is in next month → move calendar
+//   // If end date is in next month - move calendar
 //   if (isNextMonth) {
 //     await this.page.locator(
 //       "//button[@aria-label='Next Month'] | //svg[contains(@class,'chevron-right')]"
@@ -81,21 +81,21 @@ async addPrice(amount) {
     await this.nextBtn.click();
   }
 
-  //collect charger id from list then pass the same charer id to searchAndLinkCharger function
-  //next update
-
+  // Search and link charger
   async searchAndLinkCharger(chargerId) {
     await this.searchChargerInput.fill(chargerId);
-     await this.page.waitForTimeout(2000)
+     
     if (await this.linkCheckbox.isVisible()) {
       console.log("Charger present:", chargerId);
       await this.linkCheckbox.check();
+      // await this.page.waitForTimeout(5000)
     } else {
       console.log("Charger not found:", chargerId);
     }
     await this.nextBtn.click();
   }
 
+  // Get review and confirm details as table
  async getReviewAndConfirmDetailsAsTable(title = "Review & Confirm Tariff Details") {
   // Right-side review container (stable)
   const container = this.page.locator(
@@ -126,80 +126,97 @@ async addPrice(amount) {
       i++;
     }
   }
-  console.log(`\📋 ${title}`);
+  console.log(`\ ${title}`);
   console.table(table);
   return table;
 }
-  async createTariffFinal() {
-     await this.page.waitForTimeout(2000)
-    await this.createBtn.click();
-    await this.page.waitForTimeout(5000)
-  }
-
-async searchTariffAndGetDetailsAsTable(tariffName) {
-  // Search
-  await this.page.locator("//input[@placeholder='Search']").fill(tariffName);
-  await this.page.waitForTimeout(1500);
-  // Click tariff card
-  await this.page.locator("//div[contains(@class,'border')][.//text()='" + tariffName + "']").first().click();
-  const panel = this.detailsAfterCreateDiv;
-  await panel.waitFor({ timeout: 30000 });
-
-  //BASIC DETAILS
-  const text = (await panel.innerText())
-    .split("\n")
-    .map(t => t.trim())
-    .filter(Boolean);
-
-  const tariffDetails = [];
-  for (let i = 0; i < text.length; i++) {
-    const key = text[i];
-    const value = text[i + 1];
-    if (["NAME", "DESCRIPTION", "TARIFF TYPE", "VALIDITY"].includes(key)) {
-      tariffDetails.push({ Field: key, Value: value ?? "N/A" });
-      i++;
-    }
-  }
-
-//PRICING
-const pricingData = [];
-// Get full panel text
-const panelText = (await panel.innerText())
-  .split("\n")
-  .map(t => t.trim())
-  .filter(Boolean);
-// Find Pricing section start
-const pricingIndex = panelText.indexOf("Pricing");
-if (pricingIndex !== -1) {
-  for (let i = pricingIndex + 1; i < panelText.length - 1; i++) {
-    const key = panelText[i];
-    const value = panelText[i + 1];
-    // Stop when next section starts
-    if (["Assigned Assets", "Additional Charges"].includes(key)) break;
-    // Skip headers
-    if (key === "Price Type" || key === "Amount") continue;
-    pricingData.push({
-      priceType: key,
-      amount: value
-    });
-    i++; // move to next pair
-  }
-}
-  //OUTPUT 
-  console.log("\n Tariff Details");
-  console.table(tariffDetails);
-  console.log("\n Pricing Details");
-  console.table(pricingData);
-  return { tariffDetails, pricingData };
+ 
+// Final create tariff
+async createTariffFinal() {
+  await this.createBtn.click();
 }
 }
 
-//   async verifyTariff(chargerId) {
-//     await this.searchAfterCreateInput.fill(chargerId);
-//     const details = await this.detailsAfterCreateDiv.innerText();
-//     console.log("\n Created Tariff Details:\n", details);
-//     return details;
+
+
+
+//   const successToast = this.page.locator(
+//     "//div[contains(@class,'toast') and contains(text(),'Tariff')]"
+//   );
+
+//   // Wait for success toast to appear
+//   await expect(successToast).toBeVisible({ timeout: 20000});
+// }
+// }
+
+
+
+// // Search and get details as table
+// async searchTariffAndGetDetailsAsTable(tariffName) {
+//   // Search
+//   await this.page.locator("//input[@placeholder='Search']").fill(tariffName);
+//   await this.page.waitForTimeout(15000);
+//   // Click tariff card
+//   await this.page.locator("//div[contains(@class,'border')][.//text()='" + tariffName + "']").first().click();
+//   const panel = this.detailsAfterCreateDiv;
+//   await panel.waitFor({ timeout: 30000 });
+
+
+//   //BASIC DETAILS
+//   const text = (await panel.innerText())
+//     .split("\n")
+//     .map(t => t.trim())
+//     .filter(Boolean);
+
+//   const tariffDetails = [];
+//   for (let i = 0; i < text.length; i++) {
+//     const key = text[i];
+//     const value = text[i + 1];
+//     if (["NAME", "DESCRIPTION", "TARIFF TYPE", "VALIDITY"].includes(key)) {
+//       tariffDetails.push({ Field: key, Value: value ?? "N/A" });
+//       i++;
+//     }
 //   }
+
+// //PRICING
+// const pricingData = [];
+// // Get full panel text
+// const panelText = (await panel.innerText())
+//   .split("\n")
+//   .map(t => t.trim())
+//   .filter(Boolean);
+// // Find Pricing section start
+// const pricingIndex = panelText.indexOf("Pricing");
+// if (pricingIndex !== -1) {
+//   for (let i = pricingIndex + 1; i < panelText.length - 1; i++) {
+//     const key = panelText[i];
+//     const value = panelText[i + 1];
+//     // Stop when next section starts
+//     if (["Assigned Assets", "Additional Charges"].includes(key)) break;
+//     // Skip headers
+//     if (key === "Price Type" || key === "Amount") continue;
+//     pricingData.push({
+//       priceType: key,
+//       amount: value
+//     });
+//     i++; // move to next pair
+//   }
+// }
+//   //OUTPUT 
+//   console.log("\n Tariff Details");
+//   console.table(tariffDetails);
+//   console.log("\n Pricing Details");
+//   console.table(pricingData);
+//   return { tariffDetails, pricingData };
+// }
+// }
+
+// //   async verifyTariff(chargerId) {
+// //     await this.searchAfterCreateInput.fill(chargerId);
+// //     const details = await this.detailsAfterCreateDiv.innerText();
+// //     console.log("\n Created Tariff Details:\n", details);
+// //     return details;
+// //   }
 
 //   async editAndUpdateTariff() {
 //     await this.editIcon.click();

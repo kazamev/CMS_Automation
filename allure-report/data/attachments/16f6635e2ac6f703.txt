@@ -1,0 +1,13 @@
+Revenue: ₹ 21.15
+Sessions: 27
+Usage: 3.61 kWh
+Online Percentage: 0.05%
+Total Chargers: { chargers: '561', connectors: '776', nonConfigured: '72' }
+Charger Counters: {
+  all: 'All(776)',
+  busy: ' Busy (19)  ',
+  available: ' Available (88)  ',
+  error: ' Error (669)  '
+}
+Settings Button Clicked
+User Count: 206

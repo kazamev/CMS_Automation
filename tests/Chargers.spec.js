@@ -5,8 +5,13 @@ test.describe("Charger & Session Dashboard Tests", () => {
 
   test("Validate charger counters & connector status counts", async ({ loggedInPage }) => {
     const page = loggedInPage;
-    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers");
-    await page.waitForLoadState("networkidle");
+    
+    // Navigate to the specific Org page
+    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers", {
+      waitUntil: 'networkidle',
+      timeout: 30000
+    });
+
     const chargers = new ChargersPage(page);
 
     //Read top counters
@@ -53,7 +58,7 @@ test.describe("Charger & Session Dashboard Tests", () => {
       lat: "12.9716",
       long: "77.5946",
 
-      privateCharger: "No",
+      privateCharger: "Yes",
       open247: "Yes",
       imagePath: "tests/testdata/charger.png",
       newChargerName: "Charger Updated",

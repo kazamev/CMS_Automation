@@ -30,8 +30,6 @@ export class DashboardSessionsPage {
         this.chargertimeperiod = page.locator("//button[.//div[normalize-space()='Today']]");
  
     }
-
-
     // Fetch KPI values from Dashboard
     async getKPIValues() {
     const sessionText = await this.sessionsValue.textContent();
@@ -102,26 +100,19 @@ async getSessionTabCounts() {
 
 // Download Excel Report
 async downloadExcel() {
-    const downloadPromise = this.page.waitForEvent("download");
-    await this.page.waitForTimeout(1000);
-    //Click download on 3dots menu
+    // Start listener
+    const downloadPromise = this.page.waitForEvent("download", { timeout: 60000 });
+
     await this.menuButton.click();
-    await this.page.waitForTimeout(1000);
-    await this.downloadBtn.waitFor({ state: "visible", timeout: 5000 });
-    await this.page.waitForTimeout(1000);
+    await this.downloadBtn.waitFor({ state: "visible" });
     await this.downloadBtn.click();
+
     const download = await downloadPromise;
-
-    //Check "downloads" folder exists in current directory
     const downloadDir = path.join(__dirname, "downloads");
-    if (!fs.existsSync(downloadDir)) {
-        fs.mkdirSync(downloadDir);
-    }
+    if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
 
-    //Save the file
     const filePath = path.join(downloadDir, "sessions.xlsx");
     await download.saveAs(filePath);
-    console.log("Excel Downloaded ", filePath);
     return filePath;
 }
 
@@ -136,8 +127,6 @@ async countSessionIdsInExcel(filePath) {
         .filter(id => id);
     return sessionIDs.length;
 }
-
-
  async verifyCounts(filePath, allCount, sessionKpi) {
     //Extract count from Excel
     const excelCount = await this.countSessionIdsInExcel(filePath);
@@ -153,15 +142,7 @@ async countSessionIdsInExcel(filePath) {
     //Compare UI All Count with Excel
     if (allCount !== excelCount) {
         errors.push(`UI All Count (${allCount}) does NOT match Excel Count (${excelCount})`);
-
-        //compare report analytics and  excel count
-
-
-
-
-
-
-        
+ 
     }
     //Return structured result
     if (errors.length === 0) {
@@ -183,8 +164,6 @@ async countSessionIdsInExcel(filePath) {
     }
 }
 
-
-
 async sumOfUsage(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -198,8 +177,6 @@ async sumOfUsage(filePath) {
     // console.log("Excel Usage Sum (kWh):", totalUsageKwh);
     return totalUsageKwh;
 }
-
-
 async verifyUsageFromExcel(filePath, usageKpi) {
     //Sum usage from Excel (kWh)
     const excelUsageKwh = await this.sumOfUsage(filePath);
@@ -246,26 +223,39 @@ async openDailyReportsPage() {
 // Select dropdown value in Daily Reports
 async selectReportDropdown(value) {
     const dropdown = this.page.locator("//div[@class='grid gap-2']//select[1]");
-    await dropdown.waitFor();
+    await dropdown.waitFor({ state: "visible" });
     await dropdown.selectOption(value);
-    await this.page.waitForTimeout(1000);
+    await this.page.waitForTimeout(2000);
+    // Remove waitForTimeout. If the page loads data after selection:
+    await this.page.waitForLoadState("networkidle");
 }
+
+//// Select dropdown value in Daily Reports
+async selectConfigureDropdown(value) {
+    const dropdown = this.page.locator("//*[@id='cms-app-main-content']/section/div[1]/section/div/div[5]/select");
+    await dropdown.waitFor({ state: "visible" });
+    await dropdown.selectOption(value);
+    await this.page.waitForTimeout(2000);
+    // Remove waitForTimeout. If the page loads data after selection:
+    await this.page.waitForLoadState("networkidle");
+}
+
 
 
 // Calendar date selection (uses your function logic)
 async selectKazamCalendarDate(userDate) {
     const [day, month, year] = userDate.split("/");
-    // YEAR
-    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(1)",year);
+    
+    // Select Year and Month
+    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(1)", year);
+    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(2)", String(Number(month) - 1));
 
-    // MONTH (0-based)
-    await this.page.selectOption("select.focus\\:ring-0.focus\\:outline-none.border-none.p-1:nth-of-type(2)",String(Number(month) - 1));
-    // await this.page.waitForTimeout(1000);
-
-    // DAY
-    await this.page.click(`//button[.//div[text()='${Number(day)}']]`);
-    // await this.page.waitForTimeout(1000);
-    await this.page.click(`//button[.//div[text()='${Number(day)}']]`);
+    // Wait for the specific day to be visible
+    const dayBtn = this.page.locator(`//button[.//div[text()='${Number(day)}']]`);
+    await dayBtn.waitFor({ state: "visible" });
+    
+    // Perform a double click to select
+    await dayBtn.dblclick(); 
     console.log(`Selected date: ${userDate}`);
 }
 
@@ -309,7 +299,7 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     // Compare Daily Report Count vs Dashboard KPI
     if (txnIds !== sessionKpi) {
         errors.push(
-            `Daily Report Session (${txnIds}) does NOT match KPI Sessions (${sessionKpi})`
+            `Daily Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi})`
         );
     } else {
         console.log(
@@ -320,7 +310,7 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     // Compare Daily Report Count vs Excel Sessions Count
     if (txnIds !== excelCount) {
         errors.push(
-            `Daily Report Session (${txnIds}) does NOT match Excel Sessions Count (${excelCount})`
+            `Daily Report Session (${txnIds}) does not match Excel Sessions Count (${excelCount})`
         );
     } else {
         console.log(
@@ -525,10 +515,3 @@ async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
 }
 
 }
-
-
-
-
-//charger and session module validation
-//charger module and charger report_ana (count ,usage,ava)
-//

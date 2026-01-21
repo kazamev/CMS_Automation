@@ -1,5 +1,7 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { DailyReportsPage } from "../pages/DailyReportsPage";
+
+
 // import { DashboardSessionsPage } from "../pages/SesAndUsageValidation";
 
 test.describe("Daily Reports Validation", () => {
@@ -43,6 +45,7 @@ console.log("Total Usage in Chargers Report(IN Kw):", totalusageInChargersReport
 //REVENUE REPORT
 await ReportPage.RevenueClick()
 await ReportPage.selectKazamCalendarDate(getYesterdayDate());
+await page.waitForLoadState("networkidle");
 
 //Download Revenue Report
 const revenueFile = await ReportPage.downloadDailyReport("revenue_daily_report.xlsx");
