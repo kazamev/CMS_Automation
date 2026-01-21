@@ -1,0 +1,11 @@
+Downloaded Sessions Report: C:\Users\dodda\OneDrive\Documents\CMS_Automation\downloads\sessions_daily_report.xlsx
+Sessions Txn Count: 443
+Sessions Usage Sum (IN Kw): 11330.15
+Downloaded Chargers Report: C:\Users\dodda\OneDrive\Documents\CMS_Automation\downloads\chargers_daily_report.xlsx
+Chargers Txn Count: 443
+Total Usage in Chargers Report(IN Kw): 11354.77
+Downloaded Revenue Report: C:\Users\dodda\OneDrive\Documents\CMS_Automation\downloads\revenue_daily_report.xlsx
+Revenue Sum: 14203.64
+Usage Sum in Revenue Report (IN Kw): 11350.97
+Selected Previous Month: Dec 2025
+Downloaded Monthly Report: C:\Users\dodda\OneDrive\Documents\CMS_Automation\downloads\Monthly_report.xlsx

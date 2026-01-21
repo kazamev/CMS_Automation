@@ -1,0 +1,12 @@
+Charger present: 244a95
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬─────────────────────────────┐
+│ (index) │ Field         │ Value                       │
+├─────────┼───────────────┼─────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_Tariff_1768990053201' │
+│ 1       │ 'Description' │ '----'                      │
+│ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
+│ 3       │ 'Validity'    │ '21/01/2026 -- Forever'     │
+│ 4       │ 'Price Type'  │ 'Amount'                    │
+│ 5       │ 'Chargers'    │ '124aj7, 244a95'            │
+└─────────┴───────────────┴─────────────────────────────┘

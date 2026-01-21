@@ -25,9 +25,9 @@ const puppeteer = require('puppeteer');
     });
 
     await browser.close();
-    console.log('✅ Playwright HTML PDF generated:', outputPdf);
+    console.log(' Playwright HTML PDF generated:', outputPdf);
   } catch (err) {
-    console.error('❌ Playwright PDF failed:', err.message);
+    console.error('Playwright PDF failed:', err.message);
     process.exit(1);
   }
 })();

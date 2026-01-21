@@ -14,10 +14,8 @@ test.describe("Revenue Validation", () => {
 //time filter in dashboard
    await revenuePage.applyTimeFilterInDashboard("Yesterday");
    const DashBoardrevenue = await revenuePage. getDashboardRevenue();
-    console.log("DashboardRevenue:", DashBoardrevenue);
 
-
-    
+  
 // Login fixture already logged in
   await revenuePage.goto();
 

@@ -1,0 +1,30 @@
+DashboardRevenue: 14203.64
+DashboardRevenue: 14203.64
+Revenue: 14203.64
+Total Revenue: 4709275.33
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 14203.64
+Revenue In Revenue Page: 14203.64
+Dashboard Revenue: 14203.64
+Dashboard Revenue matched Excel Revenue → 14203.64
+Revenue Validation Passed: Revenue values matched successfully
+Transaction id: 25394684
+Billed Amount: 25.07
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Premium SmartLimousine 502269116
+Time stamp: 20/01/2026
+        
+        11:54:10 pm
+Transaction id: 25394684
+Billed Amount: 25.07
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Premium SmartLimousine - 502269116
+Time stamp: Jan 20 2026, 11:54:10 pm
+
+ Comparison Report
+Transaction id: MATCHED
+Billed Amount: MATCHED
+Host Details: MATCHED
+Driver Details: MATCHED
+Time stamp: MATCHED

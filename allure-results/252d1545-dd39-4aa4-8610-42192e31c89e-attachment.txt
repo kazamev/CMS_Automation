@@ -1,0 +1,26 @@
+Dashboard Session KPI: 443
+UI All Sessions Count: 443
+UI Ongoing Sessions Count: 0
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session ID Count: 443
+All counts matched successfully  443
+Count Validation Passed: All counts matched successfully
+Excel Usage (kWh): 11330.220000000001
+Excel Usage (MWh Rounded): 11.33
+KPI Usage (MWh): 11.35
+Usage Validation Passed: Usage values matched successfully
+Selected date: 20/01/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
+Daily Report Session matched KPI Sessions → 443
+Daily Report Session matched Excel Sessions → 443
+Daily Report Session matched KPI & Excel
+Excel Usage (kWh): 11330.149000000007
+Excel Usage (MWh Rounded): 11.33
+KPI Usage (MWh): 11.35
+Usage Validation Passed: Usage values matched successfully
+Excel Downloaded  C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Excel Usage (MW): 11.3547
+Excel Sessions: 443
+Sessions matched : KPI Session Count: 443, ChargerExcel Session Count: 443
+Usage matched : KPI usage: 11.35, ChargerExcel usage: 11.3547
+Dashboard KPI and Charger Excel matched successfully
