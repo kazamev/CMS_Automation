@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 const { LoginPage } = require('../pages/loginPage');
 
+// It overrides the global config and forces a clean, empty browser session
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test('Valid Login', async ({ page }) => {
     const username="shilpa@kazam.in";
     const password="Shilpa@1234567890";

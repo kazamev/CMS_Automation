@@ -62,10 +62,10 @@ import path from 'path';
 export default defineConfig({
   globalSetup: require.resolve('./global-setup.js'),
   testDir: './tests',
-   testIgnore: [
-'**/loginTest.spec.js' ,
-'**/OrgListTest.spec.js'    //login tests should not run with storageState
-],
+//    testIgnore: [
+// '**/loginTest.spec.js' ,
+    //login tests should not run with storageState
+// ],
 forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
      reporter: [

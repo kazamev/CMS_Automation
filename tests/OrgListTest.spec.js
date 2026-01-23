@@ -1,17 +1,9 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pages/loginPage');
+import { test, expect } from '../fixtures/login.fixture';
 const { OrganisationPage } = require('../pages/OrgListpage');
 
-test('Organisation List', async ({ page }) => {
-    const login = new LoginPage(page);
+  test('Organisation List', async ({ loggedInPage }) => {
+    const page = loggedInPage;  
     const orgPage = new OrganisationPage(page);
-
-    //Go to login page
-    await login.goTo();
-
-    //Perform login
-    await login.validLogin("shilpa@kazam.in", "Shilpa@1234567890");
-    await page.waitForLoadState('networkidle');
 
     //Count total organisations
     const count = await orgPage.getOrganisationCount();

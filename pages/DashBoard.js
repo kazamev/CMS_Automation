@@ -32,6 +32,9 @@ exports.DashboardPage = class DashboardPage {
         this.usermanageBtn = page.locator("//button[normalize-space()='User Management']");
         this.usercount=page.locator("//p[@class='w-max whitespace-nowrap']");
 
+//Setting
+         this.OrganisationOption=page.locator("//a[normalize-space()='Organization']");
+         this.orgDetailsCard=page.locator("(//div[@class='w-2/5 bg-white rounded-md h-auto border p-4 flex flex-col gap-4'])[1]")
         // // Dropdowns
         // this.stateDropdown = page.locator("button:has-text('All States')");
         // this.hubDropdown = page.locator("button:has-text('All Hubs')");
@@ -80,15 +83,150 @@ exports.DashboardPage = class DashboardPage {
 
     async openSettings() {
         await this.settingsBtn.click();
-        await this.usermanageBtn.waitFor({ state: 'visible', timeout: 5000 });
-        await this.usermanageBtn.click();
-        await this.usercount.waitFor({ state: 'visible', timeout: 5000 }); 
-        const text = await this.usercount.textContent();
-        return{    
-        UserCount:text.match(/\d+/)[0]
+        await this.OrganisationOption.waitFor({ state: 'visible', timeout: 5000 });
+        // await this.usermanageBtn.click();
+        // await this.usercount.waitFor({ state: 'visible', timeout: 5000 }); 
+        // const text = await this.usercount.textContent();
+        // return{    
+        // UserCount:text.match(/\d+/)[0]
+        await this.OrganisationOption.click();
     }
 
+     async getOrganisationDetails() {
+    const orgDetails = {
+    organizationName: await this. page.locator('text=Organization Name').locator('xpath=following-sibling::*').innerText(),
+    email: await this. page.locator('text=Email').locator('xpath=following-sibling::*').innerText(),
+    plan: await this. page.locator('text=Plan').locator('xpath=following-sibling::*').innerText(),
+    country: await this. page.locator('text=Country').locator('xpath=following-sibling::*').innerText(),
+    timeZone:await this. page.locator('text=Time Zone').locator('xpath=following-sibling::*').innerText(),
+    currency:await this. page.locator("//div[@class='flex items-center gap-2']").innerText(),
+  };
+
+  // 4. Print in console
+
+  console.log(`OrganizationName : ${orgDetails.organizationName}`);
+  console.log(`Email             : ${orgDetails.email}`);
+  console.log(`Plan              : ${orgDetails.plan}`);
+  console.log(`Country           : ${orgDetails.country}`);
+  console.log(`TimeZone          : ${orgDetails.timeZone}`);
+  console.log(`Currency           : ${orgDetails.currency}`);
+   return orgDetails;
+ 
+     }
+
+    
+
+
+
+   async  validateOrgVsDashboard(orgData, dashData) {
+  let hasMismatch = false;
+  const logs = [];
+
+  console.log("\n Organization Validation Started\n");
+
+  // -------- Organization Name --------
+  {
+    const orgVal  = orgData.name?.trim();
+    const dashVal = dashData.organizationName?.trim();
+
+    if (orgVal === dashVal) {
+      logs.push("Organization Name: MATCHED");
+    } else {
+      logs.push(`Organization Name: MISMATCH (${orgVal} vs ${dashVal})`);
+      hasMismatch = true;
     }
+  }
+
+  // -------- Plan --------
+  {
+    const orgVal  = orgData.plan?.replace(/plan/i, "").trim().toLowerCase();
+
+    const dashVal = dashData.plan
+      ?.trim()
+      .toLowerCase();
+
+    if (orgVal === dashVal) {
+      logs.push("Plan: MATCHED");
+    } else {
+      logs.push(`Plan: MISMATCH (${orgVal} vs ${dashVal})`);
+      hasMismatch = true;
+    }
+  }
+
+  // -------- Country (generic, no hardcode) --------
+  {
+    const orgVal = orgData.country?.trim();
+
+    const dashVal = dashData.country
+      ?.replace(/\(.*?\)/g, "")   // removes (IN), (US), etc
+      .trim();
+
+    if (orgVal === dashVal) {
+      logs.push("Country: MATCHED");
+    } else {
+      logs.push(`Country: MISMATCH (${orgVal} vs ${dashVal})`);
+      hasMismatch = true;
+    }
+  }
+
+  // -------- Timezone --------
+  {
+    const orgVal = orgData.timezone?.trim().toLowerCase();
+
+    const dashVal = dashData.timeZone
+      ?.split("(UTC")[0]          // removes UTC offset & city list
+      .trim().toLowerCase();
+
+   if (orgVal.includes(dashVal)) {
+  logs.push("Timezone: MATCHED");
+} else {
+  logs.push(`Timezone: MISMATCH (${orgVal} vs ${dashVal})`);
+  hasMismatch = true;
+}
+
+  }
+
+  // -------- Currency (fully generic) --------
+ {
+  const orgSymbol = orgData.currency?.symbol?.trim();
+  const orgName   = orgData.currency?.name?.trim();
+
+  // Normalize dashboard text (handle newline)
+  const normalizedCurrency = dashData.currencyText
+    ?.replace(/\n/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const dashSymbol = normalizedCurrency
+    ?.replace(/[A-Za-z\s]/g, "")
+    .trim();
+
+  const dashName = normalizedCurrency
+    ?.replace(/[^A-Za-z\s]/g, "")
+    .trim();
+
+  if (orgSymbol === dashSymbol && orgName === dashName) {
+    logs.push("Currency: MATCHED");
+  } else {
+    logs.push(
+      `Currency: MISMATCH (${orgSymbol} ${orgName} vs ${dashSymbol} ${dashName})`
+    );
+    hasMismatch = true;
+  }
+}
+
+
+  // -------- Print Report 
+  logs.forEach(l => console.log(l));
+
+  return {
+    success: !hasMismatch,
+    message: hasMismatch
+      ? "Organization validation failed"
+      : "Organization validation passed"
+  };
+}
+
 
     // async openStateDropdown() {
     //     await this.stateDropdown.click();

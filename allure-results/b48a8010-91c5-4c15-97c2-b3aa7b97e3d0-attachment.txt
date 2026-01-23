@@ -1,5 +1,0 @@
-Online Percentage KPI: 60.99
-Excel Downloaded  C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Chargers.xlsx
-Average Online Percent from Excel: 58.8
-Selected date: 20/01/2026
-Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
