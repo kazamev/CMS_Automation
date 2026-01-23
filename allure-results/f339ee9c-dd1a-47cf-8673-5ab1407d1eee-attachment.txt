@@ -21,8 +21,8 @@ Indian Rupee
 
  Organization Validation Started
 
-Organization Name: MATCHED
-Plan: MATCHED
-Country: MATCHED
-Timezone: MISMATCH (indian standard time vs india standard time)
-Currency: MISMATCH (₹ Indian Rupee vs undefined undefined)
+Organization Name: MISMATCH (Future Mobility vs Tyagi's Org)
+Plan: MISMATCH (premium vs enterprise)
+Country: MISMATCH (United Arab Emirates vs India)
+Timezone: MISMATCH (arabian standard time vs india standard time)
+Currency: MISMATCH (AED United Arab Emirates Dirham vs ₹ Indian Rupee)

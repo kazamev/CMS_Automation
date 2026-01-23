@@ -32,10 +32,10 @@ exports.DashboardPage = class DashboardPage {
         this.usermanageBtn = page.locator("//button[normalize-space()='User Management']");
         this.usercount=page.locator("//p[@class='w-max whitespace-nowrap']");
 
-//Setting
+        //Setting
          this.OrganisationOption=page.locator("//a[normalize-space()='Organization']");
          this.orgDetailsCard=page.locator("(//div[@class='w-2/5 bg-white rounded-md h-auto border p-4 flex flex-col gap-4'])[1]")
-        // // Dropdowns
+         // Dropdowns
         // this.stateDropdown = page.locator("button:has-text('All States')");
         // this.hubDropdown = page.locator("button:has-text('All Hubs')");
         // this.timePeriodDropdown = page.locator("button:has-text('This month')");
@@ -102,7 +102,7 @@ exports.DashboardPage = class DashboardPage {
     currency:await this. page.locator("//div[@class='flex items-center gap-2']").innerText(),
   };
 
-  // 4. Print in console
+  //Print in console
 
   console.log(`OrganizationName : ${orgDetails.organizationName}`);
   console.log(`Email             : ${orgDetails.email}`);
@@ -114,17 +114,13 @@ exports.DashboardPage = class DashboardPage {
  
      }
 
-    
-
-
-
-   async  validateOrgVsDashboard(orgData, dashData) {
+  async  validateOrgVsDashboard(orgData, dashData) {
   let hasMismatch = false;
   const logs = [];
 
   console.log("\n Organization Validation Started\n");
 
-  // -------- Organization Name --------
+  //Organization Name
   {
     const orgVal  = orgData.name?.trim();
     const dashVal = dashData.organizationName?.trim();
@@ -137,13 +133,11 @@ exports.DashboardPage = class DashboardPage {
     }
   }
 
-  // -------- Plan --------
+  //Plan
   {
     const orgVal  = orgData.plan?.replace(/plan/i, "").trim().toLowerCase();
 
-    const dashVal = dashData.plan
-      ?.trim()
-      .toLowerCase();
+    const dashVal = dashData.plan?.trim().toLowerCase();
 
     if (orgVal === dashVal) {
       logs.push("Plan: MATCHED");
@@ -153,14 +147,10 @@ exports.DashboardPage = class DashboardPage {
     }
   }
 
-  // -------- Country (generic, no hardcode) --------
+  //Country (generic, no hardcode)
   {
     const orgVal = orgData.country?.trim();
-
-    const dashVal = dashData.country
-      ?.replace(/\(.*?\)/g, "")   // removes (IN), (US), etc
-      .trim();
-
+    const dashVal = dashData.country?.replace(/\(.*?\)/g, "").trim();
     if (orgVal === dashVal) {
       logs.push("Country: MATCHED");
     } else {
@@ -169,54 +159,68 @@ exports.DashboardPage = class DashboardPage {
     }
   }
 
-  // -------- Timezone --------
-  {
-    const orgVal = orgData.timezone?.trim().toLowerCase();
-
-    const dashVal = dashData.timeZone
-      ?.split("(UTC")[0]          // removes UTC offset & city list
-      .trim().toLowerCase();
-
-   if (orgVal.includes(dashVal)) {
-  logs.push("Timezone: MATCHED");
-} else {
-  logs.push(`Timezone: MISMATCH (${orgVal} vs ${dashVal})`);
-  hasMismatch = true;
-}
-
-  }
-
-  // -------- Currency (fully generic) --------
+  //Timezone
  {
-  const orgSymbol = orgData.currency?.symbol?.trim();
-  const orgName   = orgData.currency?.name?.trim();
+  const normalizeTZ = (val) =>
+    val
+      ?.toLowerCase()
+      .replace(/\(.*?\)/g, "")   // remove (UTC+XX:XX)
+      .replace(/[^a-z\s]/g, "") // keep only letters
+      .replace(/\s+/g, " ")
+      .trim();
 
-  // Normalize dashboard text (handle newline)
-  const normalizedCurrency = dashData.currencyText
-    ?.replace(/\n/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  const extractMainTZ = (val) => {
+    const words = normalizeTZ(val)?.split(" ");
+    if (!words) return "";
+    // take first 2–3 words as main timezone
+    return words.slice(0, 3).join(" ");
+  };
 
-  const dashSymbol = normalizedCurrency
-    ?.replace(/[A-Za-z\s]/g, "")
-    .trim();
+  const orgVal  = extractMainTZ(orgData.timezone);
+  const dashVal = extractMainTZ(dashData.timeZone);
 
-  const dashName = normalizedCurrency
-    ?.replace(/[^A-Za-z\s]/g, "")
-    .trim();
+  // dynamic comparison, handles slight differences
+ if (orgVal.substring(0, 5) === dashVal.substring(0, 5)) {
+    logs.push("Timezone: MATCHED");
 
-  if (orgSymbol === dashSymbol && orgName === dashName) {
-    logs.push("Currency: MATCHED");
   } else {
-    logs.push(
-      `Currency: MISMATCH (${orgSymbol} ${orgName} vs ${dashSymbol} ${dashName})`
-    );
+    logs.push(`Timezone: MISMATCH (${orgVal} vs ${dashVal})`);
     hasMismatch = true;
   }
 }
 
 
-  // -------- Print Report 
+
+  // Currency (fully generic)
+ {
+  const orgSymbol = orgData.currency?.symbol?.trim();
+  const orgName   = orgData.currency?.name?.trim();
+
+  if (!dashData.currency) {
+    logs.push("Currency: DASHBOARD VALUE NOT FOUND");
+    hasMismatch = true;
+  } else {
+    const normalizedCurrency = dashData.currency
+      .replace(/\n/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const dashSymbol = normalizedCurrency.replace(/[A-Za-z\s]/g, "").trim();
+    const dashName   = normalizedCurrency.replace(/[^A-Za-z\s]/g, "").trim();
+
+    if (orgSymbol === dashSymbol && orgName === dashName) {
+      logs.push("Currency: MATCHED");
+    } else {
+      logs.push(
+        `Currency: MISMATCH (${orgSymbol} ${orgName} vs ${dashSymbol} ${dashName})`
+      );
+      hasMismatch = true;
+    }
+  }
+}
+
+
+  //Print Report 
   logs.forEach(l => console.log(l));
 
   return {

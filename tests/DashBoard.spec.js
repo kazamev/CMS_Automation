@@ -8,7 +8,7 @@ test('Verify dashboard values', async ({ loggedInPage }) => {
     const dashboard = new DashboardPage(page);
     const orgPage = new OrganisationPage(page);
 
-const orgData=await orgPage.getOrganisationDetailsByName("Tyagi's Org")
+const orgData=await orgPage.getOrganisationDetailsByName("Future Mobility")
 
     // Navigate to dashboard URL here
     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo");
