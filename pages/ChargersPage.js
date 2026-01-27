@@ -7,7 +7,7 @@ export class ChargersPage {
     constructor(page) {
         this.page = page;
 
-        // Top counters
+        // Top counters2
         this.chargersCount = page.locator("//div[contains(.,'Chargers')]/span[contains(@class,'text-black')]");
         this.connectorsCount = page.locator("//div[contains(., 'Connectors')]/span[contains(@class,'text-black')]");
         this.nonConfigCount = page.locator("//div[contains(., 'Non Configured')]/span[contains(@class,'text-black')]");

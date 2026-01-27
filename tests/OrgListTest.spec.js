@@ -10,8 +10,8 @@ const { OrganisationPage } = require('../pages/OrgListpage');
     console.log("Total organisations:", count);
 
     //Print details of a specific organisation
-    const organisations = await orgPage.getOrganisationDetailsByName("Tyagi's Org");
-    console.log(organisations);
+    const orgData = await orgPage.getOrganisationDetailsByName("Tyagi's Org");
+    console.log(orgData);
 
     // Click rquired organisation
     const requiredOrg = "Tyagi's Org";
@@ -23,7 +23,17 @@ const { OrganisationPage } = require('../pages/OrgListpage');
     // Click Continue to Dashboard
     await orgPage.clickContinueToDashboard();
     await expect(page).toHaveTitle("Dashboard - CMS");
-    console.log("Navigated to the Dashboard page");
-    // await page.pause()
+    
+
+    //Get dashboard organisation details
+   const dashData=await orgPage.getOrganisationDetails();
+
+
+
+//Validate organisation details between org list and dashboard
+   await orgPage.validateOrgVsDashboard(orgData, dashData)
+
+
+
 
 });

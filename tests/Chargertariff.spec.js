@@ -27,6 +27,11 @@ test.describe("Charger Tariff Flow", () => {
     await tariffPage.createTariffFinal();
 
 
+    //delete tariff after creation
+    await tariffPage.deleteTariff(tariffName);
+    console.log("Tariff deleted successfully");
+
+
     // await tariffPage.searchTariffAndGetDetailsAsTable(tariffName);
 
     // // Verify tariff after creation

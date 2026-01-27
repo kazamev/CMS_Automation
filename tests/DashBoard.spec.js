@@ -1,12 +1,12 @@
 import { test, expect } from '../fixtures/login.fixture';
 
 import { DashboardPage } from '../pages/DashBoard';
-const { OrganisationPage } = require('../pages/OrgListpage');
+
 
 test('Verify dashboard values', async ({ loggedInPage }) => {
     const page = loggedInPage;
     const dashboard = new DashboardPage(page);
-    const orgPage = new OrganisationPage(page);
+  
 
 const orgData=await orgPage.getOrganisationDetailsByName("Future Mobility")
 
@@ -33,15 +33,6 @@ const orgData=await orgPage.getOrganisationDetailsByName("Future Mobility")
 
     const counters = await dashboard.getConnectorStatusCounts();
    console.log("Charger Counters:", counters);
-
-   const SettingsClicked = await dashboard.openSettings();
-   console.log("Settings Button Clicked");
-    
-   const dashData=await dashboard.getOrganisationDetails()
-
-
-
-await dashboard.validateOrgVsDashboard(orgData, dashData)
 
 
 });

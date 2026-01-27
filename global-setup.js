@@ -28,11 +28,12 @@ import { LoginPage } from './pages/loginPage';
 import path from 'path';
 
 export default async () => {
-  console.log("Global Setup: Starting secure login...");
+  console.log("Global Setup: Starting secure login");
   const browser = await chromium.launch({ headless: false });
   const context = await browser.newContext();
   const page = await context.newPage();
   const login = new LoginPage(page);
+
 
   try {
     await login.goTo();

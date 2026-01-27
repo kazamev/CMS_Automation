@@ -18,11 +18,21 @@ export class ChargerTariffPage {
     this.linkCheckbox = page.locator("(//input[@id='link-checkbox'])[2]");
     this.reviewDetailsDiv = page.locator("(//div[contains(@class,'flex flex-col gap-4')])[1]");
     this.createBtn = page.locator("//button[text()='Create']");
-    this.searchAfterCreateInput = page.locator("(//input[contains(@placeholder,'Search')])[1]");
     this.detailsAfterCreateDiv = page.locator("(//div[@class='w-full h-full border border-kazamGray-200 rounded-md ml-2 p-6 flex flex-col gap-10 overflow-auto'])[1]");
+  
+    // this.updateBtn = page.locator("//button[normalize-space()='Update']");
+    // this.fierstNext=page.locator("//button[normalize-space()='Next']")
+
+    //tariff deletion
+    this.searchAfterCreateInput = page.locator("(//input[contains(@placeholder,'Search')])[1]");
     this.editIcon = page.locator("//div[@class='edit-button cursor-pointer']//*[name()='svg']");
-    this.updateBtn = page.locator("//button[normalize-space()='Update']");
     this.fierstNext=page.locator("//button[normalize-space()='Next']")
+    this.linkCheckbox = page.locator("(//input[@id='link-checkbox'])[2]");
+    this.nextBtn = page.locator("//button[normalize-space()='Next']");
+    this.updateBtn = page.locator("//button[normalize-space()='Update']");
+    this.dltbut=page.locator("//div[@class='delete-button cursor-pointer']//*[name()='svg']");
+    this.yesbtn=page.locator("//button[normalize-space()='Yes']");
+
   }
 
   async navigate() {
@@ -134,8 +144,37 @@ async addPrice(amount) {
 // Final create tariff
 async createTariffFinal() {
   await this.createBtn.click();
+  await this.page.waitForTimeout(2000)
+}
+
+//charger tariff deletion
+async deleteTariff(tariffName) {
+  // Search
+  await this.searchAfterCreateInput.fill(tariffName);
+  await this.page.waitForTimeout(2000)
+  // Click tariff card
+ await this.page.locator(`//div[contains(@class,'border')][.//text()[contains(normalize-space(), "${tariffName}")]]`).first().click();
+
+  await this.editIcon.click();
+ await this.page.waitForTimeout(2000)
+  await this.nextBtn.click();
+  await this.page.waitForTimeout(2000)
+  await this.nextBtn.click();
+  await this.page.waitForTimeout(2000)
+  await this.linkCheckbox.uncheck();
+  await this.page.waitForTimeout(2000);
+  await this.nextBtn.click();
+  await this.page.waitForTimeout(2000);
+  await this.updateBtn.click();
+  await this.page.waitForTimeout(2000);
+  await this.dltbut.click();
+  await this.page.waitForTimeout(2000);
+  await this.yesbtn.click();
+  await this.page.waitForTimeout(2000);
+  
 }
 }
+
 
 
 
