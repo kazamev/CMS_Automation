@@ -3,9 +3,9 @@ class OrganisationPage {
         this.page = page;
         this.orgCards = page.locator("//div[contains(@class,'flex') and contains(@class,'cursor-pointer')]");
         this.continueBtn = page.locator("//div[contains(text(),'Continue to Dashboard')]");
-         this.settingsBtn = page.locator("//button[@class='p-1 rounded-full']//*[name()='svg']");
-          this.OrganisationOption=page.locator("//a[normalize-space()='Organization']");
-         this.orgDetailsCard=page.locator("(//div[@class='w-2/5 bg-white rounded-md h-auto border p-4 flex flex-col gap-4'])[1]")
+        this.settingsBtn = page.locator("//button[@class='p-1 rounded-full']//*[name()='svg']");
+        this.OrganisationOption=page.locator("//a[normalize-space()='Organization']");
+        this.orgDetailsCard=page.locator("(//div[@class='w-2/5 bg-white rounded-md h-auto border p-4 flex flex-col gap-4'])[1]")
     }
 
     // go to the organisation page
@@ -16,11 +16,12 @@ class OrganisationPage {
     async getOrganisationCount() {
          await this.orgCards.first().waitFor({state: 'visible', timeout: 30000})
         return await this.orgCards.count();
+        
     }
 
     // Print text from Desired card
     async getOrganisationDetailsByName(orgName) {
-
+    await this.page.waitForTimeout(1000);
     const count = await this.orgCards.count();
     for (let i = 0; i < count; i++) {
 
@@ -55,20 +56,22 @@ class OrganisationPage {
     return null;
 }
 
-
-
    // Click a required organisation card by name
    async selectOrganisation(orgName) {
-    await this.page.getByText(orgName, { exact: true }).click();   
+    await this.page.getByText(orgName, { exact: true }).click(); 
+    await this.page.waitForTimeout(1000);
+  
   }
 
    // Click Continue to Dashboard button
     async clickContinueToDashboard() {
         const continueBtn = this.continueBtn;
+         await this.page.waitForTimeout(1000);
         await continueBtn.waitFor({ state: "visible", timeout: 15000 });
         await continueBtn.click();
         await this.page.waitForLoadState('networkidle');
         await this.settingsBtn.click();
+         await this.page.waitForTimeout(2000);
         await this.OrganisationOption.waitFor({ state: 'visible', timeout: 5000 });
         // await this.usermanageBtn.click();
         // await this.usercount.waitFor({ state: 'visible', timeout: 5000 }); 
@@ -76,6 +79,7 @@ class OrganisationPage {
         // return{    
         // UserCount:text.match(/\d+/)[0]
         await this.OrganisationOption.click();
+        await this.page.waitForTimeout(2000);
     }
 
 
@@ -104,7 +108,6 @@ class OrganisationPage {
   async  validateOrgVsDashboard(orgData, dashData) {
   let hasMismatch = false;
   const logs = [];
-
   console.log("\n Organization Validation Started\n");
 
   //Organization Name
@@ -123,9 +126,7 @@ class OrganisationPage {
   //Plan
   {
     const orgVal  = orgData.plan?.replace(/plan/i, "").trim().toLowerCase();
-
     const dashVal = dashData.plan?.trim().toLowerCase();
-
     if (orgVal === dashVal) {
       logs.push("Plan: MATCHED");
     } else {
@@ -176,36 +177,33 @@ class OrganisationPage {
   }
 }
 
-
-
-  // Currency
- {
-  const orgSymbol = orgData.currency?.symbol?.trim();
-  const orgName   = orgData.currency?.name?.trim();
+ // Currency
+{
+  const orgCurrency = `${orgData.currency?.symbol} ${orgData.currency?.name}`
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
 
   if (!dashData.currency) {
     logs.push("Currency: DASHBOARD VALUE NOT FOUND");
     hasMismatch = true;
   } else {
-    const normalizedCurrency = dashData.currency
+    const dashCurrency = dashData.currency
       .replace(/\n/g, " ")
       .replace(/\s+/g, " ")
-      .trim();
+      .trim()
+      .toLowerCase();
 
-    const dashSymbol = normalizedCurrency.replace(/[A-Za-z\s]/g, "").trim();
-    const dashName   = normalizedCurrency.replace(/[^A-Za-z\s]/g, "").trim();
-
-    if (orgSymbol === dashSymbol && orgName === dashName) {
+    if (orgCurrency === dashCurrency) {
       logs.push("Currency: MATCHED");
     } else {
       logs.push(
-        `Currency: MISMATCH (${orgSymbol} ${orgName} vs ${dashSymbol} ${dashName})`
+        `Currency: MISMATCH (${orgCurrency} vs ${dashCurrency})`
       );
       hasMismatch = true;
     }
   }
 }
-
 
   //Print Report 
   logs.forEach(l => console.log(l));
@@ -217,20 +215,7 @@ class OrganisationPage {
       : "Organization validation passed"
   };
 }
-
-
-    
+   
 };
-
-
-
-
-
-    
-
-
-
-
-
 
 module.exports = { OrganisationPage };

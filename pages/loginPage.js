@@ -19,7 +19,7 @@ class LoginPage {
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
-// invalid login 
+    // invalid login 
     async invalidLogin(username, password) {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);

@@ -58,7 +58,7 @@ test.describe("Dashboard Sessions KPI vs UI vs Excel Validation", () => {
     }
 
     //Sum Usage from Excel
-    await sessionPage.sumOfUsage(filePath);
+    await sessionPage.sumOfUsage(filePath, 9); // Column index for usage
 
     //Verify Usage (KPI vs Excel)
     const usageResult = await sessionPage.verifyUsageFromExcel(filePath, usageKpi); 

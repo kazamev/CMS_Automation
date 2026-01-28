@@ -17,7 +17,7 @@ constructor(page) {
     async applyTimeFilterInDashboard(period) {
     await this.DashBoardTimeFilter.click();
 
-    //Locate the option dynamically
+    
    const option = this.page.locator(`//div[contains(@class,'flex')]//div[normalize-space(text())='${period}']`);
     await option.waitFor();
     await option.click();
@@ -87,7 +87,6 @@ async getAverageOnlinePercentFromExcel(filePath) {
 async verifyOnlinePercentWithExcel(filePath, OnlineKpi) {
   try {
     const avgOnlinePercent = await this.getAverageOnlinePercentFromExcel(filePath); 
-    console.log("Average Online Percent from Excel:", avgOnlinePercent);
     const difference = Math.abs(avgOnlinePercent - OnlineKpi);
 
     const tolerance = 1.0; // 1% tolerance

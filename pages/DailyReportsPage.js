@@ -82,17 +82,17 @@ async sumOfUsage(filePath) {
   await this.EditTable.waitFor({ state: "visible" });
   await this.EditTable.click();
 
-  await this.sessionCheckbox.waitFor({ state: "visible" });
-  await this.sessionCheckbox.scrollIntoViewIfNeeded();
-  if (!(await this.sessionCheckbox.isChecked())) {
-    await this.sessionCheckbox.click();
-  }
+  // await this.sessionCheckbox.waitFor({ state: "visible" });
+  // await this.sessionCheckbox.scrollIntoViewIfNeeded();
+  // if (!(await this.sessionCheckbox.isChecked())) {
+  //   await this.sessionCheckbox.click();
+  // }
 
-  await this.UsageColumnCheckbox.waitFor({ state: "visible" });
-  await this.UsageColumnCheckbox.scrollIntoViewIfNeeded();
-  if (!(await this.UsageColumnCheckbox.isChecked())) {
-    await this.UsageColumnCheckbox.click();
-  }
+  // await this.UsageColumnCheckbox.waitFor({ state: "visible" });
+  // await this.UsageColumnCheckbox.scrollIntoViewIfNeeded();
+  // if (!(await this.UsageColumnCheckbox.isChecked())) {
+  //   await this.UsageColumnCheckbox.click();
+  // }
 
   await this.ApplyBtn.waitFor({ state: "visible" });
   await this.ApplyBtn.click();
@@ -138,7 +138,7 @@ async downloadDailyReport(fileName) {
     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
     const rows = data.slice(1);
     const RevenueValues = rows
-        .map(row => Number(row[13]))   // change index if needed
+        .map(row => Number(row[2]))   // change index if needed
         .filter(v => !isNaN(v));
    const totalRevenue = RevenueValues.reduce((a, b) => a + b, 0);
    return totalRevenue;
@@ -151,7 +151,7 @@ async sumOfUsageInChargerReport(filePath) {
     const rows = data.slice(1); 
     // Excel Usage column index (example: column 9)
     const usageValues = rows
-        .map(row => Number(row[14]))   // change index if needed
+        .map(row => Number(row[3]))   // change index if needed
         .filter(v => !isNaN(v));
    const totalUsage = usageValues.reduce((a, b) => a + b, 0);
    const formattedTotal = Number(totalUsage.toFixed(2));

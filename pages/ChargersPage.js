@@ -59,7 +59,7 @@ export class ChargersPage {
         this.configuredButton= page.locator("//button[text()=\"Configure Charger\"]");
         this.reconfiguretoolButton = page.locator("//*[name()='path' and contains(@d,'M15.6613 6')]");
         this.installationDate = page.locator("//span[contains(@class,'flex') and contains(@class,'text-sm')]");
-        this.reconfigurationDate = page.locator("(//span[contains(@class,'flex')])[8]");
+        this.reconfigurationDate = page.locator("//span[@class='flex']");
         this.downloadQR= page.locator("//button[text()=\"Download QR Code\"]");
         this.sessionbtn= page.locator("//span[normalize-space()='Sessions']");
         this.chargersbtn= page.locator("//span[normalize-space()='Chargers']");
@@ -303,7 +303,6 @@ async downloadExcel() {
     //Save the file
     const filePath = path.join(downloadDir, "chargers.xlsx");
     await download.saveAs(filePath);
-    console.log("Excel Downloaded ", filePath);
     return filePath;
 }
 

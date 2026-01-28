@@ -164,19 +164,26 @@ async countSessionIdsInExcel(filePath) {
     }
 }
 
-async sumOfUsage(filePath) {
-    const wb = excel.readFile(filePath);
-    const sheet = wb.Sheets[wb.SheetNames[0]];
-    const data = excel.utils.sheet_to_json(sheet, { header: 1 });
-    const rows = data.slice(1);
-    // Excel Usage column index (example: column 9)
-    const usageValues = rows
-        .map(row => Number(row[9]))   // change index if needed
-        .filter(v => !isNaN(v));
-    const totalUsageKwh = usageValues.reduce((a, b) => a + b, 0);
-    // console.log("Excel Usage Sum (kWh):", totalUsageKwh);
-    return totalUsageKwh;
+async sumOfUsage(filePath, columnIndex) {
+  const wb = excel.readFile(filePath);
+  const sheet = wb.Sheets[wb.SheetNames[0]];
+  const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+
+  const rows = data.slice(1); // skip header row
+
+  const values = rows
+    .map(row => Number(row[columnIndex]))
+    .filter(v => !isNaN(v));
+
+  return values.reduce((a, b) => a + b, 0);
 }
+    
+
+
+
+
+
+
 async verifyUsageFromExcel(filePath, usageKpi) {
     //Sum usage from Excel (kWh)
     const excelUsageKwh = await this.sumOfUsage(filePath);
@@ -336,7 +343,6 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
         };
     }
 }
-
     async verifyReportUsageFromExcel(filePath2, usageKpi) {
     const excelUsageKwh = await this.sumOfUsage(filePath2);
 
@@ -513,5 +519,7 @@ async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
         };
     }
 }
+
+
 
 }

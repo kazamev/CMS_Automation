@@ -1,1 +1,1 @@
-[{"uid":"e49e8968352b3067","name":"Verify dashboard values","time":{"start":1769166745467,"stop":1769166759954,"duration":14487},"status":"passed","severity":"normal"}]
+[{"uid":"ec075fb8abf3c43b","name":"Add Charger End-to-End Flow","time":{"start":1769593766541,"stop":1769593842726,"duration":76185},"status":"passed","severity":"normal"},{"uid":"bb9731c2ff7443fd","name":"Dashboard vs Charger page comparison","time":{"start":1769593744889,"stop":1769593766234,"duration":21345},"status":"passed","severity":"normal"}]
