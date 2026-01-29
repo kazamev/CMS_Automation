@@ -7,7 +7,7 @@ export class ChargersPage {
     constructor(page) {
         this.page = page;
 
-        // Top counters2
+        // Top counters
         this.chargersCount = page.locator("//div[contains(.,'Chargers')]/span[contains(@class,'text-black')]");
         this.connectorsCount = page.locator("//div[contains(., 'Connectors')]/span[contains(@class,'text-black')]");
         this.nonConfigCount = page.locator("//div[contains(., 'Non Configured')]/span[contains(@class,'text-black')]");
@@ -169,7 +169,6 @@ async fillChargerDetails(data) {
     await this.page.waitForTimeout(1000);
     await this.GetAddressBtn.click();
     await this.page.waitForTimeout(1000);
-
     await this.NextButton3.click();
 
 
@@ -231,6 +230,7 @@ await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
 
 }
 
+// Validate configuration
 async Validateconfiguration(chargerId, data) {
     // Search charger
     const searchField = this.page.locator('//input[@type="search"]');
@@ -265,6 +265,7 @@ async Validateconfiguration(chargerId, data) {
     }
 }
 
+// Get installation and reconfiguration dates
 async ReconfigurationDates() {
     // Click the reconfigure tool button
     await this.reconfiguretoolButton.click();
@@ -283,6 +284,7 @@ async ReconfigurationDates() {
     return { installDate, reconfigDate };
 }
 
+// Download Charger Excel file
 async downloadExcel() {
     const downloadPromise = this.page.waitForEvent("download");
 
@@ -306,7 +308,7 @@ async downloadExcel() {
     return filePath;
 }
 
-// Count Charger IDs in Excel
+// Count Charger IDs in  Chargers Excel
 async countChargerIdsInExcel(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -315,11 +317,10 @@ async countChargerIdsInExcel(filePath) {
     const chargerIDs = rows
         .map(r => r[0])       // change index based on required column
         .filter(id => id);
-    console.log("Excel Charger ID Count :", chargerIDs.length);
     return chargerIDs.length;
 }
 
-// Verify Excel count matches UI count
+// Verify Charger Excel count matches UI count
  async verifyExcelCountMatchesUI(afterCount) {
         const filePath = await this.downloadExcel();
         const excelCount = await this.countChargerIdsInExcel(filePath);

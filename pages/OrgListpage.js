@@ -82,7 +82,7 @@ class OrganisationPage {
         await this.page.waitForTimeout(2000);
     }
 
-
+// Get organisation details from manage org page
  async getOrganisationDetails() {
     const orgDetails = {
     organizationName: await this. page.locator('text=Organization Name').locator('xpath=following-sibling::*').innerText(),
@@ -93,8 +93,7 @@ class OrganisationPage {
     currency:await this. page.locator("//div[@class='flex items-center gap-2']").innerText(),
   };
 
-  //Print in console
-
+  //Print org details
   console.log(`OrganizationName : ${orgDetails.organizationName}`);
   console.log(`Email             : ${orgDetails.email}`);
   console.log(`Plan              : ${orgDetails.plan}`);
@@ -105,6 +104,7 @@ class OrganisationPage {
  
      }
 
+  // Validate organisation details between org list and manage org page
   async  validateOrgVsDashboard(orgData, dashData) {
   let hasMismatch = false;
   const logs = [];

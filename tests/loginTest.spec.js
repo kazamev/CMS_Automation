@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 const { LoginPage } = require('../pages/loginPage');
 
-// It overrides the global config and forces a clean, empty browser session
+// It ignored the default storage(cookies) to start with a clean session
 test.use({ storageState: { cookies: [], origins: [] } });
 
 test('Valid Login', async ({ page }) => {

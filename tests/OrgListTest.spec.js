@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures/login.fixture';
 const { OrganisationPage } = require('../pages/OrgListpage');
 
-  test('Organisation Validation', async ({ loggedInPage }) => {
+  test('Organisation Details Validation', async ({ loggedInPage }) => {
     const page = loggedInPage;  
     const orgPage = new OrganisationPage(page);
 
@@ -23,16 +23,11 @@ const { OrganisationPage } = require('../pages/OrgListpage');
     // Click Continue to Dashboard
     await orgPage.clickContinueToDashboard();
     
-    
-
-    //Get dashboard organisation details
+    //Get organisation details from Manage Org page
    const dashData=await orgPage.getOrganisationDetails();
 
 
    //Validate organisation details between org list and dashboard
    await orgPage.validateOrgVsDashboard(orgData, dashData)
-
-
-
 
 });

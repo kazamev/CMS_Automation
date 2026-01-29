@@ -2,9 +2,7 @@ import { group } from 'console';
 import { test, expect } from '../fixtures/login.fixture';
 import { TariffPage } from '../pages/DriverTariff';
 
-test.describe("Driver Tariff Lifecycle", () => {
-    
-    test("Create, Validate and Delete Driver Tariff", async ({ loggedInPage }) => {
+test("Create, Validate and Delete Driver Group And Tariff", async ({ loggedInPage }) => {
         test.setTimeout(120000); // Increased timeout for the full flow
 
         const page = loggedInPage;
@@ -67,4 +65,3 @@ test.describe("Driver Tariff Lifecycle", () => {
 //         // 6. Cleanup Driver Group
 //         await tariffPage.deleteDriverGroup(groupName);
     });
-});

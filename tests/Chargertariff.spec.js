@@ -1,8 +1,7 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { ChargerTariffPage } from "../pages/ChargerTariff";
 
-test.describe("Charger Tariff Flow", () => {
-  test("Charger Tariff", async ({ loggedInPage }) => {
+  test("Charger Tariff Creation And Deletion", async ({ loggedInPage }) => {
     const page = loggedInPage;
     const tariffPage = new ChargerTariffPage(page);
     const tariffName = `Auto_Tariff_${Date.now()}`;
@@ -42,4 +41,4 @@ test.describe("Charger Tariff Flow", () => {
     // Edit and update tariff
     // await tariffPage.editAndUpdateTariff();
   })
-  });
+  

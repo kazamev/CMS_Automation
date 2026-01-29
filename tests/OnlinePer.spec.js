@@ -70,9 +70,10 @@ const filePath2 = await sessionPage.downloadDailyReport();
 console.log("Downloaded Excel Path:", filePath2);
 
 
-//online percentage average from charger Excel
+//online percentage average from Report charger Excel
 const onlinePercentageAvg = await OnlinePer.getAverageOnlinePercentFromExcel(filePath2);
 console.log("Avg of Online Percentage from Report Excel:", onlinePercentageAvg);
+
 
 //Verify Online Percentage (KPI vs Excel)
     const ReportOnlinePercentage = await OnlinePer.verifyOnlinePercentWithExcel(filePath2, onlinePercentage);

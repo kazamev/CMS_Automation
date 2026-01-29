@@ -1,28 +1,3 @@
-// import { chromium } from '@playwright/test';
-// import { LoginPage } from './pages/loginPage';
-
-// export default async () => {
-//   const browser = await chromium.launch({ headless: false });
-//   const context = await browser.newContext();
-//   const page = await context.newPage();
-
-//   const login = new LoginPage(page);
-
-//   await login.goTo();
-//   await login.validLogin(
-//     'shilpa@kazam.in',
-//     'Shilpa@1234567890'
-//   );
-
-//   // IMPORTANT: wait for org landing, NOT /cpo
-//   await page.waitForURL(/\/org/, { timeout: 60000 });
-
-//   // Save login state
-//   await context.storageState({ path: 'storageState.json' });
-
-//   await browser.close();
-// };
-
 import { chromium } from '@playwright/test';
 import { LoginPage } from './pages/loginPage';
 import path from 'path';
@@ -39,10 +14,9 @@ export default async () => {
     await login.goTo();
     await login.validLogin('shilpa@kazam.in', 'Shilpa@1234567890');
 
-    //Wait for URL to reach the dashboard area
+    //Wait to reach the dashboard area
     await page.waitForURL(/.*org.*/, { timeout: 60000 });
-    console.log("URL detected. Waiting for network settlement");
-
+    console.log("Waiting for page load");
     await page.waitForLoadState('networkidle');
 
    

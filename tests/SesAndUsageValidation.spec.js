@@ -1,9 +1,7 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { DashboardSessionsPage } from "../pages/SesAndUsageValidation";
 
-test.describe("Dashboard Sessions KPI vs UI vs Excel Validation", () => {
-
-  test("Validate session counts across Dashboard, UI and Excel", async ({ loggedInPage }) => {
+  test("Validate Session Counts And Usage Across Dashboard, Sections and Excel", async ({ loggedInPage }) => {
     test.setTimeout(120000);
     const page = loggedInPage;
     
@@ -38,8 +36,8 @@ test.describe("Dashboard Sessions KPI vs UI vs Excel Validation", () => {
 
     //Get Session Tab Counts from UI
     const { allCount, ongoingCount } = await sessionPage.getSessionTabCounts();
-    console.log("UI All Sessions Count:", allCount);
-    console.log("UI Ongoing Sessions Count:", ongoingCount);
+    console.log("All Sessions Count in Session Page:", allCount);
+    console.log("Ongoing Sessions Count in Session Page:", ongoingCount);
 
     // Download Excel and count session IDs
     const filePath = await sessionPage.downloadExcel();
@@ -47,7 +45,7 @@ test.describe("Dashboard Sessions KPI vs UI vs Excel Validation", () => {
 
     // Count session IDs in the downloaded Excel
     const excelCount = await sessionPage.countSessionIdsInExcel(filePath);
-    console.log("Excel Session ID Count:", excelCount);
+    console.log("Excel Session Count:", excelCount);
     
     //Verify Counts (KPI vs UI vs Excel)
     const result = await sessionPage.verifyCounts(filePath, allCount, sessionKpi);
@@ -124,13 +122,11 @@ const ReportusageResult = await sessionPage.verifyReportUsageFromExcel(filePath2
   const { excelSessions, excelUsageMW } =
     await sessionPage.getSessionsAndUsageFromSessionReportExcel(filePath3);
 
-console.log("Excel Usage (MW):", excelUsageMW);
-console.log("Excel Sessions:", excelSessions);
+console.log("Charger Excel Usage (MW):", excelUsageMW);
+console.log("Charger Excel Sessions:", excelSessions);
 
 
 await sessionPage.verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi);
   
   });
 
-  
-});

@@ -2,19 +2,12 @@ import { test, expect } from "../fixtures/login.fixture";
 import { ChargersPage } from "../pages/ChargersPage";
 import { DashboardPage } from "../pages/DashBoard";
 
-test.describe(
-  "Validate charger counters & connector status counts (Dashboard vs Charger page)",
-  () => {
-
-    test("Dashboard vs Charger page comparison", async ({ loggedInPage }) => {
+test("Dashboard vs Charger page Data comparison", async ({ loggedInPage }) => {
       const page = loggedInPage;
       const dashboard = new DashboardPage(page);
       const chargers = new ChargersPage(page);
-     //Dashboard counts
-      await page.goto(
-        "https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo",
-        { waitUntil: "networkidle" }
-      );
+//Dashboard counts
+await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo",{ waitUntil: "networkidle" });
 
       const dashboardCounts = await dashboard.getChargerCounters();
       const dashboardStatus = await dashboard.getConnectorStatusCounts();
@@ -32,11 +25,8 @@ test.describe(
 
       console.log("Dashboard Data:", dashboardData);
 
-      //charger page counts
-      await page.goto(
-        "https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers",
-        { waitUntil: "networkidle" }
-      );
+//charger page counts
+await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers",{ waitUntil: "networkidle" });
 
       const chargerCounts = await chargers.getChargerCounts();
       const chargerStatus = await chargers.getConnectorStatusCounts();
@@ -54,7 +44,7 @@ test.describe(
 
       console.log("Charger Page Data:", chargerData);
 
-      // Compare Dashboard vs Charger page data
+// Compare Dashboard vs Charger page data
       expect(chargerData.chargers).toBe(dashboardData.chargers);
       expect(chargerData.connectors).toBe(dashboardData.connectors);
       expect(chargerData.nonConfigured).toBe(dashboardData.nonConfigured);
@@ -70,7 +60,7 @@ test.describe(
 
 
   // Add Charger Flow
-  test("Add Charger End-to-End Flow", async ({ loggedInPage }) => {
+  test("End-to-End Add and Reconfifured Charger Flow", async ({ loggedInPage }) => {
     const page = loggedInPage;
     test.setTimeout(120000);
      await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers");
@@ -112,15 +102,10 @@ test.describe(
 
     //step charger form
     await chargers.fillChargerDetails(data);
-
-
     console.log(`Charger added successfully → ${data.name}`);
 
     const chargerId = await chargers.getChargerId();
     console.log("Generated Charger ID:", chargerId);
-
-
-    //Check if charger appears in list
 
     // Click Back button
     await page.locator('//span[text()="Back"]').click();
@@ -142,8 +127,6 @@ try {
 } catch (err) {
     console.log("Charger not added to list");
 }
-
-
 await chargerRow.click();
 await page.waitForLoadState("networkidle");
 await page.waitForTimeout(2000);
@@ -151,7 +134,6 @@ await page.waitForTimeout(2000);
 
 // Charger Reconfiguration Flow 
  await chargers.ChargerReconfiguration(data);
-
  await page.reload({ waitUntil: "networkidle" });
  await page.waitForTimeout(2000);
 
@@ -183,8 +165,6 @@ const filePath = await chargers.downloadExcel();
 
 // Read Charger IDs from Excel
  const chargerIdCount = await chargers.countChargerIdsInExcel(filePath);
-    
-
 
 // Excel Download & Validate count
 await chargers.verifyExcelCountMatchesUI(afterCount);
@@ -192,6 +172,5 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
 });
 
-  });
 
 

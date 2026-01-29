@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs";   
 import path from "path";
 import * as excel from "xlsx";
 
@@ -17,27 +17,28 @@ constructor(page) {
     async applyTimeFilterInDashboard(period) {
     await this.DashBoardTimeFilter.click();
 
-    
-   const option = this.page.locator(`//div[contains(@class,'flex')]//div[normalize-space(text())='${period}']`);
+    // Select the required time period from dropdown
+    const option = this.page.locator(`//div[contains(@class,'flex')]//div[normalize-space(text())='${period}']`);
     await option.waitFor();
     await option.click();
     await this.page.waitForLoadState("networkidle");
 }
 
-
+// Get Online Percentage KPI from Dashboard
 async getOnlinePercentage() {
        const onlineText = await this.onlinePercent.textContent();
        const OnlineKpi = Number(onlineText.replace(/[^0-9.]/g, ""));
        return OnlineKpi;
     }
 
-
+// Click on Online Percentage KPI to redirect to Chargers page
 async  clickOnlinePercentage() {
     await this.onlinePercent.click();
     await this.page.waitForLoadState("networkidle");
     await this.page.waitForTimeout(8000);
   }
 
+// Download ChargerExcel from Chargers page
 async downloadExcel() {
     const downloadPromise = this.page.waitForEvent("download");
 
@@ -62,7 +63,7 @@ async downloadExcel() {
     return filePath;
 }
 
-
+// Calculate Average Online % from  Charger Excel
 async getAverageOnlinePercentFromExcel(filePath) {
   if (!filePath) {
     throw new Error("Excel file path is undefined for Online % calculation");
@@ -83,7 +84,7 @@ async getAverageOnlinePercentFromExcel(filePath) {
   return Number(avgOnline.toFixed(2));
 }
 
-
+// Verify Online % from charger Excel vs Dashboard KPI
 async verifyOnlinePercentWithExcel(filePath, OnlineKpi) {
   try {
     const avgOnlinePercent = await this.getAverageOnlinePercentFromExcel(filePath); 

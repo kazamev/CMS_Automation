@@ -29,7 +29,7 @@ const fs = require('fs');
 
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
-      to: 'akhilesh@kazam.in,bshilpa747@gmail.com',
+      to: 'bshilpa747@gmail.com',
       subject: 'Allure Automation Report',
       text: 'Hi,\n\nPlease find attached the automation report.\n\nThanks,\nShilpa',
       attachments: [

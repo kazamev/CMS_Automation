@@ -1,11 +1,6 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { DailyReportsPage } from "../pages/DailyReportsPage";
-
-
-// import { DashboardSessionsPage } from "../pages/SesAndUsageValidation";
-
-test.describe("Daily Reports Validation", () => {
-  test("Validate Sessions & Chargers Daily Reports", async ({ loggedInPage }) => {
+test("Validate Sessions & Chargers Daily Reports", async ({ loggedInPage }) => {
     const page = loggedInPage;
     const ReportPage = new DailyReportsPage(page);
 
@@ -76,4 +71,3 @@ function getYesterdayDate() {
   return `${day}/${month}/${year}`;
 }
   });
-});

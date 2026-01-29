@@ -7,7 +7,7 @@ export class DashboardSessionsPage {
     constructor(page) {
         this.page = page;
 
-        //GLOBAL KPI LOCATORS
+        //KPI LOCATORS
         this.sessionsValue = page.locator("(//p[@class='text-base font-medium'])[2]");
         this.usageValue = page.locator("(//p[@class='text-base font-medium'])[3]");
 
@@ -30,6 +30,7 @@ export class DashboardSessionsPage {
         this.chargertimeperiod = page.locator("//button[.//div[normalize-space()='Today']]");
  
     }
+
     // Fetch KPI values from Dashboard
     async getKPIValues() {
     const sessionText = await this.sessionsValue.textContent();
@@ -127,6 +128,8 @@ async countSessionIdsInExcel(filePath) {
         .filter(id => id);
     return sessionIDs.length;
 }
+
+// Verify Counts (KPI vs UI vs Excel)
  async verifyCounts(filePath, allCount, sessionKpi) {
     //Extract count from Excel
     const excelCount = await this.countSessionIdsInExcel(filePath);
@@ -146,11 +149,11 @@ async countSessionIdsInExcel(filePath) {
     }
     //Return structured result
     if (errors.length === 0) {
-        console.log(`All counts matched successfully  ${excelCount}`);
+        console.log(`All counts(DashBOard, Session Page, Excel) matched successfully  ${excelCount}`);
         return {
             success: true,
             excelCount,
-            message: "All counts matched successfully"
+            message: "All counts(Dashboard, Session Page, Excel) matched successfully"
         };
     } else {
         console.log(" Mismatch found:");
@@ -164,7 +167,7 @@ async countSessionIdsInExcel(filePath) {
     }
 }
 
-async sumOfUsage(filePath, columnIndex) {
+async sumOfUsage(filePath) {
   const wb = excel.readFile(filePath);
   const sheet = wb.Sheets[wb.SheetNames[0]];
   const data = excel.utils.sheet_to_json(sheet, { header: 1 });
@@ -172,18 +175,11 @@ async sumOfUsage(filePath, columnIndex) {
   const rows = data.slice(1); // skip header row
 
   const values = rows
-    .map(row => Number(row[columnIndex]))
+    .map(row => Number(row[9]))
     .filter(v => !isNaN(v));
 
   return values.reduce((a, b) => a + b, 0);
 }
-    
-
-
-
-
-
-
 async verifyUsageFromExcel(filePath, usageKpi) {
     //Sum usage from Excel (kWh)
     const excelUsageKwh = await this.sumOfUsage(filePath);
@@ -191,8 +187,8 @@ async verifyUsageFromExcel(filePath, usageKpi) {
     const excelUsageMWh_raw = excelUsageKwh / 1000;
     //Round Excel MWh to 2 decimals
     const excelUsageMWh = Number(excelUsageMWh_raw.toFixed(2));
-    console.log(`Excel Usage (kWh): ${excelUsageKwh}`);
-    console.log(`Excel Usage (MWh Rounded): ${excelUsageMWh}`);
+    console.log(`Session Excel Usage (kWh): ${excelUsageKwh}`);
+    console.log(`Session Excel Usage (MWh Rounded): ${excelUsageMWh}`);
     console.log(`KPI Usage (MWh): ${usageKpi}`);
     //Allowed buffer/tolerance (0.2 MWh)
     const tolerance = 0.2;
@@ -208,7 +204,7 @@ async verifyUsageFromExcel(filePath, usageKpi) {
         return {
             success: true,
             excelUsageMWh,
-            message: "Usage values matched successfully"
+            message: "Usage values(Dashboard, Session Page, Session Excel) matched successfully"
         };
     } else {
         console.log("Usage mismatch found:");
@@ -224,7 +220,7 @@ async verifyUsageFromExcel(filePath, usageKpi) {
 async openDailyReportsPage() {
     await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports");
     await this.page.waitForLoadState("networkidle");
-    await this.page.waitForTimeout(2000);
+    console.log("Navigated to Daily Reports Page");
 }
 
 // Select dropdown value in Daily Reports
@@ -246,9 +242,6 @@ async selectConfigureDropdown(value) {
     // Remove waitForTimeout. If the page loads data after selection:
     await this.page.waitForLoadState("networkidle");
 }
-
-
-
 // Calendar date selection (uses your function logic)
 async selectKazamCalendarDate(userDate) {
     const [day, month, year] = userDate.split("/");
@@ -352,8 +345,8 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     // Round to 2 decimals
     const excelMWh = Number(excelMWh_raw.toFixed(2));
 
-    console.log(`Excel Usage (kWh): ${excelUsageKwh}`);
-    console.log(`Excel Usage (MWh Rounded): ${excelMWh}`);
+    console.log(`Report Excel Usage (kWh): ${excelUsageKwh}`);
+    console.log(`Report Excel Usage (MWh Rounded): ${excelMWh}`);
     console.log(`KPI Usage (MWh): ${usageKpi}`);
 
     // Allowed tolerance (0.2 MWh)
@@ -362,7 +355,7 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
         return {
             success: true,
             excelUsageMWh: excelMWh,
-            message: "Usage values matched successfully"
+            message: "Usage values(Dashboard, Report Excel, Session Excel) matched successfully"
         };
     }
     // Failure result
@@ -377,6 +370,7 @@ async ChargerPage() {
     await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/chargers");
     await this.page.waitForLoadState("networkidle");
     await this.page.waitForTimeout(2000);
+    console.log("Navigated to Charger Page");
 
 }
 async applyTimeFilterinChargerPage(period) {
@@ -408,7 +402,7 @@ async ChargerdownloadExcel() {
         //Save the file
         const filePath3 = path.join(downloadDir, "chargers.xlsx");
         await download.saveAs(filePath3);
-        console.log("Excel Downloaded ", filePath3);
+        console.log("Charger Excel Downloaded ", filePath3);
         return filePath3;
     }
 
@@ -519,7 +513,4 @@ async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
         };
     }
 }
-
-
-
 }

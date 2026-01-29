@@ -1,7 +1,5 @@
 import { test, expect } from '../fixtures/login.fixture';
-
 import { DashboardPage } from '../pages/DashBoard';
-
 
 test('Verify Dashboard Values', async ({ loggedInPage }) => {
     const page = loggedInPage;
@@ -12,9 +10,9 @@ test('Verify Dashboard Values', async ({ loggedInPage }) => {
     await page.waitForLoadState("networkidle");
     
 
-
+    console.log("This month DashBoard Data");
     const revenue = await dashboard.getRevenue();
-    console.log("Revenue(Month):", revenue);
+    console.log("Revenue:", revenue);
 
     const sessions = await dashboard.getTotalSessions();
     console.log("Sessions:", sessions);

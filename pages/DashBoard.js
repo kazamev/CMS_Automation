@@ -9,11 +9,9 @@ exports.DashboardPage = class DashboardPage {
         // No of session block
         this.sessionsValue = page.locator("(//p[@class='text-base font-medium'])[2]");
         
-        
         // Usage
         this.usageValue = page.locator("(//p[@class='text-base font-medium'])[3]");
        
-
         // Online percentage
         this.onlinePercent = page.locator("(//p[@class='text-base font-medium'])[4]");
    
@@ -44,7 +42,7 @@ exports.DashboardPage = class DashboardPage {
         // Search
         // this.searchChargerInput = page.locator("input[placeholder='Search in charger list']");
 
-     // Right-side "chargers" dropdown
+        // Right-side "chargers" dropdown
         // this.chargerViewDropdown = page.locator("button:has-text('Chargers')");
     }
 
