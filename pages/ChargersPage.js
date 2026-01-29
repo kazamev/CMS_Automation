@@ -59,7 +59,7 @@ export class ChargersPage {
         this.configuredButton= page.locator("//button[text()=\"Configure Charger\"]");
         this.reconfiguretoolButton = page.locator("//*[name()='path' and contains(@d,'M15.6613 6')]");
         this.installationDate = page.locator("//span[contains(@class,'flex') and contains(@class,'text-sm')]");
-        this.reconfigurationDate = page.locator("(//span[contains(@class,'flex')])[8]");
+        this.reconfigurationDate = page.locator("//span[@class='flex']");
         this.downloadQR= page.locator("//button[text()=\"Download QR Code\"]");
         this.sessionbtn= page.locator("//span[normalize-space()='Sessions']");
         this.chargersbtn= page.locator("//span[normalize-space()='Chargers']");
@@ -169,7 +169,6 @@ async fillChargerDetails(data) {
     await this.page.waitForTimeout(1000);
     await this.GetAddressBtn.click();
     await this.page.waitForTimeout(1000);
-
     await this.NextButton3.click();
 
 
@@ -231,6 +230,7 @@ await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
 
 }
 
+// Validate configuration
 async Validateconfiguration(chargerId, data) {
     // Search charger
     const searchField = this.page.locator('//input[@type="search"]');
@@ -265,6 +265,7 @@ async Validateconfiguration(chargerId, data) {
     }
 }
 
+// Get installation and reconfiguration dates
 async ReconfigurationDates() {
     // Click the reconfigure tool button
     await this.reconfiguretoolButton.click();
@@ -283,6 +284,7 @@ async ReconfigurationDates() {
     return { installDate, reconfigDate };
 }
 
+// Download Charger Excel file
 async downloadExcel() {
     const downloadPromise = this.page.waitForEvent("download");
 
@@ -303,11 +305,10 @@ async downloadExcel() {
     //Save the file
     const filePath = path.join(downloadDir, "chargers.xlsx");
     await download.saveAs(filePath);
-    console.log("Excel Downloaded ", filePath);
     return filePath;
 }
 
-// Count Charger IDs in Excel
+// Count Charger IDs in  Chargers Excel
 async countChargerIdsInExcel(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -316,11 +317,10 @@ async countChargerIdsInExcel(filePath) {
     const chargerIDs = rows
         .map(r => r[0])       // change index based on required column
         .filter(id => id);
-    console.log("Excel Charger ID Count :", chargerIDs.length);
     return chargerIDs.length;
 }
 
-// Verify Excel count matches UI count
+// Verify Charger Excel count matches UI count
  async verifyExcelCountMatchesUI(afterCount) {
         const filePath = await this.downloadExcel();
         const excelCount = await this.countChargerIdsInExcel(filePath);

@@ -1,1 +1,0 @@
-Online Percentage Validation Failed: Online Percentage mismatch! KPI: 60.99%, Excel Avg: 58.8%

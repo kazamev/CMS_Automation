@@ -1,15 +1,16 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { DashboardPage } from '../pages/DashBoard';
 
-test('Verify dashboard values', async ({ loggedInPage }) => {
+test('Verify Dashboard Values', async ({ loggedInPage }) => {
     const page = loggedInPage;
-
-    // Navigate to dashboard URL here
-    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo");
-    await page.waitForLoadState("networkidle");
-    
     const dashboard = new DashboardPage(page);
 
+    // Navigate to dashboard URL here
+    await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+    await page.waitForLoadState("networkidle");
+    
+
+    console.log("This month DashBoard Data");
     const revenue = await dashboard.getRevenue();
     console.log("Revenue:", revenue);
 
@@ -27,10 +28,6 @@ test('Verify dashboard values', async ({ loggedInPage }) => {
 
     const counters = await dashboard.getConnectorStatusCounts();
    console.log("Charger Counters:", counters);
-
-   const SettingsClicked = await dashboard.openSettings();
-   console.log("Settings Button Clicked");
-    console.log("User Count:", SettingsClicked.UserCount);
 
 
 });

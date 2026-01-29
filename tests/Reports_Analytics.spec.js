@@ -1,11 +1,6 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { DailyReportsPage } from "../pages/DailyReportsPage";
-
-
-// import { DashboardSessionsPage } from "../pages/SesAndUsageValidation";
-
-test.describe("Daily Reports Validation", () => {
-  test("Validate Sessions & Chargers Daily Reports", async ({ loggedInPage }) => {
+test("Validate Sessions & Chargers Daily Reports", async ({ loggedInPage }) => {
     const page = loggedInPage;
     const ReportPage = new DailyReportsPage(page);
 
@@ -30,7 +25,7 @@ console.log("Sessions Usage Sum (IN Kw):", UsageSum);
 await ReportPage.selectReportDropdown("Chargers");
 await ReportPage.selectKazamCalendarDate(getYesterdayDate());
 await page.waitForLoadState("networkidle");
-await ReportPage.editTableFields(); 
+// await ReportPage.editTableFields(); 
 const chargersFile = await ReportPage.downloadDailyReport("chargers_daily_report.xlsx");
 console.log("Downloaded Chargers Report:", chargersFile);
 
@@ -76,4 +71,3 @@ function getYesterdayDate() {
   return `${day}/${month}/${year}`;
 }
   });
-});

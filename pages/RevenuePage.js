@@ -34,7 +34,8 @@ export class RevenuePage {
     this.Invoicefirstclick = page.locator("//div[@class='flex flex-col w-full h-full relative']//div[1]//div[1]//div[1]//button[1]//*[name()='svg']");
     this.InvoiceDownload= page.locator("//*[@id='cms-app-main-content']/div/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div[2]/p[2]/button");
 
-    
+    //Suspense
+    this.sespensebtn=page.locator("//button[@class='flex items-center gap-1 w-full h-full px-4 py-2 rounded-r-lg']");
   }
 
 async DashBoardURL(){
@@ -104,12 +105,12 @@ async selectSingleDate(day) {
   //   await this.page.click(`//button[normalize-space()='${lastDay}']`);
   // }
 
+
+  // Open Success Transactions and get Overview Data
 async openSuccessTransactionAndGetOverview() {
   const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-
-// wait for overview to load (Transaction ID appears)
-await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
-  // await this.page.waitForTimeout(1000);
+  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  console.log("Success row Overview Data");
   const overviewSelectors = {
     "Transaction id":
       "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(2)",
@@ -126,37 +127,30 @@ await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-ch
     "Time stamp":
       "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(11) > span:nth-child(1)",
   };
-
   const extractedTexts = {};
-
   for (const [key, selector] of Object.entries(overviewSelectors)) {
     const elements = await this.page.$$(selector);
     const values = [];
-
     for (const element of elements) {
       const text = await element.textContent();
       const trimmedText = String(text).trim();
       console.log(`${key}: ${trimmedText}`);
       values.push(trimmedText);
     }
-
     extractedTexts[key] = values;
-
-
-
   }
   return extractedTexts;
 }
 
 async downloadInvoiceFile() {
   const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-  // wait for overview to load (Transaction ID appears)
-await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
-  // await this.page.waitForTimeout(1000);
+  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  
     await this.Invoicefirstclick.click();
     await this.page.waitForTimeout(2000);
     await this.InvoiceDownload.click();
     await this.page.waitForTimeout(8000);
+    console.log("Invoice Data");
   // Data from the invoice page
           const invoiceSelectors = {
             "Transaction id":
@@ -186,6 +180,7 @@ await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-ch
           return ExtractedTexts;
   }
 
+// Compare Overview Data with Invoice Data
 async compareOverviewWithInvoice(overviewData, invoiceData) {
   const keysToCompare = ["Transaction id", "Billed Amount", "Host Details", "Driver Details", "Time stamp"];
   let mismatchFound = false;
@@ -351,9 +346,8 @@ async verifyRevenueFromExcel(filePath4, revenueText, DashboardRevenue) {
   errors.forEach(e => console.log(e));
   return { success: false, message: errors.join(" | ") };
 }
+
 }
-
-
 
 
 

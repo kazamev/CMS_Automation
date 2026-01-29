@@ -9,11 +9,9 @@ exports.DashboardPage = class DashboardPage {
         // No of session block
         this.sessionsValue = page.locator("(//p[@class='text-base font-medium'])[2]");
         
-        
         // Usage
         this.usageValue = page.locator("(//p[@class='text-base font-medium'])[3]");
        
-
         // Online percentage
         this.onlinePercent = page.locator("(//p[@class='text-base font-medium'])[4]");
    
@@ -32,16 +30,19 @@ exports.DashboardPage = class DashboardPage {
         this.usermanageBtn = page.locator("//button[normalize-space()='User Management']");
         this.usercount=page.locator("//p[@class='w-max whitespace-nowrap']");
 
+        //Setting
+         this.OrganisationOption=page.locator("//a[normalize-space()='Organization']");
+         this.orgDetailsCard=page.locator("(//div[@class='w-2/5 bg-white rounded-md h-auto border p-4 flex flex-col gap-4'])[1]")
         // // Dropdowns
         // this.stateDropdown = page.locator("button:has-text('All States')");
         // this.hubDropdown = page.locator("button:has-text('All Hubs')");
         // this.timePeriodDropdown = page.locator("button:has-text('This month')");
         // this.customizeBtn = page.locator("button:has-text('Customize')");
 
-        // // Search
+        // Search
         // this.searchChargerInput = page.locator("input[placeholder='Search in charger list']");
 
-        // // Right-side "chargers" dropdown
+        // Right-side "chargers" dropdown
         // this.chargerViewDropdown = page.locator("button:has-text('Chargers')");
     }
 
@@ -78,31 +79,15 @@ exports.DashboardPage = class DashboardPage {
         }
     }
 
-    async openSettings() {
-        await this.settingsBtn.click();
-        await this.usermanageBtn.waitFor({ state: 'visible', timeout: 5000 });
-        await this.usermanageBtn.click();
-        await this.usercount.waitFor({ state: 'visible', timeout: 5000 }); 
-        const text = await this.usercount.textContent();
-        return{    
-        UserCount:text.match(/\d+/)[0]
-    }
-
-    }
-
-    // async openStateDropdown() {
-    //     await this.stateDropdown.click();
+    // async openSettings() {
+    //     await this.settingsBtn.click();
+    //     await this.OrganisationOption.waitFor({ state: 'visible', timeout: 5000 });
+    //     // await this.usermanageBtn.click();
+    //     // await this.usercount.waitFor({ state: 'visible', timeout: 5000 }); 
+    //     // const text = await this.usercount.textContent();
+    //     // return{    
+    //     // UserCount:text.match(/\d+/)[0]
+    //     await this.OrganisationOption.click();
     // }
 
-    // async openHubDropdown() {
-    //     await this.hubDropdown.click();
-    // }
-
-    // async openTimePeriodDropdown() {
-    // //     await this.timePeriodDropdown.click();
-    // }
-
-    // async searchCharger(name) {
-    //     await this.searchChargerInput.fill(name);
-    // }
-};
+}

@@ -14,9 +14,7 @@ export class DailyReportsPage {
     this.UsageColumnCheckbox =page.locator("//input[@id='device_usage']");
 
 
-    this.url =
-      "https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports";
-
+    this.url ="https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports";
     this.reportDropdown = page.locator("//div[@class='grid gap-2']//select[1]");
     this.generateBtn = page.locator("//button[normalize-space()='Generate Report']");
   }
@@ -61,7 +59,7 @@ export class DailyReportsPage {
 }
 
 
-
+//sum of usage(Daily report)
 async sumOfUsage(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]]; 
@@ -81,22 +79,8 @@ async sumOfUsage(filePath) {
   async editTableFields() {
   await this.EditTable.waitFor({ state: "visible" });
   await this.EditTable.click();
-
-  await this.sessionCheckbox.waitFor({ state: "visible" });
-  await this.sessionCheckbox.scrollIntoViewIfNeeded();
-  if (!(await this.sessionCheckbox.isChecked())) {
-    await this.sessionCheckbox.click();
-  }
-
-  await this.UsageColumnCheckbox.waitFor({ state: "visible" });
-  await this.UsageColumnCheckbox.scrollIntoViewIfNeeded();
-  if (!(await this.UsageColumnCheckbox.isChecked())) {
-    await this.UsageColumnCheckbox.click();
-  }
-
   await this.ApplyBtn.waitFor({ state: "visible" });
   await this.ApplyBtn.click();
-
   await this.page.waitForLoadState("networkidle");
 }
 
@@ -138,7 +122,7 @@ async downloadDailyReport(fileName) {
     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
     const rows = data.slice(1);
     const RevenueValues = rows
-        .map(row => Number(row[13]))   // change index if needed
+        .map(row => Number(row[2]))   // change index if needed
         .filter(v => !isNaN(v));
    const totalRevenue = RevenueValues.reduce((a, b) => a + b, 0);
    return totalRevenue;
@@ -151,7 +135,7 @@ async sumOfUsageInChargerReport(filePath) {
     const rows = data.slice(1); 
     // Excel Usage column index (example: column 9)
     const usageValues = rows
-        .map(row => Number(row[14]))   // change index if needed
+        .map(row => Number(row[3]))   // change index if needed
         .filter(v => !isNaN(v));
    const totalUsage = usageValues.reduce((a, b) => a + b, 0);
    const formattedTotal = Number(totalUsage.toFixed(2));
@@ -177,7 +161,7 @@ async sumOfRevenue(filePath) {
     const sheet = wb.Sheets[wb.SheetNames[0]];
     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
     const rows = data.slice(1);
-    // Excel Usage column index (example: column 9)
+    // Excel Usage column index
     const RevenueValues = rows
         .map(row => Number(row[2]))   // change index if needed
         .filter(v => !isNaN(v));
@@ -194,7 +178,7 @@ async sumOfUsageInRevenueReport(filePath) {
     const sheet = wb.Sheets[wb.SheetNames[0]]; 
     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
     const rows = data.slice(1); 
-    // Excel Usage column index (example: column 9)
+    // Excel Usage column index (eg: column 9)
     const usageValues = rows
         .map(row => Number(row[13]))   // change index if needed
         .filter(v => !isNaN(v));
@@ -239,12 +223,7 @@ async selectPreviousMonth() {
 
     while (displayedYear > targetYear) {
         await prevYearBtn.click();
-
-        // FIX STARTS HERE
-        // Instead of waitForFunction, we wait until the text is NO LONGER the old year
         await expect(yearLabel).not.toHaveText(String(displayedYear), { timeout: 5000 });
-        // FIX ENDS HERE
-
         displayedYear = Number((await yearLabel.textContent()).trim());
     }
 
