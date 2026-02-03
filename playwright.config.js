@@ -73,17 +73,20 @@ forbidOnly: !!process.env.CI,
     ['allure-playwright'],
     ['html', { open: 'never', outputFolder: 'extent-report' }]
   ],
-  timeout: 60000,
+  timeout: 90000,
 
   use: {
     headless: false,
     // Use the absolute path
     storageState: path.resolve(__dirname, 'storageState.json'),
-    actionTimeout: 15000,
-    navigationTimeout: 30000,
+    actionTimeout: 30000,
+    navigationTimeout: 60000,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
      video: 'retain-on-failure',
+     launchOptions: {
+      slowMo: 1000, // 1000ms (1 second) delay between every action
+    },
  permissions: [],
   },
   // only 1 worker to prevent session clashing during debugging

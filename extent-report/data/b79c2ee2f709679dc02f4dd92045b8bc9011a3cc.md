@@ -1,0 +1,144 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - link [ref=e9] [cursor=pointer]:
+          - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo
+          - img [ref=e10]
+        - generic [ref=e11]:
+          - link "Dashboard" [ref=e13] [cursor=pointer]:
+            - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo
+            - generic [ref=e15]:
+              - paragraph [ref=e16]:
+                - img [ref=e17]
+              - generic [ref=e20]: Dashboard
+          - button "Chargers Management" [ref=e22] [cursor=pointer]:
+            - generic [ref=e24]:
+              - generic [ref=e25]:
+                - paragraph [ref=e26]:
+                  - img [ref=e27]
+                - generic [ref=e29]: Chargers Management
+              - img [ref=e31]
+          - link "Revenue Management" [ref=e34] [cursor=pointer]:
+            - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/overview
+            - generic [ref=e36]:
+              - paragraph [ref=e37]:
+                - img [ref=e38]
+              - generic [ref=e40]: Revenue Management
+          - link "Drivers & Vehicles" [ref=e42] [cursor=pointer]:
+            - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/drivers_and_vehicles/drivers
+            - generic [ref=e44]:
+              - paragraph [ref=e45]:
+                - img [ref=e46]
+              - generic [ref=e51]: Drivers & Vehicles
+          - link "Load Balancing" [ref=e53] [cursor=pointer]:
+            - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/loadbalance
+            - generic [ref=e55]:
+              - paragraph [ref=e56]:
+                - img [ref=e57]
+              - generic [ref=e61]: Load Balancing
+          - button "Operations & Maintenance" [ref=e63] [cursor=pointer]:
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - paragraph [ref=e67]:
+                  - img [ref=e68]
+                - generic [ref=e70]: Operations & Maintenance
+              - img [ref=e72]
+          - link "Alerts" [ref=e75] [cursor=pointer]:
+            - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/alerts
+            - generic [ref=e77]:
+              - paragraph [ref=e78]:
+                - img [ref=e79]
+              - generic [ref=e81]: Alerts
+          - link "Reports & Analytics" [ref=e83] [cursor=pointer]:
+            - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/reports/daily-reports
+            - generic [ref=e85]:
+              - paragraph [ref=e86]:
+                - img [ref=e87]
+              - generic [ref=e89]: Reports & Analytics
+        - generic [ref=e90]:
+          - link "My Organizations" [ref=e92] [cursor=pointer]:
+            - /url: /org
+            - img [ref=e93]
+            - generic [ref=e95]: My Organizations
+          - link "Help and Support" [ref=e97] [cursor=pointer]:
+            - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/help_and_support
+            - img [ref=e98]
+            - generic [ref=e101]: Help and Support
+      - generic [ref=e102]:
+        - generic [ref=e104]:
+          - generic [ref=e105]:
+            - paragraph [ref=e106] [cursor=pointer]: Drivers & Vehicles
+            - link "/ Manage Driver Group" [ref=e108] [cursor=pointer]:
+              - /url: /org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/drivers_and_vehicles/driver-group
+              - text: /
+              - paragraph [ref=e109]: Manage Driver Group
+          - generic [ref=e110]:
+            - button "Global search Ctrl + K" [ref=e113]:
+              - img [ref=e114]
+              - generic [ref=e117]:
+                - paragraph [ref=e118]: Global search
+                - generic [ref=e119]:
+                  - generic [ref=e120]: Ctrl
+                  - paragraph [ref=e121]: +
+                  - generic [ref=e122]: K
+            - generic [ref=e123]:
+              - button [ref=e125] [cursor=pointer]:
+                - img [ref=e126]
+              - button [ref=e130] [cursor=pointer]:
+                - img [ref=e131]
+        - main [ref=e132]:
+          - dialog [active] [ref=e134]:
+            - generic [ref=e136]:
+              - button "Close modal" [ref=e137] [cursor=pointer]:
+                - generic [ref=e138]: Close modal
+                - img [ref=e139]
+              - generic [ref=e142]:
+                - paragraph [ref=e143]: Confirmation
+                - paragraph [ref=e144]:
+                  - text: Please confirm!!
+                  - text: Are you sure you want to delete this group?
+                - generic [ref=e145]:
+                  - button "Cancel" [ref=e146] [cursor=pointer]
+                  - button "Confirm" [ref=e147] [cursor=pointer]
+          - generic [ref=e148]:
+            - generic [ref=e149]:
+              - button "Back" [ref=e150] [cursor=pointer]:
+                - img [ref=e152]
+                - generic [ref=e154]: Back
+              - button "Add Drivers to Group" [ref=e157] [cursor=pointer]:
+                - img [ref=e158]
+                - text: Add Drivers to Group
+            - generic [ref=e159]:
+              - generic [ref=e160]:
+                - generic [ref=e161]:
+                  - paragraph [ref=e162]: Driver Group Detail
+                  - generic [ref=e163]:
+                    - button [ref=e164] [cursor=pointer]:
+                      - img [ref=e165]
+                    - button [ref=e167] [cursor=pointer]:
+                      - img [ref=e168]
+                - generic [ref=e170]:
+                  - paragraph [ref=e171]: Name
+                  - paragraph [ref=e172]: Driver Group101
+                - generic [ref=e173]:
+                  - paragraph [ref=e174]: Description
+                  - paragraph [ref=e175]: Test Driver Group Description
+                - generic [ref=e176]:
+                  - paragraph [ref=e177]: Total Drivers
+                  - paragraph [ref=e178]: "0"
+              - generic [ref=e181]:
+                - generic [ref=e182]:
+                  - paragraph [ref=e183]: "Total Drivers : 0"
+                  - generic [ref=e186]:
+                    - generic:
+                      - img
+                    - searchbox "Search by name, phone" [ref=e187]
+                - paragraph [ref=e190]: No Data Found!
+    - button "Toggle Chatbot" [ref=e191] [cursor=pointer]:
+      - img [ref=e193]
+  - generic [ref=e206]: Driver Group - CMS
+```

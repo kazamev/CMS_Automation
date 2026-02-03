@@ -48,7 +48,7 @@ function getYesterdayDate() {
 
 
   // Validate Revenue Sum
-    const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,DashBoardrevenue); 
+    const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,DashBoardRevenue); 
     if (!RevenueResult.success) {
       console.error("Revenue Validation Failed:", RevenueResult.message);
     } else {

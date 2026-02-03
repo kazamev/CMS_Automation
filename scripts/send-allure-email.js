@@ -31,7 +31,7 @@ const fs = require('fs');
       from: 'shilpa@kazam.in',
       to: 'bshilpa747@gmail.com',
       subject: 'Allure Automation Report',
-      text: 'Hi,\n\nPlease find attached the automation report.\n\nThanks,\nShilpa',
+      text: 'Hi,\n\nPlease find attached the  automation report.\n\nThanks,\nShilpa',
       attachments: [
         {
           filename: 'Allure_Report.pdf',

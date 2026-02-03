@@ -286,26 +286,30 @@ async ReconfigurationDates() {
 
 // Download Charger Excel file
 async downloadExcel() {
-    const downloadPromise = this.page.waitForEvent("download");
+  // Open 3-dots menu
+  await this.downloadButton.click();
 
-    //Click download on 3dots menu
-    await this.downloadButton.click();
-    await this.page.waitForTimeout(1000);
-    await this.excelOption.waitFor({ state: "visible", timeout: 5000 });
-    await this.excelOption.click();
+  // Wait for Excel option to be visible
+  await this.excelOption.waitFor({ state: "visible", timeout: 10000 });
 
-    //Wait for file
-    const download = await downloadPromise;
+  // Listen + click at the SAME time
+  const [download] = await Promise.all([
+    this.page.waitForEvent("download", { timeout: 60000 }),
+    this.excelOption.click()
+  ]);
 
-    //Check "downloads" folder exists in current directory
-    const downloadDir = path.join(__dirname, "downloads");
-    if (!fs.existsSync(downloadDir)) {
-        fs.mkdirSync(downloadDir);
-    }
-    //Save the file
-    const filePath = path.join(downloadDir, "chargers.xlsx");
-    await download.saveAs(filePath);
-    return filePath;
+  // Ensure downloads folder exists
+  const downloadDir = path.join(__dirname, "downloads");
+  if (!fs.existsSync(downloadDir)) {
+    fs.mkdirSync(downloadDir);
+  }
+
+  // Save file
+  const filePath = path.join(downloadDir, "chargers.xlsx");
+  await download.saveAs(filePath);
+
+  console.log("Charger Excel downloaded:", filePath);
+  return filePath;
 }
 
 // Count Charger IDs in  Chargers Excel

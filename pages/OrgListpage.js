@@ -73,11 +73,6 @@ class OrganisationPage {
         await this.settingsBtn.click();
          await this.page.waitForTimeout(2000);
         await this.OrganisationOption.waitFor({ state: 'visible', timeout: 5000 });
-        // await this.usermanageBtn.click();
-        // await this.usercount.waitFor({ state: 'visible', timeout: 5000 }); 
-        // const text = await this.usercount.textContent();
-        // return{    
-        // UserCount:text.match(/\d+/)[0]
         await this.OrganisationOption.click();
         await this.page.waitForTimeout(2000);
     }
@@ -217,5 +212,6 @@ class OrganisationPage {
 }
    
 };
+
 
 module.exports = { OrganisationPage };

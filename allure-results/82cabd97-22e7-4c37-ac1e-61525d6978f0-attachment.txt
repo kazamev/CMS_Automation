@@ -1,27 +1,27 @@
-DashboardRevenue: 14483.82
-Revenue: 14483.82
-Total Revenue: 4808522.76
+DashboardRevenue: 12293.92
+Revenue: 12293.92
+Total Revenue: 4877094.92
 Starting Excel download
 Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
-Excel Revenue: 14483.82
-Revenue In Revenue Page: 14483.82
-Dashboard Revenue: 14483.82
-Dashboard Revenue matched Excel Revenue → 14483.82
+Excel Revenue: 12293.92
+Revenue In Revenue Page: 12293.92
+Dashboard Revenue: 12293.92
+Dashboard Revenue matched Excel Revenue → 12293.92
 Revenue Validation Passed: Revenue values matched successfully
 Success row Overview Data
-Transaction id: 93839864
-Billed Amount: 0.02
+Transaction id: 90317196
+Billed Amount: 12.03
 Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
-Driver Details: muneeb khan 552161528
-Time stamp: 28/01/2026
+Driver Details: Ilraf Husain 588696913
+Time stamp: 02/02/2026
         
-        11:59:50 pm
+        11:59:48 pm
 Invoice Data
-Transaction id: 93839864
-Billed Amount: 0.02
+Transaction id: 90317196
+Billed Amount: 12.03
 Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
-Driver Details: muneeb khan - 552161528
-Time stamp: Jan 28 2026, 11:59:50 pm
+Driver Details: Ilraf Husain - 588696913
+Time stamp: Feb 02 2026, 11:59:48 pm
 
  Comparison Report
 Transaction id: MATCHED

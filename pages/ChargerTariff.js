@@ -35,10 +35,6 @@ export class ChargerTariffPage {
 
   }
 
-  // Navigate to Tariff Page(Revenue)
-  async navigate() {
-    await this.page.goto(this.tariffUrl, { waitUntil: "networkidle" });
-  }
 
   // Create new tariff
   async createTariff(tariffName) {
@@ -48,38 +44,17 @@ export class ChargerTariffPage {
     await this.page.waitForTimeout(2000)
   }
 
-  async selectStartAndEndDate() {
+ async selectStartAndEndDate() {
   const today = new Date();
-  const startDate = today.getDate();
-  const endDateObj = new Date();
-  endDateObj.setDate(today.getDate() + 3);
-  const endDate = endDateObj.getDate();
-  const isNextMonth =
-    today.getMonth() !== endDateObj.getMonth() ||
-    today.getFullYear() !== endDateObj.getFullYear();
+  const startDate = today.getDate().toString();
 
-  //START DATE (Today)
+  // 1. Open the calendar
   await this.startDateCalendar.click();
-   await this.page.waitForTimeout(2000)
-  await this.page.locator(`//button[normalize-space()='${startDate}'] | //div[normalize-space()='${startDate}']`).first().click();
-   await this.page.waitForTimeout(2000)
-
-//   //END DATE (Today + 3 Days)
-//   await this.endDateCalendar.click();
-//   await this.page.locator(
-//     //button[normalize-space()='${endDate}'] | //div[normalize-space()='${endDate}']
-//   ).first().click();
-
-//   // If end date is in next month - move calendar
-//   if (isNextMonth) {
-//     await this.page.locator(
-//       "//button[@aria-label='Next Month'] | //svg[contains(@class,'chevron-right')]"
-//     ).first().click();
-//   }
-
-//   await this.page.locator(
-//     //button[normalize-space()='${endDate}'] | //div[normalize-space()='${endDate}']
-//   ).first().click();
+  const dayElement = this.page.locator('#createTariff')
+    .locator('div, span')
+    .filter({ hasText: new RegExp(`^${startDate}$`) })
+    .filter({ visible: true });
+  await dayElement.last().click({ force: true });
 
 
 
@@ -165,15 +140,16 @@ async deleteTariff(tariffName) {
   await this.nextBtn.click();
   await this.page.waitForTimeout(2000)
   await this.linkCheckbox.uncheck();
-  await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(1000);
   await this.nextBtn.click();
-  await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(1000);
   await this.updateBtn.click();
-  await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(1000);
   await this.dltbut.click();
-  await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(1000);
   await this.yesbtn.click();
-  await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(1000);
+ await this.page.waitForLoadState('networkidle');
   
 }
 }

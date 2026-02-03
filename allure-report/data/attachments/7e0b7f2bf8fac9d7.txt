@@ -1,0 +1,17 @@
+Before Count: 581
+Charger added successfully → EV Charger
+Generated Charger ID: 9szohn
+New charger added to list
+Charger Reconfigured Successfully
+After Count: 582
+Charger count increased
+Device Name: Charger Updated
+Connector Type: industrial
+Charger Name updated successfully
+Connector Type updated successfully
+Installation Date: 1. 03/02/2026, 02:31:22 PM
+Reconfiguration Date: 03/02/2026, 02:31:46 PM
+Charger Excel downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Downloaded Excel file path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Excel count matches UI count  582

@@ -11,6 +11,7 @@
     "playwright:pdf": "node scripts/playwright-html-to-pdf.js",
     "allure:email": "node scripts/send-allure-email.js",
     "allure:open": "allure open allure-report",
+    "Complete:allure": "npm run clean:allure && (npx playwright test tests/CMS_Complete_Flow.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "Full:allure": "npm run clean:allure && (npx playwright test || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "login:allure": "npm run clean:allure && (npx playwright test tests/loginTest.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "DashBoard:allure": "npm run clean:allure && (npx playwright test tests/DashBoard.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",

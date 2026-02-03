@@ -10,6 +10,7 @@ export class DashboardSessionsPage {
         //KPI LOCATORS
         this.sessionsValue = page.locator("(//p[@class='text-base font-medium'])[2]");
         this.usageValue = page.locator("(//p[@class='text-base font-medium'])[3]");
+        this.onlinePercent = page.locator("(//p[@class='text-base font-medium'])[4]");
 
         // Sessions KPI Card
         this.sessionsKPICard = page.locator("//div[contains(@class,'hover:cursor-pointer')][.//p[text()='No of Sessions']]");
@@ -33,18 +34,24 @@ export class DashboardSessionsPage {
 
     // Fetch KPI values from Dashboard
     async getKPIValues() {
-    const sessionText = await this.sessionsValue.textContent();
-    const usageText = await this.usageValue.textContent();
-    const sessionKpi = Number(sessionText.replace(/[^0-9.]/g, ""));  // keep only numbers & dot
-    let usageKpi = Number(usageText.replace(/[^0-9.]/g, ""));        // numeric value only
+  const sessionText = await this.sessionsValue.textContent();
+  const usageText = await this.usageValue.textContent();
+  const onlineText = await this.onlinePercent.textContent();
 
-    // Convert Dashboard KPI if it is in kWh
-    if (usageText.toLowerCase().includes("kwh")) {
-        usageKpi = usageKpi / 1000;       // Convert to MWh
-    }
-    return { sessionKpi, usageKpi };
+  this.sessionKpi = Number(sessionText.replace(/[^0-9.]/g, ""));
+  this.usageKpi = Number(usageText.replace(/[^0-9.]/g, ""));
+  this.onlineKpi = Number(onlineText.replace(/[^0-9.]/g, ""));
+
+  if (usageText.toLowerCase().includes("kwh")) {
+    this.usageKpi = this.usageKpi / 1000;
+  }
+
+  return {
+    sessionKpi: this.sessionKpi,
+    usageKpi: this.usageKpi,
+    onlineKpi: this.onlineKpi
+  };
 }
-
     // Apply Time Filter in Dashboard
     async applyTimeFilterInDashboard(period) {
     await this.DashBoardTimeFilter.click();
@@ -117,7 +124,7 @@ async downloadExcel() {
     return filePath;
 }
 
-// Session Count in downloaded Excel
+// Session Count in  session downloaded Excel
 async countSessionIdsInExcel(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -167,6 +174,7 @@ async countSessionIdsInExcel(filePath) {
     }
 }
 
+// Sum of Usage from session Excel
 async sumOfUsage(filePath) {
   const wb = excel.readFile(filePath);
   const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -180,6 +188,8 @@ async sumOfUsage(filePath) {
 
   return values.reduce((a, b) => a + b, 0);
 }
+
+// Verify Usage (KPI vs session Excel)
 async verifyUsageFromExcel(filePath, usageKpi) {
     //Sum usage from Excel (kWh)
     const excelUsageKwh = await this.sumOfUsage(filePath);
@@ -260,14 +270,13 @@ async selectKazamCalendarDate(userDate) {
 }
 
 //Download Daily Report with fixed filename
-async downloadDailyReport() {
+async downloadSessionReport() {
       const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
     const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
     await downloadBtn.waitFor({ timeout:60000});
     await downloadBtn.click();
     const download = await downloadPromise;
     
-
     // Create downloads folder if not exists
     const downloadDir = path.join(__dirname, "downloads");
     if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
@@ -278,9 +287,27 @@ async downloadDailyReport() {
     return filePath2;
 }
 
+//Download Charger Report with fixed filename
+async downloadChargerReport() {
+      const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
+    const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
+    await downloadBtn.waitFor({ timeout:60000});
+    await downloadBtn.click();
+    const download = await downloadPromise;
+    
+    // Create downloads folder if not exists
+    const downloadDir = path.join(__dirname, "downloads");
+    if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
 
-// Count txn_id 
-async countTxnIdsDailyReport(filePath2) {
+    // Save file with required name
+    const filePath3 = path.join(downloadDir, "Charger_Reports_Analytics.xlsx");
+    await download.saveAs(filePath3);
+    return filePath3;
+
+}
+
+// Count txn_id in Session Report Excel
+async countTxnIdsSessionReport(filePath2) {
       const wb = excel.readFile(filePath2);
     const sheet = wb.Sheets[wb.SheetNames[0]];
     const data = excel.utils.sheet_to_json(sheet, { header: 1 }); 
@@ -292,11 +319,11 @@ async countTxnIdsDailyReport(filePath2) {
 
 }
 
-// Compare daily report count with KPI & Excel
-async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
+// Compare session report count with KPI & session Excel
+async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
     let errors = [];
 
-    // Compare Daily Report Count vs Dashboard KPI
+    // Compare Session Report Count vs Dashboard KPI
     if (txnIds !== sessionKpi) {
         errors.push(
             `Daily Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi})`
@@ -336,6 +363,8 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
         };
     }
 }
+
+// Verify Usage from Report Excel vs KPI
     async verifyReportUsageFromExcel(filePath2, usageKpi) {
     const excelUsageKwh = await this.sumOfUsage(filePath2);
 
@@ -364,6 +393,24 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
         excelUsageMWh: excelMWh,
         message: `Usage KPI (${usageKpi} MWh) does NOT match Excel Usage (${excelMWh} MWh). Allowed Buffer: ±${tolerance} MWh`
     };
+}
+
+//online percent verification from charger excel
+async verifyOnlinePercentFromChargerExcel(filePath3, onlineKpi) {
+    const avgOnlinePercent = await this.getAverageOnlinePercentFromExcel(filePath3); 
+    const difference = Math.abs(avgOnlinePercent - onlineKpi);  
+    const tolerance = 1.0; // 1% tolerance
+    if (difference <= tolerance) {
+      return {
+        success: true,
+        message: `Online Percentage matches KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+      };
+    } else {
+      return {
+        success: false,
+        message: `Online Percentage mismatch! KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+        };
+    }
 }
 
 async ChargerPage() {
@@ -400,14 +447,14 @@ async ChargerdownloadExcel() {
             fs.mkdirSync(downloadDir);
         }
         //Save the file
-        const filePath3 = path.join(downloadDir, "chargers.xlsx");
-        await download.saveAs(filePath3);
-        console.log("Charger Excel Downloaded ", filePath3);
-        return filePath3;
+        const filePath4 = path.join(downloadDir, "chargers.xlsx");
+        await download.saveAs(filePath4);
+        console.log("Charger Excel Downloaded ", filePath4);
+        return filePath4;
     }
 
-async getSessionsAndUsageFromSessionReportExcel(filePath3) {
-    const wb = excel.readFile(filePath3);
+async getSessionsAndUsageFromSessionReportExcel(filePath4) {
+    const wb = excel.readFile(filePath4);
     const sheet = wb.Sheets[wb.SheetNames[0]];
 
     // Read Excel as raw rows
@@ -463,11 +510,33 @@ async getSessionsAndUsageFromSessionReportExcel(filePath3) {
 
 }
 
-async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
+
+// Calculate Average Online % from  Charger Excel
+async getAverageOnlinePercentFromExcel(filePath4) {
+  if (!filePath4) {
+    throw new Error("Excel file path is undefined for Online % calculation");
+  }
+  const wb = excel.readFile(filePath4);
+  const sheet = wb.Sheets[wb.SheetNames[0]];
+  const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+  const rows = data.slice(1);
+  const values = rows   
+    .map(row =>
+      parseFloat(
+        row[5]?.toString().replace(/[^0-9.]/g, "")
+      )
+    )
+    .filter(v => !isNaN(v));
+
+  const avgOnline =values.reduce((a, b) => a + b, 0) / values.length;
+  return Number(avgOnline.toFixed(2));
+}
+
+async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
     const {
         excelSessions,
         excelUsageMW
-    } = await this.getSessionsAndUsageFromSessionReportExcel(filePath3);
+    } = await this.getSessionsAndUsageFromSessionReportExcel(filePath4);
     let errors = [];
 
     // Compare Sessions
@@ -513,4 +582,33 @@ async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
         };
     }
 }
+
+// Verify Online % from charger Excel vs Dashboard KPI
+async verifyOnlinePercentWithExcel(filePath4, OnlineKpi) {
+  try {
+    const avgOnlinePercent = await this.getAverageOnlinePercentFromExcel(filePath4); 
+    const difference = Math.abs(avgOnlinePercent - OnlineKpi);
+
+    const tolerance = 1.0; // 1% tolerance
+    if (difference <= tolerance) {
+      return {
+        success: true,
+        message: `Online Percentage matches KPI: ${OnlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+      };
+    } else {
+      return {
+        success: false,
+        message: `Online Percentage mismatch! KPI: ${OnlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: `Error verifying Online Percentage: ${error.message}`
+    };
+  }         
+    } 
+
+
+//verifyOnlinePercentWithExcel(filePath3, OnlineKpi) {
 }
