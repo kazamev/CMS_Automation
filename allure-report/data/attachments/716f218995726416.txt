@@ -1,0 +1,167 @@
+Total organisations: 16
+{
+  name: 'Atomz Power',
+  users: '47 Users',
+  date: 'Sep 17th 2022',
+  plan: 'premium Plan',
+  country: 'India',
+  currency: { symbol: '₹', name: 'Indian Rupee' },
+  timezone: 'Indian Standard Time'
+}
+Navigated to the offerings page
+OrganizationName : Atomz Power
+Email             : kiran@atomzpower.com
+Plan              : premium
+Country           : India (IN)
+TimeZone          : India Standard Time
+(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi
+Currency           : ₹
+Indian Rupee
+
+ Organization Validation Started
+
+Organization Name: MATCHED
+Plan: MATCHED
+Country: MATCHED
+Timezone: MATCHED
+Currency: MATCHED
+Yesterday DashBoard Data
+Revenue: AED 12293.92
+Sessions: 378
+Usage: 9.83 MWh
+Online Percentage: 62.55%
+Dashboard Data: {
+  chargers: '34',
+  connectors: '55',
+  nonConfigured: '1',
+  all: 'All(55)',
+  busy: 'Busy (20)',
+  available: 'Available (24)',
+  error: 'Error (11)'
+}
+Charger Page Data: {
+  chargers: '34',
+  connectors: '55',
+  nonConfigured: '1',
+  all: 'All(55)',
+  busy: ' Busy (20)  ',
+  available: ' Available (24)  ',
+  error: ' Error (11)  '
+}
+ Dashboard and Charger page counters Match
+Before Count: 583
+Charger added successfully → EV Charger
+Generated Charger ID: drunwn
+New charger added to list
+Charger Reconfigured Successfully
+After Count: 584
+Charger count increased
+Device Name: Charger Updated
+Connector Type: industrial
+Charger Name updated successfully
+Connector Type updated successfully
+Installation Date: 1. 03/02/2026, 03:26:10 PM
+Reconfiguration Date: 03/02/2026, 03:26:33 PM
+Charger Excel downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Downloaded Excel file path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Excel count matches UI count  584
+Start Charger Tariff Creation
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬─────────────────────────────┐
+│ (index) │ Field         │ Value                       │
+├─────────┼───────────────┼─────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_Tariff_1770112626731' │
+│ 1       │ 'Description' │ '----'                      │
+│ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
+│ 3       │ 'Validity'    │ '03/02/2026 -- Forever'     │
+│ 4       │ 'Price Type'  │ 'Amount'                    │
+│ 5       │ 'Chargers'    │ '244a95'                    │
+└─────────┴───────────────┴─────────────────────────────┘
+Charger Tariff Created Successfully
+Tariff deleted successfully
+Dashboard Session KPI: 378
+Dashboard Usage KPI: 9.83
+Dashboard Online KPI: 62.55
+All Sessions Count in Session Page: 378
+Ongoing Sessions Count in Session Page: 0
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 378
+All counts(DashBOard, Session Page, Excel) matched successfully  378
+Count Validation Passed: All counts(Dashboard, Session Page, Excel) matched successfully
+Session Excel Usage (kWh): 9811.280000000006
+Session Excel Usage (MWh Rounded): 9.81
+KPI Usage (MWh): 9.83
+Usage Validation Passed: Usage values(Dashboard, Session Page, Session Excel) matched successfully
+Navigated to Daily Reports Page
+Selected date: 02/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
+Daily Report Session matched KPI Sessions → 378
+Daily Report Session matched Excel Sessions → 378
+Daily Report Session matched KPI & Excel
+Report Excel Usage (kWh): 9811.27999999999
+Report Excel Usage (MWh Rounded): 9.81
+KPI Usage (MWh): 9.83
+Usage Validation Passed: Usage values(Dashboard, Report Excel, Session Excel) matched successfully
+Selected date: 02/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Charger_Reports_Analytics.xlsx
+Avg of Online Percentage from Report Excel: 62.55
+Navigated to Charger Page
+Charger Excel Downloaded  C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 9.8323
+Charger Excel Sessions: 378
+Average Online Percent from Charger Excel: 62.55
+Sessions matched : KPI Session Count: 378, ChargerExcel Session Count: 378
+Usage matched : KPI usage: 9.83, ChargerExcel usage: 9.8323
+Dashboard KPI and Charger Excel matched successfully
+ Report Online Percentage Validation Passed: Online Percentage matches KPI: 62.55%, Excel Avg: 62.55%
+DashboardRevenue: 12293.92
+Revenue: 12293.92
+Total Revenue: 4877655.33
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 12293.92
+Revenue In Revenue Page: 12293.92
+Dashboard Revenue: 12293.92
+Dashboard Revenue matched Excel Revenue → 12293.92
+Revenue Validation Passed: Revenue values matched successfully
+Success row Overview Data
+Transaction id: 90317196
+Billed Amount: 12.03
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Ilraf Husain 588696913
+Time stamp: 02/02/2026
+        
+        11:59:48 pm
+Invoice Data
+Transaction id: 90317196
+Billed Amount: 12.03
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Ilraf Husain - 588696913
+Time stamp: Feb 02 2026, 11:59:48 pm
+
+ Comparison Report
+Transaction id: MATCHED
+Billed Amount: MATCHED
+Host Details: MATCHED
+Driver Details: MATCHED
+Time stamp: MATCHED
+Driver Group created successfully
+Starting Driver Tariff Creation
+Successfully opened Driver Group: Driver Group101
+Selecting available tariff: Auto_Tariff_1770023335777
+Driver Tariff  Created Successfully
+Successfully opened Driver Group: Driver Group101
+
+Driver Group Details
+┌─────────┬─────────────────┬─────────────────────────────────┐
+│ (index) │ Field           │ Value                           │
+├─────────┼─────────────────┼─────────────────────────────────┤
+│ 0       │ 'Name'          │ 'Driver Group101'               │
+│ 1       │ 'Description'   │ 'Test Driver Group Description' │
+│ 2       │ 'Total Drivers' │ '0'                             │
+│ 3       │ 'Name'          │ 'Auto_Tariff_1770023335777'     │
+│ 4       │ 'Description'   │ '----'                          │
+└─────────┴─────────────────┴─────────────────────────────────┘
+Driver Tariff deleted successfully.
+Successfully opened Driver Group: Driver Group101
