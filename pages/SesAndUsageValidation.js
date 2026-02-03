@@ -432,6 +432,7 @@ async applyTimeFilterinChargerPage(period) {
 
 async ChargerdownloadExcel() {
      const downloadPromise = this.page.waitForEvent("download");
+     
         //Click download on 3dots menu
         await this.downloadButton.click();
         await this.page.waitForTimeout(1000);
@@ -440,6 +441,7 @@ async ChargerdownloadExcel() {
     
         //Wait for file
         const download = await downloadPromise;
+         this.page.waitForEvent('download', { timeout: 90000 });
     
         //Check "downloads" folder exists in current directory
         const downloadDir = path.join(__dirname, "downloads");

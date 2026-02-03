@@ -67,26 +67,26 @@ export default async () => {
   const login = new LoginPage(page);
 
   try {
-    // 1️⃣ Login
+    //Login
     await login.goTo();
     await login.validLogin('shilpa@kazam.in', 'Shilpa@1234567890');
 
-    // 2️⃣ Wait for Select Organization page
+    //Wait for Select Organization page
     await page.waitForURL('**/org', { timeout: 60000 });
     console.log('Select Organization page loaded');
 
-    // 3️⃣ Click required organization (IMPORTANT)
+    //Click required organization (IMPORTANT)
     await page.click('text=Tyagi\'s Org');
 
-    // 4️⃣ Wait for dashboard / CPO page
+    //Wait for dashboard / CPO page
     await page.waitForURL(/.*\/cpo|.*\/dashboard.*/, { timeout: 60000 });
     console.log('Organization selected, landed inside app');
 
-    // 5️⃣ Wait until app fully settles
+    //Wait until app fully settles
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(2000); // small buffer for SPA storage
 
-    // 6️⃣ Save storage state
+    //Save storage state
     const storagePath = path.resolve(__dirname, 'storageState.json');
     await context.storageState({ path: storagePath });
 

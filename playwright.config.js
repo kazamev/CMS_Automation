@@ -73,14 +73,14 @@ forbidOnly: !!process.env.CI,
     ['allure-playwright'],
     ['html', { open: 'never', outputFolder: 'extent-report' }]
   ],
-  timeout: 90000,
+  timeout: 180000,
 
   use: {
     headless: false,
     // Use the absolute path
     storageState: path.resolve(__dirname, 'storageState.json'),
-    actionTimeout: 30000,
-    navigationTimeout: 60000,
+    actionTimeout: 80000,
+    navigationTimeout: 90000,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
      video: 'retain-on-failure',

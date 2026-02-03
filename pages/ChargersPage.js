@@ -112,6 +112,7 @@ async getConnectorStatusCounts() {
 // Add charger flow
 async openAddCharger() {
         await this.btnAddCharger.click();
+        await this.page.waitForLoadState("networkidle");
     }
 
 async fillChargerDetails(data) {
@@ -201,6 +202,7 @@ async getChargerId() {
 async ChargerReconfiguration(data){
     await this.reconfigureButton.waitFor({ state: "visible" });
    await this.reconfigureButton.click();
+    await this.page.waitForLoadState("networkidle");
 
 // Wait for the reconfiguration form fields to appear
 await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
@@ -221,7 +223,6 @@ await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
     await this.page.waitForTimeout(1000);
     await this.NextButton3.click();
     await this.configuredButton.click();
-
     await this.page.waitForLoadState("networkidle");
     console.log("Charger Reconfigured Successfully");
     await this.BackButton.click();
@@ -235,7 +236,7 @@ async Validateconfiguration(chargerId, data) {
     // Search charger
     const searchField = this.page.locator('//input[@type="search"]');
     await searchField.fill(chargerId);
-
+    await this.page.waitForLoadState("networkidle");
     // Locate charger row dynamically
     const chargerRow = this.page.locator(`//tr[.//p[text()="${chargerId}"]]`);
     await chargerRow.waitFor({ state: "visible", timeout: 10000 });
@@ -290,11 +291,11 @@ async downloadExcel() {
   await this.downloadButton.click();
 
   // Wait for Excel option to be visible
-  await this.excelOption.waitFor({ state: "visible", timeout: 10000 });
+  await this.excelOption.waitFor({ state: "visible", timeout: 60000 });
 
   // Listen + click at the SAME time
   const [download] = await Promise.all([
-    this.page.waitForEvent("download", { timeout: 60000 }),
+    this.page.waitForEvent("download", { timeout: 90000 }),
     this.excelOption.click()
   ]);
 

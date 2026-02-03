@@ -1,0 +1,35 @@
+Dashboard Session KPI: 378
+Dashboard Usage KPI: 9.83
+Dashboard Online KPI: 62.55
+All Sessions Count in Session Page: 378
+Ongoing Sessions Count in Session Page: 0
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 378
+All counts(DashBOard, Session Page, Excel) matched successfully  378
+Count Validation Passed: All counts(Dashboard, Session Page, Excel) matched successfully
+Session Excel Usage (kWh): 9811.280000000006
+Session Excel Usage (MWh Rounded): 9.81
+KPI Usage (MWh): 9.83
+Usage Validation Passed: Usage values(Dashboard, Session Page, Session Excel) matched successfully
+Navigated to Daily Reports Page
+Selected date: 02/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
+Daily Report Session matched KPI Sessions → 378
+Daily Report Session matched Excel Sessions → 378
+Daily Report Session matched KPI & Excel
+Report Excel Usage (kWh): 9811.27999999999
+Report Excel Usage (MWh Rounded): 9.81
+KPI Usage (MWh): 9.83
+Usage Validation Passed: Usage values(Dashboard, Report Excel, Session Excel) matched successfully
+Selected date: 02/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Charger_Reports_Analytics.xlsx
+Avg of Online Percentage from Report Excel: 62.55
+Navigated to Charger Page
+Charger Excel Downloaded  C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 9.8323
+Charger Excel Sessions: 378
+Average Online Percent from Charger Excel: 62.55
+Sessions matched : KPI Session Count: 378, ChargerExcel Session Count: 378
+Usage matched : KPI usage: 9.83, ChargerExcel usage: 9.8323
+Dashboard KPI and Charger Excel matched successfully
+ Report Online Percentage Validation Passed: Online Percentage matches KPI: 62.55%, Excel Avg: 62.55%
