@@ -8,6 +8,7 @@ export class DashboardSessionsPage {
         this.page = page;
 
         //KPI LOCATORS
+        this.revenueValue = page.locator("(//p[@class='text-base font-medium'])[1]");
         this.sessionsValue = page.locator("(//p[@class='text-base font-medium'])[2]");
         this.usageValue = page.locator("(//p[@class='text-base font-medium'])[3]");
         this.onlinePercent = page.locator("(//p[@class='text-base font-medium'])[4]");
@@ -29,7 +30,8 @@ export class DashboardSessionsPage {
          this.downloadButton = page.locator("//div[@id='download']//*[name()='svg']");
         this.excelOption = page.locator("(//div[@class='flex items-center gap-2 m-1 hover:bg-kazamGray-100 p-2 rounded-md'])[2]");
         this.chargertimeperiod = page.locator("//button[.//div[normalize-space()='Today']]");
- 
+            this.RevenueTab = page.locator("//button[normalize-space()='Revenue']");
+             this.reportDropdown = page.locator("//div[@class='grid gap-2']//select[1]");
     }
 
     // Fetch KPI values from Dashboard
@@ -37,10 +39,12 @@ export class DashboardSessionsPage {
   const sessionText = await this.sessionsValue.textContent();
   const usageText = await this.usageValue.textContent();
   const onlineText = await this.onlinePercent.textContent();
+  const revenueText = await this.revenueValue.textContent();
 
   this.sessionKpi = Number(sessionText.replace(/[^0-9.]/g, ""));
   this.usageKpi = Number(usageText.replace(/[^0-9.]/g, ""));
   this.onlineKpi = Number(onlineText.replace(/[^0-9.]/g, ""));
+  this.revenueKpi = Number(revenueText.replace(/[^0-9.]/g, ""));
 
   if (usageText.toLowerCase().includes("kwh")) {
     this.usageKpi = this.usageKpi / 1000;
@@ -49,7 +53,8 @@ export class DashboardSessionsPage {
   return {
     sessionKpi: this.sessionKpi,
     usageKpi: this.usageKpi,
-    onlineKpi: this.onlineKpi
+    onlineKpi: this.onlineKpi,
+    revenueKpi: this.revenueKpi
   };
 }
     // Apply Time Filter in Dashboard
@@ -276,6 +281,7 @@ async downloadSessionReport() {
     await downloadBtn.waitFor({ timeout:60000});
     await downloadBtn.click();
     const download = await downloadPromise;
+      this.page.waitForEvent('download', { timeout: 90000 });
     
     // Create downloads folder if not exists
     const downloadDir = path.join(__dirname, "downloads");
@@ -294,6 +300,7 @@ async downloadChargerReport() {
     await downloadBtn.waitFor({ timeout:60000});
     await downloadBtn.click();
     const download = await downloadPromise;
+      this.page.waitForEvent('download', { timeout: 90000 });
     
     // Create downloads folder if not exists
     const downloadDir = path.join(__dirname, "downloads");
@@ -413,6 +420,70 @@ async verifyOnlinePercentFromChargerExcel(filePath3, onlineKpi) {
     }
 }
 
+async RevenueClick() {
+   await this.RevenueTab.waitFor({ state: "visible", timeout: 30000 });
+ 
+   await Promise.all([
+     this.page.waitForLoadState("networkidle"),
+     this.RevenueTab.click()
+   ]);
+ 
+   // Wait for report dropdown as proof Revenue page loaded
+   await this.reportDropdown.waitFor({ state: "visible", timeout: 30000 });
+ }
+
+ //Revenue Report Download
+ async downloadRevenueReport() {
+      const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
+    const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
+    await downloadBtn.waitFor({ timeout:60000});
+    await downloadBtn.click();
+    const download = await downloadPromise;
+      this.page.waitForEvent('download', { timeout: 90000 });
+    
+    // Create downloads folder if not exists
+    const downloadDir = path.join(__dirname, "downloads");
+    if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
+
+    // Save file with required name
+    const filePath8 = path.join(downloadDir, "CRevenue_Report_Analytics.xlsx");
+    await download.saveAs(filePath8);
+    return filePath8;
+
+}
+ 
+ //Sum of Revenue(Excel)
+ async sumOfRevenue(filePath) {
+     const wb = excel.readFile(filePath);
+     const sheet = wb.Sheets[wb.SheetNames[0]];
+     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+     const rows = data.slice(1);
+     // Excel Usage column index
+     const RevenueValues = rows
+         .map(row => Number(row[2]))   // change index if needed
+         .filter(v => !isNaN(v));
+    const totalRevenue = RevenueValues.reduce((a, b) => a + b, 0);
+    const formattedTotal = Number(totalRevenue.toFixed(2));
+   //  console.log("Excel Revenue Sum:", formattedTotal);
+    return formattedTotal;
+ }
+
+ //Revenue Validation(KPI vs Report Excel)
+ async validateRevenue(filePath, revenueKpi) {
+    const excelRevenue = await this.sumOfRevenue(filePath);
+    const tolerance = 1; // 1 Rupees tolerance
+    if (Math.abs(revenueKpi - excelRevenue) <= tolerance) {
+        return {
+            message:`Revenue KPI (${revenueKpi} Rs) match Excel Revenue (${excelRevenue} Rs)`
+        };
+    }
+    return {
+        success: false,
+        excelRevenue: excelRevenue,
+        message: `Revenue KPI (${revenueKpi} Rs) does NOT match Excel Revenue (${excelRevenue} Rs). Allowed Buffer: ±${tolerance} Rs`
+    };
+ }
+
 async ChargerPage() {
     await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/chargers");
     await this.page.waitForLoadState("networkidle");
@@ -430,30 +501,31 @@ async applyTimeFilterinChargerPage(period) {
     await this.page.waitForLoadState("networkidle");}
 
 
-async ChargerdownloadExcel() {
-     const downloadPromise = this.page.waitForEvent("download");
-     
-        //Click download on 3dots menu
-        await this.downloadButton.click();
-        await this.page.waitForTimeout(1000);
-        await this.excelOption.waitFor({ state: "visible", timeout: 5000 });
-        await this.excelOption.click();
-    
-        //Wait for file
-        const download = await downloadPromise;
-         this.page.waitForEvent('download', { timeout: 90000 });
-    
-        //Check "downloads" folder exists in current directory
-        const downloadDir = path.join(__dirname, "downloads");
-        if (!fs.existsSync(downloadDir)) {
-            fs.mkdirSync(downloadDir);
-        }
-        //Save the file
-        const filePath4 = path.join(downloadDir, "chargers.xlsx");
-        await download.saveAs(filePath4);
-        console.log("Charger Excel Downloaded ", filePath4);
-        return filePath4;
+    async ChargerdownloadExcel() {
+    // Start listening BEFORE triggering download
+    const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
+
+    // Click download on 3-dots menu
+    await this.downloadButton.click();
+    await this.excelOption.waitFor({ state: "visible", timeout: 5000 });
+    await this.excelOption.click();
+
+    // Capture the download
+    const download = await downloadPromise;
+
+    // Ensure downloads folder exists
+    const downloadDir = path.join(__dirname, "downloads");
+    if (!fs.existsSync(downloadDir)) {
+        fs.mkdirSync(downloadDir, { recursive: true });
     }
+
+    // Save file
+    const filePath4 = path.join(downloadDir, "chargers.xlsx");
+    await download.saveAs(filePath4);
+
+    console.log("Charger Excel Downloaded:", filePath4);
+    return filePath4;
+}
 
 async getSessionsAndUsageFromSessionReportExcel(filePath4) {
     const wb = excel.readFile(filePath4);
@@ -611,6 +683,23 @@ async verifyOnlinePercentWithExcel(filePath4, OnlineKpi) {
   }         
     } 
 
+ 
+ 
+ 
+ //sum of usage in chargers report
+ async sumOfUsageInRevenueReport(filePath) {
+     const wb = excel.readFile(filePath);
+     const sheet = wb.Sheets[wb.SheetNames[0]]; 
+     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+     const rows = data.slice(1); 
+     // Excel Usage column index (eg: column 9)
+     const usageValues = rows
+         .map(row => Number(row[13]))   // change index if needed
+         .filter(v => !isNaN(v));
+    const totalUsage = usageValues.reduce((a, b) => a + b, 0);
+    const formattedTotal = Number(totalUsage.toFixed(2));
+    return formattedTotal;
+ }
 
 //verifyOnlinePercentWithExcel(filePath3, OnlineKpi) {
 }

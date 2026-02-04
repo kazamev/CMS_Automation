@@ -68,11 +68,18 @@ export default defineConfig({
 // ],
 forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-     reporter: [
-    ['list'],
-    ['allure-playwright'],
-    ['html', { open: 'never', outputFolder: 'extent-report' }]
-  ],
+    reporter: [
+  ['list'], 
+  ['allure-playwright', {
+    outputFolder: 'allure-results',
+    detail: true,      // Capture detailed steps
+    suiteTitle: true   // Show suite + test names
+  }],
+  ['html', { open: 'never', outputFolder: 'extent-report' }],
+   ['ortoni-report', {
+    outputFolder: 'ortoni-report'
+  }]
+],
   timeout: 180000,
 
   use: {

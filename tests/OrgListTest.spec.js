@@ -1,9 +1,20 @@
 import { test, expect } from '../fixtures/login.fixture';
 const { OrganisationPage } = require('../pages/OrgListpage');
+const { LoginPage } = require('../pages/loginPage');
 
-  test('Organisation Details Validation', async ({ loggedInPage }) => {
-    const page = loggedInPage;  
+// It ignored the default storage(cookies) to start with a clean session
+test.use({ storageState: { cookies: [], origins: [] } });
+
+  test('Organisation List', async ({ page }) => {
+    const login = new LoginPage(page);
     const orgPage = new OrganisationPage(page);
+
+    //Go to login page
+    await login.goTo();
+
+    //Perform login
+    await login.validLogin("shilpa@kazam.in", "Shilpa@1234567890");
+    await page.waitForLoadState('networkidle');
 
     //Count total organisations
     const count = await orgPage.getOrganisationCount();

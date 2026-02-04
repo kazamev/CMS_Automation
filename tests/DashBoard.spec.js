@@ -78,43 +78,44 @@ test('Verify Dashboard Values', async ({ loggedInPage }) => {
 
 
 
-// test('User Creation And Verification', async ({ loggedInPage }) => {
-//     const page = loggedInPage;
-//     const dashboard = new DashboardPage(page);
-//     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo",{ waitUntil: "networkidle" });
-//     await page.waitForLoadState("networkidle");
+    test('User Creation And Verification', async ({ loggedInPage }) => {
+        const page = loggedInPage;
+        const dashboard = new DashboardPage(page);
+        await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo",{ waitUntil: "networkidle" });
+        await page.waitForLoadState("networkidle");
 
-//     // Test Data
-//     const Data ={
-//         RoleName: "CMS View Role Only",
-//         RoleDescription: "RoleDescription",
-//         UserEmail: await dashboard.generateDummyEmail(),
-//         UserDesignation: "QA Engineer"
+        // Test Data
+        const Data ={
+            RoleName: "CMS View Role Only",
+            RoleDescription: "RoleDescription",
+            UserEmail: await dashboard.generateDummyEmail(),
+            UserDesignation: "QA Engineer"
+            
+        }
+
+        // Create User Role
+        await dashboard.UserCreation(Data);
+        await page.waitForTimeout(3000);
+        console.log("User Role Created Successfully");
+
+        //Role Verification
+        const roleDetails = await dashboard.RoleValidation();
+        expect(roleDetails.name).toBe(Data.RoleName);
+        expect(roleDetails.description).toBe(Data.RoleDescription);
+        console.log("User Role Verified Successfully");
+        console.log("Role Name:", roleDetails.name);
+        console.log("Role Description:", roleDetails.description);
+
+
+        // // User Invitation Verification
+        // await dashboard.AddUser(Data);
+        // await page.waitForTimeout(5000);
+        // console.log("User Invitation Sent Successfully to:", Data.UserEmail);
+
+
+        // Delete User Role
+        await dashboard.RoleDeletion();
+        await page.waitForTimeout(3000);
+        console.log("User Role Deleted Successfully");
         
-//     }
-
-//     // Create User Role
-//     await dashboard.UserCreation(Data);
-//     await page.waitForTimeout(3000);
-//     console.log("User Role Created Successfully");
-
-//     //Role Verification
-//     const roleDetails = await dashboard.RoleValidation();
-//     expect(roleDetails.name).toBe(Data.RoleName);
-//     expect(roleDetails.description).toBe(Data.RoleDescription);
-//     console.log("User Role Verified Successfully");
-//     console.log("Role Name:", roleDetails.name);
-//     console.log("Role Description:", roleDetails.description);
-
-
-//     // User Invitation Verification
-//     await dashboard.AddUser(Data);
-//     await page.waitForTimeout(5000);
-//     console.log("User Invitation Sent Successfully to:", Data.UserEmail);
-
-
-//     // Delete User Role
-//     // await dashboard.RoleDeletion();
-//     // await page.waitForTimeout(3000);
-//     // console.log("User Role Deleted Successfully");
-    
+      });

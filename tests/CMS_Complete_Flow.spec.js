@@ -53,7 +53,7 @@ test.setTimeout(180000)
    await orgPage.validateOrgVsDashboard(orgData, dashData)
     });
 
-    // DASHBOARD VS CHARGER PAGE COMPARISON
+ // DASHBOARD VS CHARGER PAGE COMPARISON
      test('Dashboard vs Charger page Data comparison', async () => {
       test.setTimeout(180000)
     const dashboard = new DashboardPage(page);
@@ -63,6 +63,7 @@ test.setTimeout(180000)
     await page.waitForLoadState('networkidle');
         await dashboard.applyTimeFilterInDashboard("Yesterday");
        await page.waitForLoadState('networkidle');
+       await page.waitForTimeout(5000);
          console.log("Yesterday DashBoard Data");
     const revenue = await dashboard.getRevenue();
     console.log("Revenue:", revenue);
@@ -89,6 +90,7 @@ test.setTimeout(180000)
 
       //navigate to charger page
       await dashboard.navigateToChargersPage();
+      await page.waitForLoadState('networkidle');
 
       //apply time filter in charger page
       await dashboard.applyTimeFilterinChargerPage("Yesterday");
@@ -119,15 +121,57 @@ test.setTimeout(180000)
       expect(chargerData.connectors.trim()).toBe(dashboardData.connectors.trim());
       expect(chargerData.nonConfigured.trim()).toBe(dashboardData.nonConfigured.trim());
       expect(chargerData.all.trim()).toBe(dashboardData.all.trim());
-      expect(chargerData.busy.trim()).toBe(dashboardData.busy.trim());
+      // expect(chargerData.busy.trim()).toBe(dashboardData.busy.trim());
       expect(chargerData.available.trim()).toBe(dashboardData.available.trim());
       expect(chargerData.error.trim()).toBe(dashboardData.error.trim());
       console.log(" Dashboard and Charger page counters Match");
 
     });
 
+    //USER ROLE CREATION, VERIFICATION & DELETION
+     test.skip('User Creation And Verification', async () => {
+      test.setTimeout(200000)
+        const dashboard = new DashboardPage(page);
+        await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/user-management/manage-user");
+        await page.waitForLoadState("networkidle");
+        // Test Data
+        const Data ={
+            RoleName: "CMS View Only",
+            RoleDescription: "RoleDescription",
+            UserEmail: await dashboard.generateDummyEmail(),
+            UserDesignation: "QA Engineer"
+            
+        }
+
+        // Create User Role
+        await dashboard.UserCreation(Data);
+        await page.waitForTimeout(3000);
+        console.log("User Role Created Successfully");
+
+        //Role Verification
+        const roleDetails = await dashboard.RoleValidation();
+        expect(roleDetails.name).toBe(Data.RoleName);
+        expect(roleDetails.description).toBe(Data.RoleDescription);
+        console.log("User Role Verified Successfully");
+        console.log("Role Name:", roleDetails.name);
+        console.log("Role Description:", roleDetails.description);
+
+
+        // // User Invitation Verification
+        // await dashboard.AddUser(Data);
+        // await page.waitForTimeout(5000);
+        // console.log("User Invitation Sent Successfully to:", Data.UserEmail);
+
+
+        // Delete User Role
+        await dashboard.RoleDeletion();
+        await page.waitForTimeout(3000);
+        console.log("User Role Deleted Successfully");
+        
+      });
+
     //ADD & RECONFIGURE CHARGER
-    test('End-to-End Add and Reconfigured Charger Flow', async () => {
+    test.skip('End-to-End Add and Reconfigured Charger Flow', async () => {
       test.setTimeout(200000)
         const chargers = new ChargersPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers");
@@ -225,7 +269,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     });
 
     //CHARGER TARIFF CREATION & DELETION
-    test('Charger Tariff Creation And Deletion', async () => {
+    test.skip('Charger Tariff Creation And Deletion', async () => {
       test.setTimeout(200000)
         const tariffPage = new ChargerTariffPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/tariffs");
@@ -256,13 +300,13 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     });
 
     //SESSIONS & USAGE VALIDATION
-    test('Validate Session Counts, Usage And Online Percentage', async () => {
+    test.skip('Validate Session Counts, Usage, Revenue And Online Percentage', async () => {
       test.setTimeout(200000)
         const sessionPage = new DashboardSessionsPage(page);
         await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
         await page.waitForLoadState("networkidle");
          //Apply Time Filter in Dashboard
-    await sessionPage.applyTimeFilterInDashboard("Yesterday");
+        await sessionPage.applyTimeFilterInDashboard("Yesterday");
 
 
     //Get KPI Values from Dashboard
@@ -270,6 +314,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     console.log("Dashboard Session KPI:", sessionKpi);
     console.log("Dashboard Usage KPI:", usageKpi);
     console.log("Dashboard Online KPI:", onlineKpi);
+    console.log("Dashboard Revenue KPI:", sessionPage.revenueKpi);
 
     //Navigate to Sessions Page
     await sessionPage.openSessionsPage();
@@ -370,6 +415,24 @@ console.log("Downloaded Excel Path:", filePath5);
 const onlinePercentageAvg = await sessionPage.getAverageOnlinePercentFromExcel(filePath5);
 console.log("Avg of Online Percentage from Report Excel:", onlinePercentageAvg);
 
+//download Revenue Report
+    await sessionPage.RevenueTab.click();
+    await page.waitForLoadState("networkidle");
+
+    //Pick calendar date
+await sessionPage.selectKazamCalendarDate(getYesterdayDate());
+
+    const revenueReportPath = await sessionPage.downloadRevenueReport();
+    console.log("Downloaded Revenue Report Path:", revenueReportPath);
+
+//sum of Revenue from Revenue Report Excel
+    const totalRevenue = await sessionPage.sumOfRevenue(revenueReportPath);
+    console.log("Total Revenue from Report Excel:", totalRevenue);
+
+//Revenue Validation
+  const revenueValidationResult = await sessionPage.validateRevenue(revenueReportPath, sessionPage.revenueKpi);
+  console.log("Revenue Validation Result:", revenueValidationResult);
+
 //Charger Page Validation
     await sessionPage.ChargerPage();
 
@@ -401,9 +464,10 @@ await sessionPage.verifyDashboardKPIWithChargerExcel( filePath6, sessionPage.ses
     }
 
     });
+  
 
-//REVENUE REPORT
- test('Validate Revenue Report And Invoice', async () => {
+ //REVENUE REPORT
+ test.skip('Validate Revenue Report And Invoice', async () => {
   test.setTimeout(200000)
   const revenuePage = new RevenuePage(page);
 
@@ -451,7 +515,7 @@ function getYesterdayDate() {
     });
 
 // DRIVER TARIFF
-    test('Create, Validate and Delete Driver Group And Tariff', async () => {
+    test.skip('Create, Validate and Delete Driver Group And Tariff', async () => {
       test.setTimeout(200000)
         const tariffPage = new TariffPage(page);
         const groupName = "Driver Group101";

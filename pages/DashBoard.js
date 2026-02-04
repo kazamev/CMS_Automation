@@ -177,12 +177,12 @@ async getConnectorStatusCounts() {
     }
 
     async UserCreation(Data) {
-        await this.settingsBtn.click(Data);
-        await this.page.waitForLoadState("networkidle");
-        await this.page.waitForTimeout(2000);
-        await this.usermanageBtn.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.page.waitForTimeout(2000);
+        // await this.settingsBtn.click(Data);
+        // await this.page.waitForLoadState("networkidle");
+        // await this.page.waitForTimeout(1000);
+        // await this.usermanageBtn.click();
+        // await this.page.waitForLoadState("networkidle");
+        // await this.page.waitForTimeout(2000);
         await this.UserRoleTab.click();
         await this.page.waitForLoadState("networkidle");
         await this.page.waitForTimeout(2000);

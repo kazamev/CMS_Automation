@@ -1,0 +1,24 @@
+Yesterday DashBoard Data
+Revenue: AED 13053.29
+Sessions: 429
+Usage: 10.51 MWh
+Online Percentage: 59.68%
+Dashboard Data: {
+  chargers: '36',
+  connectors: '57',
+  nonConfigured: '1',
+  all: 'All(57)',
+  busy: 'Busy (12)',
+  available: 'Available (34)',
+  error: 'Error (11)'
+}
+Charger Page Data: {
+  chargers: '36',
+  connectors: '57',
+  nonConfigured: '1',
+  all: 'All(57)',
+  busy: ' Busy (12)  ',
+  available: ' Available (34)  ',
+  error: ' Error (11)  '
+}
+ Dashboard and Charger page counters Match
