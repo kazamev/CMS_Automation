@@ -1,0 +1,46 @@
+
+===== TEST START: Validate Session Counts, Usage, Revenue And Online Percentage =====
+
+Dashboard Session KPI: 477
+Dashboard Usage KPI: 11.06
+Dashboard Online KPI: 63.99
+Dashboard Revenue KPI: 13964.04
+All Sessions Count in Session Page: 477
+Ongoing Sessions Count in Session Page: 1
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 477
+All counts(DashBOard, Session Page, Excel) matched successfully  477
+Count Validation Passed: All counts(Dashboard, Session Page, Excel) matched successfully
+Session Excel Usage (kWh): 11119.960000000001
+Session Excel Usage (MWh Rounded): 11.12
+KPI Usage (MWh): 11.06
+Usage Validation Passed: Usage values(Dashboard, Session Page, Session Excel) matched successfully
+Navigated to Reports Page
+Selected date: 04/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
+Report Mismatch Found:
+ -  Report Session (476) does not match KPI Sessions (477)
+ - Report Session (476) does not match Excel Sessions Count (477)
+Report Excel Usage (kWh): 11119.959999999995
+Report Excel Usage (MWh Rounded): 11.12
+KPI Usage (MWh): 11.06
+Usage Validation Passed: Usage values(Dashboard, Report Excel, Session Excel) matched successfully
+Selected date: 04/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Charger_Reports_Analytics.xlsx
+Avg of Online Percentage from Report Excel: 63.88
+Selected date: 04/02/2026
+Downloaded Revenue Report Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\CRevenue_Report_Analytics.xlsx
+Total Revenue from Report Excel: 13964.04
+Revenue Validation Result: { message: 'Revenue KPI (13964.04 ) match Excel Revenue (13964.04)' }
+Navigated to Charger Page
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 11.0559
+Charger Excel Sessions: 475
+Average Online Percent from Charger Excel: 63.88
+Usage matched : KPI usage: 11.06, ChargerExcel usage: 11.0559
+Mismatch found
+Sessions mismatch : KPI Session Count: 477, Session count in ChargerExcel: 475
+ Report Online Percentage Validation Passed: Online Percentage matches KPI: 63.88%, Excel Avg: 63.88%
+
+===== TEST END: Validate Session Counts, Usage, Revenue And Online Percentage =====
+

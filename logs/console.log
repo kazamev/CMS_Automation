@@ -1,0 +1,233 @@
+Global Setup: Starting secure login
+Select Organization page loaded
+Organization selected, landed inside app
+Global Setup Success! State saved to: C:\Users\dodda\OneDrive\Documents\CMS_Automation\storageState.json
+
+===== TEST START: Organisation Details Validation =====
+
+Total organisations: 16
+{
+  "name": "Atomz Power",
+  "users": "47 Users",
+  "date": "Sep 17th 2022",
+  "plan": "premium Plan",
+  "country": "India",
+  "currency": {
+    "symbol": "₹",
+    "name": "Indian Rupee"
+  },
+  "timezone": "Indian Standard Time"
+}
+Navigated to the offerings page
+OrganizationName : Atomz Power
+Email             : kiran@atomzpower.com
+Plan              : premium
+Country           : India (IN)
+TimeZone          : India Standard Time
+(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi
+Currency           : ₹
+Indian Rupee
+
+ Organization Validation Started
+
+Organization Name: MATCHED
+Plan: MATCHED
+Country: MATCHED
+Timezone: MATCHED
+Currency: MATCHED
+
+===== TEST END: Organisation Details Validation =====
+
+
+===== TEST START: Dashboard vs Charger page Data comparison =====
+
+Yesterday DashBoard Data
+Revenue: AED 13964.04
+Sessions: 477
+Usage: 11.06 MWh
+Online Percentage: 63.99%
+Dashboard Data: {
+  "chargers": "35",
+  "connectors": "56",
+  "nonConfigured": "1",
+  "all": "All(56)",
+  "busy": "Busy (18)",
+  "available": "Available (28)",
+  "error": "Error (10)"
+}
+Charger Page Data: {
+  "chargers": "35",
+  "connectors": "56",
+  "nonConfigured": "1",
+  "all": "All(56)",
+  "busy": " Busy (18)  ",
+  "available": " Available (28)  ",
+  "error": " Error (10)  "
+}
+ Dashboard and Charger page counters Match
+
+===== TEST END: Dashboard vs Charger page Data comparison =====
+
+
+===== TEST START: User Creation And Verification =====
+
+User Role Created Successfully
+User Role Verified Successfully
+Role Name: CMS View Only
+Role Description: RoleDescription
+User Role Deleted Successfully
+
+===== TEST END: User Creation And Verification =====
+
+
+===== TEST START: End-to-End Add and Reconfigured Charger Flow =====
+
+Before Count: 597
+Charger added successfully → EV Charger
+Generated Charger ID: oap314
+New charger added to list
+Charger Reconfigured Successfully
+After Count: 598
+Charger count increased
+Device Name: Charger Updated
+Connector Type: industrial
+Charger Name updated successfully
+Connector Type updated successfully
+Installation Date: 1. 05/02/2026, 04:23:48 PM
+Reconfiguration Date: 05/02/2026, 04:24:12 PM
+Excel count matches UI count  598
+
+===== TEST END: End-to-End Add and Reconfigured Charger Flow =====
+
+
+===== TEST START: Charger Tariff Creation And Deletion =====
+
+Start Charger Tariff Creation
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬─────────────────────────────┐
+│ (index) │ Field         │ Value                       │
+├─────────┼───────────────┼─────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_Tariff_1770288886184' │
+│ 1       │ 'Description' │ '----'                      │
+│ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
+│ 3       │ 'Validity'    │ '05/02/2026 -- Forever'     │
+│ 4       │ 'Price Type'  │ 'Amount'                    │
+│ 5       │ 'Chargers'    │ '244a95'                    │
+└─────────┴───────────────┴─────────────────────────────┘
+Charger Tariff Created Successfully
+Tariff deleted successfully
+
+===== TEST END: Charger Tariff Creation And Deletion =====
+
+
+===== TEST START: Validate Session Counts, Usage, Revenue And Online Percentage =====
+
+Dashboard Session KPI: 477
+Dashboard Usage KPI: 11.06
+Dashboard Online KPI: 63.99
+Dashboard Revenue KPI: 13964.04
+All Sessions Count in Session Page: 477
+Ongoing Sessions Count in Session Page: 1
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 477
+All counts(DashBOard, Session Page, Excel) matched successfully  477
+Count Validation Passed: All counts(Dashboard, Session Page, Excel) matched successfully
+Session Excel Usage (kWh): 11119.960000000001
+Session Excel Usage (MWh Rounded): 11.12
+KPI Usage (MWh): 11.06
+Usage Validation Passed: Usage values(Dashboard, Session Page, Session Excel) matched successfully
+Navigated to Reports Page
+Selected date: 04/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
+Report Mismatch Found:
+ -  Report Session (476) does not match KPI Sessions (477)
+ - Report Session (476) does not match Excel Sessions Count (477)
+Report Excel Usage (kWh): 11119.959999999995
+Report Excel Usage (MWh Rounded): 11.12
+KPI Usage (MWh): 11.06
+Usage Validation Passed: Usage values(Dashboard, Report Excel, Session Excel) matched successfully
+Selected date: 04/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Charger_Reports_Analytics.xlsx
+Avg of Online Percentage from Report Excel: 63.88
+Selected date: 04/02/2026
+Downloaded Revenue Report Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\CRevenue_Report_Analytics.xlsx
+Total Revenue from Report Excel: 13964.04
+Revenue Validation Result: {
+  "message": "Revenue KPI (13964.04 ) match Excel Revenue (13964.04)"
+}
+Navigated to Charger Page
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 11.0559
+Charger Excel Sessions: 475
+Average Online Percent from Charger Excel: 63.88
+Usage matched : KPI usage: 11.06, ChargerExcel usage: 11.0559
+Mismatch found
+Sessions mismatch : KPI Session Count: 477, Session count in ChargerExcel: 475
+ Report Online Percentage Validation Passed: Online Percentage matches KPI: 63.88%, Excel Avg: 63.88%
+
+===== TEST END: Validate Session Counts, Usage, Revenue And Online Percentage =====
+
+
+===== TEST START: Validate Revenue Report And Invoice =====
+
+DashboardRevenue: 13964.04
+Revenue: 13964.04
+Total Revenue: 4905172.77
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 13964.04
+Revenue In Revenue Page: 13964.04
+Dashboard Revenue: 13964.04
+Dashboard Revenue matched Excel Revenue → 13964.04
+Revenue Validation Passed: Revenue values matched successfully
+Success row Overview Data
+Transaction id: 86703061
+Billed Amount: 28.86
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Nabil Ashraf 557829696
+Time stamp: 04/02/2026
+        
+        11:55:21 pm
+Invoice Data
+Transaction id: 86703061
+Billed Amount: 28.86
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Nabil Ashraf - 557829696
+Time stamp: Feb 04 2026, 11:55:21 pm
+
+ Comparison Report
+Transaction id: MATCHED
+Billed Amount: MATCHED
+Host Details: MATCHED
+Driver Details: MATCHED
+Time stamp: MATCHED
+
+===== TEST END: Validate Revenue Report And Invoice =====
+
+
+===== TEST START: Create, Validate and Delete Driver Group And Tariff =====
+
+Driver Group created successfully
+Starting Driver Tariff Creation
+Successfully opened Driver Group: Driver Group101
+Selecting available tariff: Auto_Tariff_1770023335777
+Driver Tariff  Created Successfully
+Successfully opened Driver Group: Driver Group101
+
+Driver Group Details
+┌─────────┬─────────────────┬─────────────────────────────────┐
+│ (index) │ Field           │ Value                           │
+├─────────┼─────────────────┼─────────────────────────────────┤
+│ 0       │ 'Name'          │ 'Driver Group101'               │
+│ 1       │ 'Description'   │ 'Test Driver Group Description' │
+│ 2       │ 'Total Drivers' │ '1'                             │
+│ 3       │ 'Name'          │ 'Auto_Tariff_1770023335777'     │
+│ 4       │ 'Description'   │ '----'                          │
+└─────────┴─────────────────┴─────────────────────────────────┘
+Driver Tariff deleted successfully.
+Successfully opened Driver Group: Driver Group101
+All drivers removed from the group.
+Driver Group deleted successfully.
+
+===== TEST END: Create, Validate and Delete Driver Group And Tariff =====
+

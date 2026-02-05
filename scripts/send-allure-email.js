@@ -1,62 +1,3 @@
-// const nodemailer = require('nodemailer');
-// const path = require('path');
-// const fs = require('fs');
-
-// (async () => {
-//   try {
-//     console.log('Email script started');
-
-//     const pdfPath = path.resolve(__dirname, '../Allure_Report.pdf');
-
-//     if (!fs.existsSync(pdfPath)) {
-//       console.error('PDF not found:', pdfPath);
-//       process.exit(1);
-//     }
-
-//     console.log('PDF found:', pdfPath);
-
-//     const transporter = nodemailer.createTransport({
-//       service: 'gmail',
-//       auth: {
-//         user: 'shilpa@kazam.in',
-//         pass: 'jipl ekby tsca drdn'
-//       }
-//     });
-
-//     console.log('Verifying Gmail login');
-//     await transporter.verify();
-//     console.log('Gmail authentication successful');
-
-//     const info = await transporter.sendMail({
-//       from: 'shilpa@kazam.in',
-//       to: 'bshilpa747@gmail.com',
-//       subject: 'Allure Automation Report',
-//       text: 'Hi,\n\nPlease find attached the  automation report.\n\nThanks,\nShilpa',
-//       attachments: [
-//         {
-//           filename: 'Allure_Report.pdf',
-//           path: pdfPath
-//         },
-//   //        {
-//   //   filename: 'Extent_Report.pdf',
-//   //   path: path.resolve(__dirname, '../Extent_Report.pdf')
-//   // },
-//    {
-//     filename: 'Playwright_Report.pdf',
-//     path: path.resolve('Playwright_Report.pdf')
-//   }
-//       ]
-//     });
-
-//     console.log(' Email sent successfully!');
-//     console.log(' Message ID:', info.messageId);
-
-//   } catch (error) {
-//     console.error('Email failed:', error.message);
-//     process.exit(1);
-//   }
-// })();
-
 const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
@@ -65,12 +6,19 @@ const fs = require('fs');
   try {
     console.log('Email script started');
 
-    // const allurePdf = path.resolve(__dirname, '../Allure_Report.pdf');
+    //PDF paths
     const ortoniPdf = path.resolve(__dirname, '../ortoni-report/Ortoni_Report.pdf');
-    // const playwrightPdf = path.resolve(__dirname, '../Playwright_Report.pdf');
+    const ortoniGlancePdf = path.resolve('Ortoni_Glance_Report.pdf');
+    const consolePdf = path.resolve(__dirname, '../logs/Playwright-Console-Logs.pdf');
 
-    // Check files
-    [ortoniPdf].forEach(file => {
+    const files = [
+      ortoniPdf,
+      ortoniGlancePdf,
+      consolePdf
+    ];
+
+    // Check all PDFs exist
+    files.forEach(file => {
       if (!fs.existsSync(file)) {
         console.error('PDF not found:', file);
         process.exit(1);
@@ -81,7 +29,7 @@ const fs = require('fs');
       service: 'gmail',
       auth: {
         user: 'shilpa@kazam.in',
-        pass: 'jipl ekby tsca drdn' 
+        pass: 'jipl ekby tsca drdn'  
       }
     });
 
@@ -90,40 +38,33 @@ const fs = require('fs');
 
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
-      to: 'bshilpa747@gmail.com',
-      subject: 'Automation Test Report - Ortoni',
-      text:
-`Hi,
+      to: 'bshilpa747@gmail.com,akhilesh@kazam.in',
+      subject: 'Automation Test Reports',
+      text: `
+Hi,
 
-Please find attached the automation test report:
-- Ortoni Report
+Please find attached the automation test reports:
 
+• Ortoni Dashboard Report
+• Ortoni Glance Report
+• Playwright Console Logs (test-wise execution logs)
 
 Thanks,
-Shilpa`,
+Shilpa
+`,
       attachments: [
-        // {
-        //   filename: 'Allure_Report.pdf',
-        //   path: allurePdf
-        // },
         {
           filename: 'Ortoni_Report.pdf',
           path: ortoniPdf
         },
-
-          {
-    filename: 'Ortoni_Glance_Report.pdf',
-    path: path.resolve('Ortoni_Glance_Report.pdf')
-  }
-        
-      //  {filename: 'Ortoni_Report.zip',
-      //   path: path.resolve(__dirname, '../Ortoni_Report.zip')
-      //   },
-
-        // {
-        //   filename: 'Playwright_Report.pdf',
-        //   path: playwrightPdf
-        // }
+        {
+          filename: 'Ortoni_Glance_Report.pdf',
+          path: ortoniGlancePdf
+        },
+        {
+          filename: 'Playwright_Console_Logs.pdf',
+          path: consolePdf
+        }
       ]
     });
 

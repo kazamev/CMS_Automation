@@ -1,0 +1,11 @@
+
+===== TEST START: User Creation And Verification =====
+
+User Role Created Successfully
+User Role Verified Successfully
+Role Name: CMS View Only
+Role Description: RoleDescription
+User Role Deleted Successfully
+
+===== TEST END: User Creation And Verification =====
+

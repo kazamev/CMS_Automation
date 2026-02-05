@@ -308,8 +308,6 @@ async downloadExcel() {
   // Save file
   const filePath = path.join(downloadDir, "chargers.xlsx");
   await download.saveAs(filePath);
-
-  console.log("Charger Excel downloaded:", filePath);
   return filePath;
 }
 

@@ -1,3 +1,6 @@
+
+===== TEST START: Organisation Details Validation =====
+
 Total organisations: 16
 {
   name: 'Atomz Power',
@@ -25,3 +28,6 @@ Plan: MATCHED
 Country: MATCHED
 Timezone: MATCHED
 Currency: MATCHED
+
+===== TEST END: Organisation Details Validation =====
+

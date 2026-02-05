@@ -231,11 +231,11 @@ async verifyUsageFromExcel(filePath, usageKpi) {
         };
     }
 }
-// Navigate to Daily Reports Page
+// Navigate to Reports Page
 async openDailyReportsPage() {
     await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports");
     await this.page.waitForLoadState("networkidle");
-    console.log("Navigated to Daily Reports Page");
+    console.log("Navigated to Reports Page");
 }
 
 // Select dropdown value in Daily Reports
@@ -274,7 +274,7 @@ async selectKazamCalendarDate(userDate) {
     console.log(`Selected date: ${userDate}`);
 }
 
-//Download Daily Report with fixed filename
+//Download  Report with fixed filename
 async downloadSessionReport() {
       const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
     const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
@@ -333,35 +333,35 @@ async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
     // Compare Session Report Count vs Dashboard KPI
     if (txnIds !== sessionKpi) {
         errors.push(
-            `Daily Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi})`
+            ` Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi})`
         );
     } else {
         console.log(
-            `Daily Report Session matched KPI Sessions → ${txnIds}`
+            `Report Session matched KPI Sessions → ${txnIds}`
         );
     }
 
-    // Compare Daily Report Count vs Excel Sessions Count
+    // Compare  Report Count vs Excel Sessions Count
     if (txnIds !== excelCount) {
         errors.push(
-            `Daily Report Session (${txnIds}) does not match Excel Sessions Count (${excelCount})`
+            `Report Session (${txnIds}) does not match Excel Sessions Count (${excelCount})`
         );
     } else {
         console.log(
-            `Daily Report Session matched Excel Sessions → ${txnIds}`
+            `Report Session matched Excel Sessions → ${txnIds}`
         );
     }
 
     // Final result
     if (errors.length === 0) {
-        console.log("Daily Report Session matched KPI & Excel");
+        console.log(" Report Session matched KPI & Excel");
         return {
             success: true,
             txnIds,
-            message: "Daily Report Session matched KPI & Excel"
+            message: "Report Session matched KPI & Excel"
         };
     } else {
-        console.log("Daily Report Mismatch Found:");
+        console.log("Report Mismatch Found:");
         errors.forEach(e => console.log(" - " + e));
         return {
             success: false,

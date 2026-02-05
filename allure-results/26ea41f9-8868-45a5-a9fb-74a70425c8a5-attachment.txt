@@ -1,0 +1,37 @@
+
+===== TEST START: Validate Revenue Report And Invoice =====
+
+DashboardRevenue: 13964.04
+Revenue: 13964.04
+Total Revenue: 4905172.77
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 13964.04
+Revenue In Revenue Page: 13964.04
+Dashboard Revenue: 13964.04
+Dashboard Revenue matched Excel Revenue → 13964.04
+Revenue Validation Passed: Revenue values matched successfully
+Success row Overview Data
+Transaction id: 86703061
+Billed Amount: 28.86
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Nabil Ashraf 557829696
+Time stamp: 04/02/2026
+        
+        11:55:21 pm
+Invoice Data
+Transaction id: 86703061
+Billed Amount: 28.86
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Nabil Ashraf - 557829696
+Time stamp: Feb 04 2026, 11:55:21 pm
+
+ Comparison Report
+Transaction id: MATCHED
+Billed Amount: MATCHED
+Host Details: MATCHED
+Driver Details: MATCHED
+Time stamp: MATCHED
+
+===== TEST END: Validate Revenue Report And Invoice =====
+

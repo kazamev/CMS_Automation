@@ -19,6 +19,14 @@ test.setTimeout(180000)
   page = await context.newPage();
 });
 
+test.beforeEach(async ({}, testInfo) => {
+    console.log(`\n===== TEST START: ${testInfo.title} =====\n`);
+  });
+
+  test.afterEach(async ({}, testInfo) => {
+    console.log(`\n===== TEST END: ${testInfo.title} =====\n`);
+  });
+
  test.afterAll(async () => {
   await page.close();
   await context.close();
@@ -53,7 +61,7 @@ test.setTimeout(180000)
    await orgPage.validateOrgVsDashboard(orgData, dashData)
     });
 
- // DASHBOARD VS CHARGER PAGE COMPARISON
+  // DASHBOARD VS CHARGER PAGE COMPARISON
      test('Dashboard vs Charger page Data comparison', async () => {
       test.setTimeout(180000)
     const dashboard = new DashboardPage(page);
@@ -260,7 +268,7 @@ console.log("Reconfiguration Date:", reconfigDate);
 
 // Excel Download Flow
 const filePath = await chargers.downloadExcel();
-    console.log("Downloaded Excel file path:", filePath);
+
 // Read Charger IDs from Excel
  const chargerIdCount = await chargers.countChargerIdsInExcel(filePath);
 // Excel Download & Validate count

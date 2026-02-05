@@ -13,7 +13,7 @@ const path = require('path');
     const page = await browser.newPage();
 
     await page.setViewport({
-      width: 1920,
+      width: 1950,
       height: 1200,
       deviceScaleFactor: 1,
     });
@@ -65,9 +65,7 @@ const path = require('path');
         /*DO NOT block page breaks globally */
         tr {
           page-break-inside: avoid;
-        }
-
-        
+        } 
       `
     });
 
