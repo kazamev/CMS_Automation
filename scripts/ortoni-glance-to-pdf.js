@@ -13,12 +13,11 @@ const path = require('path');
     const page = await browser.newPage();
 
     await page.setViewport({
-      width: 1950,
+      width: 1920,
       height: 1200,
       deviceScaleFactor: 1,
     });
 
-    //VERY IMPORTANT
     await page.emulateMediaType('screen');
 
     const reportPath = path.resolve(
@@ -62,10 +61,10 @@ const path = require('path');
           width: 100% !important;
         }
 
-        /*DO NOT block page breaks globally */
+        /*  DO NOT block page breaks globally */
         tr {
           page-break-inside: avoid;
-        } 
+        }
       `
     });
 

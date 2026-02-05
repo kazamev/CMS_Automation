@@ -51,7 +51,7 @@ const path = require('path');
 
     await page.pdf({
       path: pdfPath,
-      format: 'A4',
+      format: 'A3',
       landscape: true,
       printBackground: true,
       scale: 0.9,
