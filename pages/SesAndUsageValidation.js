@@ -471,16 +471,16 @@ async RevenueClick() {
  //Revenue Validation(KPI vs Report Excel)
  async validateRevenue(filePath, revenueKpi) {
     const excelRevenue = await this.sumOfRevenue(filePath);
-    const tolerance = 1; // 1 Rupees tolerance
+    const tolerance = 0; // 0 Rupees tolerance
     if (Math.abs(revenueKpi - excelRevenue) <= tolerance) {
         return {
-            message:`Revenue KPI (${revenueKpi} Rs) match Excel Revenue (${excelRevenue} Rs)`
+            message:`Revenue KPI (${revenueKpi} ) match Excel Revenue (${excelRevenue})`
         };
     }
     return {
         success: false,
         excelRevenue: excelRevenue,
-        message: `Revenue KPI (${revenueKpi} Rs) does NOT match Excel Revenue (${excelRevenue} Rs). Allowed Buffer: ±${tolerance} Rs`
+        message: `Revenue KPI (${revenueKpi}) does NOT match Excel Revenue (${excelRevenue}). Allowed Buffer: ±${tolerance} `
     };
  }
 

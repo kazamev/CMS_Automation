@@ -56,10 +56,10 @@ const path = require('path');
       printBackground: true,
       scale: 0.9,
       margin: {
-        top: '10mm',
-        bottom: '10mm',
-        left: '10mm',
-        right: '10mm',
+        top: '20px',
+        bottom: '20px',
+        left: '15px',
+        right: '15px',
       },
     });
 

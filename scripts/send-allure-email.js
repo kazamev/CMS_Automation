@@ -65,12 +65,12 @@ const fs = require('fs');
   try {
     console.log('Email script started');
 
-    const allurePdf = path.resolve(__dirname, '../Allure_Report.pdf');
+    // const allurePdf = path.resolve(__dirname, '../Allure_Report.pdf');
     const ortoniPdf = path.resolve(__dirname, '../ortoni-report/Ortoni_Report.pdf');
-    const playwrightPdf = path.resolve(__dirname, '../Playwright_Report.pdf');
+    // const playwrightPdf = path.resolve(__dirname, '../Playwright_Report.pdf');
 
     // Check files
-    [allurePdf, ortoniPdf, playwrightPdf].forEach(file => {
+    [ortoniPdf].forEach(file => {
       if (!fs.existsSync(file)) {
         console.error('PDF not found:', file);
         process.exit(1);
@@ -91,23 +91,21 @@ const fs = require('fs');
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
       to: 'bshilpa747@gmail.com',
-      subject: 'Automation Test Reports - Allure, Ortoni, HTML',
+      subject: 'Automation Test Report - Ortoni',
       text:
 `Hi,
 
-Please find attached the automation test reports:
-
-- Allure Report
+Please find attached the automation test report:
 - Ortoni Report
-- HTML Playwright Report
+
 
 Thanks,
 Shilpa`,
       attachments: [
-        {
-          filename: 'Allure_Report.pdf',
-          path: allurePdf
-        },
+        // {
+        //   filename: 'Allure_Report.pdf',
+        //   path: allurePdf
+        // },
         {
           filename: 'Ortoni_Report.pdf',
           path: ortoniPdf
@@ -116,16 +114,16 @@ Shilpa`,
           {
     filename: 'Ortoni_Glance_Report.pdf',
     path: path.resolve('Ortoni_Glance_Report.pdf')
-  },
+  }
         
       //  {filename: 'Ortoni_Report.zip',
       //   path: path.resolve(__dirname, '../Ortoni_Report.zip')
       //   },
 
-        {
-          filename: 'Playwright_Report.pdf',
-          path: playwrightPdf
-        }
+        // {
+        //   filename: 'Playwright_Report.pdf',
+        //   path: playwrightPdf
+        // }
       ]
     });
 

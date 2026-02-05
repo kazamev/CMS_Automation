@@ -1,75 +1,104 @@
-const { chromium } = require('playwright');
+const puppeteer = require('puppeteer');
 const path = require('path');
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  let browser;
 
-  const page = await browser.newPage({
-    viewport: { width: 1920, height: 1200 }
-  });
+  try {
+    browser = await puppeteer.launch({
+      headless: 'new',
+      args: ['--disable-web-security']
+    });
 
-  const glanceUrl =
-    'file:///C:/Users/dodda/OneDrive/Documents/CMS_Automation/ortoni-report/ortoni-report.html#/glance';
+    const page = await browser.newPage();
 
-  console.log('Opening Glance page');
-  await page.goto(glanceUrl, { waitUntil: 'networkidle' });
+    await page.setViewport({
+      width: 1920,
+      height: 1200,
+      deviceScaleFactor: 1,
+    });
 
-  // Wait until table data is fully rendered
-  await page.waitForSelector('table', { timeout: 20000 });
+    //VERY IMPORTANT
+    await page.emulateMediaType('screen');
 
-  // Clean UI for PDF
-  await page.addStyleTag({
-    content: `
-      /* Hide sidebar + header */
-      nav, aside {
-        display: none !important;
-      }
+    const reportPath = path.resolve(
+      __dirname,
+      '..',
+      'ortoni-report',
+      'ortoni-report.html'
+    );
 
-      /* Expand main content */
-      main, .container, .content {
-        margin-left: 0 !important;
-        padding-left: 0 !important;
-        width: 100% !important;
-      }
+    console.log('Opening Glance page');
 
-      /* Table styling */
-      table {
-        width: 100% !important;
-        font-size: 12px;
-      }
+    await page.goto(`file://${reportPath}#/glance`, {
+      waitUntil: 'networkidle0',
+    });
 
-      th, td {
-        padding: 8px !important;
-        text-align: left !important;
-      }
+    // Wait for Glance table
+    await page.waitForFunction(() =>
+      document.body.innerText.includes('Test Suite Glance'),
+      { timeout: 30000 }
+    );
 
-      /* Remove scrollbars */
-      body {
-        overflow: visible !important;
-      }
-    `
-  });
+    // Fix layout AFTER content is ready
+    await page.addStyleTag({
+      content: `
+        aside, nav {
+          display: none !important;
+        }
 
-  const outputPath = path.resolve(
-    __dirname,
-    '../Ortoni_Glance_Report.pdf'
-  );
+        body {
+          margin: 0 !important;
+          overflow: visible !important;
+        }
 
-  await page.pdf({
-    path: outputPath,
-    format: 'A4',
-    landscape: true,        
-    printBackground: true,
-    margin: {
-      top: '20px',
-      bottom: '20px',
-      left: '15px',
-      right: '15px'
-    }
-  });
+        main, .main-content, .content {
+          margin-left: 0 !important;
+          width: 100% !important;
+          height: auto !important;
+        }
 
-  await browser.close();
+        table {
+          width: 100% !important;
+        }
 
-  console.log('Ortoni Glance PDF generated successfully:');
-  console.log(outputPath);
+        /*DO NOT block page breaks globally */
+        tr {
+          page-break-inside: avoid;
+        }
+
+        
+      `
+    });
+
+    const pdfPath = path.resolve(
+      __dirname,
+      '..',
+      'Ortoni_Glance_Report.pdf'
+    );
+
+   await page.pdf({
+  path: pdfPath,
+  printBackground: true,
+  format: 'A4',
+  landscape: true,
+  scale: 0.85,
+  pageRanges: '2-',   //THIS IS THE KEY
+  margin: {
+    top: '20px',
+    bottom: '20px',
+    left: '15px',
+    right: '15px',
+  },
+});
+
+    console.log('Ortoni Glance PDF generated successfully:');
+    console.log(pdfPath);
+
+  } catch (err) {
+    console.error('Error generating Ortoni Glance PDF:', err);
+  } finally {
+    if (browser) await browser.close();
+    process.exit(0);
+  }
 })();
