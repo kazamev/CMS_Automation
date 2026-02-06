@@ -1,0 +1,23 @@
+
+===== TEST START: End-to-End Add and Reconfigured Charger Flow =====
+
+
+Organisation Name: Tyagi_Org
+
+Before Count: 604
+Charger added successfully → EV Charger
+Generated Charger ID: y8cvsx
+New charger added to list
+Charger Reconfigured Successfully
+After Count: 605
+Charger count increased
+Device Name: Charger Updated
+Connector Type: industrial
+Charger Name updated successfully
+Connector Type updated successfully
+Installation Date: 1. 07/02/2026, 01:04:45 AM
+Reconfiguration Date: 07/02/2026, 01:05:09 AM
+Excel count matches UI count  605
+
+===== TEST END: End-to-End Add and Reconfigured Charger Flow =====
+

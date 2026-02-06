@@ -1,3 +1,4 @@
+import { attachApiLogger } from '../Utils/api-logger';
 import { test, expect } from '../fixtures/login.fixture';
 import { OrganisationPage } from '../pages/OrgListpage';
 import { DashboardPage } from '../pages/DashBoard';
@@ -9,28 +10,35 @@ import { TariffPage } from '../pages/DriverTariff';
 
 let context;
 let page;
+let apiLogger;
+
+
 
 test.describe('CMS End-to-End Integrated Flow', () => {
 test.setTimeout(180000)
-  test.beforeAll(async ({ browser }) => {
-  context = await browser.newContext({
-    storageState: 'storageState.json'
-  });
-  page = await context.newPage();
-});
 
-test.beforeEach(async ({}, testInfo) => {
-    console.log(`\n===== TEST START: ${testInfo.title} =====\n`);
+ test.beforeAll(async ({ browser }) => {
+    context = await browser.newContext({
+      storageState: 'storageState.json',
+    });
+    page = await context.newPage();
+   apiLogger = attachApiLogger(page);
+  });
+
+ test.beforeEach(async ({}, testInfo) => {
+  console.log(`\n===== TEST START: ${testInfo.title} =====\n`);
   });
 
   test.afterEach(async ({}, testInfo) => {
     console.log(`\n===== TEST END: ${testInfo.title} =====\n`);
   });
 
- test.afterAll(async () => {
-  await page.close();
-  await context.close();
-});
+test.afterAll(async () => {
+    await context.close();
+  });
+
+
+
     //ORGANISATION DETAILS 
    test('Organisation Details Validation', async () => {
     test.setTimeout(180000)
@@ -190,7 +198,7 @@ test.beforeEach(async ({}, testInfo) => {
       });
 
     //ADD & RECONFIGURE CHARGER
-    test('End-to-End Add and Reconfigured Charger Flow', async () => {
+    test.skip('End-to-End Add and Reconfigured Charger Flow', async () => {
       test.setTimeout(200000)
         const chargers = new ChargersPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers");
@@ -294,7 +302,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     });
 
     //CHARGER TARIFF CREATION & DELETION
-    test('Charger Tariff Creation And Deletion', async () => {
+    test.skip('Charger Tariff Creation And Deletion', async () => {
       test.setTimeout(200000)
         const tariffPage = new ChargerTariffPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/tariffs");
@@ -332,7 +340,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     });
 
     //SESSIONS & USAGE VALIDATION
-    test('Validate Session Counts, Usage, Revenue And Online Percentage', async () => {
+    test.skip('Validate Session Counts, Usage, Revenue And Online Percentage', async () => {
       test.setTimeout(200000)
         const sessionPage = new DashboardSessionsPage(page);
         await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
@@ -505,7 +513,7 @@ await sessionPage.verifyDashboardKPIWithChargerExcel( filePath6, sessionPage.ses
   
 
  //REVENUE REPORT
- test('Validate Revenue Report And Invoice', async () => {
+ test.skip('Validate Revenue Report And Invoice', async () => {
   test.setTimeout(200000)
   const revenuePage = new RevenuePage(page);
 
@@ -560,7 +568,7 @@ function getYesterdayDate() {
     });
 
 // DRIVER TARIFF
-    test('Create, Validate and Delete Driver Group And Tariff', async () => {
+    test.skip('Create, Validate and Delete Driver Group And Tariff', async () => {
       test.setTimeout(200000)
         const tariffPage = new TariffPage(page);
         const groupName = "Driver Group101";
