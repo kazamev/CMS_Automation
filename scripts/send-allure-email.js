@@ -6,14 +6,19 @@ const fs = require('fs');
   try {
     console.log('Email script started');
 
-    //PDF paths
-    const ortoniPdf = path.resolve(__dirname, '../ortoni-report/Ortoni_Report.pdf');
-    const ortoniGlancePdf = path.resolve('Ortoni_Glance_Report.pdf');
-    const consolePdf = path.resolve(__dirname, '../logs/Playwright-Console-Logs.pdf');
+    // PDF paths
+    const ortoniFinalPdf = path.resolve(
+      __dirname,
+      '../ortoni-report/Ortoni_Final_Report.pdf'
+    );
+
+    const consolePdf = path.resolve(
+      __dirname,
+      '../logs/Playwright-Console-Logs.pdf'
+    );
 
     const files = [
-      ortoniPdf,
-      ortoniGlancePdf,
+      ortoniFinalPdf,
       consolePdf
     ];
 
@@ -29,7 +34,7 @@ const fs = require('fs');
       service: 'gmail',
       auth: {
         user: 'shilpa@kazam.in',
-        pass: 'jipl ekby tsca drdn'  
+        pass: 'jipl ekby tsca drdn'   // app password
       }
     });
 
@@ -38,15 +43,14 @@ const fs = require('fs');
 
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
-      to: 'bshilpa747@gmail.com',
+      to: 'shilpa@kazam.in,akhilesh@kazam.in',
       subject: 'Automation Test Reports',
       text: `
-Hi,
+Hi Team,
 
 Please find attached the automation test reports:
 
-• Ortoni Dashboard Report
-• Ortoni Glance Report
+• Ortoni Automation Report (Dashboard + Glance)
 • Playwright Console Logs (test-wise execution logs)
 
 Thanks,
@@ -54,12 +58,8 @@ Shilpa
 `,
       attachments: [
         {
-          filename: 'Ortoni_Report.pdf',
-          path: ortoniPdf
-        },
-        {
-          filename: 'Ortoni_Glance_Report.pdf',
-          path: ortoniGlancePdf
+          filename: 'Ortoni_Automation_Report.pdf',
+          path: ortoniFinalPdf
         },
         {
           filename: 'Playwright_Console_Logs.pdf',

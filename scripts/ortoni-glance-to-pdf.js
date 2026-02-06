@@ -77,10 +77,10 @@ const path = require('path');
    await page.pdf({
   path: pdfPath,
   printBackground: true,
-  format: 'A4',
+  format: 'A3',
   landscape: true,
-  scale: 0.85,
-  pageRanges: '2-',   //THIS IS THE KEY
+  scale: 0.9,
+  // pageRanges: '2-',   //THIS IS THE KEY
   margin: {
     top: '20px',
     bottom: '20px',

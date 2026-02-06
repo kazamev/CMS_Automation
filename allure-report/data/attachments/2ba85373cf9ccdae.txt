@@ -11,7 +11,7 @@ Total organisations: 16
   currency: { symbol: '₹', name: 'Indian Rupee' },
   timezone: 'Indian Standard Time'
 }
-Navigated to the offerings page
+Navigated to the Manage Org
 OrganizationName : Atomz Power
 Email             : kiran@atomzpower.com
 Plan              : premium
