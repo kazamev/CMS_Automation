@@ -22,12 +22,16 @@ console.log("Online Percentage KPI:", onlinePercentage);
 // click on kpi to go to chargers page
 await OnlinePer.clickOnlinePercentage();
 
+//change time period to Yesterday
+await sessionPage.applyTimeFilter("Yesterday");
 
 //Download Excel
 const filePath = await OnlinePer.downloadExcel();   
-const onlineResult = await OnlinePer.getAverageOnlinePercentFromExcel(filePath);
-   
-    // Validate Online Percentage
+const onlineResult = await OnlinePer.getAverageOnlinePercentFromExcel(filePath); // Column index for online percentage
+ console.log("Average Online Percentage from Excel:", onlineResult);
+ 
+ 
+// Validate Online Percentage
     const OnlinePercentageResult = await OnlinePer.verifyOnlinePercentWithExcel(filePath, onlinePercentage);
     if (!OnlinePercentageResult.success) {
       console.error("Online Percentage Validation Failed:", OnlinePercentageResult.message);
@@ -65,6 +69,18 @@ await sessionPage.selectKazamCalendarDate(getYesterdayDate());
 const filePath2 = await sessionPage.downloadDailyReport();
 console.log("Downloaded Excel Path:", filePath2);
 
- 
+
+//online percentage average from Report charger Excel
+const onlinePercentageAvg = await OnlinePer.getAverageOnlinePercentFromExcel(filePath2);
+console.log("Avg of Online Percentage from Report Excel:", onlinePercentageAvg);
+
+
+//Verify Online Percentage (KPI vs Excel)
+    const ReportOnlinePercentage = await OnlinePer.verifyOnlinePercentWithExcel(filePath2, onlinePercentage);
+    if (!ReportOnlinePercentage.success) {
+      console.error("Report Online Percentage Validation Failed:", ReportOnlinePercentage.message);
+    } else {
+      console.log(" Report Online Percentage Validation Passed:", ReportOnlinePercentage.message);
+    }
   });
 

@@ -21,7 +21,7 @@ const fs = require('fs');
     const page = await browser.newPage();
     await page.setViewport({ width: 1920, height: 1080 });
 
-    console.log('📄 Opening Extent HTML report...');
+    console.log(' Opening Extent HTML report...');
     await page.goto(`file://${htmlPath}`, {
       waitUntil: 'networkidle0'
     });
@@ -45,7 +45,7 @@ const fs = require('fs');
     await new Promise(r => setTimeout(r, 2000));
 
     // Click Tests/View tab
-    console.log('Opening Tests tab...');
+    console.log('Opening Tests tab');
     await page.evaluate(() => {
       const testsTab = [...document.querySelectorAll('a')]
         .find(a => a.textContent.includes('Test'));

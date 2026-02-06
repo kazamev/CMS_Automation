@@ -1,7 +1,6 @@
 import { test, expect } from '../fixtures/login.fixture';
 import { RevenuePage } from "../pages/RevenuePage";
 test.setTimeout(60000);
-test.describe("Revenue Validation", () => {
   test("Validate Revenue", async ({ loggedInPage }) => {
     const page = loggedInPage;
 
@@ -13,7 +12,7 @@ test.describe("Revenue Validation", () => {
 
 //time filter in dashboard
    await revenuePage.applyTimeFilterInDashboard("Yesterday");
-   const DashBoardrevenue = await revenuePage. getDashboardRevenue();
+   const DashBoardRevenue = await revenuePage. getDashboardRevenue();
 
   
 // Login fixture already logged in
@@ -32,7 +31,7 @@ test.describe("Revenue Validation", () => {
 function getYesterdayDate() {
   const date = new Date();
   date.setDate(date.getDate() - 1);
-  return String(date.getDate()); // ❌ no padStart
+  return String(date.getDate()); //no padStart
 }
 
 // Calendar: select particular date
@@ -41,7 +40,7 @@ function getYesterdayDate() {
 
 
 // Calendar: select full month (Nov 2025)
-//   await revenuePage.selectFullMonth(2025, 11);
+// await revenuePage.selectFullMonth(2025, 11);
 
  // Download Excel
   const filePath4 = await revenuePage. downloadExcelFile();
@@ -49,23 +48,23 @@ function getYesterdayDate() {
 
 
   // Validate Revenue Sum
-    const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,DashBoardrevenue); 
+    const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,DashBoardRevenue); 
     if (!RevenueResult.success) {
       console.error("Revenue Validation Failed:", RevenueResult.message);
     } else {
       console.log("Revenue Validation Passed:", RevenueResult.message);
     }
 
-  // Search invoice and print first row
-  // await revenuePage.searchInvoiceAndPrint("30450113");
-
-
+  
+  // Open Success Transactions and get Overview Data
   const overviewData = await revenuePage.openSuccessTransactionAndGetOverview();
 
+  
   // Download Invoice PDF
   const invoiceData = await revenuePage.downloadInvoiceFile();
 
+
+  // Compare Overview Data with Invoice Data
   const comparison = revenuePage.compareOverviewWithInvoice(overviewData, invoiceData);
     
 }); 
-});

@@ -6,50 +6,70 @@ const fs = require('fs');
   try {
     console.log('Email script started');
 
-    const pdfPath = path.resolve(__dirname, '../Allure_Report.pdf');
+    // PDF paths
+    const ortoniFinalPdf = path.resolve(
+      __dirname,
+      '../ortoni-report/Ortoni_Final_Report.pdf'
+    );
 
-    if (!fs.existsSync(pdfPath)) {
-      console.error('PDF not found:', pdfPath);
-      process.exit(1);
-    }
+    const consolePdf = path.resolve(
+      __dirname,
+      '../logs/Playwright-Console-Logs.pdf'
+    );
 
-    console.log('PDF found:', pdfPath);
+    const files = [
+      ortoniFinalPdf,
+      consolePdf
+    ];
+
+    // Check all PDFs exist
+    files.forEach(file => {
+      if (!fs.existsSync(file)) {
+        console.error('PDF not found:', file);
+        process.exit(1);
+      }
+    });
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: 'shilpa@kazam.in',
-        pass: 'jipl ekby tsca drdn'
+        pass: 'jipl ekby tsca drdn'   // app password
       }
     });
 
-    console.log('Verifying Gmail login');
     await transporter.verify();
     console.log('Gmail authentication successful');
 
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
-      to: 'bshilpa747@gmail.com',
-      subject: 'Allure Automation Report',
-      text: 'Hi,\n\nPlease find attached the  automation report.\n\nThanks,\nShilpa',
+      to: 'shilpa@kazam.in,akhilesh@kazam.in',
+      subject: 'Automation Test Reports',
+      text: `
+Hi Team,
+
+Please find attached the automation test reports:
+
+• Ortoni Automation Report (Dashboard + Glance)
+• Playwright Console Logs (test-wise execution logs)
+
+Thanks,
+Shilpa
+`,
       attachments: [
         {
-          filename: 'Allure_Report.pdf',
-          path: pdfPath
+          filename: 'Ortoni_Automation_Report.pdf',
+          path: ortoniFinalPdf
         },
-  //        {
-  //   filename: 'Extent_Report.pdf',
-  //   path: path.resolve(__dirname, '../Extent_Report.pdf')
-  // },
-   {
-    filename: 'Playwright_Report.pdf',
-    path: path.resolve('Playwright_Report.pdf')
-  }
+        {
+          filename: 'Playwright_Console_Logs.pdf',
+          path: consolePdf
+        }
       ]
     });
 
-    console.log(' Email sent successfully!');
-    console.log(' Message ID:', info.messageId);
+    console.log('Email sent successfully!');
+    console.log('Message ID:', info.messageId);
 
   } catch (error) {
     console.error('Email failed:', error.message);

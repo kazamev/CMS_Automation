@@ -7,9 +7,11 @@ export class DashboardSessionsPage {
     constructor(page) {
         this.page = page;
 
-        //GLOBAL KPI LOCATORS
+        //KPI LOCATORS
+        this.revenueValue = page.locator("(//p[@class='text-base font-medium'])[1]");
         this.sessionsValue = page.locator("(//p[@class='text-base font-medium'])[2]");
         this.usageValue = page.locator("(//p[@class='text-base font-medium'])[3]");
+        this.onlinePercent = page.locator("(//p[@class='text-base font-medium'])[4]");
 
         // Sessions KPI Card
         this.sessionsKPICard = page.locator("//div[contains(@class,'hover:cursor-pointer')][.//p[text()='No of Sessions']]");
@@ -28,22 +30,33 @@ export class DashboardSessionsPage {
          this.downloadButton = page.locator("//div[@id='download']//*[name()='svg']");
         this.excelOption = page.locator("(//div[@class='flex items-center gap-2 m-1 hover:bg-kazamGray-100 p-2 rounded-md'])[2]");
         this.chargertimeperiod = page.locator("//button[.//div[normalize-space()='Today']]");
- 
+            this.RevenueTab = page.locator("//button[normalize-space()='Revenue']");
+             this.reportDropdown = page.locator("//div[@class='grid gap-2']//select[1]");
     }
+
     // Fetch KPI values from Dashboard
     async getKPIValues() {
-    const sessionText = await this.sessionsValue.textContent();
-    const usageText = await this.usageValue.textContent();
-    const sessionKpi = Number(sessionText.replace(/[^0-9.]/g, ""));  // keep only numbers & dot
-    let usageKpi = Number(usageText.replace(/[^0-9.]/g, ""));        // numeric value only
+  const sessionText = await this.sessionsValue.textContent();
+  const usageText = await this.usageValue.textContent();
+  const onlineText = await this.onlinePercent.textContent();
+  const revenueText = await this.revenueValue.textContent();
 
-    // Convert Dashboard KPI if it is in kWh
-    if (usageText.toLowerCase().includes("kwh")) {
-        usageKpi = usageKpi / 1000;       // Convert to MWh
-    }
-    return { sessionKpi, usageKpi };
+  this.sessionKpi = Number(sessionText.replace(/[^0-9.]/g, ""));
+  this.usageKpi = Number(usageText.replace(/[^0-9.]/g, ""));
+  this.onlineKpi = Number(onlineText.replace(/[^0-9.]/g, ""));
+  this.revenueKpi = Number(revenueText.replace(/[^0-9.]/g, ""));
+
+  if (usageText.toLowerCase().includes("kwh")) {
+    this.usageKpi = this.usageKpi / 1000;
+  }
+
+  return {
+    sessionKpi: this.sessionKpi,
+    usageKpi: this.usageKpi,
+    onlineKpi: this.onlineKpi,
+    revenueKpi: this.revenueKpi
+  };
 }
-
     // Apply Time Filter in Dashboard
     async applyTimeFilterInDashboard(period) {
     await this.DashBoardTimeFilter.click();
@@ -116,7 +129,7 @@ async downloadExcel() {
     return filePath;
 }
 
-// Session Count in downloaded Excel
+// Session Count in  session downloaded Excel
 async countSessionIdsInExcel(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -127,6 +140,8 @@ async countSessionIdsInExcel(filePath) {
         .filter(id => id);
     return sessionIDs.length;
 }
+
+// Verify Counts (KPI vs UI vs Excel)
  async verifyCounts(filePath, allCount, sessionKpi) {
     //Extract count from Excel
     const excelCount = await this.countSessionIdsInExcel(filePath);
@@ -146,11 +161,11 @@ async countSessionIdsInExcel(filePath) {
     }
     //Return structured result
     if (errors.length === 0) {
-        console.log(`All counts matched successfully  ${excelCount}`);
+        console.log(`All counts(DashBOard, Session Page, Excel) matched successfully  ${excelCount}`);
         return {
             success: true,
             excelCount,
-            message: "All counts matched successfully"
+            message: "All counts(Dashboard, Session Page, Excel) matched successfully"
         };
     } else {
         console.log(" Mismatch found:");
@@ -164,19 +179,22 @@ async countSessionIdsInExcel(filePath) {
     }
 }
 
+// Sum of Usage from session Excel
 async sumOfUsage(filePath) {
-    const wb = excel.readFile(filePath);
-    const sheet = wb.Sheets[wb.SheetNames[0]];
-    const data = excel.utils.sheet_to_json(sheet, { header: 1 });
-    const rows = data.slice(1);
-    // Excel Usage column index (example: column 9)
-    const usageValues = rows
-        .map(row => Number(row[9]))   // change index if needed
-        .filter(v => !isNaN(v));
-    const totalUsageKwh = usageValues.reduce((a, b) => a + b, 0);
-    // console.log("Excel Usage Sum (kWh):", totalUsageKwh);
-    return totalUsageKwh;
+  const wb = excel.readFile(filePath);
+  const sheet = wb.Sheets[wb.SheetNames[0]];
+  const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+
+  const rows = data.slice(1); // skip header row
+
+  const values = rows
+    .map(row => Number(row[9]))
+    .filter(v => !isNaN(v));
+
+  return values.reduce((a, b) => a + b, 0);
 }
+
+// Verify Usage (KPI vs session Excel)
 async verifyUsageFromExcel(filePath, usageKpi) {
     //Sum usage from Excel (kWh)
     const excelUsageKwh = await this.sumOfUsage(filePath);
@@ -184,8 +202,8 @@ async verifyUsageFromExcel(filePath, usageKpi) {
     const excelUsageMWh_raw = excelUsageKwh / 1000;
     //Round Excel MWh to 2 decimals
     const excelUsageMWh = Number(excelUsageMWh_raw.toFixed(2));
-    console.log(`Excel Usage (kWh): ${excelUsageKwh}`);
-    console.log(`Excel Usage (MWh Rounded): ${excelUsageMWh}`);
+    console.log(`Session Excel Usage (kWh): ${excelUsageKwh}`);
+    console.log(`Session Excel Usage (MWh Rounded): ${excelUsageMWh}`);
     console.log(`KPI Usage (MWh): ${usageKpi}`);
     //Allowed buffer/tolerance (0.2 MWh)
     const tolerance = 0.2;
@@ -201,7 +219,7 @@ async verifyUsageFromExcel(filePath, usageKpi) {
         return {
             success: true,
             excelUsageMWh,
-            message: "Usage values matched successfully"
+            message: "Usage values(Dashboard, Session Page, Session Excel) matched successfully"
         };
     } else {
         console.log("Usage mismatch found:");
@@ -213,11 +231,11 @@ async verifyUsageFromExcel(filePath, usageKpi) {
         };
     }
 }
-// Navigate to Daily Reports Page
+// Navigate to Reports Page
 async openDailyReportsPage() {
     await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports");
     await this.page.waitForLoadState("networkidle");
-    await this.page.waitForTimeout(2000);
+    console.log("Navigated to Reports Page");
 }
 
 // Select dropdown value in Daily Reports
@@ -239,9 +257,6 @@ async selectConfigureDropdown(value) {
     // Remove waitForTimeout. If the page loads data after selection:
     await this.page.waitForLoadState("networkidle");
 }
-
-
-
 // Calendar date selection (uses your function logic)
 async selectKazamCalendarDate(userDate) {
     const [day, month, year] = userDate.split("/");
@@ -259,15 +274,15 @@ async selectKazamCalendarDate(userDate) {
     console.log(`Selected date: ${userDate}`);
 }
 
-//Download Daily Report with fixed filename
-async downloadDailyReport() {
+//Download  Report with fixed filename
+async downloadSessionReport() {
       const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
     const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
     await downloadBtn.waitFor({ timeout:60000});
     await downloadBtn.click();
     const download = await downloadPromise;
+      this.page.waitForEvent('download', { timeout: 90000 });
     
-
     // Create downloads folder if not exists
     const downloadDir = path.join(__dirname, "downloads");
     if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
@@ -278,9 +293,28 @@ async downloadDailyReport() {
     return filePath2;
 }
 
+//Download Charger Report with fixed filename
+async downloadChargerReport() {
+      const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
+    const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
+    await downloadBtn.waitFor({ timeout:60000});
+    await downloadBtn.click();
+    const download = await downloadPromise;
+      this.page.waitForEvent('download', { timeout: 90000 });
+    
+    // Create downloads folder if not exists
+    const downloadDir = path.join(__dirname, "downloads");
+    if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
 
-// Count txn_id 
-async countTxnIdsDailyReport(filePath2) {
+    // Save file with required name
+    const filePath3 = path.join(downloadDir, "Charger_Reports_Analytics.xlsx");
+    await download.saveAs(filePath3);
+    return filePath3;
+
+}
+
+// Count txn_id in Session Report Excel
+async countTxnIdsSessionReport(filePath2) {
       const wb = excel.readFile(filePath2);
     const sheet = wb.Sheets[wb.SheetNames[0]];
     const data = excel.utils.sheet_to_json(sheet, { header: 1 }); 
@@ -292,42 +326,42 @@ async countTxnIdsDailyReport(filePath2) {
 
 }
 
-// Compare daily report count with KPI & Excel
-async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
+// Compare session report count with KPI & session Excel
+async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
     let errors = [];
 
-    // Compare Daily Report Count vs Dashboard KPI
+    // Compare Session Report Count vs Dashboard KPI
     if (txnIds !== sessionKpi) {
         errors.push(
-            `Daily Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi})`
+            ` Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi})`
         );
     } else {
         console.log(
-            `Daily Report Session matched KPI Sessions → ${txnIds}`
+            `Report Session matched KPI Sessions → ${txnIds}`
         );
     }
 
-    // Compare Daily Report Count vs Excel Sessions Count
+    // Compare  Report Count vs Excel Sessions Count
     if (txnIds !== excelCount) {
         errors.push(
-            `Daily Report Session (${txnIds}) does not match Excel Sessions Count (${excelCount})`
+            `Report Session (${txnIds}) does not match Excel Sessions Count (${excelCount})`
         );
     } else {
         console.log(
-            `Daily Report Session matched Excel Sessions → ${txnIds}`
+            `Report Session matched Excel Sessions → ${txnIds}`
         );
     }
 
     // Final result
     if (errors.length === 0) {
-        console.log("Daily Report Session matched KPI & Excel");
+        console.log(" Report Session matched KPI & Excel");
         return {
             success: true,
             txnIds,
-            message: "Daily Report Session matched KPI & Excel"
+            message: "Report Session matched KPI & Excel"
         };
     } else {
-        console.log("Daily Report Mismatch Found:");
+        console.log("Report Mismatch Found:");
         errors.forEach(e => console.log(" - " + e));
         return {
             success: false,
@@ -337,6 +371,7 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     }
 }
 
+// Verify Usage from Report Excel vs KPI
     async verifyReportUsageFromExcel(filePath2, usageKpi) {
     const excelUsageKwh = await this.sumOfUsage(filePath2);
 
@@ -346,8 +381,8 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     // Round to 2 decimals
     const excelMWh = Number(excelMWh_raw.toFixed(2));
 
-    console.log(`Excel Usage (kWh): ${excelUsageKwh}`);
-    console.log(`Excel Usage (MWh Rounded): ${excelMWh}`);
+    console.log(`Report Excel Usage (kWh): ${excelUsageKwh}`);
+    console.log(`Report Excel Usage (MWh Rounded): ${excelMWh}`);
     console.log(`KPI Usage (MWh): ${usageKpi}`);
 
     // Allowed tolerance (0.2 MWh)
@@ -356,7 +391,7 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
         return {
             success: true,
             excelUsageMWh: excelMWh,
-            message: "Usage values matched successfully"
+            message: "Usage values(Dashboard, Report Excel, Session Excel) matched successfully"
         };
     }
     // Failure result
@@ -367,10 +402,93 @@ async verifyDailyReportCounts(txnIds, sessionKpi, excelCount) {
     };
 }
 
+//online percent verification from charger excel
+async verifyOnlinePercentFromChargerExcel(filePath3, onlineKpi) {
+    const avgOnlinePercent = await this.getAverageOnlinePercentFromExcel(filePath3); 
+    const difference = Math.abs(avgOnlinePercent - onlineKpi);  
+    const tolerance = 1.0; // 1% tolerance
+    if (difference <= tolerance) {
+      return {
+        success: true,
+        message: `Online Percentage matches KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+      };
+    } else {
+      return {
+        success: false,
+        message: `Online Percentage mismatch! KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+        };
+    }
+}
+
+async RevenueClick() {
+   await this.RevenueTab.waitFor({ state: "visible", timeout: 30000 });
+ 
+   await Promise.all([
+     this.page.waitForLoadState("networkidle"),
+     this.RevenueTab.click()
+   ]);
+ 
+   // Wait for report dropdown as proof Revenue page loaded
+   await this.reportDropdown.waitFor({ state: "visible", timeout: 30000 });
+ }
+
+ //Revenue Report Download
+ async downloadRevenueReport() {
+      const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
+    const downloadBtn = this.page.locator("//button[normalize-space()='Generate Report']");
+    await downloadBtn.waitFor({ timeout:60000});
+    await downloadBtn.click();
+    const download = await downloadPromise;
+      this.page.waitForEvent('download', { timeout: 90000 });
+    
+    // Create downloads folder if not exists
+    const downloadDir = path.join(__dirname, "downloads");
+    if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
+
+    // Save file with required name
+    const filePath8 = path.join(downloadDir, "CRevenue_Report_Analytics.xlsx");
+    await download.saveAs(filePath8);
+    return filePath8;
+
+}
+ 
+ //Sum of Revenue(Excel)
+ async sumOfRevenue(filePath) {
+     const wb = excel.readFile(filePath);
+     const sheet = wb.Sheets[wb.SheetNames[0]];
+     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+     const rows = data.slice(1);
+     // Excel Usage column index
+     const RevenueValues = rows
+         .map(row => Number(row[2]))   // change index if needed
+         .filter(v => !isNaN(v));
+    const totalRevenue = RevenueValues.reduce((a, b) => a + b, 0);
+    const formattedTotal = Number(totalRevenue.toFixed(2));
+   //  console.log("Excel Revenue Sum:", formattedTotal);
+    return formattedTotal;
+ }
+
+ //Revenue Validation(KPI vs Report Excel)
+ async validateRevenue(filePath, revenueKpi) {
+    const excelRevenue = await this.sumOfRevenue(filePath);
+    const tolerance = 0; // 0 Rupees tolerance
+    if (Math.abs(revenueKpi - excelRevenue) <= tolerance) {
+        return {
+            message:`Revenue KPI (${revenueKpi} ) match Excel Revenue (${excelRevenue})`
+        };
+    }
+    return {
+        success: false,
+        excelRevenue: excelRevenue,
+        message: `Revenue KPI (${revenueKpi}) does NOT match Excel Revenue (${excelRevenue}). Allowed Buffer: ±${tolerance} `
+    };
+ }
+
 async ChargerPage() {
     await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/chargers");
     await this.page.waitForLoadState("networkidle");
     await this.page.waitForTimeout(2000);
+    console.log("Navigated to Charger Page");
 
 }
 async applyTimeFilterinChargerPage(period) {
@@ -383,31 +501,34 @@ async applyTimeFilterinChargerPage(period) {
     await this.page.waitForLoadState("networkidle");}
 
 
-async ChargerdownloadExcel() {
-     const downloadPromise = this.page.waitForEvent("download");
-        //Click download on 3dots menu
-        await this.downloadButton.click();
-        await this.page.waitForTimeout(1000);
-        await this.excelOption.waitFor({ state: "visible", timeout: 5000 });
-        await this.excelOption.click();
-    
-        //Wait for file
-        const download = await downloadPromise;
-    
-        //Check "downloads" folder exists in current directory
-        const downloadDir = path.join(__dirname, "downloads");
-        if (!fs.existsSync(downloadDir)) {
-            fs.mkdirSync(downloadDir);
-        }
-        //Save the file
-        const filePath3 = path.join(downloadDir, "chargers.xlsx");
-        await download.saveAs(filePath3);
-        console.log("Excel Downloaded ", filePath3);
-        return filePath3;
+    async ChargerdownloadExcel() {
+    // Start listening BEFORE triggering download
+    const downloadPromise = this.page.waitForEvent("download", { timeout: 90000 });
+
+    // Click download on 3-dots menu
+    await this.downloadButton.click();
+    await this.excelOption.waitFor({ state: "visible", timeout: 5000 });
+    await this.excelOption.click();
+
+    // Capture the download
+    const download = await downloadPromise;
+
+    // Ensure downloads folder exists
+    const downloadDir = path.join(__dirname, "downloads");
+    if (!fs.existsSync(downloadDir)) {
+        fs.mkdirSync(downloadDir, { recursive: true });
     }
 
-async getSessionsAndUsageFromSessionReportExcel(filePath3) {
-    const wb = excel.readFile(filePath3);
+    // Save file
+    const filePath4 = path.join(downloadDir, "chargers.xlsx");
+    await download.saveAs(filePath4);
+
+    console.log("Charger Excel Downloaded:", filePath4);
+    return filePath4;
+}
+
+async getSessionsAndUsageFromSessionReportExcel(filePath4) {
+    const wb = excel.readFile(filePath4);
     const sheet = wb.Sheets[wb.SheetNames[0]];
 
     // Read Excel as raw rows
@@ -463,11 +584,33 @@ async getSessionsAndUsageFromSessionReportExcel(filePath3) {
 
 }
 
-async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
+
+// Calculate Average Online % from  Charger Excel
+async getAverageOnlinePercentFromExcel(filePath4) {
+  if (!filePath4) {
+    throw new Error("Excel file path is undefined for Online % calculation");
+  }
+  const wb = excel.readFile(filePath4);
+  const sheet = wb.Sheets[wb.SheetNames[0]];
+  const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+  const rows = data.slice(1);
+  const values = rows   
+    .map(row =>
+      parseFloat(
+        row[5]?.toString().replace(/[^0-9.]/g, "")
+      )
+    )
+    .filter(v => !isNaN(v));
+
+  const avgOnline =values.reduce((a, b) => a + b, 0) / values.length;
+  return Number(avgOnline.toFixed(2));
+}
+
+async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
     const {
         excelSessions,
         excelUsageMW
-    } = await this.getSessionsAndUsageFromSessionReportExcel(filePath3);
+    } = await this.getSessionsAndUsageFromSessionReportExcel(filePath4);
     let errors = [];
 
     // Compare Sessions
@@ -514,4 +657,49 @@ async verifyDashboardKPIWithChargerExcel(filePath3, sessionKpi, usageKpi) {
     }
 }
 
+// Verify Online % from charger Excel vs Dashboard KPI
+async verifyOnlinePercentWithExcel(filePath4, OnlineKpi) {
+  try {
+    const avgOnlinePercent = await this.getAverageOnlinePercentFromExcel(filePath4); 
+    const difference = Math.abs(avgOnlinePercent - OnlineKpi);
+
+    const tolerance = 1.0; // 1% tolerance
+    if (difference <= tolerance) {
+      return {
+        success: true,
+        message: `Online Percentage matches KPI: ${OnlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+      };
+    } else {
+      return {
+        success: false,
+        message: `Online Percentage mismatch! KPI: ${OnlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+      };
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: `Error verifying Online Percentage: ${error.message}`
+    };
+  }         
+    } 
+
+ 
+ 
+ 
+ //sum of usage in chargers report
+ async sumOfUsageInRevenueReport(filePath) {
+     const wb = excel.readFile(filePath);
+     const sheet = wb.Sheets[wb.SheetNames[0]]; 
+     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+     const rows = data.slice(1); 
+     // Excel Usage column index (eg: column 9)
+     const usageValues = rows
+         .map(row => Number(row[13]))   // change index if needed
+         .filter(v => !isNaN(v));
+    const totalUsage = usageValues.reduce((a, b) => a + b, 0);
+    const formattedTotal = Number(totalUsage.toFixed(2));
+    return formattedTotal;
+ }
+
+//verifyOnlinePercentWithExcel(filePath3, OnlineKpi) {
 }

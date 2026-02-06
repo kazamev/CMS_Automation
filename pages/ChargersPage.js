@@ -59,7 +59,7 @@ export class ChargersPage {
         this.configuredButton= page.locator("//button[text()=\"Configure Charger\"]");
         this.reconfiguretoolButton = page.locator("//*[name()='path' and contains(@d,'M15.6613 6')]");
         this.installationDate = page.locator("//span[contains(@class,'flex') and contains(@class,'text-sm')]");
-        this.reconfigurationDate = page.locator("(//span[contains(@class,'flex')])[8]");
+        this.reconfigurationDate = page.locator("//span[@class='flex']");
         this.downloadQR= page.locator("//button[text()=\"Download QR Code\"]");
         this.sessionbtn= page.locator("//span[normalize-space()='Sessions']");
         this.chargersbtn= page.locator("//span[normalize-space()='Chargers']");
@@ -112,6 +112,7 @@ async getConnectorStatusCounts() {
 // Add charger flow
 async openAddCharger() {
         await this.btnAddCharger.click();
+        await this.page.waitForLoadState("networkidle");
     }
 
 async fillChargerDetails(data) {
@@ -169,7 +170,6 @@ async fillChargerDetails(data) {
     await this.page.waitForTimeout(1000);
     await this.GetAddressBtn.click();
     await this.page.waitForTimeout(1000);
-
     await this.NextButton3.click();
 
 
@@ -202,6 +202,7 @@ async getChargerId() {
 async ChargerReconfiguration(data){
     await this.reconfigureButton.waitFor({ state: "visible" });
    await this.reconfigureButton.click();
+    await this.page.waitForLoadState("networkidle");
 
 // Wait for the reconfiguration form fields to appear
 await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
@@ -222,7 +223,6 @@ await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
     await this.page.waitForTimeout(1000);
     await this.NextButton3.click();
     await this.configuredButton.click();
-
     await this.page.waitForLoadState("networkidle");
     console.log("Charger Reconfigured Successfully");
     await this.BackButton.click();
@@ -231,11 +231,12 @@ await this.inputChargerName.waitFor({ state: "visible", timeout: 15000 });
 
 }
 
+// Validate configuration
 async Validateconfiguration(chargerId, data) {
     // Search charger
     const searchField = this.page.locator('//input[@type="search"]');
     await searchField.fill(chargerId);
-
+    await this.page.waitForLoadState("networkidle");
     // Locate charger row dynamically
     const chargerRow = this.page.locator(`//tr[.//p[text()="${chargerId}"]]`);
     await chargerRow.waitFor({ state: "visible", timeout: 10000 });
@@ -265,6 +266,7 @@ async Validateconfiguration(chargerId, data) {
     }
 }
 
+// Get installation and reconfiguration dates
 async ReconfigurationDates() {
     // Click the reconfigure tool button
     await this.reconfiguretoolButton.click();
@@ -283,31 +285,33 @@ async ReconfigurationDates() {
     return { installDate, reconfigDate };
 }
 
+// Download Charger Excel file
 async downloadExcel() {
-    const downloadPromise = this.page.waitForEvent("download");
+  // Open 3-dots menu
+  await this.downloadButton.click();
 
-    //Click download on 3dots menu
-    await this.downloadButton.click();
-    await this.page.waitForTimeout(1000);
-    await this.excelOption.waitFor({ state: "visible", timeout: 5000 });
-    await this.excelOption.click();
+  // Wait for Excel option to be visible
+  await this.excelOption.waitFor({ state: "visible", timeout: 60000 });
 
-    //Wait for file
-    const download = await downloadPromise;
+  // Listen + click at the SAME time
+  const [download] = await Promise.all([
+    this.page.waitForEvent("download", { timeout: 90000 }),
+    this.excelOption.click()
+  ]);
 
-    //Check "downloads" folder exists in current directory
-    const downloadDir = path.join(__dirname, "downloads");
-    if (!fs.existsSync(downloadDir)) {
-        fs.mkdirSync(downloadDir);
-    }
-    //Save the file
-    const filePath = path.join(downloadDir, "chargers.xlsx");
-    await download.saveAs(filePath);
-    console.log("Excel Downloaded ", filePath);
-    return filePath;
+  // Ensure downloads folder exists
+  const downloadDir = path.join(__dirname, "downloads");
+  if (!fs.existsSync(downloadDir)) {
+    fs.mkdirSync(downloadDir);
+  }
+
+  // Save file
+  const filePath = path.join(downloadDir, "chargers.xlsx");
+  await download.saveAs(filePath);
+  return filePath;
 }
 
-// Count Charger IDs in Excel
+// Count Charger IDs in  Chargers Excel
 async countChargerIdsInExcel(filePath) {
     const wb = excel.readFile(filePath);
     const sheet = wb.Sheets[wb.SheetNames[0]];
@@ -316,11 +320,10 @@ async countChargerIdsInExcel(filePath) {
     const chargerIDs = rows
         .map(r => r[0])       // change index based on required column
         .filter(id => id);
-    console.log("Excel Charger ID Count :", chargerIDs.length);
     return chargerIDs.length;
 }
 
-// Verify Excel count matches UI count
+// Verify Charger Excel count matches UI count
  async verifyExcelCountMatchesUI(afterCount) {
         const filePath = await this.downloadExcel();
         const excelCount = await this.countChargerIdsInExcel(filePath);

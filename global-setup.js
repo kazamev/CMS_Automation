@@ -1,77 +1,100 @@
 // import { chromium } from '@playwright/test';
 // import { LoginPage } from './pages/loginPage';
+// import path from 'path';
 
 // export default async () => {
+//   console.log("Global Setup: Starting secure login");
 //   const browser = await chromium.launch({ headless: false });
 //   const context = await browser.newContext();
 //   const page = await context.newPage();
-
 //   const login = new LoginPage(page);
 
-//   await login.goTo();
-//   await login.validLogin(
-//     'shilpa@kazam.in',
-//     'Shilpa@1234567890'
-//   );
 
-//   // IMPORTANT: wait for org landing, NOT /cpo
-//   await page.waitForURL(/\/org/, { timeout: 60000 });
+//   try {
+//     await login.goTo();
+//     await login.validLogin('shilpa@kazam.in','Shilpa@1234567890');
 
-//   // Save login state
-//   await context.storageState({ path: 'storageState.json' });
+//     //Wait to reach the dashboard area
+//     await page.waitForURL(/.*org.*/, { timeout: 60000 });
+//     console.log("Waiting for page load");
+//     await page.waitForLoadState('networkidle');
 
-//   await browser.close();
+   
+//     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo", {
+//         waitUntil: 'networkidle'
+//     });
+
+ 
+//     await page.waitForTimeout(5000);
+
+    
+//     const storageState = await context.storageState();
+//     const cookieCount = storageState.cookies.length;
+//     const storageCount = storageState.origins[0]?.localStorage.length || 0;
+    
+//     console.log(`Captured ${cookieCount} cookies and ${storageCount} storage items.`);
+
+//     if (cookieCount === 0 && storageCount === 0) {
+//         throw new Error("Failed to capture any session data.");
+//     }
+
+//     const storagePath = path.resolve(__dirname, 'storageState.json');
+//     await context.storageState({ path: storagePath });
+    
+//     console.log(`Global Setup Success! State saved to: ${storagePath}`);
+
+//   } catch (error) {
+//     console.error("Global Setup Failed:", error.message);
+    
+//     await page.screenshot({ path: 'setup-error-debug.png' });
+//     throw error;
+//   } finally {
+//     await browser.close();
+//   }
 // };
+
 
 import { chromium } from '@playwright/test';
 import { LoginPage } from './pages/loginPage';
 import path from 'path';
 
 export default async () => {
-  console.log("Global Setup: Starting secure login...");
+  console.log('Global Setup: Starting secure login');
+
   const browser = await chromium.launch({ headless: false });
   const context = await browser.newContext();
   const page = await context.newPage();
   const login = new LoginPage(page);
 
   try {
+    //Login
     await login.goTo();
     await login.validLogin('shilpa@kazam.in', 'Shilpa@1234567890');
 
-    //Wait for URL to reach the dashboard area
-    await page.waitForURL(/.*org.*/, { timeout: 60000 });
-    console.log("URL detected. Waiting for network settlement");
+    //Wait for Select Organization page
+    await page.waitForURL('**/org', { timeout: 60000 });
+    console.log('Select Organization page loaded');
 
+    //Click required organization (IMPORTANT)
+    await page.click('text=Tyagi\'s Org');
+
+    //Wait for dashboard / CPO page
+    await page.waitForURL(/.*\/cpo|.*\/dashboard.*/, { timeout: 60000 });
+    console.log('Organization selected, landed inside app');
+
+    //Wait until app fully settles
     await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(2000); // small buffer for SPA storage
 
-   
-    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo", {
-        waitUntil: 'networkidle'
-    });
-
- 
-    await page.waitForTimeout(5000);
-
-    
-    const storageState = await context.storageState();
-    const cookieCount = storageState.cookies.length;
-    const storageCount = storageState.origins[0]?.localStorage.length || 0;
-    
-    console.log(`Captured ${cookieCount} cookies and ${storageCount} storage items.`);
-
-    if (cookieCount === 0 && storageCount === 0) {
-        throw new Error("Failed to capture any session data.");
-    }
-
+    //Save storage state
     const storagePath = path.resolve(__dirname, 'storageState.json');
     await context.storageState({ path: storagePath });
-    
+
     console.log(`Global Setup Success! State saved to: ${storagePath}`);
 
   } catch (error) {
-    console.error("Global Setup Failed:", error.message);
-    
-    await page.screenshot({ path: 'setup-error-debug.png' });
+    console.error('Global Setup Failed:', error.message);
+    await page.screenshot({ path: 'setup-error-debug.png', fullPage: true });
     throw error;
   } finally {
     await browser.close();

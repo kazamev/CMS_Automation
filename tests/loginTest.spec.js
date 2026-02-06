@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 const { LoginPage } = require('../pages/loginPage');
 
+// It ignored the default storage(cookies) to start with a clean session
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test('Valid Login', async ({ page }) => {
     const username="shilpa@kazam.in";
     const password="Shilpa@1234567890";
@@ -10,6 +13,7 @@ test('Valid Login', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     await expect(page).toHaveURL("https://novo.kazam.in/org");
     console.log("Login Successful, URL Verified");
+    await page.waitForTimeout(3000);
   
 });
 
@@ -19,6 +23,7 @@ test('Invalid Login Wrong Email', async ({ page }) => {
     await loginpage.invalidLogin("wrongemail@kazam.in", "Shilpa@1234567890");
     await expect(loginpage.toastMessage).toBeVisible();
     console.log(await loginpage.toastMessage.textContent());
+    await page.waitForTimeout(3000);
 });
 
 test('Invalid Login Wrong Password', async ({ page }) => {
@@ -27,6 +32,7 @@ test('Invalid Login Wrong Password', async ({ page }) => {
     await loginpage.invalidLogin("shilpa@kazam.in", "WrongPassword")
     await expect(loginpage.toastMessage).toBeVisible();
     console.log(await loginpage.toastMessage.textContent());
+    await page.waitForTimeout(3000);
 });
 
 test('Invalid Login Empty Fields', async ({ page }) => {
@@ -36,6 +42,7 @@ test('Invalid Login Empty Fields', async ({ page }) => {
     // Assertion for validation message
     await expect(loginpage.error).toBeVisible();
     console.log(await loginpage.error.textContent());
+    await page.waitForTimeout(3000);
 });
 
 

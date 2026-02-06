@@ -1,0 +1,40 @@
+Global Setup: Starting secure login
+Select Organization page loaded
+Organization selected, landed inside app
+Global Setup Success! State saved to: C:\Users\dodda\OneDrive\Documents\CMS_Automation\storageState.json
+
+===== TEST START: Organisation Details Validation =====
+
+Total organisations: 16
+{
+  "name": "Atomz Power",
+  "users": "47 Users",
+  "date": "Sep 17th 2022",
+  "plan": "premium Plan",
+  "country": "India",
+  "currency": {
+    "symbol": "₹",
+    "name": "Indian Rupee"
+  },
+  "timezone": "Indian Standard Time"
+}
+Navigated to the Manage Org
+OrganizationName : Atomz Power
+Email             : kiran@atomzpower.com
+Plan              : premium
+Country           : India (IN)
+TimeZone          : India Standard Time
+(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi
+Currency           : ₹
+Indian Rupee
+
+ Organization Validation Started
+
+Organization Name: MATCHED
+Plan: MATCHED
+Country: MATCHED
+Timezone: MATCHED
+Currency: MATCHED
+
+===== TEST END: Organisation Details Validation =====
+

@@ -1,32 +1,9 @@
-import { test, expect } from '../fixtures/login.fixture';
-import { ChargersPage } from '../pages/ChargersPage';
-
-test.describe("Charger & Session Dashboard Tests", () => {
-
-  test("Validate charger counters & connector status counts", async ({ loggedInPage }) => {
-    const page = loggedInPage;
-    
-    // Navigate to the specific Org page
-    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers", {
-      waitUntil: 'networkidle',
-      timeout: 30000
-    });
-
-    const chargers = new ChargersPage(page);
-
-    //Read top counters
-    const counts = await chargers.getChargerCounts();
-    console.log("Charger Counts:", counts);
-
-    //Read connector status counts
-    const status = await chargers.getConnectorStatusCounts();
-    console.log("Status Counts:", status);
-
-  });
+import { test, expect } from "../fixtures/login.fixture";
+import { ChargersPage } from "../pages/ChargersPage";
 
 
   // Add Charger Flow
-  test("Add Charger End-to-End Flow", async ({ loggedInPage }) => {
+  test("End-to-End Add and Reconfifured Charger Flow", async ({ loggedInPage }) => {
     const page = loggedInPage;
     test.setTimeout(120000);
      await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers");
@@ -68,15 +45,10 @@ test.describe("Charger & Session Dashboard Tests", () => {
 
     //step charger form
     await chargers.fillChargerDetails(data);
-
-
     console.log(`Charger added successfully → ${data.name}`);
 
     const chargerId = await chargers.getChargerId();
     console.log("Generated Charger ID:", chargerId);
-
-
-    //Check if charger appears in list
 
     // Click Back button
     await page.locator('//span[text()="Back"]').click();
@@ -98,22 +70,19 @@ try {
 } catch (err) {
     console.log("Charger not added to list");
 }
-
-
-  await chargerRow.click();
+await chargerRow.click();
 await page.waitForLoadState("networkidle");
 await page.waitForTimeout(2000);
 
 
-    // Charger Reconfiguration Flow 
+// Charger Reconfiguration Flow 
  await chargers.ChargerReconfiguration(data);
-
  await page.reload({ waitUntil: "networkidle" });
  await page.waitForTimeout(2000);
 
 
 // Latest Charge Counts
- const afterCount = await chargers.getAfterChargerCounts();
+const afterCount = await chargers.getAfterChargerCounts();
 console.log("After Count:", afterCount);
 
 //Verify if count increased
@@ -137,10 +106,8 @@ const filePath = await chargers.downloadExcel();
     console.log("Downloaded Excel file path:", filePath);
     
 
-    // Read Charger IDs from Excel
+// Read Charger IDs from Excel
  const chargerIdCount = await chargers.countChargerIdsInExcel(filePath);
-    console.log("Number of Charger IDs in Excel:", chargerIdCount);
-
 
 // Excel Download & Validate count
 await chargers.verifyExcelCountMatchesUI(afterCount);
@@ -148,6 +115,5 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
 });
 
-  });
 
 

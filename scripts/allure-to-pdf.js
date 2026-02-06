@@ -7,7 +7,7 @@ const { spawn } = require('child_process');
   let server;
 
   try {
-    console.log('Starting Allure HTTP server...');
+    // console.log('Starting Allure HTTP server...');
 
     // Start Allure server
     server = spawn('allure', ['open', '-p', '5050', 'allure-report'], {
@@ -18,17 +18,17 @@ const { spawn } = require('child_process');
     // Give server time to start
     await new Promise(r => setTimeout(r, 5000));
 
-    console.log(' Launching browser...');
+    // console.log(' Launching browser...');
     browser = await puppeteer.launch({ headless: 'new' });
 
     const page = await browser.newPage();
 
-    console.log(' Opening Allure report via HTTP...');
+    // console.log(' Opening Allure report via HTTP...');
     await page.goto('http://localhost:5050', {
       waitUntil: 'networkidle0'
     });
 
-    console.log(' Waiting for Allure UI to hydrate...');
+    // console.log(' Waiting for Allure UI to hydrate');
     await page.waitForFunction(() => {
       const loaders = document.querySelectorAll('div');
       return ![...loaders].some(el => el.innerText === 'Loading...');
@@ -53,3 +53,6 @@ const { spawn } = require('child_process');
     process.exit(0);
   }
 })();
+
+
+
