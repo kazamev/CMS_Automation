@@ -43,7 +43,7 @@ const fs = require('fs');
 
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
-      to: 'shilpa@kazam.in',
+      to: 'shilpa@kazam.in,akhilesh@kazam.in',
       subject: 'Automation Test Reports',
       text: `
 Hi Team,

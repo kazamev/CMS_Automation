@@ -2,17 +2,43 @@
 <html>
 <head>
 <style>
-body { font-family: Arial; }
+body { font-family: Arial; font-size: 13px; }
 h2 { background:#222; color:#fff; padding:8px; }
+
 pre {
   background:#f4f4f4;
-  padding:12px;
+  padding:10px;
   white-space:pre-wrap;
   border-left:4px solid #2196f3;
 }
+
+/* 🔥 TABLE FIXES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 11px;
+}
+
+th, td {
+  border: 1px solid #444;
+  padding: 4px 6px;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+thead {
+  background: #eee;
+}
+
+tr {
+  page-break-inside: avoid;   /* 🔥 NO ROW SPLIT */
+}
+
 </style>
 </head>
 <body>
+
 <h1>Playwright Console Logs</h1>
 <h2>Organisation Details Validation</h2><pre> Organisation Details Validation =====
 
@@ -50,7 +76,7 @@ Currency: MATCHED
 No API calls captured
 
 
-</pre><h2>Dashboard vs Charger page Data comparison</h2><pre> Dashboard vs Charger page Data comparison =====
+=</pre><h2>Dashboard vs Charger page Data comparison</h2><pre> Dashboard vs Charger page Data comparison =====
 
 
 Organisation Name: zynetic_electric_vehicle_charging_llc
@@ -65,8 +91,8 @@ Dashboard Data: {
   "connectors": "55",
   "nonConfigured": "1",
   "all": "All(55)",
-  "busy": "Busy (14)",
-  "available": "Available (31)",
+  "busy": "Busy (17)",
+  "available": "Available (28)",
   "error": "Error (10)"
 }
 Charger Page Data: {
@@ -74,16 +100,15 @@ Charger Page Data: {
   "connectors": "55",
   "nonConfigured": "1",
   "all": "All(55)",
-  "busy": " Busy (14)  ",
-  "available": " Available (31)  ",
+  "busy": " Busy (16)  ",
+  "available": " Available (29)  ",
   "error": " Error (10)  "
 }
- Dashboard and Charger page counters Match
 
 No API calls captured
 
 
-</pre><h2>User Creation And Verification</h2><pre> User Creation And Verification =====
+=</pre><h2>User Creation And Verification</h2><pre> User Creation And Verification =====
 
 User Role Created Successfully
 User Role Verified Successfully
@@ -101,29 +126,29 @@ User Role Deleted Successfully
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
 │ POST   │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles                                      │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
-│ DELETE │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles/40ddaa79-29c1-4004-a332-4cd9d84911fe │
+│ DELETE │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles/a1b6896c-8f83-4314-bc30-6bdf560b99d3 │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
 
 
-</pre><h2>End-to-End Add and Reconfigured Charger Flow</h2><pre> End-to-End Add and Reconfigured Charger Flow =====
+=</pre><h2>End-to-End Add and Reconfigured Charger Flow</h2><pre> End-to-End Add and Reconfigured Charger Flow =====
 
 
 Organisation Name: Tyagi_Org
 
-Before Count: 605
+Before Count: 608
 Charger added successfully → EV Charger
-Generated Charger ID: 64bbu1
+Generated Charger ID: qdezrk
 New charger added to list
 Charger Reconfigured Successfully
-After Count: 606
+After Count: 609
 Charger count increased
 Device Name: Charger Updated
 Connector Type: industrial
 Charger Name updated successfully
 Connector Type updated successfully
-Installation Date: 1. 07/02/2026, 01:59:08 PM
-Reconfiguration Date: 07/02/2026, 01:59:33 PM
-Excel count matches UI count  606
+Installation Date: 1. 07/02/2026, 03:23:23 PM
+Reconfiguration Date: 07/02/2026, 03:23:47 PM
+Excel count matches UI count  609
 
 ==== API CALLS : End-to-End Add and Reconfigured Charger Flow ====
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
@@ -133,9 +158,9 @@ Excel count matches UI count  606
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
 │ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-upload-url?mimetype=image%2Fpng&extension=png&dir=cms%2Fcharger-images │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/chargers/tariff_details?device_id=64bbu1                                   │
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/chargers/tariff_details?device_id=qdezrk                                   │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/64bbu1                                                                    │
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/qdezrk                                                                    │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
 │ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-make                                                                   │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
@@ -145,7 +170,7 @@ Excel count matches UI count  606
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
 
 
-</pre><h2>Charger Tariff Creation And Deletion</h2><pre> Charger Tariff Creation And Deletion =====
+=</pre><h2>Charger Tariff Creation And Deletion</h2><pre> Charger Tariff Creation And Deletion =====
 
 
 Organisation Name: Tyagi_Org
@@ -155,7 +180,7 @@ Start Charger Tariff Creation
 ┌─────────┬───────────────┬─────────────────────────────┐
 │ (index) │ Field         │ Value                       │
 ├─────────┼───────────────┼─────────────────────────────┤
-│ 0       │ 'Name'        │ 'Auto_Tariff_1770453005270' │
+│ 0       │ 'Name'        │ 'Auto_Tariff_1770458059146' │
 │ 1       │ 'Description' │ '----'                      │
 │ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
 │ 3       │ 'Validity'    │ '07/02/2026 -- Forever'     │
@@ -168,7 +193,7 @@ Tariff deleted successfully
 No API calls captured
 
 
-</pre><h2>Validate Session Counts, Usage, Revenue And Online Percentage</h2><pre> Validate Session Counts, Usage, Revenue And Online Percentage =====
+=</pre><h2>Validate Session Counts, Usage, Revenue And Online Percentage</h2><pre> Validate Session Counts, Usage, Revenue And Online Percentage =====
 
 
 Organisation: zynetic_electric_vehicle_charging_llc
@@ -234,14 +259,14 @@ Sessions mismatch : KPI Session Count: 464, Session count in ChargerExcel: 446
 │────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
 
 
-</pre><h2>Validate Revenue Report And Invoice</h2><pre> Validate Revenue Report And Invoice =====
+=</pre><h2>Validate Revenue Report And Invoice</h2><pre> Validate Revenue Report And Invoice =====
 
 
 Organisation Name: zynetic_electric_vehicle_charging_llc
 
 DashboardRevenue: 14512.27
 Revenue: 14512.27
-Total Revenue: 4933314.66
+Total Revenue: 4934318.93
 Starting Excel download
 Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
 Excel Revenue: 14512.27
@@ -274,29 +299,8 @@ Time stamp: MATCHED
 No API calls captured
 
 
-</pre><h2>Create, Validate and Delete Driver Group And Tariff</h2><pre> Create, Validate and Delete Driver Group And Tariff =====
+=</pre><h2>Create, Validate and Delete Driver Group And Tariff</h2><pre> Create, Validate and Delete Driver Group And Tariff =====
 
-Driver Group created successfully
-Starting Driver Tariff Creation
-Successfully opened Driver Group: Driver Group101
-Selecting available tariff: Auto_Tariff_1770023335777
-Driver Tariff  Created Successfully
-Successfully opened Driver Group: Driver Group101
-
-Driver Group Details
-┌─────────┬─────────────────┬─────────────────────────────────┐
-│ (index) │ Field           │ Value                           │
-├─────────┼─────────────────┼─────────────────────────────────┤
-│ 0       │ 'Name'          │ 'Driver Group101'               │
-│ 1       │ 'Description'   │ 'Test Driver Group Description' │
-│ 2       │ 'Total Drivers' │ '1'                             │
-│ 3       │ 'Name'          │ 'Auto_Tariff_1770023335777'     │
-│ 4       │ 'Description'   │ '----'                          │
-└─────────┴─────────────────┴─────────────────────────────────┘
-Driver Tariff deleted successfully.
-Successfully opened Driver Group: Driver Group101
-All drivers removed from the group.
-Driver Group deleted successfully.
 
 ==== API CALLS : Create, Validate and Delete Driver Group And Tariff ====
 │────────│────────│─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
@@ -308,4 +312,4 @@ Driver Group deleted successfully.
 │────────│────────│─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
 
 
-</pre></body></html>
+=</pre></body></html>
