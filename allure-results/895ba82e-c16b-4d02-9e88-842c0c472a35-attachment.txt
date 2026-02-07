@@ -1,0 +1,36 @@
+
+===== TEST START: Dashboard vs Charger page Data comparison =====
+
+
+Organisation Name: zynetic_electric_vehicle_charging_llc
+
+Yesterday DashBoard Data
+Revenue: AED 14512.27
+Sessions: 464
+Usage: 11.48 MWh
+Online Percentage: 69.42%
+Dashboard Data: {
+  chargers: '34',
+  connectors: '55',
+  nonConfigured: '1',
+  all: 'All(55)',
+  busy: 'Busy (14)',
+  available: 'Available (31)',
+  error: 'Error (10)'
+}
+Charger Page Data: {
+  chargers: '34',
+  connectors: '55',
+  nonConfigured: '1',
+  all: 'All(55)',
+  busy: ' Busy (14)  ',
+  available: ' Available (31)  ',
+  error: ' Error (10)  '
+}
+ Dashboard and Charger page counters Match
+
+No API calls captured
+
+
+===== TEST END: Dashboard vs Charger page Data comparison =====
+

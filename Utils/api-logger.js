@@ -6,6 +6,8 @@ export function attachApiLogger(page) {
   if (!fs.existsSync(logDir)) fs.mkdirSync(logDir);
 
   const logFile = path.join(logDir, 'console.log');
+
+  // Store APIs uniquely
   const apiMap = new Map();
 
   const isBusinessApi = url =>
@@ -19,9 +21,9 @@ export function attachApiLogger(page) {
     const key = `${req.method()} ${url}`;
     if (!apiMap.has(key)) {
       apiMap.set(key, {
-        METHOD: req.method(),
-        STATUS: '',
-        URL: url,
+        method: req.method(),
+        url,
+        status: '',
       });
     }
   });
@@ -31,8 +33,14 @@ export function attachApiLogger(page) {
     if (!isBusinessApi(url)) return;
 
     const key = `${res.request().method()} ${url}`;
-    if (apiMap.has(key)) {
-      apiMap.get(key).STATUS = res.status();
+    if (!apiMap.has(key)) {
+      apiMap.set(key, {
+        method: res.request().method(),
+        url,
+        status: res.status(),
+      });
+    } else {
+      apiMap.get(key).status = res.status();
     }
   });
 
@@ -42,26 +50,62 @@ export function attachApiLogger(page) {
 
     const key = `${req.method()} ${url}`;
     apiMap.set(key, {
-      METHOD: req.method(),
-      STATUS: 'FAILED',
-      URL: url,
+      method: req.method(),
+      url,
+      status: 'FAILED',
     });
   });
 
-    return {
-    printApiTable(testName = '') {
-      if (apiMap.size === 0) {
-        console.log(`\n========== API CALLS : ${testName} ==========\nNo API calls captured\n`);
-        return;
-      }
+  return {
+  printApiTable(testName = '') {
+  if (apiMap.size === 0) {
+    console.log('\nNo API calls captured\n');
+    return;
+  }
 
-      console.log(`\n========== API CALLS : ${testName} ==========\n`);
+  const rows = [...apiMap.values()];
 
-      // ✅ THIS gives EXACT output like your screenshot
-      console.table([...apiMap.values()]);
-
-      apiMap.clear();
-    }
+  const colWidths = {
+    method: Math.max(6, ...rows.map(r => r.method.length)),
+    status: Math.max(6, ...rows.map(r => String(r.status).length)),
+    url: Math.max(80, ...rows.map(r => r.url.length)),
   };
-}
 
+  const line =
+    '│' +
+    '─'.repeat(colWidths.method + 2) + '│' +
+    '─'.repeat(colWidths.status + 2) + '│' +
+    '─'.repeat(colWidths.url + 2) + '│';
+
+  const header =
+    '│ ' +
+    'METHOD'.padEnd(colWidths.method) + ' │ ' +
+    'STATUS'.padEnd(colWidths.status) + ' │ ' +
+    'URL'.padEnd(colWidths.url) + ' │';
+
+  let table = '';
+  table += line + '\n';
+  table += header + '\n';
+  table += line + '\n';
+
+  rows.forEach(r => {
+    table +=
+      '│ ' +
+      r.method.padEnd(colWidths.method) + ' │ ' +
+      String(r.status).padEnd(colWidths.status) + ' │ ' +
+      r.url.padEnd(colWidths.url) + ' │\n';
+    table += line + '\n';
+  });
+
+  const title = `==== API CALLS : ${testName} ====\n`;
+
+  //PRINT IN VS CODE CONSOLE
+  console.log('\n' + title + table);
+
+  //WRITE TO LOG FILE (PDF source)
+  // fs.appendFileSync(logFile, '\n' + title + table + '\n');
+
+  apiMap.clear();
+}
+  }
+}

@@ -23,6 +23,7 @@ pre {
 </style>
 </head>
 <body>
+
 <h1>Playwright Console Logs</h1>
 `;
 

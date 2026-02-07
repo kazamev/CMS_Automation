@@ -1,12 +1,11 @@
-import fs from 'fs';
-import path from 'path';
 
-// utils/api-capture.js
-export function attachApiLogger(page, apiLogs) {
+export function attachApiCapture(page) {
+  const apiLogs = [];
+
   page.on('request', request => {
     const url = request.url();
 
-    // ✅ FILTER NOISE
+    // ✅ FILTER: only business APIs
     if (!url.includes('/api/')) return;
 
     apiLogs.push({
@@ -16,27 +15,22 @@ export function attachApiLogger(page, apiLogs) {
     });
   });
 
-  page.on('response', response => {
+  page.on('response', async response => {
     const url = response.url();
     if (!url.includes('/api/')) return;
 
+    const status = response.status();
+
     apiLogs.push({
-      type: response.status() >= 400 ? 'FAILED' : 'RESPONSE',
+      type: status >= 400 ? 'FAILED' : 'RESPONSE',
       method: response.request().method(),
-      status: response.status(),
+      status,
       url
     });
   });
 
-  page.on('requestfailed', request => {
-    const url = request.url();
-    if (!url.includes('/api/')) return;
-
-    apiLogs.push({
-      type: 'NETWORK_ERR',
-      method: request.method(),
-      status: 'ERR',
-      url
-    });
-  });
+  return apiLogs;
 }
+
+
+
