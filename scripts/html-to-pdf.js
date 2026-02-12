@@ -12,7 +12,10 @@ const path = require('path');
 
   await page.pdf({
     path: 'logs/Playwright-Console-Logs.pdf',
-    format: 'A4',
+    // format: 'A4',
+    width:'210mm',
+    height:'297mm',
+    scale: 1, 
     printBackground: true
   });
 

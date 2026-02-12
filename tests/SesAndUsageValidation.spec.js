@@ -46,7 +46,7 @@ test('Validate Session Counts, Usage ,Revenue And Online Percentage', async () =
       } else {
         console.log("Count Validation Passed:", result.message);
       }
-  
+
       //Sum Usage from Excel
       await sessionPage.sumOfUsage(filePath, 9); // Column index for usage
   

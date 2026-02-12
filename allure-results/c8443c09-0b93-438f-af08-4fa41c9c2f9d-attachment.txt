@@ -29,5 +29,8 @@ Country: MATCHED
 Timezone: MATCHED
 Currency: MATCHED
 
+No API calls captured
+
+
 ===== TEST END: Organisation Details Validation =====
 

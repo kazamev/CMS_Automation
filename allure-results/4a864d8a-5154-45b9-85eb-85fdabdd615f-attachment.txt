@@ -1,0 +1,45 @@
+
+===== TEST START: Validate Revenue Report And Invoice =====
+
+
+Organisation Name: zynetic_electric_vehicle_charging_llc
+
+DashboardRevenue: 15799.99
+Revenue(AED): 15799.99
+Total Revenue(AED): 4999950.22
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 15799.99
+Revenue In Revenue Page: 15799.99
+Dashboard Revenue: 15799.99
+Dashboard Revenue matched Excel Revenue → 15799.99
+Revenue Validation Passed: Revenue values matched successfully
+Success row Overview Data
+Transaction id: 62484498
+Billed Amount: 37.30
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Muhammad Tahir 543110068
+Time stamp: 11/02/2026
+        
+        11:59:52 pm
+Invoice Data
+Transaction id: 62484498
+Billed Amount: 37.30
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Muhammad Tahir - 543110068
+Time stamp: Feb 11 2026, 11:59:53 pm
+
+ Comparison Report
+Transaction id: MATCHED
+Billed Amount: MATCHED
+Host Details: MATCHED
+Driver Details: MATCHED
+Time stamp: MISMATCH! (Overview: "11/02/2026
+        
+        11:59:52 pm" vs Invoice: "Feb 11 2026, 11:59:53 pm")
+
+No API calls captured
+
+
+===== TEST END: Validate Revenue Report And Invoice =====
+

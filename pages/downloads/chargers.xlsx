@@ -1,37 +1,35 @@
 Charger ID,Charger Name,Sessions,Usage (kWh),AVG Utilization,Online (%),Connectors,Connector Status 1,Connector Status 2,Connector Status 3,Hub Name,Geo State,Host Name,Host Phone,Make,Protocol,FW Version,Config Status,Tariff
-9yqygi,Future  Mobility ,11,0.02,0h 10m,91.46,three_pin,preparing,-,-,-,Karnataka,Akhilesh Babu,9495644454,Kazam,ocpp,OCPP_34.2.0_L510,config,kazam test
-ght831,White Crown 22KW 6/6,1,9.37,2h 42m,100.00,"type_2,type_2",Available,Available,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-gzqva7,White Crown 11KW 2/4,1,5.09,0h 29m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-yvzjz6,Testman,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,-,دبي,Harsh,558962369,威斯曼(深圳)新能源科技有限公司,ocpp,V3R2C1B115,config,-
-s27yjt,Central 1 22kW,1,49.79,4h 41m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-9huo15,120KW DC Ramada Deira,42,1536.03,33h 55m,99.71,"ccs,ccs",Charging,Charging,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F610061005,config,Dubai 6 Sep Charges
-qgtjbi,22kW - Dual Gun The Arbor School,0,0.00,0h 00m,0,"type_2,type_2",Available,Available,-,-,-,Harsh,558962369,EVSELINK,ocpp,D1-V1.1.10-beta5,config,-
-d9yafe,22kW Dual Gun - The Arbor School ,0,0.00,0h 00m,0,"type_2,type_2",Available,Available,-,-,دبي,Harsh,558962369,EVSELINK,ocpp,D1-V1.1.10-beta5,config,-
-e9tmzt,180kW Golden Tulip Liquid Cooled,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,-,Dubai,Harsh,558962369,-,ocpp,-,config,-
-h338im,30KW DC Al Owais Tower Al Barsha,10,317.45,11h 10m,100.00,ccs,Available,-,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-,config,Dubai 6 Sep Charges
-a1n93g,Saeed Tower 2 22kW,3,89.69,11h 30m,100.00,"type_2,type_2",Available,Finishing,-,-,دبي,Harsh,558962369,EVSELINK,ocpp,D0-V1.1.7,config,AC Charger
-7jzp4s,White Crown 11KW 4/6,0,33.67,10h 06m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-gdz41f,22kW Hana Residence,0,0.00,0h 00m,0,"type_2,type_2",Unavailable,Unavailable,-,-,دبي,Harsh,558962369,-,ocpp,-,config,AC Charger
-7gnwjv,White Crown 11kW 3/6,1,10.62,1h 59m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-sc6n4z,60KW Shada Hotel ( SC6N4Z ),28,673.30,24h 46m,100.00,"ccs,ccs",Charging,Charging,-,-,Dubai,Harsh,558962369,LHK,ocpp,2.1.3-11-LAN,config,Dubai 6 Sep Charges
-saun2d,WM_07,0,0.00,0h 00m,0,type_7,Available,-,-,-,Karnataka,Akhilesh Babu,9495644454,kazam,kazam,34.3.16,config,-
-v77837,White Crown 22KW 5/6,2,11.29,1h 05m,100.00,"type_2,type_2",Available,Available,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-cxzhsb,Royal Continental 120kW,40,1462.22,34h 25m,100.00,"ccs,ccs",Charging,preparing,-,-,دبي,Harsh,558962369,-,ocpp,1.4.0j,config,Dubai 6 Sep Charges
-cms638,22kW The Arbor School,0,0.00,0h 00m,0,type_2,Available,-,-,-,Dubai,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,-
-mxx6o3,22kW  The Arbor School - B,0,0.00,0h 00m,0,type_2,Faulted,Faulted,-,-,Dubai,Harsh,558962369,JOINON,ocpp,2024.07.17.V_1_10_23,config,-
-sy9rrh,White Crown 11KW 1/4,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-xp9pk3,22 KW Tennis Club Fujairah,0,0.00,0h 00m,0,type_2,Available,-,-,-,Fujairah Emirate,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
-4vx41i,150KW DC Al Owais Al Hudaiba,61,2031.18,35h 31m,100.00,"ccs,ccs",preparing,Charging,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F510061005,config,Dubai 6 Sep Charges
-f164by,30KW DC Al Owais Tower Al Barsha,23,255.34,9h 42m,100.00,ccs,Available,-,-,-,Dubai,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-,config,Dubai 6 Sep Charges
-c3zpxb,90kW DC Charger Grandstay Holiday Homes,65,1283.14,32h 40m,100.00,"ccs,ccs",Charging,Charging,-,-,دبي,Harsh,558962369,Zynetic,ocpp,V1.000499-1.11-CS22.000104-CS22.000104-,config,Dubai 6 Sep Charges
-x93erh,80KW DBC Charger,45,1330.85,34h 44m,100.00,"ccs,ccs",Charging,Available,-,-,Dubai,Harsh,558962369,LHK,ocpp,2.1.3-11-LAN,config,Dubai 6 Sep Charges
 wbp14z,Asad 120KW,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-,config,asad
-c858n5,7KW AC TAJ Business Bay,3,11.95,1h 27m,88.81,type_2,Charging,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.0-W2.2.0,config,AC Charger
-vtq9ns,150KW Oud Metha,0,0.00,0h 00m,0,"ccs,ccs,ccs",Faulted,Faulted,Faulted,-,Dubai,Harsh,558962369,Zynetic,ocpp,V1.000777-1.11-G2.000147-G2.000147-,config,Dubai 6 Sep Charges
+pc3ibi,30KW DC Afra Majid Al Owais Al Rigga,13,400.99,13h 56m,100.00,ccs,Charging,-,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F510051005,config,Dubai 6 Sep Charges
 an4z7v,test,0,0.00,0h 00m,0,type_2,Available,-,-,-,Uttar Pradesh,Apurva Zynetic,8789402815,PlugZmart,ocpp,2.3.0,config,-
+v77837,White Crown 22KW 5/6,3,34.94,5h 02m,100.00,"type_2,type_2",Finishing,Available,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+cms638,22kW The Arbor School,0,0.00,0h 00m,0,type_2,Available,-,-,-,Dubai,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,-
 g6f5qc,60kW Golden Tulip,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,-,Dubai,Harsh,558962369,-,ocpp,-,config,-
-jt4rsn,60KW DC -The Manor by JA,23,731.78,24h 24m,100.00,"ccs,ccs",Charging,Charging,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F710061005,config,Dubai 6 Sep Charges
-pc3ibi,30KW DC Afra Majid Al Owais Al Rigga,12,372.13,12h 47m,97.75,ccs,Charging,-,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-,config,Dubai 6 Sep Charges
-yotxb2,80KW DC Ramada Barsha Heights,55,1090.16,28h 13m,99.72,"ccs,ccs",Charging,Available,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F710061005,config,Dubai 6 Sep Charges
-xgmr8v,40KW TAJ Business Bay,16,389.58,16h 37m,100.00,"ccs,ccs",Charging,Available,-,-,Dubai,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F310061005,config,Dubai 6 Sep Charges
-sazayp,Test-1,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Jesinta Zynetic,9741618067,kazam,kazam,34.3.16,config,-
+yotxb2,80KW DC Ramada Barsha Heights,51,1145.25,31h 04m,100.00,"ccs,ccs",Charging,Available,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F710061005,config,Dubai 6 Sep Charges
+mxx6o3,22kW  The Arbor School - B,0,0.00,0h 00m,0,type_2,Faulted,Faulted,-,-,Dubai,Harsh,558962369,JOINON,ocpp,2024.07.17.V_1_10_23,config,-
+jt4rsn,60KW DC -The Manor by JA,40,804.76,25h 24m,100.00,"ccs,ccs",Available,Available,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F710061005,config,Dubai 6 Sep Charges
+x93erh,80KW DBC Charger,60,1152.20,31h 00m,99.71,"ccs,ccs",Charging,Charging,-,-,Dubai,Harsh,558962369,LHK,ocpp,2.1.3-11-LAN,config,Dubai 6 Sep Charges
+xgmr8v,40KW TAJ Business Bay,24,545.34,18h 44m,100.00,"ccs,ccs",Available,Available,-,-,Dubai,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F310061005,config,Dubai 6 Sep Charges
+c3zpxb,90kW DC Charger Grandstay Holiday Homes,56,1520.05,37h 47m,100.00,"ccs,ccs",Charging,Charging,-,-,دبي,Harsh,558962369,Zynetic,ocpp,V1.000499-1.11-CS22.000105-CS22.000105-,config,Dubai 6 Sep Charges
+vtq9ns,150KW Oud Metha,0,0.00,0h 00m,0,"ccs,ccs,ccs",Faulted,Faulted,Faulted,-,Dubai,Harsh,558962369,Zynetic,ocpp,V1.000777-1.11-G2.000147-G2.000147-,config,Dubai 6 Sep Charges
+s27yjt,Central 1 22kW,1,32.03,2h 59m,100.00,type_2,Charging,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+qgtjbi,22kW - Dual Gun The Arbor School,0,0.00,0h 00m,0,"type_2,type_2",Available,Available,-,-,-,Harsh,558962369,EVSELINK,ocpp,D1-V1.1.10-beta5,config,-
+gzqva7,White Crown 11KW 2/4,1,42.32,11h 19m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+d9yafe,22kW Dual Gun - The Arbor School ,0,0.00,0h 00m,0,"type_2,type_2",Available,Available,-,-,دبي,Harsh,558962369,EVSELINK,ocpp,D1-V1.1.10-beta5,config,-
+sy9rrh,White Crown 11KW 1/4,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+cxzhsb,Royal Continental 120kW,57,1631.86,37h 31m,100.00,"ccs,ccs",Charging,Charging,-,-,دبي,Harsh,558962369,-,ocpp,1.4.0j,config,Dubai 6 Sep Charges
+e9tmzt,180kW Golden Tulip Liquid Cooled,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,-,Dubai,Harsh,558962369,-,ocpp,-,config,-
+sc6n4z,60KW Shada Hotel ( SC6N4Z ),30,699.51,23h 40m,99.39,"ccs,ccs",Charging,Finishing,-,-,Dubai,Harsh,558962369,LHK,ocpp,2.1.3-11-LAN,config,Dubai 6 Sep Charges
+eqwta4,EV pump,0,0.00,0h 00m,0,ccs,Available,-,-,-,Karnataka,Jesinta Zynetic,9741618067,Kazam,ocpp,OCPP_44.1.3_L510,config,-
+h338im,30KW DC Al Owais Tower Al Barsha,7,233.13,7h 59m,100.00,ccs,Available,-,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-10051005,config,Dubai 6 Sep Charges
+yvzjz6,Testman,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,-,دبي,Harsh,558962369,威斯曼(深圳)新能源科技有限公司,ocpp,V3R2C1B115,config,-
+ght831,White Crown 22KW 6/6,1,8.14,2h 00m,100.00,"type_2,type_2",Finishing,Available,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+9huo15,120KW DC Ramada Deira,43,1775.38,38h 34m,100.00,"ccs,ccs",Charging,Charging,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F610061005,config,Dubai 6 Sep Charges
+4vx41i,150KW DC Al Owais Al Hudaiba,69,2036.12,34h 44m,100.00,"ccs,ccs",Charging,Available,-,-,دبي,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F510061005,config,Dubai 6 Sep Charges
+f164by,30KW DC Al Owais Tower Al Barsha,12,304.02,10h 46m,100.00,ccs,Charging,-,-,-,Dubai,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-10051005,config,Dubai 6 Sep Charges
+7jzp4s,White Crown 11KW 4/6,1,16.79,4h 12m,100.00,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+c858n5,7KW AC TAJ Business Bay,5,35.51,4h 58m,95.21,type_2,Available,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.0-W2.2.0,config,AC Charger
+7gnwjv,White Crown 11kW 3/6,4,26.18,2h 27m,100.00,type_2,Charging,-,-,-,دبي,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+a1n93g,Saeed Tower 2 22kW,0,0.00,0h 02m,100.00,"type_2,type_2",Available,Available,-,-,دبي,Harsh,558962369,EVSELINK,ocpp,D0-V1.1.7,config,AC Charger
+xp9pk3,22 KW Tennis Club Fujairah,0,0.00,0h 00m,0,type_2,Available,-,-,-,Fujairah Emirate,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,AC Charger
+gdz41f,22kW Hana Residence,0,0.00,0h 00m,0,"type_2,type_2",Unavailable,Unavailable,-,-,دبي,Harsh,558962369,-,ocpp,-,config,AC Charger

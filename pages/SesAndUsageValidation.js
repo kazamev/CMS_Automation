@@ -161,11 +161,10 @@ async countSessionIdsInExcel(filePath) {
     }
     //Return structured result
     if (errors.length === 0) {
-        console.log(`All counts(DashBOard, Session Page, Excel) matched successfully  ${excelCount}`);
+        console.log(`Session counts match across the Dashboard, Session page, and Excel file. ${excelCount}`);
         return {
             success: true,
-            excelCount,
-            message: "All counts(Dashboard, Session Page, Excel) matched successfully"
+            excelCount
         };
     } else {
         console.log(" Mismatch found:");
@@ -219,7 +218,7 @@ async verifyUsageFromExcel(filePath, usageKpi) {
         return {
             success: true,
             excelUsageMWh,
-            message: "Usage values(Dashboard, Session Page, Session Excel) matched successfully"
+            message: "Usage Values match across the Dashboard, Session page, and Excel file."
         };
     } else {
         console.log("Usage mismatch found:");
@@ -391,7 +390,7 @@ async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
         return {
             success: true,
             excelUsageMWh: excelMWh,
-            message: "Usage values(Dashboard, Report Excel, Session Excel) matched successfully"
+            message: "Usage values match across the Dashboard, Session page, and Excel file."
         };
     }
     // Failure result

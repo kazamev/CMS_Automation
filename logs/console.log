@@ -36,5 +36,369 @@ Country: MATCHED
 Timezone: MATCHED
 Currency: MATCHED
 
+No API calls captured
+
+
 ===== TEST END: Organisation Details Validation =====
+
+
+===== TEST START: Dashboard vs Charger page Data comparison =====
+
+
+Organisation Name: zynetic_electric_vehicle_charging_llc
+
+Yesterday DashBoard Data
+Revenue: AED 15799.99
+Sessions: 479
+Usage: 12.44 MWh
+Online Percentage: 64.81%
+Dashboard Charger Data(Offline and Online): {
+  "chargers": "34",
+  "connectors": "55",
+  "nonConfigured": "1",
+  "all": "All(55)",
+  "busy": "Busy (16)",
+  "available": "Available (29)",
+  "error": "Error (10)"
+}
+Charger Page Data(Offline And Online): {
+  "chargers": "34",
+  "connectors": "55",
+  "all": "All(55)",
+  "busy": " Busy (16)  ",
+  "available": " Available (29)  ",
+  "error": " Error (10)  "
+}
+ The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.
+Dashboard Online Chargers Data: {
+  "chargers": "22",
+  "connectors": "34",
+  "nonConfigured": "1",
+  "all": "All(34)",
+  "busy": "Busy (16)",
+  "available": "Available (18)",
+  "error": "Error (0)"
+}
+Charger Page Online Chargers Data: {
+  "chargers": "22",
+  "connectors": "34",
+  "all": "All(34)",
+  "busy": " Busy (16)  ",
+  "available": " Available (18)  ",
+  "error": " Error (0)  "
+}
+The Online Charger count matches on both the Dashboard and the Charger page.
+
+No API calls captured
+
+
+===== TEST END: Dashboard vs Charger page Data comparison =====
+
+
+===== TEST START: User Creation And Verification =====
+
+
+Organisation Name: Tyagi_Org
+
+User Role Created Successfully
+User Role Verified Successfully
+Role Name: CMS View Only
+Role Description: User Can have only view access
+User Role Deleted Successfully
+
+==== API CALLS : User Creation And Verification ====
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/users?page=1&count=50                      │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles?page=1&count=100                     │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ POST   │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles                                      │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ DELETE │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles/47228889-6a22-49c8-9ee8-dd6d486ebff7 │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: User Creation And Verification =====
+
+
+===== TEST START: Hub Creation,Validation And Deletion =====
+
+
+Organisation Name: Tyagi_Org
+
+
+Hub Creation Started
+{
+  "HubName": "Bangalore Central Hub",
+  "Lattitude": "12.9715987",
+  "Longitude": "77.5945627",
+  "Sanctionload": "50",
+  "State": "Karnataka",
+  "DISCOM": "Bangalore Electricity Supply Company Limited",
+  "BillNumber": "2024021098",
+  "ConnectorType": "CCS2",
+  "PhoneNumber": "8431273913"
+}
+Hub Added Successfully -> Bangalore Central Hub
+Hub Details of the Created Hub
+{
+  "Hub Name": "Bangalore Central Hub",
+  "Hub SAP Code": "----",
+  "Load Limit": "----",
+  "Load Limit Strategy": "----",
+  "Sanction Load": "50 kw",
+  "D' Souza Layout, Ashok Nagar, Bengaluru, Karnataka, 560001": "Hub Bill Detail",
+  "Name": "Bangalore Electricity Supply Company Limited",
+  "State": "Karnataka",
+  "Bill No": "2024021098",
+  "Connection Type": "CCS2",
+  "Phone number": "+91 8431273913",
+  "Hub Bank Detail": "Account Name",
+  "----": "Account IFSC Code"
+}
+
+Hub Validation Started
+Hub Name: MATCHED
+Sanction Load: MATCHED
+State: MATCHED
+DISCOM: MATCHED
+Bill Number: MATCHED
+Connector Type: MATCHED
+Phone Number: MATCHED
+
+Hub Deletion Started
+Hub Deleted Successfully -> Bangalore Central Hub
+
+Hub Deletion Validation Passed
+
+No API calls captured
+
+
+===== TEST END: Hub Creation,Validation And Deletion =====
+
+
+===== TEST START: End-to-End Add and Reconfigured Charger Flow =====
+
+
+Organisation Name: Tyagi_Org
+
+Before Count: 619
+Charger added successfully → EV Charger
+Generated Charger ID: pgasxv
+New charger added to list
+Charger Reconfigured Successfully
+After Count: 620
+Charger count increased
+Device Name: Charger Updated
+Connector Type: industrial
+Charger Name updated successfully
+Connector Type updated successfully
+Installation Date: 1. 12/02/2026, 11:14:20 AM
+Reconfiguration Date: 12/02/2026, 11:14:46 AM
+Excel count matches UI count  620
+
+==== API CALLS : End-to-End Add and Reconfigured Charger Flow ====
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                                                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/tariff/all-tariff                                                          │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-upload-url?mimetype=image%2Fpng&extension=png&dir=cms%2Fcharger-images │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/chargers/tariff_details?device_id=pgasxv                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/pgasxv                                                                    │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-make                                                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/custom-field/get-custom-field                                              │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-zones                                                                  │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: End-to-End Add and Reconfigured Charger Flow =====
+
+
+===== TEST START: Charger Tariff Creation And Deletion =====
+
+
+Organisation Name: Tyagi_Org
+
+Start Charger Tariff Creation
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬─────────────────────────────┐
+│ (index) │ Field         │ Value                       │
+├─────────┼───────────────┼─────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_Tariff_1770875119256' │
+│ 1       │ 'Description' │ '----'                      │
+│ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
+│ 3       │ 'Validity'    │ '12/02/2026 -- Forever'     │
+│ 4       │ 'Price Type'  │ 'Amount'                    │
+│ 5       │ 'Chargers'    │ '244a95'                    │
+└─────────┴───────────────┴─────────────────────────────┘
+Charger Tariff Created Successfully
+Tariff deleted successfully
+
+No API calls captured
+
+
+===== TEST END: Charger Tariff Creation And Deletion =====
+
+
+===== TEST START: Validate Session Counts, Usage, Revenue And Online Percentage =====
+
+
+Organisation: zynetic_electric_vehicle_charging_llc
+
+Dashboard Session KPI: 479
+Dashboard Usage KPI(MWh): 12.44
+Dashboard Online KPI(%): 64.81
+Dashboard Revenue KPI(AED): 15799.99
+All Sessions Count in Session Page: 479
+Ongoing Sessions Count in Session Page: 1
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 479
+Session counts match across the Dashboard, Session page, and Excel file. 479
+Session Excel Usage (kWh): 12196.09000000001
+Session Excel Usage (MWh Rounded): 12.2
+KPI Usage (MWh): 12.44
+Usage mismatch found:
+Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
+Usage Validation Failed: Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
+Navigated to Reports Page
+Selected date: 11/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
+Report Mismatch Found:
+ -  Report Session (478) does not match KPI Sessions (479)
+ - Report Session (478) does not match Excel Sessions Count (479)
+Report Excel Usage (kWh): 12196.090000000006
+Report Excel Usage (MWh Rounded): 12.2
+KPI Usage (MWh): 12.44
+Usage Validation Failed: Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
+Selected date: 11/02/2026
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Charger_Reports_Analytics.xlsx
+Avg of Online Percentage from Report Excel: 61.6
+Selected date: 11/02/2026
+Downloaded Revenue Report Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\CRevenue_Report_Analytics.xlsx
+Total Revenue from Report Excel: 15799.99
+Revenue Validation Result: {
+  "message": "Revenue KPI (15799.99 ) match Excel Revenue (15799.99)"
+}
+Navigated to Charger Page
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 12.4445
+Charger Excel Sessions: 478
+Average Online Percent from Charger Excel: 61.6
+Usage matched : KPI usage: 12.44, ChargerExcel usage: 12.4445
+Mismatch found
+Sessions mismatch : KPI Session Count: 479, Session count in ChargerExcel: 478
+ Report Online Percentage Validation Passed: Online Percentage matches KPI: 61.6%, Excel Avg: 61.6%
+
+==== API CALLS : Validate Session Counts, Usage, Revenue And Online Percentage ====
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                                                    │
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/get-make                        │
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/custom-field/get-custom-field   │
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/get-zones                       │
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/default-field/get-default-field │
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/geo-state?count=10000           │
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/get-host                        │
+│────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: Validate Session Counts, Usage, Revenue And Online Percentage =====
+
+
+===== TEST START: Validate Revenue Report And Invoice =====
+
+
+Organisation Name: zynetic_electric_vehicle_charging_llc
+
+DashboardRevenue: 15799.99
+Revenue(AED): 15799.99
+Total Revenue(AED): 4999950.22
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 15799.99
+Revenue In Revenue Page: 15799.99
+Dashboard Revenue: 15799.99
+Dashboard Revenue matched Excel Revenue → 15799.99
+Revenue Validation Passed: Revenue values matched successfully
+Success row Overview Data
+Transaction id: 62484498
+Billed Amount: 37.30
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Muhammad Tahir 543110068
+Time stamp: 11/02/2026
+        
+        11:59:52 pm
+Invoice Data
+Transaction id: 62484498
+Billed Amount: 37.30
+Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
+Driver Details: Muhammad Tahir - 543110068
+Time stamp: Feb 11 2026, 11:59:53 pm
+
+ Comparison Report
+Transaction id: MATCHED
+Billed Amount: MATCHED
+Host Details: MATCHED
+Driver Details: MATCHED
+Time stamp: MISMATCH! (Overview: "11/02/2026
+        
+        11:59:52 pm" vs Invoice: "Feb 11 2026, 11:59:53 pm")
+
+No API calls captured
+
+
+===== TEST END: Validate Revenue Report And Invoice =====
+
+
+===== TEST START: Create, Validate and Delete Driver Group And Tariff =====
+
+
+Organisation Name: zynetic_electric_vehicle_charging_llc
+
+Driver Group created successfully
+Starting Driver Tariff Creation
+Successfully opened Driver Group: Driver Group101
+Selecting available tariff: Auto_Tariff_1770050207422
+Driver Tariff  Created Successfully
+Successfully opened Driver Group: Driver Group101
+
+Driver Group Details
+┌─────────┬─────────────────┬─────────────────────────────────┐
+│ (index) │ Field           │ Value                           │
+├─────────┼─────────────────┼─────────────────────────────────┤
+│ 0       │ 'Name'          │ 'Driver Group101'               │
+│ 1       │ 'Description'   │ 'Test Driver Group Description' │
+│ 2       │ 'Total Drivers' │ '1'                             │
+│ 3       │ 'Name'          │ 'Auto_Tariff_1770050207422'     │
+│ 4       │ 'Description'   │ '----'                          │
+└─────────┴─────────────────┴─────────────────────────────────┘
+Driver Tariff deleted successfully.
+Successfully opened Driver Group: Driver Group101
+All drivers removed from the group.
+Driver Group deleted successfully.
+
+==== API CALLS : Create, Validate and Delete Driver Group And Tariff ====
+│────────│────────│─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                                                                                                                         │
+│────────│────────│─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/custom-field/get-custom-field                                                                                                    │
+│────────│────────│─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/driver/driver-list?page=1&search=&filters=%7B%22isActive%22%3A%5B%5D%7D&duration_filter=This%20month&sort_by=name&sort_order=asc │
+│────────│────────│─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: Create, Validate and Delete Driver Group And Tariff =====
 
