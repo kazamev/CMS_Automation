@@ -1,0 +1,43 @@
+
+===== TEST START: End-to-End Add and Reconfigured Charger Flow =====
+
+
+Organisation Name: Tyagi_Org
+
+Before Count: 619
+Charger added successfully → EV Charger
+Generated Charger ID: pgasxv
+New charger added to list
+Charger Reconfigured Successfully
+After Count: 620
+Charger count increased
+Device Name: Charger Updated
+Connector Type: industrial
+Charger Name updated successfully
+Connector Type updated successfully
+Installation Date: 1. 12/02/2026, 11:14:20 AM
+Reconfiguration Date: 12/02/2026, 11:14:46 AM
+Excel count matches UI count  620
+
+==== API CALLS : End-to-End Add and Reconfigured Charger Flow ====
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                                                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/tariff/all-tariff                                                          │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-upload-url?mimetype=image%2Fpng&extension=png&dir=cms%2Fcharger-images │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/chargers/tariff_details?device_id=pgasxv                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/pgasxv                                                                    │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-make                                                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/custom-field/get-custom-field                                              │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-zones                                                                  │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: End-to-End Add and Reconfigured Charger Flow =====
+

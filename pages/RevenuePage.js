@@ -76,8 +76,8 @@ async printRevenueValues() {
   await this.totalRevenue.waitFor({ state: "visible", timeout: 30000 });
   const revenueText = await this.revenue.innerText();
   const totalRevenueText = await this.totalRevenue.innerText();
-  console.log("Revenue:", revenueText);
-  console.log("Total Revenue:", totalRevenueText);
+  console.log("Revenue(AED):", revenueText);
+  console.log("Total Revenue(AED):", totalRevenueText);
 
   return {
     revenueText,

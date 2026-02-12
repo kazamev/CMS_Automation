@@ -1,0 +1,28 @@
+
+===== TEST START: User Creation And Verification =====
+
+
+Organisation Name: Tyagi_Org
+
+User Role Created Successfully
+User Role Verified Successfully
+Role Name: CMS View Only
+Role Description: User Can have only view access
+User Role Deleted Successfully
+
+==== API CALLS : User Creation And Verification ====
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                                   │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/users?page=1&count=50                      │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles?page=1&count=100                     │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ POST   │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles                                      │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+│ DELETE │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles/47228889-6a22-49c8-9ee8-dd6d486ebff7 │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: User Creation And Verification =====
+

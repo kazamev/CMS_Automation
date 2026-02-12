@@ -17,6 +17,11 @@ const fs = require('fs');
       '../logs/Playwright-Console-Logs.pdf'
     );
 
+   const allApiPdf = path.resolve(
+  __dirname,
+  '../all-api-logs/ALL_Business_API.pdf'
+);
+
     const files = [
       ortoniFinalPdf,
       consolePdf
@@ -44,17 +49,16 @@ const fs = require('fs');
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
       to: 'shilpa@kazam.in,akhilesh@kazam.in',
-      subject: 'Automation Test Reports',
+      subject: 'CMS Automation Test Reports',
       text: `
 Hi Team,
-
-Please find attached the automation test reports:
+Please find attached the CMS automation test reports:
 
 • Ortoni Automation Report (Dashboard + Glance)
 • Playwright Console Logs (test-wise execution logs)
 
 Thanks,
-Shilpa
+Shilpa Doddamani
 `,
       attachments: [
         {
@@ -64,6 +68,11 @@ Shilpa
         {
           filename: 'Playwright_Console_Logs.pdf',
           path: consolePdf
+        },
+       
+       {
+        filename: 'All_Business_APIs.pdf',
+        path:allApiPdf
         }
       ]
     });

@@ -1,0 +1,2 @@
+Usage Validation Failed: Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
+Usage Validation Failed: Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
