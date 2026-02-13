@@ -4,45 +4,44 @@
 
 Organisation: zynetic_electric_vehicle_charging_llc
 
-Dashboard Session KPI: 479
-Dashboard Usage KPI(MWh): 12.44
-Dashboard Online KPI(%): 64.81
-Dashboard Revenue KPI(AED): 15799.99
-All Sessions Count in Session Page: 479
-Ongoing Sessions Count in Session Page: 1
+Dashboard Session KPI: 515
+Dashboard Usage KPI(MWh): 12.34
+Dashboard Online KPI(%): 63.14
+Dashboard Revenue KPI(AED): 15172.52
+All Sessions Count in Session Page: 503
+Ongoing Sessions Count in Session Page: 0
 Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
-Excel Session Count: 479
-Session counts match across the Dashboard, Session page, and Excel file. 479
-Session Excel Usage (kWh): 12196.09000000001
-Session Excel Usage (MWh Rounded): 12.2
-KPI Usage (MWh): 12.44
-Usage mismatch found:
-Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
+Excel Session Count: 503
+Session counts match across the Dashboard, Session page, and Excel file (503 ) ---within ±5% tolerance
+Session Excel Usage (kWh): 12518.310000000005
+Session Excel Usage (MWh Rounded): 12.52
+KPI Usage (MWh): 12.34
+Usage Validation Passed: Usage KPI (12.34 MWh) match session Excel Usage (12.52 MWh) --within ±5% tolerance
 Navigated to Reports Page
-Selected date: 11/02/2026
+Selected date: 12/02/2026
 Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
-Report Mismatch Found:
- -  Report Session (478) does not match KPI Sessions (479)
- - Report Session (478) does not match Excel Sessions Count (479)
-Report Excel Usage (kWh): 12196.090000000006
-Report Excel Usage (MWh Rounded): 12.2
-KPI Usage (MWh): 12.44
-Selected date: 11/02/2026
+Report Session (503) matched KPI Sessions (515) within ±5% tolerance
+Report page Session (503) matched Session page Excel Sessions (503)
+Report page Excel Usage (kWh): 12518.310000000023
+Report page Excel Usage (MWh Rounded): 12.52
+KPI Usage (MWh): 12.34
+Usage Validation Passed: Usage values match across the Dashboard, Reports(Analytics) Excel file (12.52 MWh)---within ±5% tolerance
+Selected date: 12/02/2026
 Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Charger_Reports_Analytics.xlsx
-Avg of Online Percentage from Report Excel: 61.6
-Selected date: 11/02/2026
+Avg of Online Percentage from Report Excel: 63.14
+Selected date: 12/02/2026
 Downloaded Revenue Report Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\CRevenue_Report_Analytics.xlsx
-Total Revenue from Report Excel: 15799.99
-Revenue Validation Result: { message: 'Revenue KPI (15799.99 ) match Excel Revenue (15799.99)' }
+Total Revenue from Report Excel: 15172.52
+Revenue Validation Result: { message: 'Revenue KPI (15172.52 ) match Excel Revenue (15172.52)' }
 Navigated to Charger Page
 Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
-Charger Excel Usage (MW): 12.4445
-Charger Excel Sessions: 478
-Average Online Percent from Charger Excel: 61.6
-Usage matched : KPI usage: 12.44, ChargerExcel usage: 12.4445
-Mismatch found
-Sessions mismatch : KPI Session Count: 479, Session count in ChargerExcel: 478
- Report Online Percentage Validation Passed: Online Percentage matches KPI: 61.6%, Excel Avg: 61.6%
+Charger Excel Usage (MW): 12.34
+Charger Excel Sessions: 515
+Average Online Percent from Charger Excel: 63.14
+Charger page Online percentage matched the Dashboard online percentage --(63.14)
+Sessions matched : KPI Session Count: 515, ChargerExcel Session Count: 515
+Usage matched : KPI usage: 12.34, ChargerExcel usage: 12.34MW
+Reportoage Online Percentage Validation Passed: Online Percentage matches KPI: 63.14%,Report Page Excel Avg 63.14%
 
 ==== API CALLS : Validate Session Counts, Usage, Revenue And Online Percentage ====
 │────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│

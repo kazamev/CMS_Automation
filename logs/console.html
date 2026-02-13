@@ -82,42 +82,42 @@ No API calls captured
 Organisation Name: zynetic_electric_vehicle_charging_llc
 
 Yesterday DashBoard Data
-Revenue: AED 15799.99
-Sessions: 479
-Usage: 12.44 MWh
-Online Percentage: 64.81%
+Revenue: AED 15172.52
+Sessions: 515
+Usage: 12.34 MWh
+Online Percentage: 63.14%
 Dashboard Charger Data(Offline and Online): {
-  "chargers": "34",
-  "connectors": "55",
+  "chargers": "35",
+  "connectors": "56",
   "nonConfigured": "1",
-  "all": "All(55)",
-  "busy": "Busy (16)",
+  "all": "All(56)",
+  "busy": "Busy (17)",
   "available": "Available (29)",
   "error": "Error (10)"
 }
 Charger Page Data(Offline And Online): {
-  "chargers": "34",
-  "connectors": "55",
-  "all": "All(55)",
-  "busy": " Busy (16)  ",
+  "chargers": "35",
+  "connectors": "56",
+  "all": "All(56)",
+  "busy": " Busy (17)  ",
   "available": " Available (29)  ",
   "error": " Error (10)  "
 }
  The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.
 Dashboard Online Chargers Data: {
-  "chargers": "22",
-  "connectors": "34",
+  "chargers": "23",
+  "connectors": "35",
   "nonConfigured": "1",
-  "all": "All(34)",
-  "busy": "Busy (16)",
+  "all": "All(35)",
+  "busy": "Busy (17)",
   "available": "Available (18)",
   "error": "Error (0)"
 }
 Charger Page Online Chargers Data: {
-  "chargers": "22",
-  "connectors": "34",
-  "all": "All(34)",
-  "busy": " Busy (16)  ",
+  "chargers": "23",
+  "connectors": "35",
+  "all": "All(35)",
+  "busy": " Busy (17)  ",
   "available": " Available (18)  ",
   "error": " Error (0)  "
 }
@@ -147,7 +147,7 @@ User Role Deleted Successfully
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
 │ POST   │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles                                      │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
-│ DELETE │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles/47228889-6a22-49c8-9ee8-dd6d486ebff7 │
+│ DELETE │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/roles/fc692730-93ad-4a14-98f9-25ab17c2680d │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────│
 
 
@@ -209,20 +209,20 @@ No API calls captured
 
 Organisation Name: Tyagi_Org
 
-Before Count: 619
+Before Count: 620
 Charger added successfully → EV Charger
-Generated Charger ID: pgasxv
+Generated Charger ID: azfpp5
 New charger added to list
 Charger Reconfigured Successfully
-After Count: 620
+After Count: 621
 Charger count increased
 Device Name: Charger Updated
 Connector Type: industrial
 Charger Name updated successfully
 Connector Type updated successfully
-Installation Date: 1. 12/02/2026, 11:14:20 AM
-Reconfiguration Date: 12/02/2026, 11:14:46 AM
-Excel count matches UI count  620
+Installation Date: 1. 13/02/2026, 03:13:52 PM
+Reconfiguration Date: 13/02/2026, 03:14:16 PM
+Excel count matches UI count  621
 
 ==== API CALLS : End-to-End Add and Reconfigured Charger Flow ====
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
@@ -232,9 +232,9 @@ Excel count matches UI count  620
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
 │ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-upload-url?mimetype=image%2Fpng&extension=png&dir=cms%2Fcharger-images │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/chargers/tariff_details?device_id=pgasxv                                   │
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/chargers/tariff_details?device_id=azfpp5                                   │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/pgasxv                                                                    │
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/azfpp5                                                                    │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
 │ GET    │ 200    │ https://novo.kazam.in/api/v1/org/Tyagi_Org/get-make                                                                   │
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────│
@@ -254,10 +254,10 @@ Start Charger Tariff Creation
 ┌─────────┬───────────────┬─────────────────────────────┐
 │ (index) │ Field         │ Value                       │
 ├─────────┼───────────────┼─────────────────────────────┤
-│ 0       │ 'Name'        │ 'Auto_Tariff_1770875119256' │
+│ 0       │ 'Name'        │ 'Auto_Tariff_1770975887647' │
 │ 1       │ 'Description' │ '----'                      │
 │ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
-│ 3       │ 'Validity'    │ '12/02/2026 -- Forever'     │
+│ 3       │ 'Validity'    │ '13/02/2026 -- Forever'     │
 │ 4       │ 'Price Type'  │ 'Amount'                    │
 │ 5       │ 'Chargers'    │ '244a95'                    │
 └─────────┴───────────────┴─────────────────────────────┘
@@ -272,49 +272,46 @@ No API calls captured
 
 Organisation: zynetic_electric_vehicle_charging_llc
 
-Dashboard Session KPI: 479
-Dashboard Usage KPI(MWh): 12.44
-Dashboard Online KPI(%): 64.81
-Dashboard Revenue KPI(AED): 15799.99
-All Sessions Count in Session Page: 479
-Ongoing Sessions Count in Session Page: 1
+Dashboard Session KPI: 515
+Dashboard Usage KPI(MWh): 12.34
+Dashboard Online KPI(%): 63.14
+Dashboard Revenue KPI(AED): 15172.52
+All Sessions Count in Session Page: 503
+Ongoing Sessions Count in Session Page: 0
 Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
-Excel Session Count: 479
-Session counts match across the Dashboard, Session page, and Excel file. 479
-Session Excel Usage (kWh): 12196.09000000001
-Session Excel Usage (MWh Rounded): 12.2
-KPI Usage (MWh): 12.44
-Usage mismatch found:
-Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
-Usage Validation Failed: Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
+Excel Session Count: 503
+Session counts match across the Dashboard, Session page, and Excel file (503 ) ---within ±5% tolerance
+Session Excel Usage (kWh): 12518.310000000005
+Session Excel Usage (MWh Rounded): 12.52
+KPI Usage (MWh): 12.34
+Usage Validation Passed: Usage KPI (12.34 MWh) match session Excel Usage (12.52 MWh) --within ±5% tolerance
 Navigated to Reports Page
-Selected date: 11/02/2026
+Selected date: 12/02/2026
 Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Session_Reports_Analytics.xlsx
-Report Mismatch Found:
- -  Report Session (478) does not match KPI Sessions (479)
- - Report Session (478) does not match Excel Sessions Count (479)
-Report Excel Usage (kWh): 12196.090000000006
-Report Excel Usage (MWh Rounded): 12.2
-KPI Usage (MWh): 12.44
-Usage Validation Failed: Usage KPI (12.44 MWh) does NOT match Excel Usage (12.2 MWh). Allowed Buffer: ±0.2 MWh
-Selected date: 11/02/2026
+Report Session (503) matched KPI Sessions (515) within ±5% tolerance
+Report page Session (503) matched Session page Excel Sessions (503)
+Report page Excel Usage (kWh): 12518.310000000023
+Report page Excel Usage (MWh Rounded): 12.52
+KPI Usage (MWh): 12.34
+Usage Validation Passed: Usage values match across the Dashboard, Reports(Analytics) Excel file (12.52 MWh)---within ±5% tolerance
+Selected date: 12/02/2026
 Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Charger_Reports_Analytics.xlsx
-Avg of Online Percentage from Report Excel: 61.6
-Selected date: 11/02/2026
+Avg of Online Percentage from Report Excel: 63.14
+Selected date: 12/02/2026
 Downloaded Revenue Report Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\CRevenue_Report_Analytics.xlsx
-Total Revenue from Report Excel: 15799.99
+Total Revenue from Report Excel: 15172.52
 Revenue Validation Result: {
-  "message": "Revenue KPI (15799.99 ) match Excel Revenue (15799.99)"
+  "message": "Revenue KPI (15172.52 ) match Excel Revenue (15172.52)"
 }
 Navigated to Charger Page
 Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
-Charger Excel Usage (MW): 12.4445
-Charger Excel Sessions: 478
-Average Online Percent from Charger Excel: 61.6
-Usage matched : KPI usage: 12.44, ChargerExcel usage: 12.4445
-Mismatch found
-Sessions mismatch : KPI Session Count: 479, Session count in ChargerExcel: 478
- Report Online Percentage Validation Passed: Online Percentage matches KPI: 61.6%, Excel Avg: 61.6%
+Charger Excel Usage (MW): 12.34
+Charger Excel Sessions: 515
+Average Online Percent from Charger Excel: 63.14
+Charger page Online percentage matched the Dashboard online percentage --(63.14)
+Sessions matched : KPI Session Count: 515, ChargerExcel Session Count: 515
+Usage matched : KPI usage: 12.34, ChargerExcel usage: 12.34MW
+Reportoage Online Percentage Validation Passed: Online Percentage matches KPI: 63.14%,Report Page Excel Avg 63.14%
 
 ==== API CALLS : Validate Session Counts, Usage, Revenue And Online Percentage ====
 │────────│────────│────────────────────────────────────────────────────────────────────────────────────────────────────────│
@@ -339,39 +336,39 @@ Sessions mismatch : KPI Session Count: 479, Session count in ChargerExcel: 478
 
 Organisation Name: zynetic_electric_vehicle_charging_llc
 
-DashboardRevenue: 15799.99
-Revenue(AED): 15799.99
-Total Revenue(AED): 4999950.22
+DashboardRevenue: 15172.52
+Revenue(AED): 15172.52
+Total Revenue(AED): 5018188.47
 Starting Excel download
 Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
-Excel Revenue: 15799.99
-Revenue In Revenue Page: 15799.99
-Dashboard Revenue: 15799.99
-Dashboard Revenue matched Excel Revenue → 15799.99
+Excel Revenue: 15172.52
+Revenue In Revenue Page: 15172.52
+Dashboard Revenue: 15172.52
+Dashboard Revenue matched Excel Revenue → 15172.52
 Revenue Validation Passed: Revenue values matched successfully
 Success row Overview Data
-Transaction id: 62484498
-Billed Amount: 37.30
+Transaction id: 91387462
+Billed Amount: 0.00
 Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
-Driver Details: Muhammad Tahir 543110068
-Time stamp: 11/02/2026
+Driver Details: KingLimousineLuxury VehiclesServicesLlc 553199031
+Time stamp: 12/02/2026
         
-        11:59:52 pm
+        11:59:56 pm
 Invoice Data
-Transaction id: 62484498
-Billed Amount: 37.30
+Transaction id: 91387462
+Billed Amount: 0.00
 Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
-Driver Details: Muhammad Tahir - 543110068
-Time stamp: Feb 11 2026, 11:59:53 pm
+Driver Details: KingLimousineLuxury VehiclesServicesLlc - 553199031
+Time stamp: Feb 12 2026, 11:59:57 pm
 
  Comparison Report
 Transaction id: MATCHED
 Billed Amount: MATCHED
 Host Details: MATCHED
 Driver Details: MATCHED
-Time stamp: MISMATCH! (Overview: "11/02/2026
+Time stamp: MISMATCH! (Overview: "12/02/2026
         
-        11:59:52 pm" vs Invoice: "Feb 11 2026, 11:59:53 pm")
+        11:59:56 pm" vs Invoice: "Feb 12 2026, 11:59:57 pm")
 
 No API calls captured
 

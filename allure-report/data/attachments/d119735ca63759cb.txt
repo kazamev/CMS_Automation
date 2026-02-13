@@ -9,10 +9,10 @@ Start Charger Tariff Creation
 ┌─────────┬───────────────┬─────────────────────────────┐
 │ (index) │ Field         │ Value                       │
 ├─────────┼───────────────┼─────────────────────────────┤
-│ 0       │ 'Name'        │ 'Auto_Tariff_1770875119256' │
+│ 0       │ 'Name'        │ 'Auto_Tariff_1770975887647' │
 │ 1       │ 'Description' │ '----'                      │
 │ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
-│ 3       │ 'Validity'    │ '12/02/2026 -- Forever'     │
+│ 3       │ 'Validity'    │ '13/02/2026 -- Forever'     │
 │ 4       │ 'Price Type'  │ 'Amount'                    │
 │ 5       │ 'Chargers'    │ '244a95'                    │
 └─────────┴───────────────┴─────────────────────────────┘

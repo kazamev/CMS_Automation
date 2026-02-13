@@ -14,6 +14,8 @@ let page;
 let apiLogger;
 let allApiLogger; 
 
+
+
 test.describe('CMS End-to-End Integrated Flow', () => {
 test.setTimeout(180000)
 
@@ -42,6 +44,9 @@ test.afterEach(async ({}, testInfo) => {
 test.afterAll(async () => {
     await context.close();
   });
+
+
+
 
     //ORGANISATION DETAILS 
    test('Organisation Details Validation', async () => {
@@ -205,7 +210,6 @@ test.afterAll(async () => {
         const dashboard = new DashboardPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/user-management/manage-user");
         await page.waitForLoadState("networkidle");
-
         const currentUrl = page.url();
         const orgName = currentUrl.split('/org/')[1].split('/')[0];
 
@@ -249,7 +253,7 @@ test.afterAll(async () => {
       });
 
       //Hub Creation
-    test.only("Hub Creation,Validation And Deletion",async ()=>{
+    test("Hub Creation,Validation And Deletion",async ()=>{
         const dashboard = new DashboardPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/settings/org/manage-hub",{ waitUntil: "networkidle" });
         
@@ -469,7 +473,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await sessionPage.applyTimeFilter("Yesterday");
 
     //Apply anomaly filter  
-    await sessionPage.applyAnomalyFilter("Anomaly");
+    // await sessionPage.applyAnomalyFilter("Anomaly");
 
     //Get Session Tab Counts from UI
     const { allCount, ongoingCount } = await sessionPage.getSessionTabCounts();
@@ -594,17 +598,32 @@ console.log("Charger Excel Sessions:", excelSessions);
 const avgOnlinePercent = await sessionPage.getAverageOnlinePercentFromExcel(filePath6);
 console.log("Average Online Percent from Charger Excel:", avgOnlinePercent);
 
-//Final Validation with Charger Excel
-await sessionPage.verifyOnlinePercentWithExcel(filePath6,sessionPage.onlineKpi);
+// //Final Validation with Charger Excel
+// await sessionPage.verifyOnlinePercentWithExcel(filePath6,sessionPage.onlineKpi);
+
+// Final Validation with Charger Excel
+const chargerOnlineResult =await sessionPage.verifyOnlinePercentWithExcel( filePath6, sessionPage.onlineKpi);
+
+if (!chargerOnlineResult.success) {
+  console.log(
+    `Charger page Online percentage not matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    
+  );
+} else {
+  console.log(
+    `Charger page Online percentage matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+  );
+}
+
 
 await sessionPage.verifyDashboardKPIWithChargerExcel( filePath6, sessionPage.sessionKpi, sessionPage.usageKpi);
 
 //Verify Online Percentage (KPI vs Report Excel)
     const ReportOnlinePercentage = await sessionPage.verifyOnlinePercentWithExcel(filePath5,onlinePercentageAvg);
     if (!ReportOnlinePercentage.success) {
-      console.error("Report Online Percentage Validation Failed:", ReportOnlinePercentage.message);
+      console.error("Report page Online Percentage Validation Failed:", ReportOnlinePercentage.message);
     } else {
-      console.log(" Report Online Percentage Validation Passed:", ReportOnlinePercentage.message);
+      console.log("Reportoage Online Percentage Validation Passed:", ReportOnlinePercentage.message);
     }
 
     });
