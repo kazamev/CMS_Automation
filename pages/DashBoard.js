@@ -454,7 +454,7 @@ async HubDeletion(hubData){
   await this.page.waitForLoadState("networkidle");
 
   // Fetch hub details (object format)
-  console.log("Hub Details of the Created Hub")
+  console.log("Details of the Created Hub")
   const hubDetails = await this.getHubDetails();
   console.log(hubDetails);
   await this.page.waitForTimeout(2000);

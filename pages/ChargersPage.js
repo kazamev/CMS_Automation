@@ -328,9 +328,9 @@ async countChargerIdsInExcel(filePath) {
         const filePath = await this.downloadExcel();
         const excelCount = await this.countChargerIdsInExcel(filePath);
         if (excelCount === afterCount) {
-            console.log("Excel count matches UI count ", excelCount);
+            console.log("🟢 Charger page Excel count matches charger page UI count ", excelCount);
         } else {
-            console.log(`Count mismatch  UI: ${afterCount}, Excel: ${excelCount}`);
+            console.log(`🔴 Charger page Excel count not matches charger page UI count: ${afterCount}, Excel: ${excelCount}`);
         }
         return excelCount;
     }

@@ -170,7 +170,7 @@ test.afterAll(async () => {
       // expect(chargerData.busy.trim()).toBe(dashboardData.busy.trim());
       // expect(chargerData.available.trim()).toBe(dashboardData.available.trim());
       expect(chargerData.error.trim()).toBe(dashboardData.error.trim());
-      console.log(" The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.");
+      console.log("🟢 The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.");
 
 
       //dashboard online charger data
@@ -199,7 +199,7 @@ test.afterAll(async () => {
       // expect(chargerOnlineData.busy.trim()).toBe(dashboardOnlineData.busy.trim());
       // expect(chargerOnlineData.available.trim()).toBe(dashboardOnlineData.available.trim());
       expect(chargerOnlineData.error.trim()).toBe(dashboardOnlineData.error.trim());
-      console.log("The Online Charger count matches on both the Dashboard and the Charger page.");
+      console.log("🟢 The Online Charger count matches on both the Dashboard and the Charger page.");
 
 
     });
@@ -606,12 +606,12 @@ const chargerOnlineResult =await sessionPage.verifyOnlinePercentWithExcel( fileP
 
 if (!chargerOnlineResult.success) {
   console.log(
-    `Charger page Online percentage not matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    `🔴 Charger page Online percentage not matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
     
   );
 } else {
   console.log(
-    `Charger page Online percentage matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    `🟢 Charger page Online percentage matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
   );
 }
 
@@ -630,7 +630,7 @@ await sessionPage.verifyDashboardKPIWithChargerExcel( filePath6, sessionPage.ses
   
 
  //REVENUE REPORT
- test('Validate Revenue Report And Invoice', async () => {
+ test.only('Validate Revenue Report And Invoice', async () => {
   test.setTimeout(200000)
   const revenuePage = new RevenuePage(page);
 
@@ -670,8 +670,6 @@ function getYesterdayDate() {
     const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,DashBoardRevenue);
     if (!RevenueResult.success) {
       console.error("Revenue Validation Failed:", RevenueResult.message);
-    } else {
-      console.log("Revenue Validation Passed:", RevenueResult.message);
     }
 
   // Open Success Transactions and get Overview Data
@@ -688,12 +686,15 @@ function getYesterdayDate() {
     test('Create, Validate and Delete Driver Group And Tariff', async () => {
       test.setTimeout(200000)
         const tariffPage = new TariffPage(page);
+
+        // Navigate to Revenue Management
+        await tariffPage.navigate();
         
         const currentUrl = page.url();
         const orgName = currentUrl.split('/org/')[1].split('/')[0];
 
         //Print organisation name
-        console.log(`\nOrganisation Name: ${orgName}\n`);
+        console.log(`\nOrganisation: ${orgName}\n`)
 
         const groupName = "Driver Group101";
         const groupDesc = "Test Driver Group Description";
@@ -703,8 +704,7 @@ function getYesterdayDate() {
             'DESCRIPTION': groupDesc,
         };
 
- // Navigate to Revenue Management
-    await tariffPage.navigate();
+ 
 
 // Navigate to Driver & Vehicle
     await tariffPage.navigateToDriverTariffs();

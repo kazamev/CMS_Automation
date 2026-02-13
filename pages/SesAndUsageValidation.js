@@ -27,11 +27,11 @@ export class DashboardSessionsPage {
         this.AnomalyOption= page.locator("//span[@class='p-2 text-xs font-medium cursor-pointer hover:bg-purple-50 duration-300 flex gap-2 items-center']");
         this.Applybtn= page.locator("//button[normalize-space()='Apply']");
         this.DashBoardTimeFilter= page.locator("//button[@class='w-full flex gap-1 items-center bg-black py-2 px-3 border rounded-md bg-white']"); 
-         this.downloadButton = page.locator("//div[@id='download']//*[name()='svg']");
+        this.downloadButton = page.locator("//div[@id='download']//*[name()='svg']");
         this.excelOption = page.locator("(//div[@class='flex items-center gap-2 m-1 hover:bg-kazamGray-100 p-2 rounded-md'])[2]");
         this.chargertimeperiod = page.locator("//button[.//div[normalize-space()='Today']]");
-            this.RevenueTab = page.locator("//button[normalize-space()='Revenue']");
-             this.reportDropdown = page.locator("//div[@class='grid gap-2']//select[1]");
+        this.RevenueTab = page.locator("//button[normalize-space()='Revenue']");
+        this.reportDropdown = page.locator("//div[@class='grid gap-2']//select[1]");
     }
 
     // Fetch KPI values from Dashboard
@@ -165,7 +165,7 @@ async countSessionIdsInExcel(filePath) {
     }
     //Return structured result
     if (errors.length === 0) {
-        console.log(`Session counts match across the Dashboard, Session page, and Excel file (${excelCount} ) ---within ±5% tolerance`);
+        console.log(`🟡 Session counts match across the Dashboard, Session page, and Excel file (${excelCount} ) ---within ±5% tolerance`);
         return {
             success: true,
             excelCount
@@ -214,7 +214,7 @@ async verifyUsageFromExcel(filePath, usageKpi) {
     //Check if values differ beyond tolerance
     if (Math.abs(usageKpi - excelUsageMWh) > tolerance) {
         errors.push(
-            `Usage KPI (${usageKpi} MWh) does NOT match session Excel Usage (${excelUsageMWh} MWh)`);
+            `🔴 Usage KPI (${usageKpi} MWh) does NOT match session Excel Usage (${excelUsageMWh} MWh)`);
     }
 
     //Return result
@@ -222,10 +222,10 @@ async verifyUsageFromExcel(filePath, usageKpi) {
         return {
             success: true,
             excelUsageMWh,
-            message:  `Usage KPI (${usageKpi} MWh) match session Excel Usage (${excelUsageMWh} MWh) --within ±5% tolerance`
+            message:  `🟡 Usage KPI (${usageKpi} MWh) match session Excel Usage (${excelUsageMWh} MWh) --within ±5% tolerance`
         };
     } else {
-        console.log( `Usage KPI (${usageKpi} MWh) does NOT match session Excel Usage (${excelUsageMWh} MWh)`);
+        console.log( `🔴 Usage KPI (${usageKpi} MWh) does NOT match session Excel Usage (${excelUsageMWh} MWh)`);
         errors.forEach(e => console.log("" + e));
         return {
             success: false,
@@ -338,22 +338,22 @@ async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
     if (Math.abs(txnIds - sessionKpi) > tolerance)
         {
         errors.push(
-            ` Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi}) within ±5% tolerance`
+            `🔴 Report Session (${txnIds}) does not match KPI Sessions (${sessionKpi}) within ±5% tolerance`
         );
     } else {
         console.log(
-            `Report Session (${txnIds}) matched KPI Sessions (${sessionKpi}) within ±5% tolerance`
+            `🟡 Report Session (${txnIds}) matched KPI Sessions (${sessionKpi}) within ±5% tolerance`
         );
     }
 
     // Compare  Report Count vs Excel Sessions Count
     if (txnIds !== excelCount) {
         errors.push(
-            `Report page Sessions (${txnIds}) does not match Session page Excel Sessions Count (${excelCount})`
+            `🔴Report page Sessions (${txnIds}) does not match Session page Excel Sessions Count (${excelCount})`
         );
     } else {
         console.log(
-            `Report page Session (${txnIds}) matched Session page Excel Sessions (${excelCount})`
+            `🟢Report page Session (${txnIds}) matched Session page Excel Sessions (${excelCount})`
         );
     }
 
@@ -363,10 +363,10 @@ async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
         return {
             success: true,
             txnIds,
-            message: `Report page Session (${txnIds}) matched  Excel Sessions (${excelCount}`
+            message: `🟢 Report page Session (${txnIds}) matched  Excel Sessions (${excelCount}`
         };
     } else {
-        console.log(`Report page Session (${txnIds}) doesn't match  Excel Sessions (${excelCount}`);
+        console.log(`🔴 Report page Session (${txnIds}) doesn't match  Excel Sessions (${excelCount}`);
         errors.forEach(e => console.log(" - " + e));
         return {
             success: false,
@@ -396,14 +396,14 @@ async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
         return {
             success: true,
             excelUsageMWh: excelMWh,
-            message: `Usage values match across the Dashboard, Reports(Analytics) Excel file (${excelMWh} MWh)---within ±5% tolerance`
+            message: `🟡 Usage values match across the Dashboard, Reports(Analytics) Excel file (${excelMWh} MWh)---within ±5% tolerance`
         };
     }
     // Failure result
     return {
         success: false,
         excelUsageMWh: excelMWh,
-        message: `Usage KPI (${usageKpi} MWh) does NOT match Reports(Analytics) Excel file (${excelMWh} MWh)`
+        message: `🔴 Usage KPI (${usageKpi} MWh) does NOT match Reports(Analytics) Excel file (${excelMWh} MWh)`
     };
 }
 
@@ -415,12 +415,12 @@ async verifyOnlinePercentFromChargerExcel(filePath3, onlineKpi) {
     if (difference <= tolerance) {
       return {
         success: true,
-        message: `Online Percentage matches KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%---within ±5% tolerance`
+        message: `🟡 Online Percentage matches KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%---within ±5% tolerance`
       };
     } else {
       return {
         success: false,
-        message: `Online Percentage mismatch! KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
+        message: `🔴 Online Percentage mismatch! KPI: ${onlineKpi}%, Excel Avg: ${avgOnlinePercent}%`
         };
     }
 }
@@ -479,13 +479,13 @@ async RevenueClick() {
     const tolerance = 0; // 0 Rupees tolerance
     if (Math.abs(revenueKpi - excelRevenue) <= tolerance) {
         return {
-            message:`Revenue KPI (${revenueKpi} ) match Excel Revenue (${excelRevenue})`
+            message:`🟢 Revenue KPI (${revenueKpi} ) match Excel Revenue (${excelRevenue})`
         };
     }
     return {
         success: false,
         excelRevenue: excelRevenue,
-        message: `Revenue KPI (${revenueKpi}) does NOT match Excel Revenue (${excelRevenue})`
+        message: `🔴 Revenue KPI (${revenueKpi}) does NOT match Excel Revenue (${excelRevenue})`
     };
  }
 
@@ -621,11 +621,11 @@ async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
     // Compare Sessions
     if (sessionKpi !== excelSessions) {
         errors.push(
-            `Sessions mismatch : KPI Session Count: ${sessionKpi}, Session count in ChargerExcel: ${excelSessions}`
+            `🔴 Sessions mismatch : KPI Session Count: ${sessionKpi}, Session count in ChargerExcel: ${excelSessions}`
         );
     } else {
     console.log(
-        `Sessions matched : KPI Session Count: ${sessionKpi}, ChargerExcel Session Count: ${excelSessions}`
+        `🟢 Sessions matched : KPI Session Count: ${sessionKpi}, ChargerExcel Session Count: ${excelSessions}`
     );
 }
 
@@ -633,11 +633,11 @@ async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
     // const tolerance = 0.2;
     if (usageKpi != excelUsageMW) {
         errors.push(
-            `Usage mismatch : KPI: ${usageKpi} MW, Charger Excel: ${excelUsageMW} MW`
+            `🔴 Usage mismatch : KPI: ${usageKpi} MW, Charger Excel: ${excelUsageMW} MW`
         );
     } else {
     console.log(
-        `Usage matched : KPI usage: ${usageKpi}, ChargerExcel usage: ${excelUsageMW}MW`
+        `🟢 Usage matched : KPI usage: ${usageKpi}, ChargerExcel usage: ${excelUsageMW}MW`
     );
 }
 
@@ -647,10 +647,10 @@ async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
             success: true,
             excelSessions,
             excelUsageMW,
-            message: `Dashboard KPI Usage ${usageKpi} and Charger Excel usage ${excelUsageMW}MW matched successfully`
+            message: `🟢 Dashboard KPI Usage ${usageKpi} and Charger Excel usage ${excelUsageMW}MW matched successfully`
         };
     } else {
-        console.log(`Mismatch found in Dashboard KPI Usage ${usageKpi} and Charger Excel usage ${excelUsageMW}MW`);
+        console.log(` 🔴 Mismatch found in Dashboard KPI Usage ${usageKpi} and Charger Excel usage ${excelUsageMW}MW`);
         errors.forEach(e => console.log("" + e));
 
         return {
@@ -671,12 +671,12 @@ async verifyOnlinePercentWithExcel(filePath4, OnlineKpi) {
     if (avgOnlinePercent !== OnlineKpi) {
       return {
         success: false,
-        message: `Online Percentage mismatch: KPI ${OnlineKpi}%, Report page Excel Avg ${avgOnlinePercent}%`
+        message: `🔴 Online Percentage mismatch: KPI ${OnlineKpi}%, Report page Excel Avg ${avgOnlinePercent}%`
       };
     } else {
       return {
         success: true,
-        message: `Online Percentage matches KPI: ${OnlineKpi}%,Report Page Excel Avg ${avgOnlinePercent}%`
+        message: `🟢 Online Percentage matches KPI: ${OnlineKpi}%,Report Page Excel Avg ${avgOnlinePercent}%`
       };
     }
 

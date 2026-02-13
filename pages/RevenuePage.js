@@ -203,10 +203,25 @@ async compareOverviewWithInvoice(overviewData, invoiceData) {
       // Convert both strings to Date objects to compare actual time
       // Overview: "14/01/2026 11:56:01 pm"
       // Invoice: "Jan 14 2026, 11:56:01 pm"
-      const dateO = new Date(overviewVal.replace(/\//g, "-")); 
-      const dateI = new Date(invoiceVal.replace(/,/g, ""));
+      const cleanOverview = overviewVal.replace(/\s+/g, " ").trim();
+      const cleanInvoice = invoiceVal.replace(/,/g, "").replace(/\s+/g, " ").trim();
+
+      const [datePart, timePart, ampm] = cleanOverview.split(" ");
+      const [day, month, year] = datePart.split("/");
+
+     const formattedOverview = `${year}-${month}-${day} ${timePart} ${ampm}`;
+     const dateO = new Date(formattedOverview);
+
+      const dateI = new Date(cleanInvoice);
+
       
-      isMatch = dateO.getTime() === dateI.getTime();
+      isMatch =
+    dateO.getFullYear() === dateI.getFullYear() &&
+    dateO.getMonth() === dateI.getMonth() &&
+    dateO.getDate() === dateI.getDate() &&
+    dateO.getHours() === dateI.getHours() &&
+    dateO.getMinutes() === dateI.getMinutes();
+
       
       // Fallback: If Date object fails, check if time part matches
       if (!isMatch) {
@@ -324,25 +339,25 @@ async verifyRevenueFromExcel(filePath4, revenueText, DashboardRevenue) {
   console.log(`Revenue In Revenue Page: ${revenuePageValue}`);
   console.log(`Dashboard Revenue: ${DashboardRevenue}`);
   let errors = [];
-  if (Math.abs(revenuePageValue - Revenue) > 1.0) {
+  if (Math.abs(revenuePageValue - Revenue) >0) {
     errors.push(
-      `Excel Revenue (${Revenue}) does not match Revenue Page value (${revenuePageValue})`
+      `🔴 Excel Revenue (${Revenue}) does not match Revenue Page value (${revenuePageValue})`
     );
   }
-  if (Math.abs(DashboardRevenue - Revenue) > 1.0) {
+  if (Math.abs(DashboardRevenue - Revenue) > 0) {
     errors.push(
-      `Dashboard Revenue (${DashboardRevenue}) does NOT match Excel revenue (${Revenue})`
+      `🔴 Dashboard Revenue (${DashboardRevenue}) does NOT match Excel revenue (${Revenue})`
     );
   } else {
     console.log(
-      `Dashboard Revenue matched Excel Revenue → ${DashboardRevenue}`
+      `🟢 Dashboard Revenue matched Excel Revenue → ${DashboardRevenue}`
     );
   }
 
   if (errors.length === 0) {
-    return { success: true, message: "Revenue values matched successfully" };
+    return { success: true, message: "🟢 Revenue values matched successfully" };
   }
-  console.log("Revenue mismatch found:");
+  console.log("🔴 Revenue mismatch found:");
   errors.forEach(e => console.log(e));
   return { success: false, message: errors.join(" | ") };
 }
