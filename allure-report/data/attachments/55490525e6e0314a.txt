@@ -1,0 +1,50 @@
+
+===== TEST START: Hubwise Data Validation =====
+
+
+Organisation: hpcl
+
+Selected Date: 17/02/2026
+Selected Hub is : BENGALURU
+Dashboard Session KPI: 77
+Dashboard Usage KPI(MWh): 0.65
+Dashboard Online KPI(%): 65.39
+Dashboard Revenue KPI(Rs): 9600.12
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 0.65
+Charger Excel Sessions: 77
+Average Online Percent from Charger Excel: 65.39
+🟢 Dashboard Online percentage and Charger Excel Online percentage is Matched: 65.39
+🟢 Sessions matched : KPI Session Count: 77, ChargerExcel Session Count: 77
+🟢 Usage matched : KPI usage: 0.65, ChargerExcel usage: 0.65MW
+All Sessions Count in Session Page: 77
+Ongoing Sessions Count in Session Page: 0
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 77
+🟡 Session counts match across the Dashboard, Session page, and Excel file (77 ) ---within ±5% tolerance
+Session Excel Usage (kWh): 642.2300000000001
+Session Excel Usage (MWh Rounded): 0.64
+KPI Usage (MWh): 0.65
+Usage Validation Passed: 🟡 Usage KPI (0.65 MWh) match session Excel Usage (0.64 MWh) --within ±5% tolerance
+Revenue In Revenue Page: 9600.12
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 9600.12
+Revenue In Revenue Page: 9600.12
+Dashboard Revenue: 9600.12
+🟢 Dashboard Revenue matched Excel Revenue → 9600.12
+
+==== API CALLS : Hubwise Data Validation ====
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-make                                   │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/custom-field/get-custom-field              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-zones                                  │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: Hubwise Data Validation =====
+

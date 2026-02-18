@@ -40,43 +40,90 @@ tr {
 <body>
 
 <h1>Playwright Console Logs</h1>
-<h2>Validate Revenue Report And Invoice</h2><pre> Validate Revenue Report And Invoice =====
+<h2>Hubwise Data Validation</h2><pre> Hubwise Data Validation =====
 
 
-Organisation Name: zynetic_electric_vehicle_charging_llc
+Organisation: hpcl
 
-DashboardRevenue: 15172.52
-Revenue(AED): 15172.52
-Total Revenue(AED): 5020446.11
+Selected Date: 17/02/2026
+Selected Hub is : BENGALURU
+Dashboard Session KPI: 77
+Dashboard Usage KPI(MWh): 0.65
+Dashboard Online KPI(%): 65.39
+Dashboard Revenue KPI(Rs): 9600.12
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 0.65
+Charger Excel Sessions: 77
+Average Online Percent from Charger Excel: 65.39
+🟢 Dashboard Online percentage and Charger Excel Online percentage is Matched: 65.39
+🟢 Sessions matched : KPI Session Count: 77, ChargerExcel Session Count: 77
+🟢 Usage matched : KPI usage: 0.65, ChargerExcel usage: 0.65MW
+All Sessions Count in Session Page: 77
+Ongoing Sessions Count in Session Page: 0
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 77
+🟡 Session counts match across the Dashboard, Session page, and Excel file (77 ) ---within ±5% tolerance
+Session Excel Usage (kWh): 642.2300000000001
+Session Excel Usage (MWh Rounded): 0.64
+KPI Usage (MWh): 0.65
+Usage Validation Passed: 🟡 Usage KPI (0.65 MWh) match session Excel Usage (0.64 MWh) --within ±5% tolerance
+Revenue In Revenue Page: 9600.12
 Starting Excel download
 Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
-Excel Revenue: 15172.52
-Revenue In Revenue Page: 15172.52
-Dashboard Revenue: 15172.52
-🟢 Dashboard Revenue matched Excel Revenue → 15172.52
-Success row Overview Data
-Transaction id: 91387462
-Billed Amount: 0.00
-Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
-Driver Details: KingLimousineLuxury VehiclesServicesLlc 553199031
-Time stamp: 12/02/2026
-        
-        11:59:56 pm
-Invoice Data
-Transaction id: 91387462
-Billed Amount: 0.00
-Host Details: ZYNETIC ELECTRIC VEHICLE CHARGING LLC
-Driver Details: KingLimousineLuxury VehiclesServicesLlc - 553199031
-Time stamp: Feb 12 2026, 11:59:57 pm
+Excel Revenue: 9600.12
+Revenue In Revenue Page: 9600.12
+Dashboard Revenue: 9600.12
+🟢 Dashboard Revenue matched Excel Revenue → 9600.12
 
- Comparison Report
-Transaction id: MATCHED
-Billed Amount: MATCHED
-Host Details: MATCHED
-Driver Details: MATCHED
-Time stamp: MATCHED
+==== API CALLS : Hubwise Data Validation ====
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-make                                   │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/custom-field/get-custom-field              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-zones                                  │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
 
-No API calls captured
+
+=</pre><h2>Statewise Data Validation</h2><pre> Statewise Data Validation =====
+
+
+Organisation: zynetic_electric_vehicle_charging_llc
+
+Selected State is : Dubai
+Dashboard Session KPI: 113
+Dashboard Usage KPI(MWh): 2.45
+Dashboard Online KPI(%): 44.44
+Dashboard Revenue KPI(AED): 3076.11
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 2.45
+Charger Excel Sessions: 113
+Average Online Percent from Charger Excel: 44.44
+🟢 Dashboard Online percentage and Charger Excel Online percentage is Matched: 44.44
+🟢 Sessions matched : KPI Session Count: 113, ChargerExcel Session Count: 113
+🟢 Usage matched : KPI usage: 2.45, ChargerExcel usage: 2.45MW
+All Sessions Count in Session Page: 112
+Ongoing Sessions Count in Session Page: 0
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 112
+🟡 Session counts match across the Dashboard, Session page, and Excel file (112 ) ---within ±5% tolerance
+Session Excel Usage (kWh): 2458.4500000000016
+Session Excel Usage (MWh Rounded): 2.46
+KPI Usage (MWh): 2.45
+Usage Validation Passed: 🟡 Usage KPI (2.45 MWh) match session Excel Usage (2.46 MWh) --within ±5% tolerance
+
+==== API CALLS : Statewise Data Validation ====
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                                                  │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/get-make                      │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/custom-field/get-custom-field │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/zynetic_electric_vehicle_charging_llc/get-zones                     │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────────────────────────│
 
 
 =</pre></body></html>

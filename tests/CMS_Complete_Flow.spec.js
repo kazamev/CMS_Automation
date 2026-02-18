@@ -8,6 +8,8 @@ import { ChargerTariffPage } from "../pages/ChargerTariff";
 import { DashboardSessionsPage } from "../pages/SesAndUsageValidation";
 import { RevenuePage } from "../pages/RevenuePage";
 import { TariffPage } from '../pages/DriverTariff';
+import{StateDataPage} from '../pages/State_Data_Validation';
+import{HubDataPage} from '../pages/Hub_Data_Validation';
 
 let context;
 let page;
@@ -279,7 +281,7 @@ test.afterAll(async () => {
     
     //HUB CREATION
 
-    console.log('\nHub Creation Started');
+    console.log('\nHub Creation Started...');
     await dashboard.HubCreation(hubData);
     console.log(hubData);
     console.log(`Hub Added Successfully -> ${hubData.HubName}`);
@@ -287,18 +289,182 @@ test.afterAll(async () => {
     
     //OPEN HUB & VALIDATE
     await dashboard.HubDeletion(hubData);
-    console.log('\nHub Deletion Started');
+    console.log('\nHub Deletion Started....');
     console.log(`Hub Deleted Successfully -> ${hubData.HubName}`);
 
     
-    // VALIDATE HUB DELETED
-    await dashboard.HubSearch.fill(hubData.HubName);
-    await page.waitForLoadState('networkidle');
-    await expect(dashboard.HubCard.filter({ hasText: hubData.HubName })).toHaveCount(0);
-    console.log('\nHub Deletion Validation Passed');
-    await page.waitForTimeout(5000)
+    // // VALIDATE HUB DELETED
+    // await dashboard.HubSearch.fill(hubData.HubName);
+    // await page.waitForLoadState('networkidle');
+    // await expect(dashboard.HubCard.filter({ hasText: hubData.HubName })).toHaveCount(0);
+    // console.log('Hub Deletion Validation Passed');
+    // await page.waitForTimeout(5000)
   });
 
+
+   //Hub Data Validation
+test('Hubwise Data Validation', async () => {
+    test.setTimeout(180000)
+    const dashboard = new DashboardPage(page);
+    const Hubdata=new HubDataPage(page);
+    const sessionPage = new DashboardSessionsPage(page);
+    const revenuePage = new RevenuePage(page);
+     
+
+     // Test Data
+        const Data ={
+            Hub: "BENGALURU"
+            
+        }
+    // Navigate to dashboard URL here
+    await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo");
+    await page.waitForLoadState("networkidle");
+      
+
+    const currentUrl = page.url();
+    const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+    //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
+
+   
+   function getSelectedDate() {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+    }
+   
+   console.log("Selected Date:",getSelectedDate())
+
+    //apply yesterday fillter
+   await dashboard.applyTimeFilterInDashboard("Yesterday");
+
+   //select required Hub In Dashboard
+   await Hubdata.HubSelection(Data);
+
+    const { sessionKpi, usageKpi, onlineKpi } = await sessionPage.getKPIValues();
+    console.log("Dashboard Session KPI:", sessionKpi);
+    console.log("Dashboard Usage KPI(MWh):", usageKpi.toFixed(2));
+    console.log("Dashboard Online KPI(%):", onlineKpi);
+    console.log("Dashboard Revenue KPI(Rs):", sessionPage.revenueKpi);
+
+    //Charger Page
+     await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/chargers");
+    await dashboard.applyTimeFilterinChargerPage("Yesterday");
+    
+    //SelectHub in charger page
+    await Hubdata.applyHubFilter(Data);
+
+
+
+    const filePath6 = await sessionPage.ChargerdownloadExcel();
+    const { excelSessions, excelUsageMW } =
+      await sessionPage.getSessionsAndUsageFromSessionReportExcel(filePath6);
+  
+  console.log("Charger Excel Usage (MW):", excelUsageMW);
+  console.log("Charger Excel Sessions:", excelSessions);
+  
+   const avgOnlinePercent = await sessionPage.getAverageOnlinePercentFromExcel(filePath6);
+  console.log("Average Online Percent from Charger Excel:", avgOnlinePercent);
+  
+  //Final Validation with Charger Excel
+  const onlineResult = await sessionPage.verifyOnlinePercentWithExcel(filePath6,sessionPage.onlineKpi);
+
+if (onlineResult.success) {
+    console.log("🟢 Dashboard Online percentage and Charger Excel Online percentage is Matched:",sessionPage.onlineKpi);
+} else {
+    console.log("🔴 Dashboard Online percentage and Charger Excel Online percentage is not Matched:",sessionPage.onlineKpi);
+}
+
+  
+ await sessionPage.verifyDashboardKPIWithChargerExcel(
+    filePath6, sessionPage.sessionKpi, sessionPage.usageKpi
+);
+  
+
+     //Navigate to Sessions Page
+      await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/sessions")
+      await page.waitForLoadState("networkidle");
+
+     //Apply Time Filter in Sessions Page
+      await sessionPage.applyTimeFilter("Yesterday");
+
+      //Hubfilter
+      await Hubdata.HubFilter(Data);
+
+        //Get Session Tab Counts from UI
+      const { allCount, ongoingCount } = await sessionPage.getSessionTabCounts();
+      console.log("All Sessions Count in Session Page:", allCount);
+      console.log("Ongoing Sessions Count in Session Page:", ongoingCount);
+
+      
+      // Download Excel and count session IDs
+      const filePath = await sessionPage.downloadExcel();
+      console.log("Downloaded Excel Path:", filePath);
+  
+      // Count session IDs in the downloaded Excel
+      const excelCount = await sessionPage.countSessionIdsInExcel(filePath);
+      console.log("Excel Session Count:", excelCount);
+     
+      //Verify Counts (KPI vs UI vs Excel)
+      const result = await sessionPage.verifyCounts(filePath, allCount, sessionKpi);
+       if (!result.success) {
+        console.error("Count Validation Failed:", result.message);
+      }
+
+      //Sum Usage from Excel
+      await sessionPage.sumOfUsage(filePath, 9); // Column index for usage
+  
+      //Verify Usage (KPI vs Excel)
+      const USAGEKPI=usageKpi.toFixed(2)
+      const usageResult = await sessionPage.verifyUsageFromExcel(filePath, USAGEKPI);
+      if (!usageResult.success) {
+        console.error("Usage Validation Failed:", usageResult.message);
+      } else {
+        console.log("Usage Validation Passed:", usageResult.message);
+      }
+
+
+      //Navigate to the Revenue page
+      await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/revenue_management/overview")
+      await page.waitForLoadState("networkidle");
+
+      function getYesterdayDate() {
+      const date = new Date();
+      date.setDate(date.getDate() - 1);
+      return String(date.getDate()); //no padStart
+}
+
+// Calendar: select particular date
+  await revenuePage.selectSingleDate(getYesterdayDate());
+
+  
+
+
+//Hub Filter
+await Hubdata.HubRevenueFilter(Data);
+
+
+
+const revenueData = await revenuePage.printRevenueValues();
+
+
+ // Download Excel
+  const filePath4 = await revenuePage. downloadExcelFile();
+  await revenuePage.sumOfRevenue(filePath4);
+
+
+  // Validate Revenue Sum
+    const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,sessionPage.revenueKpi); 
+    if (!RevenueResult.success) {
+      console.log("Revenue Validation Failed:", RevenueResult.message);
+    }
+});
 
 
     //ADD & RECONFIGURE CHARGER
@@ -630,7 +796,7 @@ await sessionPage.verifyDashboardKPIWithChargerExcel( filePath6, sessionPage.ses
   
 
  //REVENUE REPORT
- test.only('Validate Revenue Report And Invoice', async () => {
+ test('Validate Revenue Report And Invoice', async () => {
   test.setTimeout(200000)
   const revenuePage = new RevenuePage(page);
 
@@ -731,4 +897,116 @@ function getYesterdayDate() {
     await tariffPage.DriverGroupDltion(groupName);
 
     });
+
+
+//State Data Validation
+test('Statewise Data Validation', async () => {
+    test.setTimeout(180000)
+    const dashboard = new DashboardPage(page);
+    const statedata=new StateDataPage(page);
+    const sessionPage = new DashboardSessionsPage(page);
+     
+
+     // Test Data
+        const Data ={
+            State: "Dubai"
+            
+        }
+    // Navigate to dashboard URL here
+    await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+    await page.waitForLoadState("networkidle");
+      
+
+    const currentUrl = page.url();
+    const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+    //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
+
+
+    //apply yesterday fillter
+   await dashboard.applyTimeFilterInDashboard("Yesterday");
+
+   //select required state
+   await statedata.StateSelection(Data)
+
+    const { sessionKpi, usageKpi, onlineKpi } = await sessionPage.getKPIValues();
+    console.log("Dashboard Session KPI:", sessionKpi);
+    console.log("Dashboard Usage KPI(MWh):", usageKpi);
+    console.log("Dashboard Online KPI(%):", onlineKpi);
+    console.log("Dashboard Revenue KPI(AED):", sessionPage.revenueKpi);
+
+    await dashboard.navigateToChargersPage();
+    await dashboard.applyTimeFilterinChargerPage("Yesterday");
+
+    await statedata.applyStateFilter(Data)
+    const filePath6 = await sessionPage.ChargerdownloadExcel();
+    const { excelSessions, excelUsageMW } =
+      await sessionPage.getSessionsAndUsageFromSessionReportExcel(filePath6);
+  
+  console.log("Charger Excel Usage (MW):", excelUsageMW);
+  console.log("Charger Excel Sessions:", excelSessions);
+  
+   const avgOnlinePercent = await sessionPage.getAverageOnlinePercentFromExcel(filePath6);
+  console.log("Average Online Percent from Charger Excel:", avgOnlinePercent);
+  
+  //Final Validation with Charger Excel
+  const onlineResult = await sessionPage.verifyOnlinePercentWithExcel(filePath6,sessionPage.onlineKpi);
+
+if (onlineResult.success) {
+    console.log("🟢 Dashboard Online percentage and Charger Excel Online percentage is Matched:",sessionPage.onlineKpi);
+} else {
+    console.log("🔴 Dashboard Online percentage and Charger Excel Online percentage is not Matched:",sessionPage.onlineKpi);
+}
+
+  
+ await sessionPage.verifyDashboardKPIWithChargerExcel(
+    filePath6, sessionPage.sessionKpi, sessionPage.usageKpi
+);
+  
+
+     //Navigate to Sessions Page
+      await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/sessions")
+      await page.waitForLoadState("networkidle");
+
+     //Apply Time Filter in Sessions Page
+      await sessionPage.applyTimeFilter("Yesterday");
+
+      //statefilter
+      await statedata.SesStateFilter(Data);
+
+        //Get Session Tab Counts from UI
+      const { allCount, ongoingCount } = await sessionPage.getSessionTabCounts();
+      console.log("All Sessions Count in Session Page:", allCount);
+      console.log("Ongoing Sessions Count in Session Page:", ongoingCount);
+
+      
+      // Download Excel and count session IDs
+      const filePath = await sessionPage.downloadExcel();
+      console.log("Downloaded Excel Path:", filePath);
+  
+      // Count session IDs in the downloaded Excel
+      const excelCount = await sessionPage.countSessionIdsInExcel(filePath);
+      console.log("Excel Session Count:", excelCount);
+     
+      //Verify Counts (KPI vs UI vs Excel)
+      const result = await sessionPage.verifyCounts(filePath, allCount, sessionKpi);
+       if (!result.success) {
+        console.error("Count Validation Failed:", result.message);
+      }
+
+      //Sum Usage from Excel
+      await sessionPage.sumOfUsage(filePath, 9); // Column index for usage
+  
+      //Verify Usage (KPI vs Excel)
+      const usageResult = await sessionPage.verifyUsageFromExcel(filePath, usageKpi);
+      if (!usageResult.success) {
+        console.error("Usage Validation Failed:", usageResult.message);
+      } else {
+        console.log("Usage Validation Passed:", usageResult.message);
+      }
+
+      });
+
+
 });

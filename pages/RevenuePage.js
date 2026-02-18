@@ -73,15 +73,15 @@ async goto() {
 // Print Revenue Values
 async printRevenueValues() {
   await this.revenue.waitFor({ state: "visible", timeout: 30000 });
-  await this.totalRevenue.waitFor({ state: "visible", timeout: 30000 });
+  // await this.totalRevenue.waitFor({ state: "visible", timeout: 30000 });
   const revenueText = await this.revenue.innerText();
-  const totalRevenueText = await this.totalRevenue.innerText();
-  console.log("Revenue(AED):", revenueText);
-  console.log("Total Revenue(AED):", totalRevenueText);
+  // const totalRevenueText = await this.totalRevenue.innerText();
+  console.log("Revenue In Revenue Page:", revenueText);
+  // console.log("Total Revenue:", totalRevenueText);
 
   return {
     revenueText,
-    totalRevenueText
+    // totalRevenueText
   };
 }
 

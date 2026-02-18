@@ -198,7 +198,9 @@ async sumOfUsage(filePath) {
 }
 
 // Verify Usage (KPI vs session Excel)
+
 async verifyUsageFromExcel(filePath, usageKpi) {
+   
     //Sum usage from Excel (kWh)
     const excelUsageKwh = await this.sumOfUsage(filePath);
     //Convert kWh → MWh
@@ -617,7 +619,7 @@ async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
         excelUsageMW
     } = await this.getSessionsAndUsageFromSessionReportExcel(filePath4);
     let errors = [];
-
+    const USAGEKPI=usageKpi.toFixed(2)
     // Compare Sessions
     if (sessionKpi !== excelSessions) {
         errors.push(
@@ -631,13 +633,13 @@ async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
 
     // Compare Usage (MW) with tolerance
     // const tolerance = 0.2;
-    if (usageKpi != excelUsageMW) {
+    if (USAGEKPI != excelUsageMW) {
         errors.push(
-            `🔴 Usage mismatch : KPI: ${usageKpi} MW, Charger Excel: ${excelUsageMW} MW`
+            `🔴 Usage mismatch : KPI: ${USAGEKPI} MW, Charger Excel: ${excelUsageMW} MW`
         );
     } else {
     console.log(
-        `🟢 Usage matched : KPI usage: ${usageKpi}, ChargerExcel usage: ${excelUsageMW}MW`
+        `🟢 Usage matched : KPI usage: ${USAGEKPI}, ChargerExcel usage: ${excelUsageMW}MW`
     );
 }
 
@@ -647,10 +649,10 @@ async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
             success: true,
             excelSessions,
             excelUsageMW,
-            message: `🟢 Dashboard KPI Usage ${usageKpi} and Charger Excel usage ${excelUsageMW}MW matched successfully`
+            message: `🟢 Dashboard KPI Usage ${USAGEKPI} and Charger Excel usage ${excelUsageMW}MW matched successfully`
         };
     } else {
-        console.log(` 🔴 Mismatch found in Dashboard KPI Usage ${usageKpi} and Charger Excel usage ${excelUsageMW}MW`);
+        console.log(` 🔴 Mismatch found in Dashboard KPI Usage ${USAGEKPI} and Charger Excel usage ${excelUsageMW}MW`);
         errors.forEach(e => console.log("" + e));
 
         return {
@@ -667,8 +669,9 @@ async verifyOnlinePercentWithExcel(filePath4, OnlineKpi) {
   try {
     const avgOnlinePercent =
       await this.getAverageOnlinePercentFromExcel(filePath4);
+      const excelValue = Number(parseFloat(avgOnlinePercent).toFixed(2));
 
-    if (avgOnlinePercent !== OnlineKpi) {
+    if (excelValue !== OnlineKpi) {
       return {
         success: false,
         message: `🔴 Online Percentage mismatch: KPI ${OnlineKpi}%, Report page Excel Avg ${avgOnlinePercent}%`
