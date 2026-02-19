@@ -28,6 +28,7 @@
     "DashBoard:allure": "npm run clean:allure && (npx playwright test tests/DashBoard.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "StateData:allure": "npm run clean:allure && (npx playwright test tests/State_Data_Validation.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "HubData:allure":"npm run clean:allure && (npx playwright test tests/Hub_Data_Validation.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
+    "HigUsg:allure":"npm run clean:allure && (npx playwright test tests/Highest_Usage_Validation.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "OrgList:allure": "npm run clean:ortoni && npm run clean:allure && (npx playwright test tests/OrgListTest.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "ChargerTariffs:allure": "npm run clean:allure && (npx playwright test tests/Chargertariff.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
     "Chargers:allure": "npm run clean:allure && (npx playwright test tests/Chargers.spec.js || cmd /c exit 0) && npm run allure:generate && npm run allure:pdf && npm run playwright:pdf && npm run allure:email",
