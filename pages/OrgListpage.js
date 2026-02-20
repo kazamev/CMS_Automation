@@ -206,8 +206,8 @@ class OrganisationPage {
   return {
     success: !hasMismatch,
     message: hasMismatch
-      ? "Organization validation failed"
-      : "Organization validation passed"
+      ? "🔴 Organization validation failed"
+      : "🟢 Organization validation passed"
   };
 }
    

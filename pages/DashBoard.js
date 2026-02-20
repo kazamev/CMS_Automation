@@ -444,6 +444,12 @@ async compareHubDetails(beforeData, afterData) {
   }
 }
 
+//get selected Chargers
+async SelectedChargers(){
+const Charger1=await this.page.locator('(//*[@id="hover_cell_0"])[1]').textContent();
+const Charger2=await this.page.locator('(//*[@id="hover_cell_0"])[2]').textContent();
+console.log(`Selected Chargers: ${Charger1}and ${Charger2}`)
+}
 
 //Hub Deletion
 async HubDeletion(hubData){
@@ -454,11 +460,13 @@ async HubDeletion(hubData){
   await this.page.waitForLoadState("networkidle");
 
   // Fetch hub details (object format)
-  console.log("Hub Details of the Created Hub")
+  console.log("Details of the Created Hub")
   const hubDetails = await this.getHubDetails();
   console.log(hubDetails);
   await this.page.waitForTimeout(2000);
+  await this.SelectedChargers();
   await this.compareHubDetails(hubData, hubDetails);
+  console.log("\nRemoved the selected Chargers Sucessfully\n")
   await this.ChargeCheckbox1.click();
   await this.page.waitForTimeout(1000);
   await this.ChargeCheckbox2.click();
@@ -474,4 +482,6 @@ async HubDeletion(hubData){
   await this.page.waitForTimeout(2000);
 
 }
+
+
 }

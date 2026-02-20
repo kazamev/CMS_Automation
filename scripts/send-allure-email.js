@@ -56,6 +56,7 @@ Please find attached the CMS automation test reports:
 
 • Ortoni Automation Report (Dashboard + Glance)
 • Playwright Console Logs (test-wise execution logs)
+• All Business APIs
 
 Thanks,
 Shilpa Doddamani
