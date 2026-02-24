@@ -2,6 +2,12 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
 
+
+const today = new Date();
+const formattedDate = today
+  .toLocaleDateString('en-GB')
+  .replace(/\//g, '-');
+
 (async () => {
   try {
     console.log('Email script started');
@@ -48,7 +54,7 @@ const fs = require('fs');
 
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
-      to: 'shilpa@kazam.in,akhilesh@kazam.in',
+      to: 'shilpa@kazam.in',
       subject: 'CMS Automation Test Reports',
       text: `
 Hi Team,
@@ -63,16 +69,16 @@ Shilpa Doddamani
 `,
       attachments: [
         {
-          filename: 'Ortoni_Automation_Report.pdf',
+          filename: `Ortoni_Automation_Report_${formattedDate}.pdf`,
           path: ortoniFinalPdf
         },
         {
-          filename: 'Playwright_Console_Logs.pdf',
+          filename: `Playwright_Console_Logs_${formattedDate}.pdf`,
           path: consolePdf
         },
        
        {
-        filename: 'All_Business_APIs.pdf',
+        filename: `All_Business_APIs_${formattedDate}.pdf`,
         path:allApiPdf
         }
       ]

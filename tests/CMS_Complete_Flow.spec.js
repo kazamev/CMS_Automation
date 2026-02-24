@@ -428,14 +428,22 @@ if (onlineResult.success) {
       return String(date.getDate()); //no padStart
 }
 
-// Calendar: select particular date
-  await revenuePage.selectSingleDate(getYesterdayDate());
+
+
+//select only sucess Transactions in Revenue Page
+await Hubdata.selectSuccessTransactions();
 
 //Hub Filter
 await Hubdata.HubRevenueFilter(Data);
 
+
+// Calendar: select particular date
+  await revenuePage.selectSingleDate(getYesterdayDate());
+
 //Print Revenue from Revenue Page
 const revenueData = await revenuePage.printRevenueValues();
+
+
 
 // Download Excel
   const filePath4 = await revenuePage. downloadExcelFile();
@@ -771,7 +779,7 @@ if (!chargerOnlineResult.success) {
     if (!ReportOnlinePercentage.success) {
       console.error("Report page Online Percentage Validation Failed:", ReportOnlinePercentage.message);
     } else {
-      console.log("Reportoage Online Percentage Validation Passed:", ReportOnlinePercentage.message);
+      console.log("Reportpage Online Percentage Validation Passed:", ReportOnlinePercentage.message);
     }
 
     });
@@ -999,7 +1007,7 @@ test('Statewise Data Validation', async () => {
 
 
     //Highest Usage Validation
-      test.only('Highest Usage Validation', async () => {
+      test('Highest Usage Validation', async () => {
          test.setTimeout(180000)
            const HigUsg=new HigUsgPage(page);
           const dashboard = new DashboardPage(page);
@@ -1037,6 +1045,9 @@ test('Statewise Data Validation', async () => {
       
         //click Session History
         await HigUsg.SesHistory();
+
+          //Apply Time Filter in Sessions Page
+         await sessionPage.applyAnomalyFilter("Anomaly");
       
         // Download Excel and count session IDs
         const filePath = await sessionPage.downloadExcel();

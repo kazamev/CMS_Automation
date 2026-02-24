@@ -1,10 +1,37 @@
 Charger ID,Charger Name,Sessions,Usage (kWh),AVG Utilization,Online (%),Connectors,Connector Status 1,Connector Status 2,Connector Status 3,Hub Name,Geo State,Host Name,Host Phone,Make,Protocol,FW Version,Config Status,Tariff
-x93erh,80KW DBC Charger,56,1149.80,33h 53m,100.00,"ccs,ccs",Available,Available,-,-,Dubai,Harsh,558962369,LHK,ocpp,2.1.3-11-LAN,config,Dubai 6 Sep Charges
-cms638,22kW The Arbor School,0,0.00,0h 00m,0,type_2,Available,-,-,-,Dubai,Harsh,558962369,TIMXON,ocpp,A0-V2.2.3-W2.2.0,config,-
-vtq9ns,150KW Oud Metha,0,0.00,0h 00m,0,"ccs,ccs,ccs",Faulted,Faulted,Faulted,-,Dubai,Harsh,558962369,Zynetic,ocpp,V1.000777-1.11-G2.000147-G2.000147-,config,Dubai 6 Sep Charges
-g6f5qc,60kW Golden Tulip,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,-,Dubai,Harsh,558962369,-,ocpp,-,config,-
-mxx6o3,22kW  The Arbor School - B,0,0.00,0h 00m,0,type_2,Faulted,Faulted,-,-,Dubai,Harsh,558962369,JOINON,ocpp,2024.07.17.V_1_10_23,config,-
-xgmr8v,40KW TAJ Business Bay,22,452.34,15h 02m,100.00,"ccs,ccs",Charging,Available,-,-,Dubai,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-2247F310061005,config,Dubai 6 Sep Charges
-sc6n4z,60KW Shada Hotel ( SC6N4Z ),23,543.45,16h 21m,100.00,"ccs,ccs",Charging,Available,-,-,Dubai,Harsh,558962369,LHK,ocpp,2.1.3-11-LAN,config,Dubai 6 Sep Charges
-f164by,30KW DC Al Owais Tower Al Barsha,12,307.43,11h 39m,100.00,ccs,Charging,-,-,-,Dubai,Harsh,558962369,-,ocpp,140d10i-104104200165122121-0236-,config,Dubai 6 Sep Charges
-e9tmzt,180kW Golden Tulip Liquid Cooled,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,-,Dubai,Harsh,558962369,-,ocpp,-,config,-
+qauspf,ID(qauspf)-MS/HSD SRI MAHESHWARI SERVICE STATION MACHENAHALLI. CHIKKABALLAPUR ,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Venkata RamS,9520380197,SERVOTECH,ocpp,140c10a-103104159121121-0225-10051005,config,Live chargers
+j7pt9f,ID(j7pt9f)Amaravathi Fuels station ,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,BENGALURU RO,Karnataka,Ananth KumarC,9900859999,OKAYA,ocpp,"3.0.0.4,3.0.0.4,2.0.1.6,2.0.2.0,2.0.1.5",config,Live chargers
+g3gu54,ID(g3gu54) Ganga Filling Station ,19,142.93,4h 43m,92.72,"ccs,ccs",Available,Charging,-,BENGALURU RO,Karnataka,Kumarswamy Hhm,9448318103,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247F710061005,config,Live chargers
+gej4wu,ID(gej4wu) Sree chowdeshwari fuel station,2,2.31,0h 10m,100.00,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Shreepati Khainur,9428324965,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247F7,config,Live chargers
+sqbeee,ID(sqbeee) ONE STOP SERVICE STATION ,4,4.44,0h 18m,99.79,ccs,Charging,-,-,BENGALURU RO,Karnataka,One stop service station,9886160954,-,ocpp,125107-102104159149116113-0209-040003F7,config,Live chargers
+ive2t8, ID(ive2t8)TRS FUEL PARK,2,10.22,0h 14m,92.20,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,HARISHNATH CS,9901360067,SERVOTECH,ocpp,140c10a-103104189159121121-0225-,config,Live chargers
+ch6cns,ID(ch6cns)Maruti Fuel Station ,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Mohan P,9980841678,SERVOTECH,ocpp,140c10a-103104159121121-0225-10031002,config,Live chargers
+6q765b,ID(6q765b) Sri Ranga Amaravathi Fuels,9,62.59,2h 39m,100.00,ccs,Available,-,-,BENGALURU RO,Karnataka,GR. Suma ,9900859999,-,ocpp,125107-102104159149116113-0210-03FF03F6,config,Live chargers
+gos6hm,ID(gos6hm)Hp Auto Care Centre Old Airport Road ,0,0.00,0h 00m,99.79,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,ComcoOldAirport Road,7411351909,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E,config,Live chargers
+6mm7zg,  ID(6mm7zg) Balaji service station ,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Balajiservicestation balajiservicestation,9449710054,SERVOTECH,ocpp,140c10a-103104121121-0-,config,Live chargers
+fi1z61,ID(fi1z61) Nidhu and co,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,BENGALURU RO,Karnataka,Kalyana Chakravarthi,9686950355,SERVOTECH,ocpp,140c10a-103104159121121-0225-,config,Live chargers
+5wbsvc,ID(5wbsvc)Annada Enterprises,1,17.89,0h 19m,98.73,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Mohan P,9980841678,SERVOTECH,ocpp,140c10a-103104159121121-0225-10061005,config,Live chargers
+3f3pss,ID(3f3pss) HP Petrol Pump- COMCO NHAI YEDEHALLI,0,0.00,0h 00m,0,ccs,Faulted,-,-,BENGALURU RO,Karnataka,M. Thulasireddy,9902616626,-,ocpp,125107-102104159149116113-0210-,config,Live chargers
+ws75we,ID(ws75we) Liberty Service Station HP eCharger 60Kw DC Fast Charger,23,171.40,6h 25m,99.41,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,LibertyService Station,9663258646,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247F7,config,Live chargers
+6k5t4t,ID(6k5t4t) Nirmala Fuel Station ,2,20.82,1h 08m,99.50,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Karthik M,9900366002,SERVOTECH,ocpp,140c10a-103104159121121-0225-10061005,config,Live chargers
+j65f8z,ID(j65f8z)Renuka agencies avalahalli ,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,BENGALURU RO,Karnataka,Arun R,8892329391,OKAYA,ocpp,"3.0.0.4,3.0.0.4,2.0.1.6,2.0.2.0,2.0.1.5",config,Live chargers
+azpnrc,ID(azpnrc) Taksh fuel station ,0,0.00,0h 00m,0,ccs,Faulted,-,-,BENGALURU RO,Karnataka,Prashanth Bl,8050711250,-,ocpp,125107-102104159149116113-0210-2245,config,Live chargers
+7nvvnq,ID(7nvvnq) SLN SERVICE STATION ,0,0.00,0h 00m,98.16,ccs,Faulted,-,-,BENGALURU RO,Karnataka,Praveen kumar,9900441461,OKAYA,ocpp,"TCU:GUN(1-3)_V3.1_6ul,A:RCCS2.3",config,Live chargers
+udpfaz,ID(udpfaz)Sri Balaji fuel station ,2,12.71,0h 17m,99.79,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Ashwin HR,9353357269,SERVOTECH,ocpp,140c10a-103104159121121-0225-10061005,config,Live chargers
+fukwk6,ID(fukwk6) PAVITHRA FUEL PARK,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,BENGALURU RO,Karnataka,Karthik Om,8884366002,-,ocpp,-,config,Live chargers
+6qq5yn,ID(6qq5yn) SLR Fuel Station,3,16.69,0h 40m,90.50,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,M R Lakshmi Narayana ,9880646909,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247F7,config,Live chargers
+kd2abs,ID(kd2abs) Axis Energies ,26,136.02,3h 22m,94.72,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Nelamangala solur,9845093869,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247F7,config,Live chargers
+w6badu,ID(w6badu) HNS FUEL STATION ,0,0.00,0h 00m,73.98,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Nandisha V,7348874349,SERVOTECH,ocpp,140c-103104189159121121-0-,config,Live chargers
+t8zm7k,ID(t8zm7k)Shree Raghavendra Fuels ,0,0.00,0h 00m,94.03,"ccs,ccs",Faulted,Faulted,-,BENGALURU RO,Karnataka,Kempaiah DK,9686265644,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E10051005,config,Live chargers
+8t2mw7,ID(8t2mw7)AM SAMYULLA ,0,0.00,0h 00m,100.00,"ccs,ccs",Faulted,Faulted,-,BENGALURU RO,Karnataka,Firozk Kz,7996448678,Pilot,ocpp,V1.08,config,Live chargers
+tn1azu,ID(tn1azu)Chethana Service Station,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,BENGALURU RO,Karnataka,Ravi KiranTr,9945001501,-,ocpp,-,config,Live chargers
+tmqwzy,ID(tmqwzy)TVL ENTERPRISES ,0,0.00,0h 00m,93.58,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,LakshmiNarayana TV,9986940097,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E,config,Live chargers
+fwgc5a,ID(fwgc5a)-M/S C P R Petroleum ,0,0.00,0h 00m,100.00,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Shrikanth HP,8748852232,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E,config,Live chargers
+b9qaue,ID(b9qaue) HP Auto Care Service ,2,41.49,1h 13m,95.59,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Akshay,9945144152,SERVOTECH,ocpp,140c10a-103104159121121-0225-10061005,config,Live chargers
+upthfa,ID(upthfa)Ramesh fuels ,0,0.00,0h 00m,0,"ccs,ccs",Unavailable,Unavailable,-,BENGALURU RO,Karnataka,Praveen R,9590886644,-,ocpp,-,config,Live chargers
+j6gca2,ID(j6gca2)Lavanya filling statin,0,0.00,0h 00m,94.23,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Srinivasappa M,9480345868,OKAYA,ocpp,"3.0.0.4,3.0.0.4,2.0.1.6,2.0.2.0,2.0.1.5",config,Live chargers
+ipu131,ID(ipu131)Sri Venkateshwara service station hoskote ,0,0.00,35h 31m,26.04,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Ramu V,8073430658,OKAYA,ocpp,"3.0.0.4,3.0.0.4,2.0.1.6,2.0.2.0,2.0.1.5",config,Live chargers
+rh9vz6,ID(rh9vz6)Sat fuel park ,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,BENGALURU RO,Karnataka,Suresh AS,9902780025,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E,config,Live chargers
+f7mg6d,ID(f7mg6d)Sri Siddeshwara Swamy Fuel Station,2,29.85,0h 34m,95.83,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,N Mahesha,9964340516,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247F7,config,Live chargers
+idwbpw,ID(idwbpw)C S N PETROLEUM ,0,0.00,0h 00m,61.51,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Ravi Kumar,9141069443,OKAYA,ocpp,"3.0.0.4,3.0.0.4,2.0.1.6,2.0.2.0,2.0.1.5",config,Live chargers
+te97cy,ID(te97cy)Maruthi service station ,2,42.07,1h 12m,99.48,"ccs,ccs",Available,Available,-,BENGALURU RO,Karnataka,Mahesh Vibhu,8884072845,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E,config,Live chargers

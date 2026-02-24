@@ -3,39 +3,52 @@ Select Organization page loaded
 Organization selected, landed inside app
 Global Setup Success! State saved to: C:\Users\dodda\OneDrive\Documents\CMS_Automation\storageState.json
 
-===== TEST START: Highest Usage Validation =====
+===== TEST START: Hubwise Data Validation =====
 
 
 Organisation: hpcl
 
-Selected Date: 18/02/2026
-Highest Usage Charger Details
-Charger id: dt87y2
-Sessions: 55
-Usage: 500.63
-Avg Utilization: 25h 42m
-Host Details: Nirmal Khan9831497759
-Hub Name: KOLKATA RO
+Selected Date: 23/02/2026
+Selected Hub is : BENGALURU
+Dashboard Session KPI: 99
+Dashboard Usage KPI(MWh): 0.71
+Dashboard Online KPI(%): 61.1
+Dashboard Revenue KPI(Rs): 8824.24
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 0.71
+Charger Excel Sessions: 99
+Average Online Percent from Charger Excel: 61.1
+🟢 Dashboard Online percentage and Charger Excel Online percentage is Matched: 61.1
+🟢 Sessions matched : KPI Session Count: 99, ChargerExcel Session Count: 99
+🟢 Usage matched : KPI usage: 0.71, ChargerExcel usage: 0.71MW
+All Sessions Count in Session Page: 97
+Ongoing Sessions Count in Session Page: 0
 Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
-Excel Session Count: 55
-Count Validation Passed: 🟢 Sessions count matched → 55
-Session Excel Usage (kWh): 489.57
-Highest Usage (kWh): 500.63
-Usage Validation Passed: 🟡 Highest Usage in the charger page (500.63 kWh) match session Excel Usage (489.57 kWh) --within ±5% tolerance
+Excel Session Count: 97
+🟡 Session counts match across the Dashboard, Session page, and Excel file (97 ) ---within ±5% tolerance
+Session Excel Usage (kWh): 702.5999999999997
+Session Excel Usage (MWh Rounded): 0.7
+KPI Usage (MWh): 0.71
+Usage Validation Passed: 🟡 Usage KPI (0.71 MWh) match session Excel Usage (0.7 MWh) --within ±5% tolerance
+Revenue In Revenue Page: 8824.24
+Starting Excel download
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 8824.24
+Revenue In Revenue Page: 8824.24
+Dashboard Revenue: 8824.24
+🟢 Dashboard Revenue matched Excel Revenue → 8824.24
 
-==== API CALLS : Highest Usage Validation ====
+==== API CALLS : Hubwise Data Validation ====
 │────────│────────│──────────────────────────────────────────────────────────────────────────────────│
 │ METHOD │ STATUS │ URL                                                                              │
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/chargers/tariff_details?device_id=dt87y2   │
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/dt87y2                               │
 │────────│────────│──────────────────────────────────────────────────────────────────────────────────│
 │ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-make                                   │
 │────────│────────│──────────────────────────────────────────────────────────────────────────────────│
 │ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/custom-field/get-custom-field              │
 │────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-zones                                  │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
 
 
-===== TEST END: Highest Usage Validation =====
+===== TEST END: Hubwise Data Validation =====
 

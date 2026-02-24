@@ -155,6 +155,9 @@ await Hubdata.HubRevenueFilter(Data);
 
 const revenueData = await revenuePage.printRevenueValues();
 
+//select only sucess Transactions in Revenue Page
+await Hubdata.selectSuccessTransactions();
+
 
  // Download Excel
   const filePath4 = await revenuePage. downloadExcelFile();
