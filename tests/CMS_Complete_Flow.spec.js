@@ -11,6 +11,7 @@ import { TariffPage } from '../pages/DriverTariff';
 import{StateDataPage} from '../pages/State_Data_Validation';
 import{HubDataPage} from '../pages/Hub_Data_Validation';
 import{HigUsgPage} from "../pages/Highest_Usage_Validation";
+import { ConnectorPage } from '../pages/Connectors_Validation';
 
 let context;
 let page;
@@ -1078,5 +1079,37 @@ test('Statewise Data Validation', async () => {
             }
       });
 
+
+      //CONNECTOR TYPE VALIDATION
+      
+
+
+test.only('Verify Connector type', async () => {
+    test.setTimeout(180000)
+    const connectorPage = new ConnectorPage(page);
+
+    // Navigate to dashboard URL here
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
+    await page.waitForLoadState("networkidle");
+
+    const currentUrl = page.url();
+    const orgName = currentUrl.split('/org/')[1].split('/')[0];
+    //Print organisation name
+    console.log(`\nOrganisation: ${orgName}\n`)
+      
+
+    // Test Data
+    const Data ={
+        Connector: "ccs"
+        }
+        
+    //Apply Connector filter in Charger Page
+    await connectorPage.applyStateFilter(Data);
+
+    //Select first row and validate the selected connector
+    await connectorPage.selectFirstRow(Data);
+
+
+});
 
 });
