@@ -12,6 +12,8 @@ import{StateDataPage} from '../pages/State_Data_Validation';
 import{HubDataPage} from '../pages/Hub_Data_Validation';
 import{HigUsgPage} from "../pages/Highest_Usage_Validation";
 import { ConnectorPage } from '../pages/Connectors_Validation';
+import {  WeeklyChargerConnectorValidator } from '../pages/WeeklyChargersAndConnectors';
+import { WeeklySessionUsageOnlineValidator } from "../pages/sessionUsageOnlineValidator.js";
 
 let context;
 let page;
@@ -564,7 +566,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     });
 
     //CHARGER TARIFF CREATION & DELETION
-    test('Charger Tariff Creation And Deletion', async () => {
+    test.only('Charger Tariff Creation And Deletion', async () => {
       test.setTimeout(200000)
         const tariffPage = new ChargerTariffPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/tariffs");
@@ -578,26 +580,111 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     
          
     const tariffName = `Auto_Tariff_${Date.now()}`;
-    const chargerId = "244a95";
     const amount = "1";
 
     // Create tariff
+    console.log(`Start Flat Tariff Creation : ${tariffName}`);
     await tariffPage.createTariff(tariffName);
     await tariffPage.selectStartAndEndDate();
     await tariffPage.addPrice(amount);
 
     // Search & link charger
-    await tariffPage.searchAndLinkCharger(chargerId);
+    await tariffPage.searchAndLinkCharger();
 
     // Review page
     const reviewDetails = await tariffPage.getReviewAndConfirmDetailsAsTable();
 
     // Create tariff
     await tariffPage.createTariffFinal();
+    console.log(`\nFlat Tariff Created Successfully: ${tariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
     await tariffPage.deleteTariff(tariffName);
-    console.log("Tariff deleted successfully");
+    console.log("\nFlatTariff deleted successfully\n");
+   
+     // Create Fast Charging tariff
+     const fastTariffName = `Auto_Fast_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start Fast Charging Tariff Creation : ${fastTariffName}`);
+    await tariffPage.createTariff(fastTariffName);
+    await tariffPage.selectStartAndEndDateForFastCharging();
+    await tariffPage.addPrice(amount);
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforFastCharging = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nFast Charging Tariff Created Successfully: ${fastTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(fastTariffName);
+    console.log("\nFast Charging Tariff deleted successfully\n");
+
+    // Create Time Of Day tariff
+     const timeOfDayTariffName = `Auto_TimeOfDay_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start Time Of Day Tariff Creation : ${timeOfDayTariffName}`);
+    await tariffPage.createTariff(timeOfDayTariffName);
+    await tariffPage.selectStartAndEndDateForTimeOfDay();
+
+  await tariffPage.setTimeRangeForTimeOfDay("10:00 hrs", "12:00 hrs");
+    
+    await tariffPage.addPrice(amount);
+
+
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforTimeOfDay = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nTime Of Day Tariff Created Successfully: ${timeOfDayTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(timeOfDayTariffName);
+    console.log("\nTime Of Day Tariff deleted successfully\n");
+
+
+    // Create Charge By Hour tariff
+     const chargeByHourTariffName = `Auto_ChargeByHour_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start Charge By Hour Tariff Creation : ${chargeByHourTariffName}`);
+    await tariffPage.createTariff(chargeByHourTariffName);
+
+    // Select hour range and add price  
+    await tariffPage.selectStartAndEndDateForHourTariff();
+
+    // Set price for hour range
+    await tariffPage.setChargeByHour(amount);
+
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforChargeByHour = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nCharge By Hour Tariff Created Successfully: ${chargeByHourTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(chargeByHourTariffName);
+    console.log("\nCharge By Hour Tariff deleted successfully\n");
 
     });
 
@@ -1080,11 +1167,8 @@ test('Statewise Data Validation', async () => {
       });
 
 
-      //CONNECTOR TYPE VALIDATION
-      
-
-
-test.only('Verify Connector type', async () => {
+//CONNECTOR TYPE VALIDATION
+test('Verify Connector type', async () => {
     test.setTimeout(180000)
     const connectorPage = new ConnectorPage(page);
 
@@ -1111,5 +1195,317 @@ test.only('Verify Connector type', async () => {
 
 
 });
+
+//Weekly Chargers and Connectors Data Validation
+test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
+      test.setTimeout(200000)
+    const dashboard = new  WeeklyChargerConnectorValidator(page);
+
+    // Navigate to dashboard URL here
+    await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+    await page.waitForLoadState("networkidle");
+    
+
+    const currentUrl = page.url();
+    const orgName = currentUrl.split('/org/')[1].split('/')[0];
+    //Print organisation name
+    console.log(`\nOrganisation Name: ${orgName}\n`);
+
+    await dashboard.applyTimeFilterInDashboard("Calendar");
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(5000);
+    console.log("One Week DashBoard Data");
+    const revenue = await dashboard.getRevenue();
+    console.log("Revenue:", revenue);
+    const sessions = await dashboard.getTotalSessions();
+    console.log("Sessions:", sessions);
+    const usage = await dashboard.getUsage();
+    console.log("Usage:", usage);
+    const onlinePercentage = await dashboard.getOnlinePercentage();
+    console.log("Online Percentage:", onlinePercentage);
+    const dashboardCounts = await dashboard.getDashboardChargerCounts();
+    const dashboardStatus = await dashboard.getDashboardConnectorStatusCounts();
+
+      const dashboardData = {
+        chargers: dashboardCounts.chargers,
+        connectors: dashboardCounts.connectors,
+        nonConfigured: dashboardCounts.nonConfigured,
+
+        all: dashboardStatus.All,
+        busy: dashboardStatus.Busy,
+        available: dashboardStatus.Available,
+        error: dashboardStatus.Error
+      };
+
+      console.log("Dashboard Charger Data(Offline and Online):", dashboardData);
+       await dashboard.OnlineFilter()
+        await page.waitForTimeout(3000);
+        const dashboardOnlineCounts = await dashboard.getDashboardChargerCounts();
+        const dashboardOnlineStatus = await dashboard.getDashboardConnectorStatusCounts();
+
+        const dashboardOnlineData = {
+        chargers: dashboardOnlineCounts.chargers,
+        connectors: dashboardOnlineCounts.connectors,
+        nonConfigured: dashboardOnlineCounts.nonConfigured,
+
+        all: dashboardOnlineStatus.All,
+        busy: dashboardOnlineStatus.Busy,
+        available: dashboardOnlineStatus.Available,
+        error: dashboardOnlineStatus.Error
+      };
+
+     //Navigate to the Charger Page
+     await dashboard.navigateToChargersPage();
+
+     //apply the time filter in the charger page
+     await dashboard.applyTimeFilterinChargerPage("Calendar");
+
+    const chargerCounts = await dashboard.getChargerCounts();
+    const chargerStatus = await dashboard.getConnectorStatusCounts();
+
+    const chargerData = {
+        chargers: chargerCounts.chargers,
+        connectors: chargerCounts.connectors,
+        // nonConfigured: chargerCounts.nonConfigured,
+
+        all: chargerStatus.All,
+        busy: chargerStatus.Busy,
+        available: chargerStatus.Available,
+        error: chargerStatus.Error
+      };
+
+      console.log("Charger Page Data(Offline And Online):", chargerData);
+
+      // Compare Dashboard vs Charger page data
+      expect(chargerData.chargers.trim()).toBe(dashboardData.chargers.trim());
+      expect(chargerData.connectors.trim()).toBe(dashboardData.connectors.trim());
+      // expect(chargerData.nonConfigured.trim()).toBe(dashboardData.nonConfigured.trim());
+      expect(chargerData.all.trim()).toBe(dashboardData.all.trim());
+      // expect(chargerData.busy.trim()).toBe(dashboardData.busy.trim());
+      // expect(chargerData.available.trim()).toBe(dashboardData.available.trim());
+      // expect(chargerData.error.trim()).toBe(dashboardData.error.trim());
+      console.log("🟢 The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.");
+
+
+      //dashboard online charger data
+      console.log("Dashboard Online Chargers Data:", dashboardOnlineData);
+      await dashboard.OnlineFilterCharger()
+      await page.waitForTimeout(3000);
+      const chargerOnlineCounts = await dashboard.getChargerCounts();
+      const chargerOnlineStatus = await dashboard.getConnectorStatusCounts();
+
+      const chargerOnlineData = {
+        chargers: chargerOnlineCounts.chargers,
+        connectors: chargerOnlineCounts.connectors,
+        // nonConfigured: chargerOnlineCounts.nonConfigured,
+
+        all: chargerOnlineStatus.All,
+        busy: chargerOnlineStatus.Busy,
+        available: chargerOnlineStatus.Available,
+        error: chargerOnlineStatus.Error
+      };
+      console.log("Charger Page Online Chargers Data:", chargerOnlineData);
+      // Compare Dashboard vs Charger page data
+      expect(chargerOnlineData.chargers.trim()).toBe(dashboardOnlineData.chargers.trim());
+      expect(chargerOnlineData.connectors.trim()).toBe(dashboardOnlineData.connectors.trim());
+      // expect(chargerOnlineData.nonConfigured.trim()).toBe(dashboardOnlineData.nonConfigured.trim());
+      expect(chargerOnlineData.all.trim()).toBe(dashboardOnlineData.all.trim());
+      // expect(chargerOnlineData.busy.trim()).toBe(dashboardOnlineData.busy.trim());
+      // expect(chargerOnlineData.available.trim()).toBe(dashboardOnlineData.available.trim());
+      // expect(chargerOnlineData.error.trim()).toBe(dashboardOnlineData.error.trim());
+      console.log("🟢 The Online Charger count matches on both the Dashboard and the Charger page.");
+
+    });
+
+
+//WEEKLY SESSIONS, USAGE, REVENUE AND ONLINE PERCENTAGE VALIDATION
+test('Validate Week data of the Session Counts, Usage, Revenue And Online Percentage', async () => {
+      test.setTimeout(6000000)
+     
+        const sessionPage = new WeeklySessionUsageOnlineValidator(page);
+        await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+        await page.waitForLoadState("networkidle");
+
+        const currentUrl = page.url();
+        const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+        //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
+        
+        //Apply Time Filter in Dashboard
+        await sessionPage.applyTimeFilterInDashboard("Calendar");
+
+    //Get KPI Values from Dashboard
+    const { sessionKpi, usageKpi, onlineKpi } = await sessionPage.getKPIValues();
+    console.log("Dashboard Session KPI:", sessionKpi);
+    console.log("Dashboard Usage KPI(MWh):", usageKpi);
+    console.log("Dashboard Online KPI(%):", onlineKpi);
+    console.log("Dashboard Revenue KPI(AED):", sessionPage.revenueKpi);
+
+    //Navigate to Sessions Page
+    await sessionPage.openSessionsPage();
+
+    //Apply Time Filter in Sessions Page
+    await sessionPage.applyTimeFilter("Calendar");
+
+    //Apply anomaly filter  
+    // await sessionPage.applyAnomalyFilter("Anomaly");
+
+    //Get Session Tab Counts from UI
+    const { allCount, ongoingCount } = await sessionPage.getSessionTabCounts();
+    console.log("All Sessions Count in Session Page:", allCount);
+    console.log("Ongoing Sessions Count in Session Page:", ongoingCount);
+
+    // Download Excel and count session IDs
+    const filePath = await sessionPage.downloadExcel();
+    console.log("Downloaded Excel Path:", filePath);
+
+    // Count session IDs in the downloaded Excel
+    const excelCount = await sessionPage.countSessionIdsInExcel(filePath);
+    console.log("Excel Session Count:", excelCount);
+   
+    //Verify Counts (KPI vs UI vs Excel)
+    const result = await sessionPage.verifyCounts(filePath, allCount, sessionKpi);
+    if (!result.success) {
+      console.log(`🔴 Session count did not match among Dashboard KPI, UI Count and Excel Count -- Dashboard KPI: ${sessionKpi}, UI Count: ${allCount}, Excel Count: ${excelCount}`);
+    } 
+
+    //Sum Usage from Excel
+    await sessionPage.sumOfUsage(filePath, 9); // Column index for usage
+
+    //Verify Usage (KPI vs Excel)
+    const usageResult = await sessionPage.verifyUsageFromExcel(filePath, usageKpi);
+    if (!usageResult.success) {
+      console.error("Usage Validation Failed:", usageResult.message);
+    } else {
+      console.log("Usage Validation Passed:", usageResult.message);
+    }
+     
+//Go to Daily Reports
+await sessionPage.openDailyReportsPage();
+
+//Select dropdown value
+await sessionPage.selectReportDropdown("Sessions");  
+// or "usage", depends on user input
+
+function getYesterdayDate() {
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+//Pick calendar date
+await sessionPage.selectKazamCalendarDate(getYesterdayDate());
+//Generate report
+
+const filePath2 = await sessionPage.downloadSessionReport();
+    console.log("Downloaded Excel Path:", filePath2);
+//Count txn ids
+const dailyTxnCount = await sessionPage.countTxnIdsSessionReport(filePath2);
+
+//Final Validation
+const dailyCheck = await sessionPage.verifySessionReportCounts(
+    dailyTxnCount,
+    sessionKpi,
+    excelCount
+);
+
+//usage validation from daily report excel and dashboard KPI
+const ReportusageResult = await sessionPage.verifyReportUsageFromExcel(filePath2, usageKpi);
+    if (!ReportusageResult.success) {
+      console.log("Report Page Usage did not match the Dashboard Usage KPI");
+    } else {
+      console.log("Report Page Usage Matched with the Dashboard Usage KPI:", ReportusageResult.message);
+    }
+
+//Select dropdown value
+await sessionPage.selectReportDropdown("Chargers");  
+
+//Select Only Configured Chargers
+await sessionPage.selectConfigureDropdown("Configured");
+
+//Pick calendar date
+await sessionPage.selectKazamCalendarDate();
+
+//Generate report
+const filePath5 = await sessionPage.downloadChargerReport();
+console.log("Downloaded Excel Path:", filePath5);
+
+//online percentage average from Report charger Excel
+const onlinePercentageAvg = await sessionPage.getAverageOnlinePercentFromExcel(filePath5);
+console.log("Avg of Online Percentage from Report Excel:", onlinePercentageAvg);
+
+//download Revenue Report
+    await sessionPage.RevenueTab.click();
+    await page.waitForLoadState("networkidle");
+
+    //Pick calendar date
+await sessionPage.selectKazamCalendarDate();
+
+    const revenueReportPath = await sessionPage.downloadRevenueReport();
+    console.log("Downloaded Revenue Report Path:", revenueReportPath);
+
+//sum of Revenue from Revenue Report Excel
+    const totalRevenue = await sessionPage.sumOfRevenue(revenueReportPath);
+    console.log("Total Revenue from Report Excel:", totalRevenue);
+
+//Revenue Validation
+  const revenueValidationResult = await sessionPage.validateRevenue(revenueReportPath, sessionPage.revenueKpi);
+  console.log("Revenue Validation Result:", revenueValidationResult);
+
+//Charger Page Validation
+    await sessionPage.ChargerPage();
+
+//Apply Time Filter in Charger Page
+    await sessionPage.applyTimeFilterinChargerPage("Calendar");
+
+//Download Charger Excel
+    const filePath6 = await sessionPage.ChargerdownloadExcel();
+  const { excelSessions, excelUsageMW } =
+    await sessionPage.getSessionsAndUsageFromSessionReportExcel(filePath6);
+
+console.log("Charger Excel Usage (MW):", excelUsageMW);
+console.log("Charger Excel Sessions:", excelSessions);
+
+const avgOnlinePercent = await sessionPage.getAverageOnlinePercentFromExcel(filePath6);
+console.log("Average Online Percent from Charger Excel:", avgOnlinePercent);
+
+// //Final Validation with Charger Excel
+// await sessionPage.verifyOnlinePercentWithExcel(filePath6,sessionPage.onlineKpi);
+
+// Final Validation with Charger Excel
+const chargerOnlineResult =await sessionPage.verifyOnlinePercentWithExcel( filePath6, sessionPage.onlineKpi);
+
+if (!chargerOnlineResult.success) {
+  console.log(
+    `🔴 Charger page Online percentage not matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    
+  );
+} else {
+  console.log(
+    `🟢 Charger page Online percentage matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+  );
+}
+
+  await sessionPage.verifyDashboardKPIWithChargerExcel( filePath6, sessionPage.sessionKpi, sessionPage.usageKpi);
+
+  //Verify Online Percentage (KPI vs Report Excel)
+    const ReportOnlinePercentage = await sessionPage.verifyOnlinePercentWithExcel(filePath5,onlinePercentageAvg);
+    if (!ReportOnlinePercentage.success) {
+      console.log(`🔴 Report page Online Percentage did not match the Dashboard KPI Online Percentage -- Dashboard KPI: ${sessionPage.onlineKpi}, Report Excel Average: ${onlinePercentageAvg}`);
+    } else {
+      console.log(`🟢 Report page Online Percentage matched the Dashboard KPI Online Percentage -- Dashboard KPI: ${sessionPage.onlineKpi}, Report Excel Average: ${onlinePercentageAvg}`);
+    }
+
+    });
+
+
+
+
+
 
 });

@@ -3,25 +3,88 @@ Select Organization page loaded
 Organization selected, landed inside app
 Global Setup Success! State saved to: C:\Users\dodda\OneDrive\Documents\CMS_Automation\storageState.json
 
-===== TEST START: Verify Connector type =====
+===== TEST START: Charger Tariff Creation And Deletion =====
 
 
-Organisation: nikolev
+Organisation Name: Tyagi_Org
 
-Selected Connector is : ccs
-Total Chargers displayed for the selected connector type:  84
-Number of Selected Connectors in the particuler charger:  2
-Connector filter applied successfully
+Start Flat Tariff Creation : Auto_Tariff_1772112300071
+Selected Charger: 114fhe
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬─────────────────────────────┐
+│ (index) │ Field         │ Value                       │
+├─────────┼───────────────┼─────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_Tariff_1772112300071' │
+│ 1       │ 'Description' │ '----'                      │
+│ 2       │ 'Tariff Type' │ 'Flat Tariff'               │
+│ 3       │ 'Validity'    │ '26/02/2026 -- Forever'     │
+│ 4       │ 'Price Type'  │ 'Amount'                    │
+│ 5       │ 'Chargers'    │ '114fhe'                    │
+└─────────┴───────────────┴─────────────────────────────┘
 
-==== API CALLS : Verify Connector type ====
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
-│ METHOD │ STATUS │ URL                                                                               │
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/nikolev/chargers/tariff_details?device_id=2yi4km │
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/2yi4km                                │
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
+Flat Tariff Created Successfully: Auto_Tariff_1772112300071
+
+Remove the linked charger successfully to delete the tariff
+
+FlatTariff deleted successfully
+
+Start Fast Charging Tariff Creation : Auto_Fast_Tariff_1772112349310
+Selected Charger: 16dyhc
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬──────────────────────────────────┐
+│ (index) │ Field         │ Value                            │
+├─────────┼───────────────┼──────────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_Fast_Tariff_1772112349310' │
+│ 1       │ 'Description' │ '----'                           │
+│ 2       │ 'Tariff Type' │ 'Fast Charging'                  │
+│ 3       │ 'Validity'    │ '26/02/2026 -- Forever'          │
+│ 4       │ 'Price Type'  │ 'Amount'                         │
+│ 5       │ 'Chargers'    │ '16dyhc'                         │
+└─────────┴───────────────┴──────────────────────────────────┘
+
+Fast Charging Tariff Created Successfully: Auto_Fast_Tariff_1772112349310
+
+Remove the linked charger successfully to delete the tariff
+
+Fast Charging Tariff deleted successfully
+
+Start Time Of Day Tariff Creation : Auto_TimeOfDay_Tariff_1772112395564
+Selected Charger: gowzq4
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬───────────────────────────────────────┐
+│ (index) │ Field         │ Value                                 │
+├─────────┼───────────────┼───────────────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_TimeOfDay_Tariff_1772112395564' │
+│ 1       │ 'Description' │ '----'                                │
+│ 2       │ 'Tariff Type' │ 'Time of Day'                         │
+│ 3       │ 'Validity'    │ '26/02/2026 -- Forever'               │
+│ 4       │ 'Price Type'  │ 'Amount'                              │
+│ 5       │ 'Chargers'    │ 'gowzq4'                              │
+└─────────┴───────────────┴───────────────────────────────────────┘
+
+Time Of Day Tariff Created Successfully: Auto_TimeOfDay_Tariff_1772112395564
+
+Remove the linked charger successfully to delete the tariff
+
+Time Of Day Tariff deleted successfully
+
+Start Charge By Hour Tariff Creation : Auto_ChargeByHour_Tariff_1772112460763
+Selected Charger: 114fhe
+ Review & Confirm Tariff Details
+┌─────────┬───────────────┬──────────────────────────────────────────┐
+│ (index) │ Field         │ Value                                    │
+├─────────┼───────────────┼──────────────────────────────────────────┤
+│ 0       │ 'Name'        │ 'Auto_ChargeByHour_Tariff_1772112460763' │
+│ 1       │ 'Description' │ '----'                                   │
+│ 2       │ 'Tariff Type' │ 'Charge by Hour'                         │
+│ 3       │ 'Validity'    │ '26/02/2026 -- Forever'                  │
+│ 4       │ 'Price Type'  │ 'Amount'                                 │
+│ 5       │ 'Price Type'  │ 'Amount'                                 │
+│ 6       │ 'Chargers'    │ '114fhe'                                 │
+└─────────┴───────────────┴──────────────────────────────────────────┘
+
+No API calls captured
 
 
-===== TEST END: Verify Connector type =====
+===== TEST END: Charger Tariff Creation And Deletion =====
 
