@@ -567,7 +567,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
     //CHARGER TARIFF CREATION & DELETION
     test.only('Charger Tariff Creation And Deletion', async () => {
-      test.setTimeout(200000)
+      test.setTimeout(300000)
         const tariffPage = new ChargerTariffPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/tariffs");
         await page.waitForLoadState("networkidle");
@@ -685,6 +685,35 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     //delete tariff after creation
     await tariffPage.deleteTariff(chargeByHourTariffName);
     console.log("\nCharge By Hour Tariff deleted successfully\n");
+
+     // Create State Of Charge tariff
+     const stateOfChargeTariffName = `Auto_StateOfCharge_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start State Of Charge Tariff Creation : ${stateOfChargeTariffName}`);
+    await tariffPage.createTariff(stateOfChargeTariffName);
+
+    // Select hour range and add price  
+    await tariffPage.selectStartAndEndDateForStateOfCharge();
+
+    // Set price for hour range
+    await tariffPage.setChargeByHour(amount);
+
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforStateOfCharge = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nState Of Charge Tariff Created Successfully: ${stateOfChargeTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(stateOfChargeTariffName);
+    console.log("\nState Of Charge Tariff deleted successfully\n");
 
     });
 

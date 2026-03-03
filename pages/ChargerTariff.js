@@ -42,6 +42,9 @@ this.addprice = page.locator("(//button[contains(text(),'Add Price')])[1]");
 this.price2 =page.locator("(//input[contains(@placeholder,'Enter Amount')])[2]");
 this.Condition2=this.page.locator("(//button[@class='flex items-center justify-between w-full font-medium text-left group-first:rounded-t-xl border-gray-200 dark:border-gray-700 border-l border-r group-first:border-t border-b rounded-b-lg group-first:!rounded-t-lg border-gray-200 dark:border-gray-700 p-0 text-gray-500 dark:text-gray-400 hover:bg-gray-100 hover:dark:bg-gray-800 text-gray-900 bg-[#F7F9FB] hover:!bg-[#F7F9FB]'])[1]");
 this.price3=this.page.locator("(//input[@placeholder='Enter Amount'])[3]");
+
+//State Of Charge locators
+this.StateChargeBtn = page.locator("(//button[@type='button'])[5]");
   
     // this.updateBtn = page.locator("//button[normalize-space()='Update']");
     // this.fierstNext=page.locator("//button[normalize-space()='Next']")
@@ -327,6 +330,30 @@ async selectStartAndEndDateForHourTariff() {
  
 
     }
+
+// State Of Charge tariff creation
+async selectStartAndEndDateForStateOfCharge() {
+  const today = new Date();
+  const startDate = today.getDate().toString();
+
+  // 1. Open the calendar
+  await this.startDateCalendar.click();
+  const dayElement = this.page.locator('#createTariff')
+    .locator('div, span')
+    .filter({ hasText: new RegExp(`^${startDate}$`) })
+    .filter({ visible: true });
+  await dayElement.last().click({ force: true });
+// Continue flow
+  await this.StateChargeBtn.click();
+  await this.page.waitForTimeout(2000)
+  await this.fierstNext.click();
+}
+
+
+
+
+
+
 
     }
 

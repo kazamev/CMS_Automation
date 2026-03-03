@@ -73,8 +73,6 @@ import { ChargerTariffPage } from "../pages/ChargerTariff";
     
     await tariffPage.addPrice(amount);
 
-
-
     // Search & link charger
     await tariffPage.searchAndLinkCharger();
 
@@ -90,13 +88,9 @@ import { ChargerTariffPage } from "../pages/ChargerTariff";
     await tariffPage.deleteTariff(timeOfDayTariffName);
     console.log("\nTime Of Day Tariff deleted successfully\n");
 
-
-
-
-// Create Charge By Hour tariff
+    // Create Charge By Hour tariff
      const chargeByHourTariffName = `Auto_ChargeByHour_Tariff_${Date.now()}`;
     
-
     console.log(`Start Charge By Hour Tariff Creation : ${chargeByHourTariffName}`);
     await tariffPage.createTariff(chargeByHourTariffName);
 
@@ -121,17 +115,6 @@ import { ChargerTariffPage } from "../pages/ChargerTariff";
     //delete tariff after creation
     await tariffPage.deleteTariff(chargeByHourTariffName);
     console.log("\nCharge By Hour Tariff deleted successfully\n");
-
-
-
-
-
-
-
-
-
-
-
 
     // await tariffPage.searchTariffAndGetDetailsAsTable(tariffName);
 
