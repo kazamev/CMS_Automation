@@ -209,7 +209,7 @@ async verifyUsageFromExcel(filePath, usageKpi) {
     const excelUsageMWh = Number(excelUsageMWh_raw.toFixed(2));
     console.log(`Session Excel Usage (kWh): ${excelUsageKwh}`);
     console.log(`Session Excel Usage (MWh Rounded): ${excelUsageMWh}`);
-    console.log(`KPI Usage (MWh): ${usageKpi}`);
+    console.log(`Dashboard KPI Usage (MWh): ${usageKpi}`);
     //Allowed buffer/tolerance (0.2 MWh)
     const tolerance = excelUsageMWh * 0.05;
     let errors = [];
@@ -238,7 +238,7 @@ async verifyUsageFromExcel(filePath, usageKpi) {
 }
 // Navigate to Reports Page
 async openDailyReportsPage() {
-    await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports");
+    await this.page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/reports/daily-reports");
     await this.page.waitForLoadState("networkidle");
     console.log("Navigated to Reports Page");
 }
@@ -390,7 +390,7 @@ async verifySessionReportCounts(txnIds, sessionKpi, excelCount) {
 
     console.log(`Report page Excel Usage (kWh): ${excelUsageKwh}`);
     console.log(`Report page Excel Usage (MWh Rounded): ${excelMWh}`);
-    console.log(`KPI Usage (MWh): ${usageKpi}`);
+    console.log(`Dashboard KPI Usage (MWh): ${usageKpi}`);
 
     // Allowed tolerance (0.2 MWh)
     const tolerance = excelMWh * 0.05;
@@ -492,7 +492,7 @@ async RevenueClick() {
  }
 
 async ChargerPage() {
-    await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/chargers");
+    await this.page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers", { waitUntil: "load" });
     await this.page.waitForLoadState("networkidle");
     await this.page.waitForTimeout(2000);
     console.log("Navigated to Charger Page");
@@ -635,11 +635,11 @@ async verifyDashboardKPIWithChargerExcel(filePath4, sessionKpi, usageKpi) {
     // const tolerance = 0.2;
     if (USAGEKPI != excelUsageMW) {
         errors.push(
-            `🔴 Usage mismatch : KPI: ${USAGEKPI} MW, Charger Excel: ${excelUsageMW} MW`
+            `🔴 Usage mismatch : KPI: ${USAGEKPI}MW, Charger Excel: ${excelUsageMW}MW`
         );
     } else {
     console.log(
-        `🟢 Usage matched : KPI usage: ${USAGEKPI}, ChargerExcel usage: ${excelUsageMW}MW`
+        `🟢 Usage matched : KPI usage: ${USAGEKPI}MW, ChargerExcel usage: ${excelUsageMW}MW`
     );
 }
 
@@ -691,8 +691,6 @@ async verifyOnlinePercentWithExcel(filePath4, OnlineKpi) {
   }
 }
 
- 
- 
  
  //sum of usage in chargers report
  async sumOfUsageInRevenueReport(filePath) {

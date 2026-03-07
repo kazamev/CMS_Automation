@@ -54,62 +54,65 @@
 
  }
 
- // Apply Time Filter in Dashboard
-    async applyTimeFilterInDashboard(period) {
-    await this.DashBoardTimeFilter.click();
 
-    //Locate the option dynamically
-   const option = this.page.locator(`//div[contains(@class,'flex')]//div[normalize-space(text())='${period}']`);
-    // await option.waitFor();
-    await option.click();
-    await this.page.waitForLoadState("networkidle");
-    // Get today's date
-    const today = new Date();
 
-   // Calculate yesterday
-   const endDate = new Date(today);
-   endDate.setDate(today.getDate() - 1);
+// Apply Time Filter in Dashboard
+async applyTimeFilterInDashboard(period) {
 
-// Calculate 7 days before today
-const startDate = new Date(today);
-startDate.setDate(today.getDate() - 8);
+  await this.DashBoardTimeFilter.click();
 
-// Extract day numbers
-const startDay = startDate.getDate();
-const endDay = endDate.getDate();
+  const option = this.page.locator(`//div[contains(@class,'flex')]//div[normalize-space(text())='${period}']`);
+  await option.click();
+  await this.page.waitForLoadState("networkidle");
 
-// Format function (DD/MM/YYYY)
-function formatDate(date) {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // month is 0-based
-  const year = date.getFullYear();
+  const today = new Date();
 
-  return `${day}/${month}/${year}`;
+  // Yesterday
+  const endDate = new Date(today);
+  endDate.setDate(today.getDate() - 1);
+
+  // 7 days before yesterday
+  const startDate = new Date(today);
+  startDate.setDate(today.getDate() - 8);
+
+  const startDay = startDate.getDate();
+  const endDay = endDate.getDate();
+
+  const startMonth = startDate.getMonth();
+  const currentMonth = today.getMonth();
+
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2,'0');
+    const month = String(date.getMonth()+1).padStart(2,'0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  console.log("Start Date:", formatDate(startDate));
+  console.log("End Date:", formatDate(endDate));
+
+  // If start date is in previous month → go to previous month
+  if (startMonth !== currentMonth) {
+    await this.page.locator("//button[@title='Go to Previous Month']//*[name()='svg']").click();
+  }
+
+  // Select Start Date
+  await this.page.locator(`//button[normalize-space()='${startDay}']`).click();
+
+  // If end date is in current month → move forward
+  if (startMonth !== endDate.getMonth()) {
+    await this.page.locator("//button[@title='Go to Next Month']//*[name()='svg']").click();
+  }
+
+  // Select End Date
+  await this.page.locator(`//button[normalize-space()='${endDay}']`).click();
+
+  // Submit
+  await this.page.locator("//button[normalize-space()='Submit']").click();
+
+  await this.page.waitForLoadState("networkidle");
 }
 
-// Calculate yesterday
-const EndDate = new Date(today);
-EndDate.setDate(today.getDate() - 1);
-
-// Calculate 7 days before today
-const StartDate = new Date(today);
-StartDate.setDate(today.getDate() - 8);
-
-// Print formatted dates
-console.log("Start Date:", formatDate(StartDate));
-console.log("End Date:", formatDate(EndDate));
-
-// Click start date
-await this.page.locator(`//button[normalize-space()='${startDay}']`).click();
-
-// Click end date
-await this.page.locator(`//button[normalize-space()='${endDay}']`).click();
-
-// Click Submit
-await this.page.locator("//button[normalize-space()='Submit']").click();
-
-await this.page.waitForLoadState("networkidle");
-}
 
     async getRevenue() {
         return (await this.revenueValue.textContent()).trim();
@@ -151,7 +154,7 @@ await this.page.waitForLoadState("networkidle");
     }
 
     async navigateToChargersPage() {
-        await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/chargers", { waitUntil: "load" });
+        await this.page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/chargers", { waitUntil: "load" });
         await this.page.waitForLoadState("networkidle");
     }
     async applyTimeFilterinChargerPage(period) {
@@ -163,55 +166,52 @@ await this.page.waitForLoadState("networkidle");
     await option.click();
     await this.page.waitForLoadState("networkidle");
 
-// Get today's date
-    const today = new Date();
+const today = new Date();
 
-   // Calculate yesterday
-   const endDate = new Date(today);
-   endDate.setDate(today.getDate() - 1);
+  // Yesterday
+  const endDate = new Date(today);
+  endDate.setDate(today.getDate() - 1);
 
-// Calculate 7 days before today
-const startDate = new Date(today);
-startDate.setDate(today.getDate() - 8);
+  // 7 days before yesterday
+  const startDate = new Date(today);
+  startDate.setDate(today.getDate() - 8);
 
-// Extract day numbers
-const startDay = startDate.getDate();
-const endDay = endDate.getDate();
+  const startDay = startDate.getDate();
+  const endDay = endDate.getDate();
 
-// Format function (DD/MM/YYYY)
-function formatDate(date) {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // month is 0-based
-  const year = date.getFullYear();
+  const startMonth = startDate.getMonth();
+  const currentMonth = today.getMonth();
 
-  return `${day}/${month}/${year}`;
-}
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2,'0');
+    const month = String(date.getMonth()+1).padStart(2,'0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 
+  console.log("Start Date:", formatDate(startDate));
+  console.log("End Date:", formatDate(endDate));
 
-// Calculate yesterday
-const EndDate = new Date(today);
-EndDate.setDate(today.getDate() - 1);
+  // If start date is in previous month → go to previous month
+  if (startMonth !== currentMonth) {
+    await this.page.locator("//button[@title='Go to Previous Month']//*[name()='svg']").click();
+  }
 
-// Calculate 7 days before today
-const StartDate = new Date(today);
-StartDate.setDate(today.getDate() - 8);
+  // Select Start Date
+  await this.page.locator(`//button[normalize-space()='${startDay}']`).click();
 
-// Print formatted dates
-console.log("Start Date:", formatDate(StartDate));
-console.log("End Date:", formatDate(EndDate));
+  // If end date is in current month → move forward
+  if (startMonth !== endDate.getMonth()) {
+    await this.page.locator("//button[@title='Go to Next Month']//*[name()='svg']").click();
+  }
 
-// Click start date
-await this.page.locator(`//button[normalize-space()='${startDay}']`).click();
+  // Select End Date
+  await this.page.locator(`//button[normalize-space()='${endDay}']`).click();
 
-// Click end date
-await this.page.locator(`//button[normalize-space()='${endDay}']`).click();
+  // Submit
+  await this.page.locator("//button[normalize-space()='Submit']").click();
 
-// Click Submit
-await this.page.locator("//button[normalize-space()='Submit']").click();
-
-await this.page.waitForLoadState("networkidle");
-
-
+  await this.page.waitForLoadState("networkidle");
 
 }
 

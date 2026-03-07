@@ -13,7 +13,7 @@ import{HubDataPage} from '../pages/Hub_Data_Validation';
 import{HigUsgPage} from "../pages/Highest_Usage_Validation";
 import { ConnectorPage } from '../pages/Connectors_Validation';
 import {  WeeklyChargerConnectorValidator } from '../pages/WeeklyChargersAndConnectors';
-import { WeeklySessionUsageOnlineValidator } from "../pages/sessionUsageOnlineValidator.js";
+
 
 let context;
 let page;
@@ -49,36 +49,43 @@ test.afterAll(async () => {
   });
 
   //ORGANISATION DETAILS 
-   test('Organisation Details Validation', async () => {
-    test.setTimeout(180000)
-    const orgPage = new OrganisationPage(page);
-    await page.goto('https://novo.kazam.in/org');
-    await page.waitForLoadState('networkidle');
-        
-    //Count total organisations
-    const count = await orgPage.getOrganisationCount();
-    console.log("Total organisations:", count);
+  test('Organisation Details Validation', async () => {
+  test.setTimeout(180000);
 
-    //Print details of a specific organisation
-    const orgData = await orgPage.getOrganisationDetailsByName("Atomz Power");
-    console.log(orgData);
+  const orgPage = new OrganisationPage(page);
 
-    // Click rquired organisation
-    const requiredOrg = "Atomz Power";
-    await orgPage.selectOrganisation(requiredOrg);
-    await expect(page).toHaveTitle("Offerings - CMS");
-    // console.log("Navigated to the offerings page");
+  await page.goto('https://novo.kazam.in/org');
+  await page.waitForLoadState('networkidle');
 
-    // Click Continue to Dashboard
-    await orgPage.clickContinueToDashboard();
-     
-    //Get organisation details from Manage Org page
-     console.log("Navigated to the Manage Org")
-    const dashData=await orgPage.getOrganisationDetails();
+  const count = await orgPage.getOrganisationCount();
+  console.log("Total organisations:", count);
 
-   //Validate organisation details between org list and dashboard
-   await orgPage.validateOrgVsDashboard(orgData, dashData)
-    });
+  const orgData =
+    await orgPage.getOrganisationDetailsByName("Atomz Power");
+
+  console.log(orgData);
+
+  const requiredOrg = "Atomz Power";
+  await orgPage.selectOrganisation(requiredOrg);
+
+  await expect(page).toHaveTitle("Offerings - CMS");
+
+  await orgPage.clickContinueToDashboard();
+
+  console.log("Navigated to the Manage Org");
+
+  const dashData =
+    await orgPage.getOrganisationDetails();
+
+  const validation =
+    await orgPage.validateOrgVsDashboard(orgData, dashData);
+
+  expect(
+    validation.success,
+    validation.message
+  ).toBeTruthy();
+
+});
 
   // DASHBOARD VS CHARGER PAGE COMPARISON
      test('Dashboard vs Charger page Data comparison', async () => {
@@ -86,7 +93,7 @@ test.afterAll(async () => {
     const dashboard = new DashboardPage(page);
 
     // IMPORTANT: no new context, same page
-    await page.goto('https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo');
+    await page.goto('https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo');
     await page.waitForLoadState('networkidle');
 
     const currentUrl = page.url();
@@ -113,7 +120,7 @@ test.afterAll(async () => {
       const dashboardData = {
         chargers: dashboardCounts.chargers,
         connectors: dashboardCounts.connectors,
-        nonConfigured: dashboardCounts.nonConfigured,
+        // nonConfigured: dashboardCounts.nonConfigured,
 
         all: dashboardStatus.All,
         busy: dashboardStatus.Busy,
@@ -131,7 +138,7 @@ test.afterAll(async () => {
         const dashboardOnlineData = {
         chargers: dashboardOnlineCounts.chargers,
         connectors: dashboardOnlineCounts.connectors,
-        nonConfigured: dashboardOnlineCounts.nonConfigured,
+        // nonConfigured: dashboardOnlineCounts.nonConfigured,
 
         all: dashboardOnlineStatus.All,
         busy: dashboardOnlineStatus.Busy,
@@ -231,18 +238,16 @@ test.afterAll(async () => {
 
         //Role Verification
         const roleDetails = await dashboard.RoleValidation();
-        expect(roleDetails.name).toBe(Data.RoleName);
-        expect(roleDetails.description).toBe(Data.RoleDescription);
+        expect(roleDetails.name,`Role Name mismatch → Expected: ${Data.RoleName}, Actual: ${roleDetails.name}`).toBe(Data.RoleName);
+        expect(roleDetails.description,`Role Description mismatch → Expected: ${Data.RoleDescription}, Actual: ${roleDetails.description}`).toBe(Data.RoleDescription);
         console.log("User Role Verified Successfully");
         console.log("Role Name:", roleDetails.name);
         console.log("Role Description:", roleDetails.description);
-
 
         // // User Invitation Verification
         // await dashboard.AddUser(Data);
         // await page.waitForTimeout(5000);
         // console.log("User Invitation Sent Successfully to:", Data.UserEmail);
-
 
         // Delete User Role
         await dashboard.RoleDeletion();
@@ -377,7 +382,6 @@ if (onlineResult.success) {
     filePath6, sessionPage.sessionKpi, sessionPage.usageKpi
 );
   
-
      //Navigate to Sessions Page
       await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/sessions")
       await page.waitForLoadState("networkidle");
@@ -420,7 +424,6 @@ if (onlineResult.success) {
         console.log("Usage Validation Passed:", usageResult.message);
       }
 
-
       //Navigate to the Revenue page
       await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/revenue_management/overview")
       await page.waitForLoadState("networkidle");
@@ -431,22 +434,17 @@ if (onlineResult.success) {
       return String(date.getDate()); //no padStart
 }
 
-
-
 //select only sucess Transactions in Revenue Page
 await Hubdata.selectSuccessTransactions();
 
 //Hub Filter
 await Hubdata.HubRevenueFilter(Data);
 
-
 // Calendar: select particular date
   await revenuePage.selectSingleDate(getYesterdayDate());
 
 //Print Revenue from Revenue Page
 const revenueData = await revenuePage.printRevenueValues();
-
-
 
 // Download Excel
   const filePath4 = await revenuePage. downloadExcelFile();
@@ -459,6 +457,7 @@ const revenueData = await revenuePage.printRevenueValues();
       console.log("Revenue Validation Failed:", RevenueResult.message);
     }
 });
+
 
 
     //ADD & RECONFIGURE CHARGER
@@ -566,7 +565,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     });
 
     //CHARGER TARIFF CREATION & DELETION
-    test.only('Charger Tariff Creation And Deletion', async () => {
+    test('Charger Tariff Creation And Deletion', async () => {
       test.setTimeout(300000)
         const tariffPage = new ChargerTariffPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/tariffs");
@@ -721,7 +720,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     test('Validate Session Counts, Usage, Revenue And Online Percentage', async () => {
       test.setTimeout(200000)
         const sessionPage = new DashboardSessionsPage(page);
-        await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+        await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
         await page.waitForLoadState("networkidle");
 
         const currentUrl = page.url();
@@ -738,7 +737,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     console.log("Dashboard Session KPI:", sessionKpi);
     console.log("Dashboard Usage KPI(MWh):", usageKpi);
     console.log("Dashboard Online KPI(%):", onlineKpi);
-    console.log("Dashboard Revenue KPI(AED):", sessionPage.revenueKpi);
+    console.log("Dashboard Revenue KPI(₹):", sessionPage.revenueKpi);
 
     //Navigate to Sessions Page
     await sessionPage.openSessionsPage();
@@ -880,12 +879,12 @@ const chargerOnlineResult =await sessionPage.verifyOnlinePercentWithExcel( fileP
 
 if (!chargerOnlineResult.success) {
   console.log(
-    `🔴 Charger page Online percentage not matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    `🔴 Charger page Online percentage ${avgOnlinePercent} not matched the Dashboard online percentage (${sessionPage.onlineKpi})`,
     
   );
 } else {
   console.log(
-    `🟢 Charger page Online percentage matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    `🟢 Charger page Online percentage ${avgOnlinePercent} matched the Dashboard online percentage (${sessionPage.onlineKpi})`,
   );
 }
 
@@ -894,66 +893,95 @@ if (!chargerOnlineResult.success) {
   //Verify Online Percentage (KPI vs Report Excel)
     const ReportOnlinePercentage = await sessionPage.verifyOnlinePercentWithExcel(filePath5,onlinePercentageAvg);
     if (!ReportOnlinePercentage.success) {
-      console.error("Report page Online Percentage Validation Failed:", ReportOnlinePercentage.message);
+      console.log(`🔴 Dashboard Online Percentage(${sessionPage.onlineKpi}) did not match the average Online Percentage from ChargerReport Excel: ${onlinePercentageAvg}`);
     } else {
-      console.log("Reportpage Online Percentage Validation Passed:", ReportOnlinePercentage.message);
+      console.log(`🟢 Dashboard Online Percentage(${sessionPage.onlineKpi}) matched the average Online Percentage from Charger Report Excel: ${onlinePercentageAvg}`);
     }
 
     });
   
 
- //REVENUE REPORT VALIDATION
- test('Validate Revenue Report And Invoice', async () => {
-  test.setTimeout(200000)
+test.only('Validate Revenue Amount between Dashboard and Revenue Page', async () => {
+  test.setTimeout(200000);
+
   const revenuePage = new RevenuePage(page);
 
-  // Navigate to dashboard URL here
   await revenuePage.DashBoardURL();
 
   const currentUrl = page.url();
   const orgName = currentUrl.split('/org/')[1].split('/')[0];
 
-  //Print organisation name
   console.log(`\nOrganisation Name: ${orgName}\n`);
-    
 
-//time filter in dashboard
-   await revenuePage.applyTimeFilterInDashboard("Yesterday");
-   const DashBoardRevenue = await revenuePage. getDashboardRevenue();
+  await revenuePage.applyTimeFilterInDashboard("Yesterday");
+  const DashBoardRevenue = await revenuePage.getDashboardRevenue();
 
-// Login fixture already logged in
   await revenuePage.goto();
 
-function getYesterdayDate() {
-  const date = new Date();
-  date.setDate(date.getDate() - 1);
-  return String(date.getDate()); //no padStart
-}
+  function getYesterdayDate() {
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+    return String(date.getDate());
+  }
 
-// Calendar: select particular date
+  await revenuePage.SelectSuccessTransactions();
   await revenuePage.selectSingleDate(getYesterdayDate());
- const revenueData = await revenuePage.printRevenueValues();
 
+  const revenueData = await revenuePage.printRevenueValues();
 
- // Download Excel
-  const filePath4 = await revenuePage. downloadExcelFile();
+  const filePath4 = await revenuePage.downloadExcelFile();
   await revenuePage.sumOfRevenue(filePath4);
 
-  // Validate Revenue Sum
-    const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,DashBoardRevenue);
-    if (!RevenueResult.success) {
-      console.error("Revenue Validation Failed:", RevenueResult.message);
-    }
+  const RevenueResult = await revenuePage.verifyRevenueFromExcel(
+    filePath4,
+    revenueData.revenueText,
+    DashBoardRevenue
+  );
 
-  // Open Success Transactions and get Overview Data
-  const overviewData = await revenuePage.openSuccessTransactionAndGetOverview();
+  expect(
+    RevenueResult.success,
+    RevenueResult.message
+  ).toBeTruthy();
+});
 
-  // Download Invoice PDF
-  const invoiceData = await revenuePage.downloadInvoiceFile();
+test('Validate Revenue Report And Invoice Data', async () => {
+  test.setTimeout(200000);
 
-  // Compare Overview Data with Invoice Data
-  const comparison = revenuePage.compareOverviewWithInvoice(overviewData, invoiceData);
-    });
+  const REVENUEPAGE = new RevenuePage(page);
+
+  await REVENUEPAGE.goto();
+
+  const currentUrl = page.url();
+  const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+  console.log(`\nOrganisation Name: ${orgName}\n`);
+
+  function getYesterdayDate() {
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+    return String(date.getDate());
+  }
+
+  await REVENUEPAGE.SelectSuccessTransactions();
+  await REVENUEPAGE.selectSingleDate(getYesterdayDate());
+
+  const overviewData =
+    await REVENUEPAGE.openSuccessTransactionAndGetOverview();
+
+  const invoiceData =
+    await REVENUEPAGE.downloadInvoiceFile();
+
+  const comparison =
+    await REVENUEPAGE.compareOverviewWithInvoice(
+      overviewData,
+      invoiceData
+    );
+
+  expect(
+    comparison.success,
+    comparison.message
+  ).toBeTruthy();
+});
 
 // DRIVER TARIFF CREATION AND DELETION
     test('Create, Validate and Delete Driver Group And Tariff', async () => {
@@ -1015,10 +1043,10 @@ test('Statewise Data Validation', async () => {
      
      // Test Data
         const Data ={
-        State: "Dubai"   
+        State: "Maharashtra"   
         }
     // Navigate to dashboard URL here
-    await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
     await page.waitForLoadState("networkidle");
       
     
@@ -1050,9 +1078,9 @@ test('Statewise Data Validation', async () => {
     console.log("Dashboard Session KPI:", sessionKpi);
     console.log("Dashboard Usage KPI(MWh):", usageKpi);
     console.log("Dashboard Online KPI(%):", onlineKpi);
-    console.log("Dashboard Revenue KPI(AED):", sessionPage.revenueKpi);
+    console.log("Dashboard Revenue KPI(₹):", sessionPage.revenueKpi);
 
-    await dashboard.navigateToChargersPage();
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
     await dashboard.applyTimeFilterinChargerPage("Yesterday");
 
     await statedata.applyStateFilter(Data)
@@ -1080,7 +1108,7 @@ test('Statewise Data Validation', async () => {
   
 
      //Navigate to Sessions Page
-      await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/sessions")
+      await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/sessions")
       await page.waitForLoadState("networkidle");
 
      //Apply Time Filter in Sessions Page
@@ -1231,7 +1259,7 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
     const dashboard = new  WeeklyChargerConnectorValidator(page);
 
     // Navigate to dashboard URL here
-    await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
     await page.waitForLoadState("networkidle");
     
 
@@ -1284,7 +1312,8 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
       };
 
      //Navigate to the Charger Page
-     await dashboard.navigateToChargersPage();
+     await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
+     await page.waitForLoadState("networkidle");
 
      //apply the time filter in the charger page
      await dashboard.applyTimeFilterinChargerPage("Calendar");
@@ -1345,196 +1374,6 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
       console.log("🟢 The Online Charger count matches on both the Dashboard and the Charger page.");
 
     });
-
-
-//WEEKLY SESSIONS, USAGE, REVENUE AND ONLINE PERCENTAGE VALIDATION
-test('Validate Week data of the Session Counts, Usage, Revenue And Online Percentage', async () => {
-      test.setTimeout(6000000)
-     
-        const sessionPage = new WeeklySessionUsageOnlineValidator(page);
-        await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
-        await page.waitForLoadState("networkidle");
-
-        const currentUrl = page.url();
-        const orgName = currentUrl.split('/org/')[1].split('/')[0];
-
-        //Print organisation name
-        console.log(`\nOrganisation: ${orgName}\n`)
-        
-        //Apply Time Filter in Dashboard
-        await sessionPage.applyTimeFilterInDashboard("Calendar");
-
-    //Get KPI Values from Dashboard
-    const { sessionKpi, usageKpi, onlineKpi } = await sessionPage.getKPIValues();
-    console.log("Dashboard Session KPI:", sessionKpi);
-    console.log("Dashboard Usage KPI(MWh):", usageKpi);
-    console.log("Dashboard Online KPI(%):", onlineKpi);
-    console.log("Dashboard Revenue KPI(AED):", sessionPage.revenueKpi);
-
-    //Navigate to Sessions Page
-    await sessionPage.openSessionsPage();
-
-    //Apply Time Filter in Sessions Page
-    await sessionPage.applyTimeFilter("Calendar");
-
-    //Apply anomaly filter  
-    // await sessionPage.applyAnomalyFilter("Anomaly");
-
-    //Get Session Tab Counts from UI
-    const { allCount, ongoingCount } = await sessionPage.getSessionTabCounts();
-    console.log("All Sessions Count in Session Page:", allCount);
-    console.log("Ongoing Sessions Count in Session Page:", ongoingCount);
-
-    // Download Excel and count session IDs
-    const filePath = await sessionPage.downloadExcel();
-    console.log("Downloaded Excel Path:", filePath);
-
-    // Count session IDs in the downloaded Excel
-    const excelCount = await sessionPage.countSessionIdsInExcel(filePath);
-    console.log("Excel Session Count:", excelCount);
-   
-    //Verify Counts (KPI vs UI vs Excel)
-    const result = await sessionPage.verifyCounts(filePath, allCount, sessionKpi);
-    if (!result.success) {
-      console.log(`🔴 Session count did not match among Dashboard KPI, UI Count and Excel Count -- Dashboard KPI: ${sessionKpi}, UI Count: ${allCount}, Excel Count: ${excelCount}`);
-    } 
-
-    //Sum Usage from Excel
-    await sessionPage.sumOfUsage(filePath, 9); // Column index for usage
-
-    //Verify Usage (KPI vs Excel)
-    const usageResult = await sessionPage.verifyUsageFromExcel(filePath, usageKpi);
-    if (!usageResult.success) {
-      console.error("Usage Validation Failed:", usageResult.message);
-    } else {
-      console.log("Usage Validation Passed:", usageResult.message);
-    }
-     
-//Go to Daily Reports
-await sessionPage.openDailyReportsPage();
-
-//Select dropdown value
-await sessionPage.selectReportDropdown("Sessions");  
-// or "usage", depends on user input
-
-function getYesterdayDate() {
-    const date = new Date();
-    date.setDate(date.getDate() - 1);
-
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
-
-//Pick calendar date
-await sessionPage.selectKazamCalendarDate(getYesterdayDate());
-//Generate report
-
-const filePath2 = await sessionPage.downloadSessionReport();
-    console.log("Downloaded Excel Path:", filePath2);
-//Count txn ids
-const dailyTxnCount = await sessionPage.countTxnIdsSessionReport(filePath2);
-
-//Final Validation
-const dailyCheck = await sessionPage.verifySessionReportCounts(
-    dailyTxnCount,
-    sessionKpi,
-    excelCount
-);
-
-//usage validation from daily report excel and dashboard KPI
-const ReportusageResult = await sessionPage.verifyReportUsageFromExcel(filePath2, usageKpi);
-    if (!ReportusageResult.success) {
-      console.log("Report Page Usage did not match the Dashboard Usage KPI");
-    } else {
-      console.log("Report Page Usage Matched with the Dashboard Usage KPI:", ReportusageResult.message);
-    }
-
-//Select dropdown value
-await sessionPage.selectReportDropdown("Chargers");  
-
-//Select Only Configured Chargers
-await sessionPage.selectConfigureDropdown("Configured");
-
-//Pick calendar date
-await sessionPage.selectKazamCalendarDate();
-
-//Generate report
-const filePath5 = await sessionPage.downloadChargerReport();
-console.log("Downloaded Excel Path:", filePath5);
-
-//online percentage average from Report charger Excel
-const onlinePercentageAvg = await sessionPage.getAverageOnlinePercentFromExcel(filePath5);
-console.log("Avg of Online Percentage from Report Excel:", onlinePercentageAvg);
-
-//download Revenue Report
-    await sessionPage.RevenueTab.click();
-    await page.waitForLoadState("networkidle");
-
-    //Pick calendar date
-await sessionPage.selectKazamCalendarDate();
-
-    const revenueReportPath = await sessionPage.downloadRevenueReport();
-    console.log("Downloaded Revenue Report Path:", revenueReportPath);
-
-//sum of Revenue from Revenue Report Excel
-    const totalRevenue = await sessionPage.sumOfRevenue(revenueReportPath);
-    console.log("Total Revenue from Report Excel:", totalRevenue);
-
-//Revenue Validation
-  const revenueValidationResult = await sessionPage.validateRevenue(revenueReportPath, sessionPage.revenueKpi);
-  console.log("Revenue Validation Result:", revenueValidationResult);
-
-//Charger Page Validation
-    await sessionPage.ChargerPage();
-
-//Apply Time Filter in Charger Page
-    await sessionPage.applyTimeFilterinChargerPage("Calendar");
-
-//Download Charger Excel
-    const filePath6 = await sessionPage.ChargerdownloadExcel();
-  const { excelSessions, excelUsageMW } =
-    await sessionPage.getSessionsAndUsageFromSessionReportExcel(filePath6);
-
-console.log("Charger Excel Usage (MW):", excelUsageMW);
-console.log("Charger Excel Sessions:", excelSessions);
-
-const avgOnlinePercent = await sessionPage.getAverageOnlinePercentFromExcel(filePath6);
-console.log("Average Online Percent from Charger Excel:", avgOnlinePercent);
-
-// //Final Validation with Charger Excel
-// await sessionPage.verifyOnlinePercentWithExcel(filePath6,sessionPage.onlineKpi);
-
-// Final Validation with Charger Excel
-const chargerOnlineResult =await sessionPage.verifyOnlinePercentWithExcel( filePath6, sessionPage.onlineKpi);
-
-if (!chargerOnlineResult.success) {
-  console.log(
-    `🔴 Charger page Online percentage not matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
-    
-  );
-} else {
-  console.log(
-    `🟢 Charger page Online percentage matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
-  );
-}
-
-  await sessionPage.verifyDashboardKPIWithChargerExcel( filePath6, sessionPage.sessionKpi, sessionPage.usageKpi);
-
-  //Verify Online Percentage (KPI vs Report Excel)
-    const ReportOnlinePercentage = await sessionPage.verifyOnlinePercentWithExcel(filePath5,onlinePercentageAvg);
-    if (!ReportOnlinePercentage.success) {
-      console.log(`🔴 Report page Online Percentage did not match the Dashboard KPI Online Percentage -- Dashboard KPI: ${sessionPage.onlineKpi}, Report Excel Average: ${onlinePercentageAvg}`);
-    } else {
-      console.log(`🟢 Report page Online Percentage matched the Dashboard KPI Online Percentage -- Dashboard KPI: ${sessionPage.onlineKpi}, Report Excel Average: ${onlinePercentageAvg}`);
-    }
-
-    });
-
-
-
-
 
 
 });

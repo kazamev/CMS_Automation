@@ -14,7 +14,7 @@ export class DailyReportsPage {
     this.UsageColumnCheckbox =page.locator("//input[@id='device_usage']");
 
 
-    this.url ="https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/reports/daily-reports";
+    this.url ="https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/reports/daily-reports";
     this.reportDropdown = page.locator("//div[@class='grid gap-2']//select[1]");
     this.generateBtn = page.locator("//button[normalize-space()='Generate Report']");
   }
