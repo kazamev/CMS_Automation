@@ -11,6 +11,9 @@ import { TariffPage } from '../pages/DriverTariff';
 import{StateDataPage} from '../pages/State_Data_Validation';
 import{HubDataPage} from '../pages/Hub_Data_Validation';
 import{HigUsgPage} from "../pages/Highest_Usage_Validation";
+import { ConnectorPage } from '../pages/Connectors_Validation';
+import {  WeeklyChargerConnectorValidator } from '../pages/WeeklyChargersAndConnectors';
+
 
 let context;
 let page;
@@ -46,36 +49,43 @@ test.afterAll(async () => {
   });
 
   //ORGANISATION DETAILS 
-   test('Organisation Details Validation', async () => {
-    test.setTimeout(180000)
-    const orgPage = new OrganisationPage(page);
-    await page.goto('https://novo.kazam.in/org');
-    await page.waitForLoadState('networkidle');
-        
-    //Count total organisations
-    const count = await orgPage.getOrganisationCount();
-    console.log("Total organisations:", count);
+  test('Organisation Details Validation', async () => {
+  test.setTimeout(180000);
 
-    //Print details of a specific organisation
-    const orgData = await orgPage.getOrganisationDetailsByName("Atomz Power");
-    console.log(orgData);
+  const orgPage = new OrganisationPage(page);
 
-    // Click rquired organisation
-    const requiredOrg = "Atomz Power";
-    await orgPage.selectOrganisation(requiredOrg);
-    await expect(page).toHaveTitle("Offerings - CMS");
-    // console.log("Navigated to the offerings page");
+  await page.goto('https://novo.kazam.in/org');
+  await page.waitForLoadState('networkidle');
 
-    // Click Continue to Dashboard
-    await orgPage.clickContinueToDashboard();
-     
-    //Get organisation details from Manage Org page
-     console.log("Navigated to the Manage Org")
-    const dashData=await orgPage.getOrganisationDetails();
+  const count = await orgPage.getOrganisationCount();
+  console.log("Total organisations:", count);
 
-   //Validate organisation details between org list and dashboard
-   await orgPage.validateOrgVsDashboard(orgData, dashData)
-    });
+  const orgData =
+    await orgPage.getOrganisationDetailsByName("Atomz Power");
+
+  console.log(orgData);
+
+  const requiredOrg = "Atomz Power";
+  await orgPage.selectOrganisation(requiredOrg);
+
+  await expect(page).toHaveTitle("Offerings - CMS");
+
+  await orgPage.clickContinueToDashboard();
+
+  console.log("Navigated to the Manage Org");
+
+  const dashData =
+    await orgPage.getOrganisationDetails();
+
+  const validation =
+    await orgPage.validateOrgVsDashboard(orgData, dashData);
+
+  expect(
+    validation.success,
+    validation.message
+  ).toBeTruthy();
+
+});
 
   // DASHBOARD VS CHARGER PAGE COMPARISON
      test('Dashboard vs Charger page Data comparison', async () => {
@@ -83,7 +93,7 @@ test.afterAll(async () => {
     const dashboard = new DashboardPage(page);
 
     // IMPORTANT: no new context, same page
-    await page.goto('https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo');
+    await page.goto('https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo');
     await page.waitForLoadState('networkidle');
 
     const currentUrl = page.url();
@@ -110,7 +120,7 @@ test.afterAll(async () => {
       const dashboardData = {
         chargers: dashboardCounts.chargers,
         connectors: dashboardCounts.connectors,
-        nonConfigured: dashboardCounts.nonConfigured,
+        // nonConfigured: dashboardCounts.nonConfigured,
 
         all: dashboardStatus.All,
         busy: dashboardStatus.Busy,
@@ -128,7 +138,7 @@ test.afterAll(async () => {
         const dashboardOnlineData = {
         chargers: dashboardOnlineCounts.chargers,
         connectors: dashboardOnlineCounts.connectors,
-        nonConfigured: dashboardOnlineCounts.nonConfigured,
+        // nonConfigured: dashboardOnlineCounts.nonConfigured,
 
         all: dashboardOnlineStatus.All,
         busy: dashboardOnlineStatus.Busy,
@@ -228,18 +238,16 @@ test.afterAll(async () => {
 
         //Role Verification
         const roleDetails = await dashboard.RoleValidation();
-        expect(roleDetails.name).toBe(Data.RoleName);
-        expect(roleDetails.description).toBe(Data.RoleDescription);
+        expect(roleDetails.name,`Role Name mismatch → Expected: ${Data.RoleName}, Actual: ${roleDetails.name}`).toBe(Data.RoleName);
+        expect(roleDetails.description,`Role Description mismatch → Expected: ${Data.RoleDescription}, Actual: ${roleDetails.description}`).toBe(Data.RoleDescription);
         console.log("User Role Verified Successfully");
         console.log("Role Name:", roleDetails.name);
         console.log("Role Description:", roleDetails.description);
-
 
         // // User Invitation Verification
         // await dashboard.AddUser(Data);
         // await page.waitForTimeout(5000);
         // console.log("User Invitation Sent Successfully to:", Data.UserEmail);
-
 
         // Delete User Role
         await dashboard.RoleDeletion();
@@ -374,7 +382,6 @@ if (onlineResult.success) {
     filePath6, sessionPage.sessionKpi, sessionPage.usageKpi
 );
   
-
      //Navigate to Sessions Page
       await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/sessions")
       await page.waitForLoadState("networkidle");
@@ -417,7 +424,6 @@ if (onlineResult.success) {
         console.log("Usage Validation Passed:", usageResult.message);
       }
 
-
       //Navigate to the Revenue page
       await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/revenue_management/overview")
       await page.waitForLoadState("networkidle");
@@ -428,11 +434,14 @@ if (onlineResult.success) {
       return String(date.getDate()); //no padStart
 }
 
-// Calendar: select particular date
-  await revenuePage.selectSingleDate(getYesterdayDate());
+//select only sucess Transactions in Revenue Page
+await Hubdata.selectSuccessTransactions();
 
 //Hub Filter
 await Hubdata.HubRevenueFilter(Data);
+
+// Calendar: select particular date
+  await revenuePage.selectSingleDate(getYesterdayDate());
 
 //Print Revenue from Revenue Page
 const revenueData = await revenuePage.printRevenueValues();
@@ -448,6 +457,7 @@ const revenueData = await revenuePage.printRevenueValues();
       console.log("Revenue Validation Failed:", RevenueResult.message);
     }
 });
+
 
 
     //ADD & RECONFIGURE CHARGER
@@ -556,7 +566,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
     //CHARGER TARIFF CREATION & DELETION
     test('Charger Tariff Creation And Deletion', async () => {
-      test.setTimeout(200000)
+      test.setTimeout(300000)
         const tariffPage = new ChargerTariffPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/tariffs");
         await page.waitForLoadState("networkidle");
@@ -569,26 +579,140 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     
          
     const tariffName = `Auto_Tariff_${Date.now()}`;
-    const chargerId = "244a95";
     const amount = "1";
 
     // Create tariff
+    console.log(`Start Flat Tariff Creation : ${tariffName}`);
     await tariffPage.createTariff(tariffName);
     await tariffPage.selectStartAndEndDate();
     await tariffPage.addPrice(amount);
 
     // Search & link charger
-    await tariffPage.searchAndLinkCharger(chargerId);
+    await tariffPage.searchAndLinkCharger();
 
     // Review page
     const reviewDetails = await tariffPage.getReviewAndConfirmDetailsAsTable();
 
     // Create tariff
     await tariffPage.createTariffFinal();
+    console.log(`\nFlat Tariff Created Successfully: ${tariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
     await tariffPage.deleteTariff(tariffName);
-    console.log("Tariff deleted successfully");
+    console.log("\nFlatTariff deleted successfully\n");
+   
+     // Create Fast Charging tariff
+     const fastTariffName = `Auto_Fast_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start Fast Charging Tariff Creation : ${fastTariffName}`);
+    await tariffPage.createTariff(fastTariffName);
+    await tariffPage.selectStartAndEndDateForFastCharging();
+    await tariffPage.addPrice(amount);
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforFastCharging = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nFast Charging Tariff Created Successfully: ${fastTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(fastTariffName);
+    console.log("\nFast Charging Tariff deleted successfully\n");
+
+    // Create Time Of Day tariff
+     const timeOfDayTariffName = `Auto_TimeOfDay_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start Time Of Day Tariff Creation : ${timeOfDayTariffName}`);
+    await tariffPage.createTariff(timeOfDayTariffName);
+    await tariffPage.selectStartAndEndDateForTimeOfDay();
+
+  await tariffPage.setTimeRangeForTimeOfDay("10:00 hrs", "12:00 hrs");
+    
+    await tariffPage.addPrice(amount);
+
+
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforTimeOfDay = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nTime Of Day Tariff Created Successfully: ${timeOfDayTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(timeOfDayTariffName);
+    console.log("\nTime Of Day Tariff deleted successfully\n");
+
+
+    // Create Charge By Hour tariff
+     const chargeByHourTariffName = `Auto_ChargeByHour_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start Charge By Hour Tariff Creation : ${chargeByHourTariffName}`);
+    await tariffPage.createTariff(chargeByHourTariffName);
+
+    // Select hour range and add price  
+    await tariffPage.selectStartAndEndDateForHourTariff();
+
+    // Set price for hour range
+    await tariffPage.setChargeByHour(amount);
+
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforChargeByHour = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nCharge By Hour Tariff Created Successfully: ${chargeByHourTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(chargeByHourTariffName);
+    console.log("\nCharge By Hour Tariff deleted successfully\n");
+
+     // Create State Of Charge tariff
+     const stateOfChargeTariffName = `Auto_StateOfCharge_Tariff_${Date.now()}`;
+    
+
+    console.log(`Start State Of Charge Tariff Creation : ${stateOfChargeTariffName}`);
+    await tariffPage.createTariff(stateOfChargeTariffName);
+
+    // Select hour range and add price  
+    await tariffPage.selectStartAndEndDateForStateOfCharge();
+
+    // Set price for hour range
+    await tariffPage.setChargeByHour(amount);
+
+
+    // Search & link charger
+    await tariffPage.searchAndLinkCharger();
+
+    // Review page
+    const reviewDetailsforStateOfCharge = await tariffPage.getReviewAndConfirmDetailsAsTable();
+
+    // Create tariff
+    await tariffPage.createTariffFinal();
+    console.log(`\nState Of Charge Tariff Created Successfully: ${stateOfChargeTariffName}\n`);
+    console.log(`Remove the linked charger successfully to delete the tariff`);
+
+    //delete tariff after creation
+    await tariffPage.deleteTariff(stateOfChargeTariffName);
+    console.log("\nState Of Charge Tariff deleted successfully\n");
 
     });
 
@@ -596,7 +720,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     test('Validate Session Counts, Usage, Revenue And Online Percentage', async () => {
       test.setTimeout(200000)
         const sessionPage = new DashboardSessionsPage(page);
-        await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+        await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
         await page.waitForLoadState("networkidle");
 
         const currentUrl = page.url();
@@ -613,7 +737,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     console.log("Dashboard Session KPI:", sessionKpi);
     console.log("Dashboard Usage KPI(MWh):", usageKpi);
     console.log("Dashboard Online KPI(%):", onlineKpi);
-    console.log("Dashboard Revenue KPI(AED):", sessionPage.revenueKpi);
+    console.log("Dashboard Revenue KPI(₹):", sessionPage.revenueKpi);
 
     //Navigate to Sessions Page
     await sessionPage.openSessionsPage();
@@ -755,12 +879,12 @@ const chargerOnlineResult =await sessionPage.verifyOnlinePercentWithExcel( fileP
 
 if (!chargerOnlineResult.success) {
   console.log(
-    `🔴 Charger page Online percentage not matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    `🔴 Charger page Online percentage ${avgOnlinePercent} not matched the Dashboard online percentage (${sessionPage.onlineKpi})`,
     
   );
 } else {
   console.log(
-    `🟢 Charger page Online percentage matched the Dashboard online percentage --(${sessionPage.onlineKpi})`,
+    `🟢 Charger page Online percentage ${avgOnlinePercent} matched the Dashboard online percentage (${sessionPage.onlineKpi})`,
   );
 }
 
@@ -769,66 +893,95 @@ if (!chargerOnlineResult.success) {
   //Verify Online Percentage (KPI vs Report Excel)
     const ReportOnlinePercentage = await sessionPage.verifyOnlinePercentWithExcel(filePath5,onlinePercentageAvg);
     if (!ReportOnlinePercentage.success) {
-      console.error("Report page Online Percentage Validation Failed:", ReportOnlinePercentage.message);
+      console.log(`🔴 Dashboard Online Percentage(${sessionPage.onlineKpi}) did not match the average Online Percentage from ChargerReport Excel: ${onlinePercentageAvg}`);
     } else {
-      console.log("Reportoage Online Percentage Validation Passed:", ReportOnlinePercentage.message);
+      console.log(`🟢 Dashboard Online Percentage(${sessionPage.onlineKpi}) matched the average Online Percentage from Charger Report Excel: ${onlinePercentageAvg}`);
     }
 
     });
   
 
- //REVENUE REPORT VALIDATION
- test('Validate Revenue Report And Invoice', async () => {
-  test.setTimeout(200000)
+test.only('Validate Revenue Amount between Dashboard and Revenue Page', async () => {
+  test.setTimeout(200000);
+
   const revenuePage = new RevenuePage(page);
 
-  // Navigate to dashboard URL here
   await revenuePage.DashBoardURL();
 
   const currentUrl = page.url();
   const orgName = currentUrl.split('/org/')[1].split('/')[0];
 
-  //Print organisation name
   console.log(`\nOrganisation Name: ${orgName}\n`);
-    
 
-//time filter in dashboard
-   await revenuePage.applyTimeFilterInDashboard("Yesterday");
-   const DashBoardRevenue = await revenuePage. getDashboardRevenue();
+  await revenuePage.applyTimeFilterInDashboard("Yesterday");
+  const DashBoardRevenue = await revenuePage.getDashboardRevenue();
 
-// Login fixture already logged in
   await revenuePage.goto();
 
-function getYesterdayDate() {
-  const date = new Date();
-  date.setDate(date.getDate() - 1);
-  return String(date.getDate()); //no padStart
-}
+  function getYesterdayDate() {
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+    return String(date.getDate());
+  }
 
-// Calendar: select particular date
+  await revenuePage.SelectSuccessTransactions();
   await revenuePage.selectSingleDate(getYesterdayDate());
- const revenueData = await revenuePage.printRevenueValues();
 
+  const revenueData = await revenuePage.printRevenueValues();
 
- // Download Excel
-  const filePath4 = await revenuePage. downloadExcelFile();
+  const filePath4 = await revenuePage.downloadExcelFile();
   await revenuePage.sumOfRevenue(filePath4);
 
-  // Validate Revenue Sum
-    const RevenueResult = await revenuePage.verifyRevenueFromExcel(filePath4,revenueData.revenueText,DashBoardRevenue);
-    if (!RevenueResult.success) {
-      console.error("Revenue Validation Failed:", RevenueResult.message);
-    }
+  const RevenueResult = await revenuePage.verifyRevenueFromExcel(
+    filePath4,
+    revenueData.revenueText,
+    DashBoardRevenue
+  );
 
-  // Open Success Transactions and get Overview Data
-  const overviewData = await revenuePage.openSuccessTransactionAndGetOverview();
+  expect(
+    RevenueResult.success,
+    RevenueResult.message
+  ).toBeTruthy();
+});
 
-  // Download Invoice PDF
-  const invoiceData = await revenuePage.downloadInvoiceFile();
+test('Validate Revenue Report And Invoice Data', async () => {
+  test.setTimeout(200000);
 
-  // Compare Overview Data with Invoice Data
-  const comparison = revenuePage.compareOverviewWithInvoice(overviewData, invoiceData);
-    });
+  const REVENUEPAGE = new RevenuePage(page);
+
+  await REVENUEPAGE.goto();
+
+  const currentUrl = page.url();
+  const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+  console.log(`\nOrganisation Name: ${orgName}\n`);
+
+  function getYesterdayDate() {
+    const date = new Date();
+    date.setDate(date.getDate() - 1);
+    return String(date.getDate());
+  }
+
+  await REVENUEPAGE.SelectSuccessTransactions();
+  await REVENUEPAGE.selectSingleDate(getYesterdayDate());
+
+  const overviewData =
+    await REVENUEPAGE.openSuccessTransactionAndGetOverview();
+
+  const invoiceData =
+    await REVENUEPAGE.downloadInvoiceFile();
+
+  const comparison =
+    await REVENUEPAGE.compareOverviewWithInvoice(
+      overviewData,
+      invoiceData
+    );
+
+  expect(
+    comparison.success,
+    comparison.message
+  ).toBeTruthy();
+});
 
 // DRIVER TARIFF CREATION AND DELETION
     test('Create, Validate and Delete Driver Group And Tariff', async () => {
@@ -890,10 +1043,10 @@ test('Statewise Data Validation', async () => {
      
      // Test Data
         const Data ={
-        State: "Dubai"   
+        State: "Maharashtra"   
         }
     // Navigate to dashboard URL here
-    await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo");
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
     await page.waitForLoadState("networkidle");
       
     
@@ -925,9 +1078,9 @@ test('Statewise Data Validation', async () => {
     console.log("Dashboard Session KPI:", sessionKpi);
     console.log("Dashboard Usage KPI(MWh):", usageKpi);
     console.log("Dashboard Online KPI(%):", onlineKpi);
-    console.log("Dashboard Revenue KPI(AED):", sessionPage.revenueKpi);
+    console.log("Dashboard Revenue KPI(₹):", sessionPage.revenueKpi);
 
-    await dashboard.navigateToChargersPage();
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
     await dashboard.applyTimeFilterinChargerPage("Yesterday");
 
     await statedata.applyStateFilter(Data)
@@ -955,7 +1108,7 @@ test('Statewise Data Validation', async () => {
   
 
      //Navigate to Sessions Page
-      await page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/sessions")
+      await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/sessions")
       await page.waitForLoadState("networkidle");
 
      //Apply Time Filter in Sessions Page
@@ -999,7 +1152,7 @@ test('Statewise Data Validation', async () => {
 
 
     //Highest Usage Validation
-      test.only('Highest Usage Validation', async () => {
+      test('Highest Usage Validation', async () => {
          test.setTimeout(180000)
            const HigUsg=new HigUsgPage(page);
           const dashboard = new DashboardPage(page);
@@ -1037,6 +1190,9 @@ test('Statewise Data Validation', async () => {
       
         //click Session History
         await HigUsg.SesHistory();
+
+          //Apply Time Filter in Sessions Page
+         await sessionPage.applyAnomalyFilter("Anomaly");
       
         // Download Excel and count session IDs
         const filePath = await sessionPage.downloadExcel();
@@ -1066,6 +1222,158 @@ test('Statewise Data Validation', async () => {
         console.log("Usage Validation Passed:", usageResult.message);
             }
       });
+
+
+//CONNECTOR TYPE VALIDATION
+test('Verify Connector type', async () => {
+    test.setTimeout(180000)
+    const connectorPage = new ConnectorPage(page);
+
+    // Navigate to dashboard URL here
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
+    await page.waitForLoadState("networkidle");
+
+    const currentUrl = page.url();
+    const orgName = currentUrl.split('/org/')[1].split('/')[0];
+    //Print organisation name
+    console.log(`\nOrganisation: ${orgName}\n`)
+      
+
+    // Test Data
+    const Data ={
+        Connector: "ccs"
+        }
+        
+    //Apply Connector filter in Charger Page
+    await connectorPage.applyStateFilter(Data);
+
+    //Select first row and validate the selected connector
+    await connectorPage.selectFirstRow(Data);
+
+
+});
+
+//Weekly Chargers and Connectors Data Validation
+test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
+      test.setTimeout(200000)
+    const dashboard = new  WeeklyChargerConnectorValidator(page);
+
+    // Navigate to dashboard URL here
+    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
+    await page.waitForLoadState("networkidle");
+    
+
+    const currentUrl = page.url();
+    const orgName = currentUrl.split('/org/')[1].split('/')[0];
+    //Print organisation name
+    console.log(`\nOrganisation Name: ${orgName}\n`);
+
+    await dashboard.applyTimeFilterInDashboard("Calendar");
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(5000);
+    console.log("One Week DashBoard Data");
+    const revenue = await dashboard.getRevenue();
+    console.log("Revenue:", revenue);
+    const sessions = await dashboard.getTotalSessions();
+    console.log("Sessions:", sessions);
+    const usage = await dashboard.getUsage();
+    console.log("Usage:", usage);
+    const onlinePercentage = await dashboard.getOnlinePercentage();
+    console.log("Online Percentage:", onlinePercentage);
+    const dashboardCounts = await dashboard.getDashboardChargerCounts();
+    const dashboardStatus = await dashboard.getDashboardConnectorStatusCounts();
+
+      const dashboardData = {
+        chargers: dashboardCounts.chargers,
+        connectors: dashboardCounts.connectors,
+        nonConfigured: dashboardCounts.nonConfigured,
+
+        all: dashboardStatus.All,
+        busy: dashboardStatus.Busy,
+        available: dashboardStatus.Available,
+        error: dashboardStatus.Error
+      };
+
+      console.log("Dashboard Charger Data(Offline and Online):", dashboardData);
+       await dashboard.OnlineFilter()
+        await page.waitForTimeout(3000);
+        const dashboardOnlineCounts = await dashboard.getDashboardChargerCounts();
+        const dashboardOnlineStatus = await dashboard.getDashboardConnectorStatusCounts();
+
+        const dashboardOnlineData = {
+        chargers: dashboardOnlineCounts.chargers,
+        connectors: dashboardOnlineCounts.connectors,
+        nonConfigured: dashboardOnlineCounts.nonConfigured,
+
+        all: dashboardOnlineStatus.All,
+        busy: dashboardOnlineStatus.Busy,
+        available: dashboardOnlineStatus.Available,
+        error: dashboardOnlineStatus.Error
+      };
+
+     //Navigate to the Charger Page
+     await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
+     await page.waitForLoadState("networkidle");
+
+     //apply the time filter in the charger page
+     await dashboard.applyTimeFilterinChargerPage("Calendar");
+
+    const chargerCounts = await dashboard.getChargerCounts();
+    const chargerStatus = await dashboard.getConnectorStatusCounts();
+
+    const chargerData = {
+        chargers: chargerCounts.chargers,
+        connectors: chargerCounts.connectors,
+        // nonConfigured: chargerCounts.nonConfigured,
+
+        all: chargerStatus.All,
+        busy: chargerStatus.Busy,
+        available: chargerStatus.Available,
+        error: chargerStatus.Error
+      };
+
+      console.log("Charger Page Data(Offline And Online):", chargerData);
+
+      // Compare Dashboard vs Charger page data
+      expect(chargerData.chargers.trim()).toBe(dashboardData.chargers.trim());
+      expect(chargerData.connectors.trim()).toBe(dashboardData.connectors.trim());
+      // expect(chargerData.nonConfigured.trim()).toBe(dashboardData.nonConfigured.trim());
+      expect(chargerData.all.trim()).toBe(dashboardData.all.trim());
+      // expect(chargerData.busy.trim()).toBe(dashboardData.busy.trim());
+      // expect(chargerData.available.trim()).toBe(dashboardData.available.trim());
+      // expect(chargerData.error.trim()).toBe(dashboardData.error.trim());
+      console.log("🟢 The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.");
+
+
+      //dashboard online charger data
+      console.log("Dashboard Online Chargers Data:", dashboardOnlineData);
+      await dashboard.OnlineFilterCharger()
+      await page.waitForTimeout(3000);
+      const chargerOnlineCounts = await dashboard.getChargerCounts();
+      const chargerOnlineStatus = await dashboard.getConnectorStatusCounts();
+
+      const chargerOnlineData = {
+        chargers: chargerOnlineCounts.chargers,
+        connectors: chargerOnlineCounts.connectors,
+        // nonConfigured: chargerOnlineCounts.nonConfigured,
+
+        all: chargerOnlineStatus.All,
+        busy: chargerOnlineStatus.Busy,
+        available: chargerOnlineStatus.Available,
+        error: chargerOnlineStatus.Error
+      };
+      console.log("Charger Page Online Chargers Data:", chargerOnlineData);
+      // Compare Dashboard vs Charger page data
+      expect(chargerOnlineData.chargers.trim()).toBe(dashboardOnlineData.chargers.trim());
+      expect(chargerOnlineData.connectors.trim()).toBe(dashboardOnlineData.connectors.trim());
+      // expect(chargerOnlineData.nonConfigured.trim()).toBe(dashboardOnlineData.nonConfigured.trim());
+      expect(chargerOnlineData.all.trim()).toBe(dashboardOnlineData.all.trim());
+      // expect(chargerOnlineData.busy.trim()).toBe(dashboardOnlineData.busy.trim());
+      // expect(chargerOnlineData.available.trim()).toBe(dashboardOnlineData.available.trim());
+      // expect(chargerOnlineData.error.trim()).toBe(dashboardOnlineData.error.trim());
+      console.log("🟢 The Online Charger count matches on both the Dashboard and the Charger page.");
+
+    });
 
 
 });

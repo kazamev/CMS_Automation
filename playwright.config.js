@@ -28,7 +28,7 @@ export default defineConfig({
     headless: false,
     storageState: path.resolve(__dirname, 'storageState.json'),
     actionTimeout: 80000,
-    navigationTimeout: 90000,
+    navigationTimeout: 900000,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

@@ -9,7 +9,8 @@ exports.HubDataPage = class HubDataPage {
         this.HubFilterInSes=page.locator("//div[contains(@class,'flex gap-2')]//button[2]");
         this.HubDropdownSes=page.locator("//input[contains(@name,'zone')]");
         this.HubfilterInRevenue=page.locator("//button[@class='w-full flex gap-1 items-center bg-white py-2 px-3 border rounded-md bg-white']//*[name()='svg']");
-        
+        this.SelectSucessTrans=page.locator("//select[@class='border border-gray-300 bg-white rounded-lg text-sm focus:border-kazamGray-300 focus:ring-kazamGray-300']");
+
 
     }
 
@@ -71,6 +72,14 @@ await this.page.waitForTimeout(1000);
 
     }
 
+//Select only sucess Transactions in Revenue Page
+async selectSuccessTransactions(){  
+await this.SelectSucessTrans.click();
+await this.page.waitForTimeout(3000);
+await this.SelectSucessTrans.selectOption({ label: "Success" });
+await this.page.waitForTimeout(4000);
+await this.page.waitForLoadState("networkidle");    
+}
 
 
 }

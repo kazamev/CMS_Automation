@@ -6,14 +6,14 @@ export class RevenuePage {
     this.page = page;
 
     // URL
-    this.revenueUrl ="https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/revenue_management/overview";
+    this.revenueUrl ="https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/revenue_management/overview";
     this.DashboardrevenueValue = page.locator("(//p[@class='text-base font-medium'])[1]");
     this.revenue = page.locator("(//span[@class='text-2xl'])[1]");
     this.totalRevenue = page.locator("(//span[@class='text-2xl'])[3]");
-    this.Dashboardurl="https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo"
+    this.Dashboardurl="https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo"
 
     // Calendar
-    this.calendarBtn = page.locator("button[type='submit']");
+    this.calendarBtn = page.locator("//*[@id='cms-app-main-content']/div/div[2]/div[1]/div[2]/div/button");
 
     // Calendar dropdowns
     this.yearSelect = page.locator("(//select[@class='focus:ring-0 focus:outline-none border-none p-1'])[2]");
@@ -36,6 +36,9 @@ export class RevenuePage {
 
     //Suspense
     this.sespensebtn=page.locator("//button[@class='flex items-center gap-1 w-full h-full px-4 py-2 rounded-r-lg']");
+
+     this.SelectSucessTrans=page.locator("//select[@class='border border-gray-300 bg-white rounded-lg text-sm focus:border-kazamGray-300 focus:ring-kazamGray-300']");
+
   }
 
 async DashBoardURL(){
@@ -70,6 +73,15 @@ async goto() {
     await this.page.waitForLoadState("networkidle");
   }
 
+
+async SelectSuccessTransactions(){  
+await this.SelectSucessTrans.click();
+await this.page.waitForTimeout(3000);
+await this.SelectSucessTrans.selectOption({ label: "Success" });
+await this.page.waitForTimeout(4000);
+await this.page.waitForLoadState("networkidle");    
+}
+
 // Print Revenue Values
 async printRevenueValues() {
   await this.revenue.waitFor({ state: "visible", timeout: 30000 });
@@ -95,37 +107,23 @@ async selectSingleDate(day) {
   await dateBtn.click();
   await this.submitDateBtn.click();
 }
-  // Calendar: select full month
-  // async selectFullMonth(year, monthIndex) {
-  //   await this.calendarBtn.click();
-  //   await this.yearSelect.selectOption(year.toString());
-  //   await this.monthSelect.selectOption(monthIndex.toString());
-  //   const lastDay = new Date(year, monthIndex + 1, 0).getDate();
-  //   await this.page.click("//button[normalize-space()='1']");
-  //   await this.page.click(`//button[normalize-space()='${lastDay}']`);
-  // }
-
 
   // Open Success Transactions and get Overview Data
 async openSuccessTransactionAndGetOverview() {
-  const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  // const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
+  // await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
   console.log("Success row Overview Data");
   const overviewSelectors = {
+
     "Transaction id":
       "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(2)",
 
     "Billed Amount":
       "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3)",
 
-    "Host Details":
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(9) > span:nth-child(1) > span:nth-child(1)",
-
-    "Driver Details":
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(10) > span:nth-child(1)",
-
-    "Time stamp":
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(11) > span:nth-child(1)",
+    "Host Details":"//body//div//div//div//div//div//div//div//div//div//div//div//div//div[1]//div[1]//div[11]//span[1]//span[1]",
+    "Driver Details":"//body/div/div/div/div/div/div/main/div/div/div/div/div/div/div/div[1]/div[1]/div[12]/span[1]",
+    "Time stamp":"//body/div/div/div/div/div/div/main/div/div/div/div/div/div/div/div[1]/div[1]/div[13]/span[1]",
   };
   const extractedTexts = {};
   for (const [key, selector] of Object.entries(overviewSelectors)) {
@@ -157,10 +155,8 @@ async downloadInvoiceFile() {
               "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)",
             "Billed Amount":
               "div[class='flex items-center justify-between'] span[class='font-mono']",
-            "Host Details":
-              "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > p:nth-child(2)",
-            "Driver Details":
-              "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > p:nth-child(2)",
+            "Host Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > p:nth-child(3) > span:nth-child(1)",
+            "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) > p:nth-child(2)",
             "Time stamp": "p[class='text-black'] span[class='text-gray-600']",
           };
           const ExtractedTexts = {};
@@ -188,11 +184,22 @@ async compareOverviewWithInvoice(overviewData, invoiceData) {
 
   console.log("\n Comparison Report");
 
-  for (const key of keysToCompare) {
-    let overviewVal = (overviewData[key] ? overviewData[key][0] : "NOT FOUND").trim();
-    let invoiceVal = (invoiceData[key] ? invoiceData[key][0] : "NOT FOUND").trim();
+  // for (const key of keysToCompare) {
+  //   let overviewVal = (overviewData[key] ? overviewData[key][0] : "NOT FOUND").trim();
+  //   let invoiceVal = (invoiceData[key] ? invoiceData[key][0] : "NOT FOUND").trim();
 
-    let isMatch = false;
+  //   let isMatch = false;
+
+
+  for (const key of keysToCompare) {
+
+  let overviewVal = overviewData[key]?.[0] ?? "NOT FOUND";
+  let invoiceVal = invoiceData[key]?.[0] ?? "NOT FOUND";
+
+  overviewVal = String(overviewVal).trim();
+  invoiceVal = String(invoiceVal).trim();
+
+  let isMatch = false;
 
     if (key === "Driver Details") {
       // Remove dashes and extra spaces: "Limousine - 123" -> "Limousine 123"
@@ -265,7 +272,7 @@ async compareOverviewWithInvoice(overviewData, invoiceData) {
   }
 
 async downloadExcelFile() {
-  console.log("Starting Excel download");
+  
 
   await this.MenuButton.waitFor({ state: "visible", timeout: 20000 });
   await this.MenuButton.click();
@@ -336,21 +343,25 @@ async verifyRevenueFromExcel(filePath4, revenueText, DashboardRevenue) {
     revenueText.replace(/[^\d.]/g, "")
   );
   console.log(`Excel Revenue: ${Revenue}`);
-  console.log(`Revenue In Revenue Page: ${revenuePageValue}`);
-  console.log(`Dashboard Revenue: ${DashboardRevenue}`);
+  // console.log(`Revenue In Revenue Page: ${revenuePageValue}`);
+  // console.log(`Dashboard Revenue: ${DashboardRevenue}`);
   let errors = [];
   if (Math.abs(revenuePageValue - Revenue) >0) {
     errors.push(
       `🔴 Excel Revenue (${Revenue}) does not match Revenue Page value (${revenuePageValue})`
     );
+  } else {
+    console.log(
+      `🟢 Excel Revenue (${Revenue}) matched Revenue Page value (${revenuePageValue})`
+    );
   }
   if (Math.abs(DashboardRevenue - Revenue) > 0) {
     errors.push(
-      `🔴 Dashboard Revenue (${DashboardRevenue}) does NOT match Excel revenue (${Revenue})`
+      `🔴 Excel Revenue  (${Revenue}) does NOT match Dashboard(KPI) revenue (${DashboardRevenue})`
     );
   } else {
     console.log(
-      `🟢 Dashboard Revenue matched Excel Revenue → ${DashboardRevenue}`
+      `🟢 Dashboard Revenue(${DashboardRevenue}) matched Excel Revenue(${Revenue})`
     );
   }
 

@@ -40,38 +40,20 @@ tr {
 <body>
 
 <h1>Playwright Console Logs</h1>
-<h2>Highest Usage Validation</h2><pre> Highest Usage Validation =====
+<h2>Validate Revenue Amount between Dashboard and Revenue Page</h2><pre> Validate Revenue Amount between Dashboard and Revenue Page =====
 
 
-Organisation: hpcl
+Organisation Name: hpcl
 
-Selected Date: 18/02/2026
-Highest Usage Charger Details
-Charger id: dt87y2
-Sessions: 55
-Usage: 500.63
-Avg Utilization: 25h 42m
-Host Details: Nirmal Khan9831497759
-Hub Name: KOLKATA RO
-Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
-Excel Session Count: 55
-Count Validation Passed: 🟢 Sessions count matched → 55
-Session Excel Usage (kWh): 489.57
-Highest Usage (kWh): 500.63
-Usage Validation Passed: 🟡 Highest Usage in the charger page (500.63 kWh) match session Excel Usage (489.57 kWh) --within ±5% tolerance
+DashboardRevenue: 199018.73
+Revenue In Revenue Page: 199018.73
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 201670.29
+🔴 Revenue mismatch found:
+🔴 Excel Revenue (201670.29) does not match Revenue Page value (199018.73)
+🔴 Excel Revenue  (201670.29) does NOT match Dashboard(KPI) revenue (199018.73)
 
-==== API CALLS : Highest Usage Validation ====
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
-│ METHOD │ STATUS │ URL                                                                              │
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/chargers/tariff_details?device_id=dt87y2   │
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/dt87y2                               │
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-make                                   │
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/custom-field/get-custom-field              │
-│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+No API calls captured
 
 
 =</pre></body></html>

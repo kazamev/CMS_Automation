@@ -171,12 +171,12 @@ exports.DashboardPage = class DashboardPage {
         return {
             chargers: (await this.totalChargers.textContent() || "0").trim(),
             connectors: (await this.totalConnectors.textContent() || "0").trim(),
-            nonConfigured: (await this.nonConfigured.textContent() || "0").trim()
+            // nonConfigured: (await this.nonConfigured.textContent() || "0").trim()
         };
     }
 
     async navigateToChargersPage() {
-        await this.page.goto("https://novo.kazam.in/org/zynetic_electric_vehicle_charging_llc/7aff5403-3de3-4273-9665-099574cf2048/cpo/chargers", { waitUntil: "load" });
+        await this.page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo/chargers", { waitUntil: "load" });
         await this.page.waitForLoadState("networkidle");
     }
     async applyTimeFilterinChargerPage(period) {

@@ -10,7 +10,7 @@ exports.StateDataPage = class StateDataPage {
 
     }
 
-
+//HUB SELECTION IN DASHBOARD
     async StateSelection(Data){
     await this.stateDropdown.click();
      await this.page.locator(`//div[contains(text(),"${Data.State}")]`).click();
@@ -19,8 +19,8 @@ exports.StateDataPage = class StateDataPage {
     
         }
 
-
-        async applyStateFilter(Data) {
+//HUB SELECTION IN CHARGERPAGE
+    async applyStateFilter(Data) {
     await this.statefilter.click();
     await this.StateSelect.click();
     await this.page.waitForTimeout(1000);
@@ -31,19 +31,18 @@ exports.StateDataPage = class StateDataPage {
     await this.page.waitForTimeout(1000);
     await this.page.waitForLoadState("networkidle");
 }
+
+//HUB SELECTION IN SESSIONPAGE
 async SesStateFilter(Data){
-      await this.SesFilter.click();
+    await this.SesFilter.click();
     await this.page.locator("//input[@name='geo_state']").click();
     await this.page.waitForTimeout(1000);
-    const upperState = Data.State.toUpperCase();   // ✅ convert string
+    const upperState = Data.State.toUpperCase();
     const option = this.page.locator(`//span[normalize-space()='${upperState}']`).first();
-
     await option.waitFor({ state: 'visible' });
     await option.click();
     await this.ApplyBtn.click();
     await this.page.waitForTimeout(1000);
     await this.page.waitForLoadState("networkidle");
-
-
 }
 }
