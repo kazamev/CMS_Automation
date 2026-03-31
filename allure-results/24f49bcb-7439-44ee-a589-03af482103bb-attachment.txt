@@ -1,0 +1,43 @@
+
+===== TEST START: Statewise Data Validation =====
+
+
+Organisation: nikolev
+
+Selected Date: 30/03/2026
+Selected State is : Maharashtra
+Dashboard Session KPI: 373
+Dashboard Usage KPI(MWh): 6.01
+Dashboard Online KPI(%): 67.38
+Dashboard Revenue KPI(₹): 26616.4
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Charger Excel Usage (MW): 6.01
+Charger Excel Sessions: 373
+Average Online Percent from Charger Excel: 67.38
+🟢 Dashboard Online percentage and Charger Excel Online percentage is Matched: 67.38
+🟢 Sessions matched : KPI Session Count: 373, ChargerExcel Session Count: 373
+🟢 Usage matched : KPI usage: 6.01MW, ChargerExcel usage: 6.01MW
+All Sessions Count in Session Page: 373
+Ongoing Sessions Count in Session Page: 0
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 373
+🟡 Session counts match across the Dashboard, Session page, and Excel file (373 ) ---within ±5% tolerance
+Session Excel Usage (kWh): 5779.589999999999
+Session Excel Usage (MWh Rounded): 5.78
+Dashboard KPI Usage (MWh): 6.01
+Usage Validation Passed: 🟡 Usage KPI (6.01 MWh) match session Excel Usage (5.78 MWh) --within ±5% tolerance
+
+==== API CALLS : Statewise Data Validation ====
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/nikolev/get-make                                │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/nikolev/custom-field/get-custom-field           │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/nikolev/get-zones                               │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: Statewise Data Validation =====
+

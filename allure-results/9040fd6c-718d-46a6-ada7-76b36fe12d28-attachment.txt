@@ -1,0 +1,51 @@
+
+===== TEST START: Validate Session,Usage,Online percentage,Revenue =====
+
+Start Date: 23/03/2026
+End Date: 30/03/2026
+Dashboard Session KPI: 1133
+Dashboard Usage KPI: 14.46
+Dashboard Online KPI: 70.88
+Dashboard Revenue KPI: 332913.84
+Start Date: 23/03/2026
+End Date: 30/03/2026
+All Sessions Count in Session Page: 1133
+Ongoing Sessions Count in Session Page: 3
+Downloaded Excel Path: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 1133
+🟡 All sessions Count in the session page (1133) matches KPI Count (1133) ---within ±5% tolerance
+🟡 KPI Count (1133) matches Excel Count (1133) ---within ±5% tolerance
+🟡 All sessions Count in the session page (1133) matches Excel Count (1133)
+Session Excel Usage (kWh): 14554.849999999997
+Session Excel Usage (MWh Rounded): 14.55
+Dashboard KPI Usage (MWh): 14.46
+🟡 Usage KPI (14.46 MWh) matches session Excel Usage (14.55 MWh) --within ±5% tolerance
+Start Date: 23/03/2026
+End Date: 30/03/2026
+Charger Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+Downloaded Excel Path in Charger Page: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\chargers.xlsx
+🟢 Sessions matched : KPI Session Count: 1133, ChargerExcel Session Count: 1133
+🟢 Usage matched : KPI usage: 14.46MW, ChargerExcel usage: 14.46MW
+🟢 Online Percentage matches KPI: 70.88%, Report Page Excel Avg 70.88%
+Selecting Range: 23/3/2026 → 30/3/2026
+Revenue In Revenue Page: 332913.84
+Excel Downloaded: C:\Users\dodda\OneDrive\Documents\CMS_Automation\pages\downloads\Revenue.xlsx
+Excel Revenue: 332913.84
+🟢 Excel Revenue matches Revenue Page Value
+🟢 Excel Revenue matches Dashboard(KPI) Revenue
+🟢 Dashboard(KPI) Revenue matches Revenue Page Value
+
+==== API CALLS : Validate Session,Usage,Online percentage,Revenue ====
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/ev_pump/get-make                                │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/ev_pump/custom-field/get-custom-field           │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/ev_pump/get-zones                               │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: Validate Session,Usage,Online percentage,Revenue =====
+

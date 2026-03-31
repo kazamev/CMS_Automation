@@ -1,0 +1,57 @@
+
+===== TEST START: Validate_Weekly_Chargers_And_Connectors_Data =====
+
+
+Organisation Name: nikolev
+
+Start Date: 23/03/2026
+End Date: 30/03/2026
+One Week DashBoard Data
+Revenue: ₹ 226711.05
+Sessions: 3254
+Usage: 56.15 MWh
+Online Percentage: 67.76%
+Dashboard Charger Data(Offline and Online): {
+  chargers: '218',
+  connectors: '280',
+  nonConfigured: '30',
+  all: 'All(280)',
+  busy: 'Busy (27)',
+  available: 'Available (224)',
+  error: 'Error (29)'
+}
+Start Date: 23/03/2026
+End Date: 30/03/2026
+Charger Page Data(Offline And Online): {
+  chargers: '218',
+  connectors: '280',
+  all: 'All(280)',
+  busy: ' Busy (28)  ',
+  available: ' Available (223)  ',
+  error: ' Error (29)  '
+}
+🟢 The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.
+Dashboard Online Chargers Data: {
+  chargers: '144',
+  connectors: '193',
+  nonConfigured: '30',
+  all: 'All(193)',
+  busy: 'Busy (22)',
+  available: 'Available (160)',
+  error: 'Error (11)'
+}
+Charger Page Online Chargers Data: {
+  chargers: '144',
+  connectors: '193',
+  all: 'All(193)',
+  busy: ' Busy (24)  ',
+  available: ' Available (158)  ',
+  error: ' Error (11)  '
+}
+🟢 The Online Charger count matches on both the Dashboard and the Charger page.
+
+No API calls captured
+
+
+===== TEST END: Validate_Weekly_Chargers_And_Connectors_Data =====
+

@@ -1,0 +1,51 @@
+
+===== TEST START: Dashboard vs Charger page Data comparison =====
+
+
+Organisation Name: ev_pump
+
+Yesterday DashBoard Data
+Revenue: ₹ 38921.74
+Sessions: 187
+Usage: 1.77 MWh
+Online Percentage: 69.85%
+Dashboard Charger Data(Offline and Online): {
+  chargers: '28',
+  connectors: '53',
+  all: 'All(53)',
+  busy: 'Busy (7)',
+  available: 'Available (38)',
+  error: 'Error (8)'
+}
+Charger Page Data(Offline And Online): {
+  chargers: '28',
+  connectors: '53',
+  all: 'All(53)',
+  busy: ' Busy (7)  ',
+  available: ' Available (38)  ',
+  error: ' Error (8)  '
+}
+🟢 The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.
+Dashboard Online Chargers Data: {
+  chargers: '20',
+  connectors: '40',
+  all: 'All(40)',
+  busy: 'Busy (6)',
+  available: 'Available (32)',
+  error: 'Error (2)'
+}
+Charger Page Online Chargers Data: {
+  chargers: '20',
+  connectors: '40',
+  all: 'All(40)',
+  busy: ' Busy (5)  ',
+  available: ' Available (33)  ',
+  error: ' Error (2)  '
+}
+🟢 The Online Charger count matches on both the Dashboard and the Charger page.
+
+No API calls captured
+
+
+===== TEST END: Dashboard vs Charger page Data comparison =====
+
