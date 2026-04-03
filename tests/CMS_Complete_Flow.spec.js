@@ -14,6 +14,9 @@ import{HigUsgPage} from "../pages/Highest_Usage_Validation";
 import { ConnectorPage } from '../pages/Connectors_Validation';
 import {  WeeklyChargerConnectorValidator } from '../pages/WeeklyChargersAndConnectors';
 import { DataValidation } from "../pages/Weekly_Data_Validation";
+import { LastConfigurationVal } from "../pages/LastConfigurationVal";
+import { ErrorCodeVal } from "../pages/Error_Code_Validation";
+import { TaxAggregationVal } from "../pages/Tax_Aggregation"; 
 
 
 let context;
@@ -1472,4 +1475,123 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
 
     });
     
+
+  // Last Configuration Date Validation
+  test("Validate Last Configuration Date", async () => {
+    
+    test.setTimeout(120000);
+    const lastConfigVal = new LastConfigurationVal(page);
+     await page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo/chargers");
+    await page.waitForLoadState("networkidle"); 
+
+    // click on any charger
+    await lastConfigVal.ClickOnFirstCharger();
+
+    //Last Configuration value
+    const lastConfigDate = await lastConfigVal.getLastConfigurationValue();
+      console.log("Last Configuration Date in Charger Details Page:", lastConfigDate);
+
+    //Reconfiguration Value
+    const reConfigDate = await lastConfigVal.getLastConfigurationValueInCharger();
+      console.log("Last Reconfiguration Date in Configuration Tracking:", reConfigDate);
+
+    //Validation
+    await lastConfigVal.ValidateLastConfigurationValue(lastConfigDate, reConfigDate);
+  });
+
+
+
+// Error Code Validation
+test('Validate Error Code', async () => {
+  test.setTimeout(120000);
+  const errorCodeVal = new ErrorCodeVal(page);
+   await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
+  await page.waitForLoadState("networkidle");
+
+  //edit table and get error code
+  await errorCodeVal.ClickOnEditTableField();
+
+  //validate error code
+  await errorCodeVal.ValidateErrorCodeValue();
+    
+});
+
+//Aggregator Tariff Creation and Deletion
+test('Create, Validate and Delete Aggregation Fee', async () => {
+  test.setTimeout(200000)
+    const Aggregation = new TaxAggregationVal(page);
+    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/overview");
+    await page.waitForLoadState("networkidle");
+
+    const Data = {
+        TariffName: "Test Aggregation",
+        Percentage:10
+    }
+
+    //Create Aggregation Fee
+    await Aggregation.CreateAggregationFee(Data.TariffName, Data.Percentage);
+
+    //Validate Aggregation Fee
+    const result = await Aggregation.ValidateAggregationFee(Data.TariffName, Data.Percentage);
+    console.log(result);
+  if (expect(result.name).toBe(Data.TariffName)) {
+    console.log("Aggregation Fee name validation is passed");
+  }
+  if (expect(result.percentage).toBe(Data.Percentage.toString())) {
+    console.log("Aggregation Fee percentage validation is passed");
+  }
+  if (expect(result.date).toContain("2026")) {
+    console.log("Aggregation Fee date validation is passed");
+  }
+  console.log("\nAggregation Fee validated successfully\n");
+
+  //Delete Aggregation Fee
+  await Aggregation.DeleteAggregationFee();
+    
+});
+
+
+//Tax Creation, Validation and Deletion
+test.only('Create, Validate and Delete Tax', async () => {
+  test.setTimeout(200000)
+    const TaxVal = new TaxAggregationVal(page);
+    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/overview");
+    await page.waitForLoadState("networkidle");
+
+    const Data = {
+        TaxName: "Test Tax",
+        TaxPolicy: "GST",
+        TaxNumber: "1234ABC567890",
+        BusinessName: "Kazam Test EV",
+        Address: "Bengalore",
+        SubCategory: "cgst",
+        Amount: 18,
+        AmountType: "Percentage"
+    } 
+
+    //Tax Creation
+    await TaxVal.CreateTax(Data.TaxName,Data.TaxNumber, Data.TaxPolicy, Data.BusinessName, Data.Address, Data.SubCategory, Data.Amount, Data.AmountType);
+    //Validate Tax
+    const result = await TaxVal.ValidateTax(Data.TaxName,Data.TaxNumber, Data.TaxPolicy, Data.BusinessName, Data.Address, Data.SubCategory, Data.Amount, Data.AmountType);
+    console.log(result);
+  if (expect(result.taxName).toBe(Data.TaxName)) {
+    // console.log("Tax name validation is passed");
+  }
+
+  if (expect(result.businessName).toBe(Data.BusinessName)) {
+    // console.log("Tax business name validation is passed");
+  }
+
+  if (expect(result.taxid).toBe(Data.TaxNumber)) {
+    // console.log("Tax number validation is passed");
+  }
+  if (expect(result.address).toBe(Data.Address)) {
+    // console.log("Tax address validation is passed");
+  }
+  console.log("\nTax validated successfully\n");
+
+  //Delete Tax
+  await TaxVal.DeleteTax();
+});
+
 });
