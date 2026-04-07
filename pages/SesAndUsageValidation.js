@@ -453,7 +453,7 @@ async RevenueClick() {
     if (!fs.existsSync(downloadDir)) fs.mkdirSync(downloadDir);
 
     // Save file with required name
-    const filePath8 = path.join(downloadDir, "CRevenue_Report_Analytics.xlsx");
+    const filePath8 = path.join(downloadDir, "Revenue_Report_Analytics.xlsx");
     await download.saveAs(filePath8);
     return filePath8;
 

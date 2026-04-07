@@ -16,29 +16,33 @@ test.use({ storageState: { cookies: [], origins: [] } });
     await login.validLogin("shilpa@kazam.in", "Shilpa@1234567890");
     await page.waitForLoadState('networkidle');
 
-    //Count total organisations
-    const count = await orgPage.getOrganisationCount();
-    console.log("Total organisations:", count);
-
-    //Print details of a specific organisation
-    const orgData = await orgPage.getOrganisationDetailsByName("Atomz Power");
-    console.log(orgData);
-
-    // Click rquired organisation
-    const requiredOrg = "Atomz Power";
-    await orgPage.selectOrganisation(requiredOrg);
-    await expect(page).toHaveTitle("Offerings - CMS");
-    console.log("Navigated to the offerings page");
+      const count = await orgPage.getOrganisationCount();
+      console.log("Total organisations:", count);
     
-
-    // Click Continue to Dashboard
-    await orgPage.clickContinueToDashboard();
+      const orgData =
+        await orgPage.getOrganisationDetailsByName("Atomz Power");
     
-    //Get organisation details from Manage Org page
-   const dashData=await orgPage.getOrganisationDetails();
-
-
-   //Validate organisation details between org list and dashboard
-   await orgPage.validateOrgVsDashboard(orgData, dashData)
+      console.log(orgData);
+    
+      const requiredOrg = "Atomz Power";
+      await orgPage.selectOrganisation(requiredOrg);
+    
+      await expect(page).toHaveTitle("Offerings - CMS");
+    
+      await orgPage.clickContinueToDashboard();
+    
+      console.log("Navigated to the Manage Org");
+    
+      const dashData =
+        await orgPage.getOrganisationDetails();
+    
+      const validation =
+        await orgPage.validateOrgVsDashboard(orgData, dashData);
+    
+      expect(
+        validation.success,
+        validation.message
+      ).toBeTruthy();
+    
 
 });

@@ -10,7 +10,7 @@ exports.StateDataPage = class StateDataPage {
 
     }
 
-//HUB SELECTION IN DASHBOARD
+//STATE SELECTION IN DASHBOARD
     async StateSelection(Data){
     await this.stateDropdown.click();
      await this.page.locator(`//div[contains(text(),"${Data.State}")]`).click();
@@ -19,7 +19,7 @@ exports.StateDataPage = class StateDataPage {
     
         }
 
-//HUB SELECTION IN CHARGERPAGE
+// STATE SELECTION IN CHARGERPAGE
     async applyStateFilter(Data) {
     await this.statefilter.click();
     await this.StateSelect.click();
@@ -32,7 +32,7 @@ exports.StateDataPage = class StateDataPage {
     await this.page.waitForLoadState("networkidle");
 }
 
-//HUB SELECTION IN SESSIONPAGE
+//STATE SELECTION IN SESSIONPAGE
 async SesStateFilter(Data){
     await this.SesFilter.click();
     await this.page.locator("//input[@name='geo_state']").click();

@@ -26,7 +26,7 @@ export class TariffPage {
 
 
         //delete driver tariff 
-        this.TariffDltBtn=page.locator("//*[name()='path' and contains(@d,'M19 6v14a2')]");
+        this.TariffDltBtn=page.locator("(//*[name()='svg'][@class='feather feather-trash '])[1]");
         this.DltConfirmBtn=page.locator("//button[normalize-space()='Confirm']");
         this.AssignedChargerBtn=page.locator("(//*[name()='svg'][@class='feather feather-edit-2 '])[1]");
         this.UpdateAssetBtn=page.locator("//button[normalize-space()='Update Assets']");

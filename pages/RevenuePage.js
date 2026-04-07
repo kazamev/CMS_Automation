@@ -6,11 +6,11 @@ export class RevenuePage {
     this.page = page;
 
     // URL
-    this.revenueUrl ="https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/revenue_management/overview";
+    this.revenueUrl ="https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo/revenue_management/overview";
     this.DashboardrevenueValue = page.locator("(//p[@class='text-base font-medium'])[1]");
     this.revenue = page.locator("(//span[@class='text-2xl'])[1]");
     this.totalRevenue = page.locator("(//span[@class='text-2xl'])[3]");
-    this.Dashboardurl="https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo"
+    this.Dashboardurl="https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo"
 
     // Calendar
     this.calendarBtn = page.locator("//*[@id='cms-app-main-content']/div/div[2]/div[1]/div[2]/div/button");
@@ -110,8 +110,8 @@ async selectSingleDate(day) {
 
   // Open Success Transactions and get Overview Data
 async openSuccessTransactionAndGetOverview() {
-  // const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-  // await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
+  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
   console.log("Success row Overview Data");
   const overviewSelectors = {
 
@@ -141,13 +141,13 @@ async openSuccessTransactionAndGetOverview() {
 }
 
 async downloadInvoiceFile() {
-  const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  // const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
+  // await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
   
     await this.Invoicefirstclick.click();
     await this.page.waitForTimeout(2000);
     await this.InvoiceDownload.click();
-    await this.page.waitForTimeout(8000);
+    await this.page.waitForTimeout(10000);
     console.log("Invoice Data");
   // Data from the invoice page
           const invoiceSelectors = {
@@ -318,27 +318,47 @@ async downloadExcelFile() {
   }
 }
 
+async SumBilledAmountForOrg(filePath4) {
+  const workbook = excel.readFile(filePath4);
+  const sheetName = workbook.SheetNames[0];
+  const sheet = workbook.Sheets[sheetName];
+  const data = excel.utils.sheet_to_json(sheet);
+  let total = 0;
+  data.forEach(row => {
+    const owner = String(row.OWNER || row.Owner || row.owner || "").trim();
+
+    if (owner === "Org") {
+      const billed = Number(
+        String(row["BILLED AMOUNT"] || row["Billed Amount"] || row["BILLED"] || 0)
+          .replace(/[^\d.]/g, "")
+      );
+      total += billed;
+    }
+  });
+  const formattedTotal = Number(total.toFixed(2));;
+  return formattedTotal;
+}
 
 
 //Sum of Revenue(Excel)
-async sumOfRevenue(filePath4) {
-    const wb = excel.readFile(filePath4);
-    const sheet = wb.Sheets[wb.SheetNames[0]];
-    const data = excel.utils.sheet_to_json(sheet, { header: 1 });
-    const rows = data.slice(1);
-    // Excel Usage column index (example: column 9)
-    const RevenueValues = rows
-        .map(row => Number(row[2]))   // change index if needed
-        .filter(v => !isNaN(v));
-   const totalRevenue = RevenueValues.reduce((a, b) => a + b, 0);
-   const formattedTotal = Number(totalRevenue.toFixed(2));
-  //  console.log("Excel Revenue Sum:", formattedTotal);
-   return formattedTotal;
-}
+// async sumOfRevenue(filePath4) {
+//     const wb = excel.readFile(filePath4);
+//     const sheet = wb.Sheets[wb.SheetNames[0]];
+//     const data = excel.utils.sheet_to_json(sheet, { header: 1 });
+//     const rows = data.slice(1);
+//     // Excel Usage column index (example: column 9)
+//     const RevenueValues = rows
+//         .map(row => Number(row[2]))   // change index if needed
+//         .filter(v => !isNaN(v));
+//    const totalRevenue = RevenueValues.reduce((a, b) => a + b, 0);
+//    const formattedTotal = Number(totalRevenue.toFixed(2));
+//   //  console.log("Excel Revenue Sum:", formattedTotal);
+//    return formattedTotal;
+// }
 
 //Validation
 async verifyRevenueFromExcel(filePath4, revenueText, DashboardRevenue) {
-  const Revenue = await this.sumOfRevenue(filePath4);
+  const Revenue = await this.SumBilledAmountForOrg(filePath4);
   const revenuePageValue = Number(
     revenueText.replace(/[^\d.]/g, "")
   );
@@ -347,7 +367,7 @@ async verifyRevenueFromExcel(filePath4, revenueText, DashboardRevenue) {
   // console.log(`Dashboard Revenue: ${DashboardRevenue}`);
   let errors = [];
   if (Math.abs(revenuePageValue - Revenue) >0) {
-    errors.push(
+   console.log(
       `🔴 Excel Revenue (${Revenue}) does not match Revenue Page value (${revenuePageValue})`
     );
   } else {
@@ -365,15 +385,28 @@ async verifyRevenueFromExcel(filePath4, revenueText, DashboardRevenue) {
     );
   }
 
+   if(Math.abs(DashboardRevenue - revenuePageValue) > 0){
+    errors.push(
+      `🔴 Dashboard Revenue (${DashboardRevenue}) does NOT match Revenue Page value (${revenuePageValue})`
+    );
+  } else {
+    console.log(
+      `🟢 Dashboard Revenue (${DashboardRevenue}) matched Revenue Page value (${revenuePageValue})`
+    );
+  }
+
+
   if (errors.length === 0) {
     return { success: true, message: "🟢 Revenue values matched successfully" };
   }
-  console.log("🔴 Revenue mismatch found:");
+ 
   errors.forEach(e => console.log(e));
   return { success: false, message: errors.join(" | ") };
 }
 
 }
+
+
 
 
 
