@@ -1,219 +1,218 @@
 Charger ID,Charger Name,Sessions,Usage (kWh),AVG Utilization,Online (%),Connectors,Connector Status 1,Connector Status 2,Connector Status 3,Hub Name,Geo State,Make,Protocol,FW Version,Config Status,Tariff
-cp2nht,NIKOL EV3.3 KW- Lootel Opp River View Bilaspur C.G,0,0.00,0h 00m,0,three_pin,Faulted,-,-,-,Chhattisgarh,Kazam,ocpp,OCPP_34.1.8_SIM800,config,20 Rs/Unit
-aaoiar,Nikol EV 7.4kW - Ganga Utopia (2),0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,18 Rs Per Unit
-bvudxq,Nikol EV 60kW - Servotech Goa,0,0.00,0h 00m,99.56,"ccs,ccs",Available,Available,-,-,Goa,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E10061005,config,Rs.19.5 (incl.Gst)
-ehexh9,1-NIKOL EV 7.4 kW-PCMC,2,7.32,2h 22m,97.88,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.10_IOEXP_0.00,config,-
-ikwjtv,Nikol EV 22kW - Marathahalli ,0,0.00,0h 00m,0,type_2,Unavailable,-,-,-,Karnataka,-,ocpp,-,config,-
-2xxzo4,"Nikol EV 80kW - Hotel Naivedya, Waluj",0,0.00,0h 00m,97.82,"ccs,ccs",Available,Available,-,-,-,mindra,ocpp,V112_72902_09409,config,Rs.21.5 + GST
-ueqf5v,P1 - 6 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-x5okx5,Nikol EV 60kW- Salasar Mahindra Panvel,0,0.00,0h 00m,36.43,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.28.00_03.06_04.00.06_04.00.06,config,18 Rs Per Unit
-daggkj,P4-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,Phoenix
-eqf8zz, NIKOL EV 60kW - SafeFast ElectrifyIndia,14,39.51,4h 07m,84.76,"ccs,ccs",Available,Available,-,-,Maharashtra,NIKOL EV,ocpp,4.0.6-3.0.8,config,22+Gst
-h67923,2-River Dale-NIKOL EV 3.3kW,2,3.18,6h 10m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
-jttvag,P4-5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-2hgv1e,P3-4 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-5pwvdq,Nikol EV Novel Queens Office 3.3kW - 1,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Novel 3.3kW
-b9dk3e,Nikol EV 3.3kW - Hinjewadi Hub 02,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,Hinjewadi Hub,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,18 Rs Per Unit
-ixakza,P4-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-ipvcte,P3-6 Phoenix Mall of the Millennium 7.4kW AC ,1,4.84,0h 47m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-x1b721,Nikol EV 7.4kW - Agreen Hotels & Resort,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25 All In
-uw743q,NIKOL EV 60kW- bhosari,0,0.00,0h 00m,97.50,"ccs,ccs",Available,Unavailable,-,-,-,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
-1s3jfm,Mauli enterprises 14kW Hybrid AC - NIKOL EV,0,0.00,0h 00m,0,"type_2,three_pin,industrial",Available,Faulted,Faulted,-,Maharashtra,Nikol EV,ocpp,0.1.1.11,config,15.54 All Inclusive
-i85nne,P3-5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Charging,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-2dygvc,1-River Dale-Bharat AC-NIKOL EV 10kW,0,0.00,0h 00m,100.00,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Available,Charging,Available,-,Maharashtra,Mindra,ocpp,0.0.4.3,config,Riverdale
-u4j79d,Nikol EV  240KW- AEM,57,3833.63,36h 21m,99.33,"ccs,ccs",Available,Available,-,-,Maharashtra,NIKOL EV,ocpp,1.0.7-2.0.7,config,AEM
-47ujyn,"NIKOL EV 3.3 kW- Hotel Naivedya, Waluj",0,0.00,0h 00m,97.79,industrial_three_pin,Available,-,-,-,-,-,kazam,34.3.21_L510,config,Rs.21.5 + GST
-bvn57w,Nikol 3.3kW CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,24+GST
-1o7thm,Nikol EV 7.4kW - Titwala,0,0.00,0h 00m,99.44,type_2,Faulted,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,20 Rs/Unit
-nmywgr,14-NIKOL EV 3.3 kW-PCMC ,1,8.52,3h 12m,90.75,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-zzij3y,P5-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-yd1yys,P5-5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-wenbm9,"Nikol EV 30kW - Vitthal Kamat, Saswad",0,0.00,0h 00m,99.23,"ccs,ccs",Available,-,-,-,Maharashtra,Chabbi,ocpp,P0-6.3,config,25 All In
-77k1vc,Nikol EV 7.4kW - Thane,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,Nikol EV,ocpp,0.0.4.11_IOEXP_0.00,config,-
-b6pmwn,7-NIKOL EV 3.3 kW-PCMC ,1,4.79,1h 46m,95.50,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Rs.30 incl.GST
-5z2u42,8-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,97.91,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Rs.30 incl.GST
-ur15yd,Harshwardhan Patil_Nikol 7.4kW,0,0.00,0h 00m,93.95,type_2,Faulted,-,-,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.10_IOEXP_0.00,config,Free user
-5knqw2,Nikol EV 3.3kW - Phoenix Mall of the Millennium,0,0.00,0h 00m,0,industrial_three_pin,Charging,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Phoenix
-w21ors,P-1 3 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-pp967r,Nikol EV 60kW -  Salasar Hyundai Ahilyanagar,1,11.71,0h 58m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,Quickwatt - 22+gst
-nriqe3,P6-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-oidbkk,P4-2 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.6,config,Phoenix
-chzfwz,11-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,96.20,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-qzzt2e,Nikol EV 3.3 kW - Ganga Utopia (2),0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_L510,config,Rs.16 incl. GST
-qhy6b3,Nikol EV 3.3kW - Swara E -Vehicles  Sambhajinagar,1,0.28,1h 00m,97.83,industrial,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,25 All In
-c6bn2c,16-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,0,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-w2rpir,Nikol EV 15kW DC GBT Shingnapur,18,73.38,8h 37m,73.10,gbt,Charging,-,-,-,Maharashtra,mindra,ocpp,V111_72902_09366,config,Free user
-cy5zf9,19-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,87.23,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-x2wz9f,New Daulat Food Mall  60kW DC  - NIKOL EV,15,102.45,4h 10m,87.73,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09609,config,25 All In
-v49nwc,Nikol EV  Novel Tech Park HSR 3.3kW -  1,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
-eas3dv,Nikol EV 15kW - Pickkup (Zomato Hub),9,54.65,8h 16m,75.87,gbt,preparing,-,-,-,Haryana,mindra,ocpp,V111_72902_09558,config,Free user
+6nbtnm,Nikol EV 3.3kW - Vansh EV charging station akluj,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Telangana,Kazam,ocpp,OCPP_34.1.8_L510,config,Rs.15 + GST
 xv8fk1,P4-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-khq3ef,P6-2 Phoenix Mall of the Millennium 7.4kW AC ,1,4.88,1h 36m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-t9few6,P5-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-n4o2ec,Verna Furniture Goa - Laxmi Steel Industries Nikol EV 22kW ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Goa,Exicom,ocpp,B:25.14_M:35.24.2.42_EM1:26.4.0_EM2:27.4.0,config,Verna Goa
-883dpw,Nikol EV 30kW DC GBT -  Hinjewadi Hub  ,9,56.94,6h 23m,96.74,"gbt,gbt",Available,Available,-,Hinjewadi Hub,Maharashtra,mindra,ocpp,V112_72902_09389,config,18 Rs Per Unit
-bttndj,Nikol EV 11kW- Marigold Society_O-Building,0,0.00,0h 00m,20.98,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.32.4.25_EM1:26.5.0_EM2:27.5.0,config,Rs.15 + GST
-brmuyf,NIKOL EV 3.3kW - Stature ,4,0.00,0h 03m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,18 Rs Per Unit
-ubur8k,NIKOL EV 7.4 KW- CretaCity Mall,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25+GST
-ygjdqz,Saguna EVCS - Nikol EV 60kW,0,0.00,0h 00m,94.35,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09588,config,25 All In
-4mveba,Nikol EV 80kW - Sai Shraddha EVCS ,1,2.81,0h 12m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09409,config,18 Rs Per Unit
-en58zw,Nikol EV 60kW- Aaradhya EV Charging Station Beed,1,5.20,0h 06m,69.53,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,Rs.21 Incl. GST
-5jffhr,1-River Dale-NIKOL EV 3.3kW,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Riverdale
-a9mvet,Grishma Solar - Stature DC 03,0,0.00,0h 00m,0,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
-whn3yw,Nikol EV- 3.3kW,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,25 All In
-htkcg2,P6-5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Faulted,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-brba9h,Nikol EV 3.3kW AC 01 - Zensar Technologies,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,ZENSAR
-nmesqq,Nikol EV Novel Marathahalli 3.3kw - 1,1,1.43,2h 00m,100.00,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
-i2fpgf,Nikol EV 22kW - Wadgaonpir,0,0.00,0h 00m,0,type_2,Charging,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.24.4.32_EM1:26.4.0_EM2:27.4.0,config,-
-7sqzjw,Hyper test,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,-,Karnataka,mindra,ocpp,V112_72902_09409,config,-
-aeoyhc,Nikol EV 60kW - Salasar Kia,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
-e7o2ue,Nikol EV 3.3kW-  Marigold Society-R Building,0,0.00,0h 00m,90.72,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_L510,config,Rs.15 + GST
-mt4rds, Kumar Picasso - NIKOL EV 14kW Hybrid Charger,0,0.00,0h 00m,95.34,"type_2,three_pin,industrial",Available,Available,Available,-,Maharashtra,NIKOL EV,ocpp,0.0.4.0,config,15.54 All Inclusive
-yebpfe,6-River Dale-NIKOL EV 3.3kW,2,1.49,3h 40m,46.62,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
-2e4fsu,P-1 2 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-9f17uj,Nikol EV 7.4kW - Ganga Utopia ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,18 Rs Per Unit
-acmbi9,Nikol EV - Indapur Corporation 22kW ,0,0.00,0h 00m,4.79,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.24.2.42_EM1:26.4.0_EM2:27.4.0,config,Indapur Corporation
-9d2om3,Nikol EV 7.4kW Baar Baar Dhaba,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,Nikol EV,ocpp,0.0.4.10_IOEXP_0.00,config,-
-h1j7e9,Bharat AC-NIKOL EV 10kW- solapur,0,0.00,0h 00m,0,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Available,Available,Available,-,-,Mindra,ocpp,0.0.4.3,config,25 All In
-sfi3s7,P1 - 5 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-5q4nqj,NIKOL EV 3.3 kW- Lootel cafe bus,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Madhya Pradesh,Kazam,ocpp,OCPP_34.1.8_SIM800,config,20 Rs/Unit
-5tygrk,NIKOL EV 3.3kW- Solitaire-2,1,2.58,4h 00m,93.66,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Rs.18+GST
-ughft5,Mauli enterprises 60kW DC - NIKOL EV,0,0.00,0h 00m,7.73,"ccs,ccs",Available,Available,-,-,Maharashtra,IOEMAS,ocpp,P0-5.3,config,25 All In
-6rn39z,Nikol EV 3.3kW - Phoenix Mall of the Millennium,0,0.00,0h 00m,100.00,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Phoenix
-hkw2j3,Nikol EV 7.4kW AC 01 - Zensar Technologies,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.4,config,ZENSAR
-9ak7kg,Laxminarayan EVCS - Nikol EV 30kW,1,7.82,0h 28m,100.00,ccs,Available,-,-,-,Maharashtra,nikol,ocpp,3.8.5-2.7.8,config,Shirpur
-gpyzc7,Nikol EV 22kw Riddhi Siddhi Mumbai,1,10.57,3h 19m,100.00,type_2,Available,-,-,-,Mumbai City,StarCharge,ocpp,1.0.0.0.6b106,config,12 rs per unit
-urkfju,Citadines Goa - NIKOL EV 30kW DC Charger,0,0.00,0h 00m,99.75,ccs,Available,-,-,-,Goa,Plugzmart,ocpp,3.2.0,config,25 All In
-4qtfwa,3-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,97.60,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-tgxk62,Nikol EV 7.4kW - Novel Tech Park HSR ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Karnataka,NIKOL EV ,ocpp,0.0.4.10_IOEXP_0.00,config,Novel 7.4 kW
-3ox9ku, Nikol EV 180kW - AEM,14,0.00,0h 05m,28.12,"ccs,ccs",Available,Available,-,-,Maharashtra,NIKOL EV,ocpp,2.1.4-2.1.4,config,AEM
-718oyj,Nikol EV 80kW - Hotel Grand Savita Malegaon,4,50.14,2h 41m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,Mindra,ocpp,V112_72902_09389,config,Quickwatt - 22+gst
-7ik5w4,Nikol EV - Indapur Corporation 7.4kW ,0,0.00,0h 00m,90.62,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:35.11.2_O:35.20.07_M:35.12.8,config,Indapur Corporation
-5sjt3h,Nikol EV 3.3kW - Phoenix Mall of the Millennium,1,1.31,1h 31m,100.00,industrial_three_pin,Charging,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Phoenix
-5wnbwq,Nikol EV Novel Hoodi HSR 3.3kW - 2,0,0.00,0h 00m,42.93,industrial_three_pin,Faulted,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.1.6_SIM800,config,Novel 3.3kW
-5uedz3,Nikol EV 3.3kW AC 02 - Zensar Technologies,0,0.00,0h 00m,100.00,industrial_three_pin,Charging,-,-,-,Pune City,Kazam,ocpp,OCPP_34.0.14_SIM800,config,ZENSAR
-5qarmf,Nikol EV Novel Office Hoodi HSR 3.3kW - 1,2,2.53,3h 35m,100.00,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Novel 3.3kW
-vqepbk,5-River Dale-NIKOL EV 3.3kW,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
-n5qy4h,Grishma Solar - Stature DC 02,0,0.00,0h 00m,0,ccs,Faulted,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
-i7dr7x,P2-2 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-6curqm,Nikol EV 3.3kW - Ganga Utopia,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.16 incl. GST
-yj5d2p,Unique EV Charging - Nikol EV 7.4kW,1,16.37,2h 25m,95.32,type_2,preparing,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Rs.20.5 incl. GST
-x4i1ss,Nikol EV 60kW- Peruchi Wadi nashik,2,27.31,1h 00m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
-b6pmf6,NIKOL EV 3.3kW - PCMC (18),0,0.00,0h 00m,97.17,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Rs.30 incl.GST
-6nbtnm,Marigold Society 3.3 kW,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Telangana,Kazam,ocpp,OCPP_34.1.8_L510,config,Rs.15 + GST
-gk6vko,Monto EV charging station Nikol EV 14kW ,0,0.00,0h 00m,69.59,"type_2,three_pin,industrial",Available,Available,Available,-,Madhya Pradesh,NIKOL EV,ocpp,0.0.4.0,config,Monto EVCS Indore
-5kfyaa,Health & Harmony - NIKOL EV 3.3kW 1,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,15.54 All Inclusive
-m2syqq,Alankar 7.4kW  EV Charging Station ,0,0.00,0h 00m,97.36,type_2,Unavailable,-,-,-,Maharashtra,ABB,ocpp,TAC1Z9118606710273::V1.8.21,config,18 Rs Per Unit
-hjgstp,Nikol EV 3.3kW Titwala,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,-
-khxpqf,Hotel Daulat Foodmall 50kW DC - NIKOL EV,3,0.00,0h 03m,19.46,"ccs,ccs",Available,Faulted,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.16,config,25 All In
-v9e66v,NIKOL EV 7.4kW AC - Saikrupa,0,0.00,0h 00m,76.78,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,test
-vsa5tq,Harikrupa Enterprises 14kW Hybrid Nikol EV,0,0.00,0h 00m,89.61,"type_2,three_pin,industrial",Faulted,Faulted,Available,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.0,config,18 Rs Per Unit
-67skns,Nikol EV 7.4 kW AC Charger (E-Pulse),0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,EPulse
-q2nk9f,NIKOL EV - Kudale Mall 14kW Hybrid,5,16.71,8h 33m,94.63,"type_2,three_pin,industrial",Available,Available,Charging,-,Maharashtra,NIKOL EV,ocpp,0.1.1.10,config,Rs.18+GST
-bqwuc9,Nikol EV 3.3kW - Titwala,0,0.00,0h 00m,99.52,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,-
-irevw2,P5-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-oxj1rt, The O Hotel - Nikol EV 30KW CCS,0,0.00,0h 00m,54.83,ccs,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,P0-6.0,config,Rs.35 incl. GST
-5ze5v5,Nikol 3.3kW- CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,-
-4ntrrx,"WTC Gate No. 2, Mumbai - NIKOL EV 60kW",4,102.08,2h 08m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,Rs.30 incl.GST
-2yi4km,Nikol EV 60kW - Hotel Sanai Residency,9,109.64,3h 10m,82.75,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
-c9pap6,60kW - MetroCharge EV Charging Station,25,291.51,20h 01m,83.41,"ccs,ccs",Charging,Charging,-,-,Maharashtra,EXICOM,ocpp,42.12.11.00_02.11_04.00.02_04.00.02,config,metro charge
-gfy681,R S Electromatics 50kW DC - NIKOL EV,1,11.20,0h 48m,93.12,"ccs,ccs",Faulted,Unavailable,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.16,config,RS Electromatics - Rs.25/unit (incl. gst)
-5wzvn7,NIKOL EV 3.3 kW - Solitaire-1,0,0.00,0h 00m,93.63,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Rs.18+GST
-vwuhk7,"Nikol EV 60kW - Salasar Mahindra, Thane",9,169.89,6h 50m,89.80,"ccs,ccs",Finishing,Charging,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.02_04.00.02,config,22+Gst
-cmrdg2,Nikol EV 60kW- Naik Motors Verna Goa,6,206.25,6h 19m,94.18,"ccs,ccs",Available,Charging,-,-,Goa,EXICOM,ocpp,42.12.28.00_03.06_04.00.02_04.00.02,config,21 Rs per unit
-33fkmr,Nikol EV 3.3kW - Phoenix Mall of the Millennium,0,0.00,0h 00m,100.00,industrial_three_pin,Charging,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Phoenix
-qqpmh2,5-NIKOL EV 3.3 kW-PCMC ,1,12.05,6h 31m,91.54,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-agey7t,NIKOL EV - 14kW  AC Hybrid - Calangute,0,0.00,0h 00m,99.69,"type_2,three_pin,industrial",Available,Available,Available,-,Goa,NIKOL EV,ocpp,0.0.4.0,config,Rs.15 + GST
-xvbonb,S.S. Charging Zone 25kW DC - NIKOL EV,0,0.00,0h 00m,57.09,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.05.12.21.0E,config,25 All In
-i48yqk,3-River Dale-Bharat AC-NIKOL EV 10kW,0,0.00,0h 00m,100.00,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Available,Available,Charging,-,Maharashtra,Mindra,ocpp,0.0.4.3,config,Riverdale
-3kp7p6,P3-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-ex7y71,P2 - 4 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-2w8s7a,Nikol EV 14kW Hybrid- Greaves Cotton Ltd ,0,0.00,0h 00m,97.29,"type_2,three_pin,industrial",Available,Available,Available,-,Maharashtra,NIKOL EV,ocpp,0.0.4.0,config,Free user
-bvbv22,20-NIKOL EV 3.3 kW-PCMC ,2,8.92,3h 22m,94.99,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-gtqefe,Nikol EV 60kW - Krushna Srushti Amravati,0,0.00,0h 00m,96.00,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.02_04.00.02,config,25 All In
-iqycq7,NIKOL EV 120KW- Quick watt Hotel Tatyancha Wada ,1,5.45,0h 07m,92.73,"ccs,ccs",Charging,Available,-,-,-,mindra,ocpp,V112_72902_09609,config,Quickwatt - 22+gst
-ytes6n,R.S. Electromatics 25kW DC - NIKOL EV,0,0.00,0h 00m,96.73,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.05.12.21.0E,config,RS Electromatics - Rs.25/unit (incl. gst)
-awjzrd,4-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,91.15,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-2nza5f,P2 - 5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-w47dj6,Nikol EV Novel Marathahalli 3.3kW - 2,1,0.00,0h 01m,100.00,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Novel 3.3kW
-fsbczu,Nikol EV 60kW - Zeroleap Hub,56,374.87,22h 22m,100.00,"ccs,ccs",Charging,Charging,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.51,config,Free user
-bsqur5,Nikol EV 3.3Kw - Power Battery Services Jalgaon,0,0.00,0h 00m,97.26,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,20 Rs/Unit
-6n2ev3,01 NIKOL EV - Quickwatt 3.3KW - Winggs Club Bhopal ,0,0.00,0h 00m,0,three_pin,Available,-,-,-,Madhya Pradesh,Kazam,ocpp,OCPP_34.1.8_SIM800,config,20 Rs/Unit
-6b4j5q,17-Nikol EV 3.3 kW- PCMC ,0,0.00,0h 00m,96.91,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-4vd355,02 NIKOL EV - Quickwatt 3.3KW - Winggs Club Bhopal,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Madhya Pradesh,-,kazam,34.3.17,config,20 Rs/Unit
-ohwidb,Swarali EV Charging Station - NIKOL EV 60kW,9,64.06,2h 25m,93.17,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09389,config,25 All In
-6e95rd,Nikol EV 3.3kW-  Marigold Society-R Building,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.15 + GST
-tab3gq,9-NIKOL EV 3.3 kW-PCMC ,1,8.26,3h 37m,96.20,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-ro6zz6,P2-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-y7aych,3-River Dale-NIKOL EV 3.3kW,2,2.08,2h 46m,60.87,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
-7marjo,60kW - MetroCharge EV Charging Station,15,56.60,5h 43m,83.44,"ccs,ccs",Available,Charging,-,-,Maharashtra,EXICOM,ocpp,42.12.04.00_01.10_04.00.02_04.00.02,config,metro charge
-5kjdy6,Nikol EV 3.3kW - Phoenix Mall of the Millennium,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,-,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Phoenix
-f8qwf4,Hotel Entry Point - Nikol EV 60kW DC,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,-,Chhattisgarh,OKAYA,ocpp,"TCU:GUN(1-3)_V3.1_6ul,A:RCCS2.3,B:RCCS2.3",config,Hotel Entry Point
-bfy5fm,Nikol EV 3.3kW AC - Saguna EVCS,0,0.00,0h 00m,4.87,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,25 All In
-uitr6n,P3-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-xoydry,Ameya Industries 25kW DC - NIKOL EV,0,0.00,0h 00m,98.64,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
+pv5yqs,Health & Harmony - NIKOL EV 3.3kW 2,0,0.00,0h 00m,100.00,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,15.54 All Inclusive
+6n29ym,NIKOL EV 3.3kW AC - R S Electromatics,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Ahilyanagar,Kazam,ocpp,OCPP_34.1.8_SIM800,config,18 Rs Per Unit
+5d2gwc,Nikol EV Novel Tech Park HSR 3.3kW - 2,0,0.00,0h 00m,98.16,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
+2w6a59,Nikol 3.3kW CretaCity Mall ,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,-,kazam,34.3.17,config,24+GST
+cwp97j,Nikol EV 3.3kW - Thane,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,-,Kazam,ocpp,OCPP_34.1.8_L510,config,-
+6r42vh,NIKOL EV 7.4KW-  CretaCity Mall,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,-
+2wdi53,Nikol 3.3kW- Krushnasrushti Amravati,0,0.00,0h 00m,98.25,three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_L510,config,25 All In
+c9pap6,60kW - MetroCharge EV Charging Station,21,300.75,19h 32m,100.00,"ccs,ccs",Charging,Charging,-,-,Maharashtra,EXICOM,ocpp,42.12.11.00_02.11_04.00.02_04.00.02,config,metro charge
+gfy681,R S Electromatics 50kW DC - NIKOL EV,6,74.09,2h 59m,100.00,"ccs,ccs",Charging,Unavailable,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.16,config,RS Electromatics - Rs.25/unit (incl. gst)
 yuhz36,P4-4 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-ede6bs,P1 - 4 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-wmc5qo,P6-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-pa33a6,NIKOL EV - Quickwatt 30KW - Winggs Club Bhopal,1,20.85,0h 42m,100.00,ccs,Available,-,-,-,Madhya Pradesh,Nikol EV,ocpp,4.0.6-3.1.7,config,NIKOL_X_Quickwatt_Winggs Club
-h45dsc,Nikol EV 60kW-  New arihant traders Ellora Sambhajinagar,2,54.94,1h 09m,99.00,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09588,config,25 All In
-84cmks,2-NIKOL EV 7.4 kW-PCMC ,2,58.68,10h 18m,97.85,type_2,Available,-,-,PCMC,Maharashtra,NIKOL EV,ocpp,0.0.4.10_IOEXP_0.00,config,Rs.30 incl.GST
-9stoz9,NIKOL EV 7.4KW- CretaCity Mall,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25+GST
-eiqprj,Harikrupa Enterprises 60kW DC - NIKOL EV,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,-,Maharashtra,IOEMAS,ocpp,P0-5.3,config,16+GST
+h2qhty,Nikol EV Novel Hoodi Office 7.4kW,0,0.00,0h 00m,81.03,type_2,Available,-,-,-,Karnataka,NIkolev,ocpp,0.0.4.6,config,Novel 7.4 kW
+bz7qae,Nikol EV 3.3kW - Indore,0,0.00,0h 00m,0,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,25 All In
+pp967r,Nikol EV 60kW -  Salasar Hyundai Ahilyanagar,0,0.00,0h 00m,100.00,"ccs,ccs",Available,Finishing,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,Quickwatt - 22+gst
+7n4ez3,Nikol EV Novel Queens Office 3.3kW - 2,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
+77k1vc,Nikol EV 7.4kW - Thane,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,Nikol EV,ocpp,0.0.4.11_IOEXP_0.00,config,-
+5vqme7,Nikol EV 3.3kW-  Marigold Society- O Building,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.15 + GST
+t3rwkd,6-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,93.11,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+5kjdy6,Nikol EV 3.3kW - Phoenix Mall of the Millennium,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,-,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Phoenix
+yd1yys,P5-5 Phoenix Mall of the Millennium 7.4kW AC ,1,10.08,1h 33m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+ij2oek,Nikol EV 11kW- Marigold Society_R-Building,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.32.4.12_EM1:26.5.0_EM2:27.5.0,config,Rs.15 + GST
+cp2nht,NIKOL EV3.3 KW- Lootel Opp River View Bilaspur C.G,0,0.00,0h 00m,0,three_pin,Faulted,-,-,-,Chhattisgarh,Kazam,ocpp,OCPP_34.1.8_SIM800,config,20 Rs/Unit
+e6g1tw,Grishma Solar - Stature DC 04,0,0.00,0h 00m,0,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
+bfn66t,Nikol EV 3.3kW - N K E-Bikes (2),0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,25 All In
+fsbczu,Nikol EV 60kW - Zeroleap Hub,24,296.33,18h 44m,93.16,"ccs,ccs",Available,Available,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.51,config,Free user
+t95eip,2-River Dale-Bharat AC-NIKOL EV 10kW,2,1.37,6h 00m,99.76,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Charging,Charging,Available,-,Maharashtra,Mindra,ocpp,0.0.4.3,config,Riverdale
+wenbm9,"Nikol EV 30kW - Vitthal Kamat, Saswad",0,0.00,0h 00m,3.92,"ccs,ccs",Faulted,-,-,-,Maharashtra,Nikol,ocpp,P0-6.0,config,25 All In
+6kpw2c,18-NIKOL EV 3.3 kW-PCMC ,1,9.68,3h 51m,100.00,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+9m3khm,P6-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+6g4z27,10-NIKOL EV 3.3 kW-PCMC ,1,3.80,1h 28m,91.95,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+u4j79d,Nikol EV  240KW- AEM,41,2290.26,21h 37m,77.48,"ccs,ccs",preparing,Available,-,-,Maharashtra,NIKOL EV,ocpp,1.0.7-2.0.7,config,AEM
+5ze5v5,Nikol 3.3kW- CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,-
+5h2bmk,Nikol EV - 3.3kW Saikrupa,11,2.62,2h 04m,100.00,industrial_three_pin,Charging,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Shivkrupa
+c7hmsv,Power Battery Services - 60kW NIKOL EV jalgaon,1,16.10,0h 46m,99.35,"ccs,ccs",Available,Available,-,-,Maharashtra,NIKOL ,ocpp,3.8.5-2.7.8,config,25 All In
+ex7y71,P2 - 4 Phoenix Mall of the Millennium 7.4kW AC ,1,1.28,0h 11m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+bwmwj7,13-NIKOL EV 3.3 kW-PCMC,1,5.25,2h 53m,82.93,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+53g1eb,Nikol EV 3.3kW-  Marigold Society-O Building,2,1.21,3h 17m,100.00,three_pin,Available,-,-,-,Maharashtra,-,kazam,34.3.21_L510,config,Rs.15 + GST
+33fkmr,Nikol EV 3.3kW - Phoenix Mall of the Millennium,3,1.71,2h 54m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Phoenix
+bvudxq,Nikol EV 60kW - Servotech Goa,0,0.00,0h 00m,99.79,"ccs,ccs",Available,Available,-,-,Goa,SERVOTECH,ocpp,140c10a-103104189159121121-0225-2247E,config,Rs.19.5 (incl.Gst)
+5nk7hz,Nikol EV 3.3kW AC - Aaradhya EV Beed,0,0.00,0h 00m,11.90,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.21 Incl. GST
+irevw2,P5-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+f6swtz,P2-3 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
 6qnzgz,Nikol EV 3.3kW - Hinjewadi Hub  01,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,Hinjewadi Hub,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,18 Rs Per Unit
-xg8upa,NIKOL EV - Quickwatt  14KW - Winggs Club Bhopal,0,0.00,0h 00m,100.00,"type_2,three_pin,industrial",Available,Available,Available,-,Madhya Pradesh,Nikol EV,ocpp,0.1.1.12,config,NIKOL_X_Quickwatt_Winggs Club
-eq24q9,NIKOL EV 7.4kW - Serenity Meadows Bungalow,0,0.00,0h 00m,100.00,type_2,Available,Available,Available,-,Maharashtra,NIKOL EV,ocpp,0.0.4.10_IOEXP_0.00,config,Rs.30 incl.GST
-5nk7hz,Nikol EV 3.3kW AC - Aaradhya EV Beed,1,0.00,0h 01m,0.42,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.21 Incl. GST
+eqf8zz, NIKOL EV 60kW - SafeFast ElectrifyIndia,0,0.00,0h 00m,95.86,"ccs,ccs",Available,Available,-,-,Maharashtra,NIKOL EV,ocpp,4.0.6-3.0.8,config,22+Gst
+w2rpir,Nikol EV 15kW DC GBT Shingnapur,13,54.08,6h 08m,88.83,gbt,Charging,-,-,-,Maharashtra,mindra,ocpp,V111_72902_09366,config,Free user
 cpznzm,Nikol EV 3.3kW AC 04 - Zensar Technologies,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,ZENSAR
-c2qt6w,4-River Dale-NIKOL EV 3.3kW,1,1.08,2h 37m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Riverdale
-6kfck9,Nikol EV Novel Office Adugodi 3.3kW,0,0.00,0h 00m,91.97,industrial_three_pin,Charging,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Novel 3.3kW
+5wzvn7,NIKOL EV 3.3 kW - Solitaire-1,1,2.11,3h 02m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Rs.18+GST
+84cmks,2-NIKOL EV 7.4 kW-PCMC ,1,11.85,3h 46m,100.00,type_2,Charging,-,-,PCMC,Maharashtra,NIKOL EV,ocpp,0.0.4.10_IOEXP_0.00,config,Rs.30 incl.GST
+cvvy3u,Nikol 3.3kW- CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,24+GST
+5pwvdq,Nikol EV Novel Queens Office 3.3kW - 1,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Novel 3.3kW
 4i66fe,P6-4 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Unavailable,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
 7d5nbv,P3-2 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-de8bg9,P1 -1 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-uhux19,Nikol EV 7.4kW AC 02- Zensar Technologies,0,0.00,0h 00m,99.79,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.4,config,ZENSAR
-wws24x,Nikol EV 60kW - Akluj,0,0.00,0h 00m,100.00,"ccs,ccs",Available,Unavailable,-,-,Maharashtra,EXICOM,ocpp,42.12.28.00_03.06_04.00.02_04.00.02,config,20 Rs/Unit
-yf36qx,"NIKOL EV 60KW - DBA EVCS, Beed",16,32.66,2h 26m,85.26,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09609,config,25 All In
-gebgzj,Nikol 3.3kW- CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,24+GST
-6kpw2c,18-NIKOL EV 3.3 kW-PCMC ,1,7.32,2h 45m,97.91,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-f6swtz,P2-3 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-53g1eb,Nikol EV 3.3kW-  Marigold Society-O Building,0,0.00,0h 00m,90.83,three_pin,Available,-,-,-,Maharashtra,-,kazam,34.3.21_L510,config,Rs.15 + GST
-jycrv7,P2-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-62sfxa,Grishma Solar - Stature DC 05,0,0.00,0h 00m,0,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
-7djh9g,Nikol EV - Pickkup  30kW DC GBT,0,0.00,0h 00m,0,"gbt,gbt",Available,Charging,-,-,Uttar Pradesh,OKAYA,ocpp,1.4.2,config,Free user
-9m3khm,P6-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-5h2bmk,Nikol EV - 3.3kW Saikrupa,5,9.21,6h 59m,88.43,industrial_three_pin,Charging,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Shivkrupa
-cvvy3u,Nikol 3.3kW- CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,24+GST
-6g4z27,10-NIKOL EV 3.3 kW-PCMC ,1,6.29,2h 20m,87.28,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-bwmwj7,13-NIKOL EV 3.3 kW-PCMC,1,7.65,4h 06m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-t5gjwg,15-NIKOL EV 3.3 kW-PCMC ,1,8.95,3h 30m,97.94,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-6fhgp9,NIKOL EV 3.3 kW- Mauli Enterprises ,1,0.20,0h 27m,99.72,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,-
-nw128t,NIKOL EV 7.4kW  - Serenity Skies Apartment,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.6,config,Rs.30 incl.GST
-c7hmsv,Power Battery Services - 60kW NIKOL EV jalgaon,5,20.46,1h 22m,96.16,"ccs,ccs",Finishing,Charging,-,-,Maharashtra,NIKOL ,ocpp,3.8.5-2.7.8,config,25 All In
-pqiaja,"Abhijit EVCS, Tembhurni - NIKOL EV 30kW",7,26.19,1h 19m,97.77,ccs,Available,-,-,-,Maharashtra,NIKOL,ocpp,3.8.5-2.7.8,config,25 All In
-t3rwkd,6-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,94.42,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-9gm63u, Grishma Solar - Stature DC 01,0,0.00,0h 00m,0,ccs,Faulted,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
-k9niai,NIKOL EV 7.4kW - Luxor Lake Villa,0,0.00,0h 00m,97.81,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25 All In
-4r3na6,Nikol EV 7.4kW- Novel Queens Office,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Karnataka,NIKOL EV,ocpp,0.0.4.6,config,Novel 7.4 kW
-e6g1tw,Grishma Solar - Stature DC 04,0,0.00,0h 00m,0,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
-5c3pzc,Nikol EV 3.3kW AC 03 - Zensar Technologies,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Pune City,Kazam,ocpp,OCPP_34.0.14_SIM800,config,ZENSAR
-bz7qae,Nikol EV 3.3kW - Indore,0,0.00,0h 00m,0,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,25 All In
-7n4ez3,Nikol EV Novel Queens Office 3.3kW - 2,1,1.13,1h 53m,100.00,industrial_three_pin,Charging,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
-bfn66t,Nikol EV 3.3kW - N K E-Bikes (2),0,0.00,0h 00m,61.55,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,25 All In
-5vqme7,Nikol EV 3.3kW-  Marigold Society- O Building,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.15 + GST
+daggkj,P4-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,Phoenix
+x4i1ss,Nikol EV 60kW- Peruchi Wadi nashik,0,0.00,0h 00m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
+6curqm,Nikol EV 3.3kW - Ganga Utopia,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.16 incl. GST
+qbmdr2,Nikol EV 25kW DC Charger - Zeroleap Hub,9,81.59,5h 15m,100.00,ccs,Charging,Unavailable,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,Free user
+t6nrb7,P5-4 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Charging,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+6b4j5q,17-Nikol EV 3.3 kW- PCMC ,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+hjgstp,Nikol EV 3.3kW Titwala,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,-
+a9mvet,Grishma Solar - Stature DC 03,0,0.00,0h 00m,0,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
+9stoz9,NIKOL EV 7.4KW- CretaCity Mall,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25+GST
+h45dsc,Nikol EV 60kW-  New arihant traders Ellora Sambhajinagar,5,47.91,1h 30m,95.94,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09588,config,25 All In
+ro6zz6,P2-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
 d4txca,P5-2 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Nikol ev,ocpp,0.0.4.11_IOEXP_0.00,config,Phoenix
-t95eip,2-River Dale-Bharat AC-NIKOL EV 10kW,0,0.00,0h 00m,100.00,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Charging,Available,Available,-,Maharashtra,Mindra,ocpp,0.0.4.3,config,Riverdale
-cwp97j,Nikol EV 3.3kW - Thane,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,-,Kazam,ocpp,OCPP_34.1.8_L510,config,-
-2w6a59,Nikol 3.3kW CretaCity Mall ,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,-,kazam,34.3.17,config,24+GST
-whzutc,Nikol EV 15kW GBT - Solapur,0,0.00,0h 00m,0,gbt,Faulted,-,-,-,Maharashtra,mindra,ocpp,V111_72902_09389,config,25 All In
-qbmdr2,Nikol EV 25kW DC Charger - Zeroleap Hub,7,75.06,4h 15m,82.14,ccs,Charging,Unavailable,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,Free user
-t6nrb7,P5-4 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
-6n29ym,NIKOL EV 3.3kW AC - R S Electromatics,1,0.12,0h 59m,96.77,industrial_three_pin,Available,-,-,-,Ahilyanagar,Kazam,ocpp,OCPP_34.1.8_SIM800,config,18 Rs Per Unit
-h2qhty,Nikol EV Novel Hoodi Office 7.4kW,0,0.00,0h 00m,71.07,type_2,Available,-,-,-,Karnataka,NIkolev,ocpp,0.0.4.6,config,Novel 7.4 kW
+67skns,Nikol EV 7.4 kW AC Charger (E-Pulse),0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,EPulse
 njdvwy,Nikol EV 7.4kW Agreen Hotels & Resort,0,0.00,0h 00m,0,type_2,Faulted,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25 All In
-6r42vh,NIKOL EV 7.4KW-  CretaCity Mall,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,-
-54fa6q,Dream EV Maharashtra Food Mall 60kW DC - NIKOL EV,25,204.89,8h 35m,92.73,"ccs,ccs",Available,Available,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.16,config,22+Gst
-2wdi53,Nikol 3.3kW- Krushnasrushti Amravati,0,0.00,0h 00m,96.29,three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_L510,config,25 All In
-ij2oek,Nikol EV 11kW- Marigold Society_R-Building,0,0.00,0h 00m,90.84,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.32.4.12_EM1:26.5.0_EM2:27.5.0,config,Rs.15 + GST
-usm5cg,12-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,74.22,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
-pv5yqs,Health & Harmony - NIKOL EV 3.3kW 2,0,0.00,0h 00m,100.00,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,15.54 All Inclusive
-5d2gwc,Nikol EV Novel Tech Park HSR 3.3kW - 2,0,0.00,0h 00m,97.77,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
+ohwidb,Swarali EV Charging Station - NIKOL EV 60kW,0,0.00,0h 00m,2.41,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09389,config,25 All In
+f8qwf4,Hotel Entry Point - Nikol EV 60kW DC,2,27.32,1h 05m,100.00,"ccs,ccs",Available,Available,-,-,Chhattisgarh,OKAYA,ocpp,"TCU:GUN(1-3)_V3.1_6ul,A:RCCS2.3,B:RCCS2.3",config,Hotel Entry Point
+5qarmf,Nikol EV Novel Office Hoodi HSR 3.3kW - 1,1,2.81,3h 59m,100.00,industrial_three_pin,Charging,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Novel 3.3kW
+x5okx5,Nikol EV 60kW- Salasar Mahindra Panvel,0,0.00,0h 00m,72.76,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.28.00_03.06_04.00.06_04.00.06,config,18 Rs Per Unit
+acmbi9,Nikol EV - Indapur Corporation 22kW ,0,0.00,0h 00m,4.79,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.24.2.42_EM1:26.4.0_EM2:27.4.0,config,Indapur Corporation
+y7aych,3-River Dale-NIKOL EV 3.3kW,2,3.75,5h 20m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
+pa33a6,NIKOL EV - Quickwatt 30KW - Winggs Club Bhopal,0,0.00,0h 00m,92.76,ccs,Available,-,-,-,Madhya Pradesh,Nikol EV,ocpp,4.0.6-3.1.7,config,NIKOL_X_Quickwatt_Winggs Club
+jycrv7,P2-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+tab3gq,9-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,88.27,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+pqiaja,"Abhijit EVCS, Tembhurni - NIKOL EV 30kW",1,3.53,0h 15m,100.00,ccs,Charging,-,-,-,Maharashtra,NIKOL,ocpp,3.8.5-2.7.8,config,25 All In
+4r3na6,Nikol EV 7.4kW- Novel Queens Office,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Karnataka,NIKOL EV,ocpp,0.0.4.6,config,Novel 7.4 kW
+5wnbwq,Nikol EV Novel Hoodi HSR 3.3kW - 2,0,0.00,0h 00m,51.35,industrial_three_pin,Faulted,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.1.6_SIM800,config,Novel 3.3kW
+gebgzj,Nikol 3.3kW- CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,24+GST
+bvbv22,20-NIKOL EV 3.3 kW-PCMC ,2,10.94,4h 08m,99.75,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+ughft5,Mauli enterprises 60kW DC - NIKOL EV,0,0.00,0h 00m,17.36,"ccs,ccs",Charging,Available,-,-,Maharashtra,IOEMAS,ocpp,P0-5.3,config,25 All In
+qqpmh2,5-NIKOL EV 3.3 kW-PCMC ,1,6.73,3h 13m,85.49,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+tgxk62,Nikol EV 7.4kW - Novel Tech Park HSR ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Karnataka,NIKOL EV ,ocpp,0.0.4.10_IOEXP_0.00,config,Novel 7.4 kW
+gtqefe,Nikol EV 60kW - Krushna Srushti Amravati,9,0.00,0h 03m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.02_04.00.02,config,25 All In
+xg8upa,NIKOL EV - Quickwatt  14KW - Winggs Club Bhopal,1,1.16,2h 36m,89.90,"type_2,three_pin,industrial",Available,Available,Available,-,Madhya Pradesh,Nikol EV,ocpp,0.1.1.12,config,NIKOL_X_Quickwatt_Winggs Club
+awjzrd,4-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,99.51,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+7djh9g,Nikol EV - Pickkup  30kW DC GBT,0,0.00,0h 00m,0,"gbt,gbt",Available,Charging,-,-,Uttar Pradesh,OKAYA,ocpp,1.4.2,config,Free user
+2e4fsu,P-1 2 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Faulted,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+sfi3s7,P1 - 5 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,0,type_2,preparing,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+agey7t,NIKOL EV - 14kW  AC Hybrid - Calangute,0,0.00,0h 00m,25.15,"type_2,three_pin,industrial",Available,Available,Available,-,Goa,NIKOL EV,ocpp,0.0.4.0,config,Rs.15 + GST
+3kp7p6,P3-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+wws24x,Nikol EV 60kW - Vansh EV charging station akluj,0,0.00,0h 00m,100.00,"ccs,ccs",Available,Unavailable,-,-,Maharashtra,EXICOM,ocpp,42.12.28.00_03.06_04.00.02_04.00.02,config,20 Rs/Unit
+2xxzo4,"Nikol EV 80kW - Hotel Naivedya, Waluj",9,79.84,2h 15m,96.56,"ccs,ccs",Available,Available,-,-,-,mindra,ocpp,V112_72902_09409,config,Rs.21.5 + GST
+xvbonb,S.S. Charging Zone 25kW DC - NIKOL EV,1,33.59,1h 41m,34.80,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.05.12.21.0E,config,25 All In
+2w8s7a,Nikol EV 14kW Hybrid- Greaves Cotton Ltd ,0,0.00,0h 00m,100.00,"type_2,three_pin,industrial",Available,Available,Available,-,Maharashtra,NIKOL EV,ocpp,0.0.4.0,config,Free user
+htkcg2,P6-5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+de8bg9,P1 -1 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+uhux19,Nikol EV 7.4kW AC 02- Zensar Technologies,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.4,config,ZENSAR
+c2qt6w,4-River Dale-NIKOL EV 3.3kW,0,0.38,0h 34m,48.28,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Riverdale
+2yi4km,Nikol EV 60kW - Hotel Sanai Residency,0,0.00,0h 00m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
+en58zw,Nikol EV 60kW- Aaradhya EV Charging Station Beed,2,37.99,1h 01m,91.10,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_FFFF_FFFF,config,Rs.21 Incl. GST
+9d2om3,Nikol EV 7.4kW Baar Baar Dhaba,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,Nikol EV,ocpp,0.0.4.10_IOEXP_0.00,config,-
+54fa6q,Dream EV Maharashtra Food Mall 60kW DC - NIKOL EV,5,31.87,1h 30m,99.79,"ccs,ccs",Unavailable,Available,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.51,config,22+Gst
+5tygrk,NIKOL EV 3.3kW- Solitaire-2,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Rs.18+GST
+62sfxa,Grishma Solar - Stature DC 05,2,10.43,0h 37m,56.88,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
+vwuhk7,"Nikol EV 60kW - Salasar Mahindra, Thane",5,159.95,4h 18m,94.87,"ccs,ccs",Charging,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.02_04.00.02,config,22+Gst
+aeoyhc,Nikol EV 60kW - Salasar Kia,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
+oxj1rt, The O Hotel - Nikol EV 30KW CCS,0,0.00,0h 00m,0,ccs,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,P0-6.0,config,Rs.35 incl. GST
+brba9h,Nikol EV 3.3kW AC 01 - Zensar Technologies,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,ZENSAR
+qhy6b3,Nikol EV 3.3kW - Swara E -Vehicles  Sambhajinagar,0,0.00,0h 00m,98.08,industrial,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,25 All In
+2nza5f,P2 - 5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+bfy5fm,Nikol EV 3.3kW AC - Saguna EVCS,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,25 All In
+k9niai,NIKOL EV 7.4kW - Luxor Lake Villa,0,0.00,0h 00m,86.57,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25 All In
+xoydry,Ameya Industries 25kW DC - NIKOL EV,0,0.00,0h 00m,100.00,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
+b6pmwn,7-NIKOL EV 3.3 kW-PCMC ,1,9.27,3h 26m,95.85,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Rs.30 incl.GST
+w47dj6,Nikol EV Novel Marathahalli 3.3kW - 2,1,0.31,0h 28m,100.00,industrial_three_pin,Charging,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Novel 3.3kW
+ikwjtv,Nikol EV 22kW - Marathahalli ,0,0.00,0h 00m,0,type_2,Unavailable,-,-,-,Karnataka,-,ocpp,-,config,-
+7sqzjw,Hyper test,0,0.00,0h 00m,0,"ccs,ccs",Available,Available,-,-,Karnataka,mindra,ocpp,V112_72902_09409,config,-
+i7dr7x,P2-2 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+khxpqf,Hotel Daulat Foodmall 50kW DC - NIKOL EV,3,47.91,1h 55m,97.80,"ccs,ccs",Available,Unavailable,-,-,Maharashtra,Delta Electronics,ocpp,2.00.M.16,config,25 All In
+883dpw,Nikol EV 30kW DC GBT -  Hinjewadi Hub  ,11,49.88,6h 12m,98.36,"gbt,gbt",Available,Charging,-,Hinjewadi Hub,Maharashtra,mindra,ocpp,V112_72902_09389,config,18 Rs Per Unit
+bttndj,Nikol EV 11kW- Marigold Society_O-Building,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.32.4.25_EM1:26.5.0_EM2:27.5.0,config,Rs.15 + GST
+ipvcte,P3-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+m2syqq,Alankar 7.4kW  EV Charging Station ,0,0.00,0h 00m,76.23,type_2,Unavailable,-,-,-,Maharashtra,ABB,ocpp,TAC1Z9118606710273::V1.8.21,config,18 Rs Per Unit
+eiqprj,Harikrupa Enterprises 60kW DC - NIKOL EV,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Faulted,-,-,Maharashtra,IOEMAS,ocpp,P0-5.3,config,16+GST
+b6pmf6,NIKOL EV 3.3kW - PCMC (18),0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Rs.30 incl.GST
+uitr6n,P3-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+ixakza,P4-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+6e95rd,Nikol EV 3.3kW-  Marigold Society-R Building,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.15 + GST
+wmc5qo,P6-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+5uedz3,Nikol EV 3.3kW AC 02 - Zensar Technologies,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Pune City,Kazam,ocpp,OCPP_34.0.14_SIM800,config,ZENSAR
+i48yqk,3-River Dale-Bharat AC-NIKOL EV 10kW,0,0.00,0h 00m,100.00,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Available,Available,Charging,-,Maharashtra,Mindra,ocpp,0.0.4.3,config,Riverdale
+oidbkk,P4-2 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.6,config,Phoenix
+t9few6,P5-6 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+3ox9ku, Nikol EV 180kW - AEM,45,2008.85,22h 42m,68.98,"ccs,ccs",Charging,Available,-,-,Maharashtra,NIKOL EV,ocpp,2.1.4-2.1.4,config,AEM
+bsqur5,Nikol EV 3.3Kw - Power Battery Services Jalgaon,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,20 Rs/Unit
+khq3ef,P6-2 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+7ik5w4,Nikol EV - Indapur Corporation 7.4kW ,0,0.00,0h 00m,92.58,type_2,Available,-,-,-,Maharashtra,Exicom,ocpp,B:35.11.2_O:35.20.07_M:35.12.8,config,Indapur Corporation
+5sjt3h,Nikol EV 3.3kW - Phoenix Mall of the Millennium,1,1.71,4h 43m,100.00,industrial_three_pin,Charging,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Phoenix
+5knqw2,Nikol EV 3.3kW - Phoenix Mall of the Millennium,0,0.00,0h 00m,0,industrial_three_pin,Charging,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Phoenix
+ueqf5v,P1 - 6 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+5q4nqj,NIKOL EV 3.3 kW- Lootel cafe bus,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Madhya Pradesh,Kazam,ocpp,OCPP_34.1.8_SIM800,config,20 Rs/Unit
+q2nk9f,NIKOL EV - Kudale Mall 14kW Hybrid,8,6.28,9h 22m,100.00,"type_2,three_pin,industrial",Available,Available,Available,-,Maharashtra,NIKOL EV,ocpp,0.1.1.10,config,Rs.18+GST
+mt4rds, Kumar Picasso - NIKOL EV 14kW Hybrid Charger,0,0.00,0h 00m,100.00,"type_2,three_pin,industrial",Available,Available,Available,-,Maharashtra,NIKOL EV,ocpp,0.0.4.0,config,15.54 All Inclusive
+ytes6n,R.S. Electromatics 25kW DC - NIKOL EV,0,0.00,0h 00m,99.77,ccs,Available,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.05.12.21.0E,config,RS Electromatics - Rs.25/unit (incl. gst)
+chzfwz,11-NIKOL EV 3.3 kW-PCMC ,1,5.85,2h 20m,79.80,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+gpyzc7,Nikol EV 22kw Riddhi Siddhi Mumbai,0,0.00,0h 00m,75.29,type_2,Charging,-,-,-,Mumbai City,StarCharge,ocpp,1.0.0.0.6b106,config,12 rs per unit
+6rn39z,Nikol EV 3.3kW - Phoenix Mall of the Millennium,0,0.00,0h 00m,98.78,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Phoenix
+4ntrrx,"WTC Gate No. 2, Mumbai - NIKOL EV 60kW",1,35.85,0h 56m,99.78,"ccs,ccs",Available,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,Rs.30 incl.GST
+7marjo,60kW - MetroCharge EV Charging Station,5,138.78,4h 14m,100.00,"ccs,ccs",Charging,Available,-,-,Maharashtra,EXICOM,ocpp,42.12.04.00_01.10_04.00.02_04.00.02,config,metro charge
+h1j7e9,Bharat AC-NIKOL EV 10kW- solapur,0,0.00,0h 00m,0,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Available,Available,Available,-,-,Mindra,ocpp,0.0.4.3,config,25 All In
+cmrdg2,Nikol EV 60kW- Naik Motors Verna Goa,4,123.99,2h 56m,100.00,"ccs,ccs",Finishing,Charging,-,-,Goa,EXICOM,ocpp,42.12.28.00_03.06_04.00.02_04.00.02,config,21 Rs per unit
+ede6bs,P1 - 4 Phoenix Mall of the Millennium 7.4kW AC,1,8.90,1h 18m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+9f17uj,Nikol EV 7.4kW - Ganga Utopia ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,18 Rs Per Unit
+i2fpgf,Nikol EV 22kW - Wadgaonpir,0,0.00,0h 00m,0,type_2,Charging,-,-,-,Maharashtra,Exicom,ocpp,B:25.14_M:35.24.4.32_EM1:26.4.0_EM2:27.4.0,config,-
+2hgv1e,P3-4 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+4mveba,Nikol EV 80kW - Sai Shraddha EVCS ,10,29.85,1h 00m,94.82,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09413,config,18 Rs Per Unit
+ygjdqz,Saguna EVCS - Nikol EV 60kW,6,158.61,3h 08m,90.82,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09588,config,25 All In
+brmuyf,NIKOL EV 3.3kW - Stature ,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,18 Rs Per Unit
+bqwuc9,Nikol EV 3.3kW - Titwala,0,0.00,0h 00m,100.00,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,-
+ehexh9,1-NIKOL EV 7.4 kW-PCMC,1,0.00,0h 02m,100.00,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.10_IOEXP_0.00,config,-
+jttvag,P4-5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+v49nwc,Nikol EV  Novel Tech Park HSR 3.3kW -  1,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
+gk6vko,Monto EV charging station Nikol EV 14kW ,4,1.05,0h 23m,99.78,"type_2,three_pin,industrial",Available,Available,Available,-,Madhya Pradesh,NIKOL EV,ocpp,0.0.4.0,config,Monto EVCS Indore
+cy5zf9,19-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,99.72,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+n5qy4h,Grishma Solar - Stature DC 02,0,0.00,0h 00m,0,ccs,Faulted,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
+usm5cg,12-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,83.96,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+whn3yw,Nikol EV- 3.3kW,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,25 All In
+9gm63u, Grishma Solar - Stature DC 01,0,0.00,0h 00m,0,ccs,Unavailable,-,-,-,Maharashtra,Delta Electronics,ocpp,v02.07.12.21.05,config,25 All In
+qzzt2e,Nikol EV 3.3 kW - Ganga Utopia (2),0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_L510,config,Rs.16 incl. GST
+c6bn2c,16-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,0,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+vsa5tq,Harikrupa Enterprises 14kW Hybrid Nikol EV,0,0.00,0h 00m,100.00,"type_2,three_pin,industrial",Available,Available,Available,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.0,config,18 Rs Per Unit
+nmesqq,Nikol EV Novel Marathahalli 3.3kw - 1,2,2.80,3h 59m,98.68,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.2.0_SIM800,config,Novel 3.3kW
+ubur8k,NIKOL EV 7.4 KW- CretaCity Mall,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25+GST
+n4o2ec,Verna Furniture Goa - Laxmi Steel Industries Nikol EV 22kW ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Goa,Exicom,ocpp,B:25.14_M:35.24.2.42_EM1:26.4.0_EM2:27.4.0,config,Verna Goa
+eas3dv,Nikol EV 15kW - Pickkup (Zomato Hub),10,73.07,10h 50m,75.68,gbt,Charging,-,-,-,Haryana,mindra,ocpp,V111_72902_09558,config,Free user
+nriqe3,P6-1 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+4qtfwa,3-NIKOL EV 3.3 kW-PCMC ,1,7.60,2h 50m,99.72,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+w21ors,P-1 3 Phoenix Mall of the Millennium 7.4kW AC,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+5z2u42,8-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,97.69,industrial_three_pin,Available,-,-,PCMC,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Rs.30 incl.GST
+zzij3y,P5-3 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+x2wz9f,New Daulat Food Mall  60kW DC  - NIKOL EV,10,90.50,2h 24m,91.82,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09609,config,25 All In
+ur15yd,Harshwardhan Patil_Nikol 7.4kW,0,0.00,0h 00m,99.15,type_2,Available,-,-,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.10_IOEXP_0.00,config,Free user
+vqepbk,5-River Dale-NIKOL EV 3.3kW,1,1.21,3h 23m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
+6fhgp9,NIKOL EV 3.3 kW- Mauli Enterprises ,0,0.00,0h 00m,0,industrial_three_pin,Faulted,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,-
+whzutc,Nikol EV 15kW GBT - Solapur,0,0.00,0h 00m,0,gbt,Faulted,-,-,-,Maharashtra,mindra,ocpp,V111_72902_09389,config,25 All In
+urkfju,Citadines Goa - NIKOL EV 30kW DC Charger,0,0.00,0h 00m,97.56,ccs,Faulted,-,-,-,Goa,Plugzmart,ocpp,3.2.0,config,25 All In
+iqycq7,NIKOL EV 120KW- Quick watt Hotel Tatyancha Wada ,0,0.00,0h 00m,100.00,"ccs,ccs",Available,Available,-,-,-,mindra,ocpp,V112_72902_09609,config,Quickwatt - 22+gst
+5kfyaa,Health & Harmony - NIKOL EV 3.3kW 1,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,15.54 All Inclusive
+nw128t,NIKOL EV 7.4kW  - Serenity Skies Apartment,0,0.00,0h 00m,76.60,type_2,Available,-,-,-,Maharashtra,NIKOL EV ,ocpp,0.0.4.6,config,Rs.30 incl.GST
+5c3pzc,Nikol EV 3.3kW AC 03 - Zensar Technologies,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Pune City,Kazam,ocpp,OCPP_34.0.14_SIM800,config,ZENSAR
+1o7thm,Nikol EV 7.4kW - Titwala,0,0.00,0h 00m,100.00,type_2,Faulted,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,20 Rs/Unit
+bvn57w,Nikol 3.3kW CretaCity Mall,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.14_SIM800,config,24+GST
+9ak7kg,Laxminarayan EVCS - Nikol EV 30kW,0,0.00,0h 00m,99.78,ccs,Available,-,-,-,Maharashtra,nikol,ocpp,3.8.5-2.7.8,config,Shirpur
+5jffhr,1-River Dale-NIKOL EV 3.3kW,2,1.89,4h 36m,19.73,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Riverdale
+1s3jfm,Mauli enterprises 14kW Hybrid AC - NIKOL EV,0,0.00,0h 00m,0,"type_2,three_pin,industrial",Available,Faulted,Faulted,-,Maharashtra,Nikol EV,ocpp,0.1.1.11,config,15.54 All Inclusive
+718oyj,Nikol EV 80kW - Hotel Grand Savita Malegaon,1,10.54,1h 54m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,Mindra,ocpp,V112_72902_09389,config,Quickwatt - 22+gst
+i85nne,P3-5 Phoenix Mall of the Millennium 7.4kW AC ,0,0.00,0h 00m,0,type_2,Charging,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Phoenix
+2bb4g4,Test,11,0.01,1h 18m,26.33,industrial,Available,-,-,-,Karnataka,-,kazam,34.3.17,config,-
+hkw2j3,Nikol EV 7.4kW AC 01 - Zensar Technologies,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.4,config,ZENSAR
+uw743q,NIKOL EV 60kW- bhosari,0,0.00,0h 00m,0,"ccs,ccs",Faulted,Unavailable,-,-,-,EXICOM,ocpp,42.12.25.00_03.06_04.00.06_04.00.06,config,25 All In
+nmywgr,14-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,84.13,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+47ujyn,"NIKOL EV 3.3 kW- Hotel Naivedya, Waluj",0,0.00,0h 00m,96.70,industrial_three_pin,Available,-,-,-,-,-,kazam,34.3.21_L510,config,Rs.21.5 + GST
+yebpfe,6-River Dale-NIKOL EV 3.3kW,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
+yf36qx,"NIKOL EV 60KW - DBA EVCS, Beed",0,0.00,0h 00m,100.00,"ccs,ccs",Available,Available,-,-,Maharashtra,mindra,ocpp,V112_72902_09609,config,25 All In
+6kfck9,Nikol EV Novel Office Adugodi 3.3kW,0,0.00,0h 00m,100.00,industrial_three_pin,Available,-,-,-,Karnataka,Kazam,ocpp,OCPP_34.0.14_SIM800,config,Novel 3.3kW
+h67923,2-River Dale-NIKOL EV 3.3kW,1,0.07,0h 06m,100.00,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.0.19_SIM800,config,Riverdale
+b9dk3e,Nikol EV 3.3kW - Hinjewadi Hub 02,0,0.00,0h 00m,0,industrial_three_pin,Available,-,-,Hinjewadi Hub,Maharashtra,Kazam,ocpp,OCPP_34.2.0_SIM800,config,18 Rs Per Unit
+yj5d2p,Unique EV Charging - Nikol EV 7.4kW,0,0.00,0h 00m,77.22,type_2,Faulted,-,-,-,Maharashtra,Enter_vendor,ocpp,0.0.4.10_IOEXP_0.00,config,Rs.20.5 incl. GST
+eq24q9,NIKOL EV 7.4kW - Serenity Meadows Bungalow,0,0.00,0h 00m,100.00,type_2,Available,Available,Available,-,Maharashtra,NIKOL EV,ocpp,0.0.4.10_IOEXP_0.00,config,Rs.30 incl.GST
+x1b721,Nikol EV 7.4kW - Agreen Hotels & Resort,0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,25 All In
+aaoiar,Nikol EV 7.4kW - Ganga Utopia (2),0,0.00,0h 00m,0,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,18 Rs Per Unit
+v9e66v,NIKOL EV 7.4kW AC - Saikrupa,0,0.00,0h 00m,100.00,type_2,Available,-,-,-,Maharashtra,NIKOL EV,ocpp,0.0.4.6,config,test
+2dygvc,1-River Dale-Bharat AC-NIKOL EV 10kW,0,0.00,0h 00m,100.00,"industrial_three_pin,industrial_three_pin,industrial_three_pin",Available,Available,Available,-,Maharashtra,Mindra,ocpp,0.0.4.3,config,Riverdale
+t5gjwg,15-NIKOL EV 3.3 kW-PCMC ,0,0.00,0h 00m,99.21,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_SIM800,config,Rs.30 incl.GST
+e7o2ue,Nikol EV 3.3kW-  Marigold Society-R Building,0,0.00,0h 00m,95.95,industrial_three_pin,Available,-,-,-,Maharashtra,Kazam,ocpp,OCPP_34.1.8_L510,config,Rs.15 + GST

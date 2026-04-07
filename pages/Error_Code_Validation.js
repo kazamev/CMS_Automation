@@ -57,7 +57,9 @@ export class ErrorCodeVal{
 async GetErrorCodeValue() {
   const colIndex = await this.getErrorCodeColumnIndex();
   const errorCode = (await this.page.locator(`//*[@id='scroll_listener']//tr[1]/td[${colIndex}]`).textContent()).trim();
+  const ChargeId = (await this.page.locator(`//*[@id="scroll_listener"]/table/tbody/tr[1]/td[2]`).textContent()).trim();
   console.log("Error Code Value in Chargers Table:", errorCode);
+  console.log("Charge ID:", ChargeId);
   await this.ChargerRow.click();
   await this.page.waitForLoadState("networkidle");
   return errorCode;

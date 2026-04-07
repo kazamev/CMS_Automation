@@ -18,7 +18,7 @@ export class ChargerTariffPage {
     this.amountInput = page.locator("//input[contains(@placeholder,'Enter Amount')]");
     this.addPriceBtn = page.locator("//button[normalize-space()='Add Price']");
     this.searchChargerInput = page.locator("(//input[@placeholder='Search'])[1]");
-    this.linkCheckbox = page.locator("(//input[@id='link-checkbox'])[2]");
+    this.linkCheckbox = page.locator("(//input[@id='link-checkbox'])[4]");
     this.reviewDetailsDiv = page.locator("(//div[contains(@class,'flex flex-col gap-4')])[1]");
     this.createBtn = page.locator("//button[text()='Create']");
     this.detailsAfterCreateDiv = page.locator("(//div[@class='w-full h-full border border-kazamGray-200 rounded-md ml-2 p-6 flex flex-col gap-10 overflow-auto'])[1]");
@@ -59,6 +59,12 @@ this.StateChargeBtn = page.locator("(//button[@type='button'])[5]");
     this.dltbut=page.locator("//div[@class='delete-button cursor-pointer']//*[name()='svg']");
     this.yesbtn=page.locator("//button[normalize-space()='Yes']");
 
+    //charger page
+    this.filtersBtn = page.locator("//div[@class='flex gap-2 items-end']//button[2]");
+    this.nonconfiguredFilter = page.locator("//input[@placeholder='Select status']");
+    this.Configuredoptions = page.locator("//span[normalize-space()='Configured']");
+    this.Nonconfigureoptions = page.locator("//span[normalize-space()='Non-Configured']");
+    this.ApplyBtn = page.locator("//button[normalize-space()='Apply']");
   }
 
 
@@ -110,9 +116,10 @@ async addPrice(amount) {
   //   await this.nextBtn.click();
   // }
 
-   async searchAndLinkCharger() {
+   async searchAndLinkCharger(chargerId) {
+      await this.searchChargerInput.fill(chargerId);
+      await this.page.waitForTimeout(2000);
     await this.linkCheckbox.check();
-      const chargerId = await this.selectedchargerId.innerText();
       await this.page.waitForTimeout(2000)
       if (await this.linkCheckbox.isChecked()) {
         console.log("Selected Charger:", chargerId);
@@ -120,6 +127,7 @@ async addPrice(amount) {
         console.log("Charger not found");
       }
     await this.nextBtn.click();
+    return chargerId;
   }
    
 
@@ -156,6 +164,34 @@ const container = this.page.locator("//div[contains(@class,'rounded') and .//tex
   return table;
 }
  
+
+//Goto Charger Page to check the linked charger
+async gotoLinkedCharger(chargerId) {
+  await this.page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers");
+      await this.page.waitForLoadState("networkidle");
+      console.log("Navigated to Chargers page to verify the linked charger.");
+      console.log(`charger ID: ${chargerId}`);
+      await this.filtersBtn.click();
+      await this.nonconfiguredFilter.click();
+      await this.page.waitForTimeout(1000);
+      await this.Nonconfigureoptions.click();
+      //  await this.page.waitForTimeout(1000);
+      //  await this.Configuredoptions.click();
+        await this.page.waitForTimeout(1000);
+      await this.ApplyBtn.click();
+        await this.page.waitForTimeout(2000);
+      const searchField = this.page.locator('//input[@type="search"]');
+    await searchField.fill(chargerId);
+    await this.page.waitForLoadState("networkidle");
+    // Locate charger row dynamically
+    const chargerRow = this.page.locator(`//tr[.//p[text()="${chargerId}"]]`);
+    await chargerRow.waitFor({ state: "visible", timeout: 10000 });
+    const TariffName=await this.page.locator(`(//div[@class='py-1 text-center line-clamp-2 false svelte-htk24u'])[1]`).innerText();
+    console.log("Assigned Tariff Name: ", TariffName);
+    await this.page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/tariffs");
+    await this.page.waitForLoadState("networkidle");
+    return TariffName;
+}
 // Final create tariff
 async createTariffFinal() {
   await this.createBtn.click();

@@ -110,8 +110,8 @@ async selectSingleDate(day) {
 
   // Open Success Transactions and get Overview Data
 async openSuccessTransactionAndGetOverview() {
-  // const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-  // await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
+  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
   console.log("Success row Overview Data");
   const overviewSelectors = {
 
@@ -141,13 +141,13 @@ async openSuccessTransactionAndGetOverview() {
 }
 
 async downloadInvoiceFile() {
-  const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  // const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
+  // await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
   
     await this.Invoicefirstclick.click();
     await this.page.waitForTimeout(2000);
     await this.InvoiceDownload.click();
-    await this.page.waitForTimeout(8000);
+    await this.page.waitForTimeout(10000);
     console.log("Invoice Data");
   // Data from the invoice page
           const invoiceSelectors = {

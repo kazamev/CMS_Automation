@@ -17,7 +17,7 @@ import { DataValidation } from "../pages/Weekly_Data_Validation";
 import { LastConfigurationVal } from "../pages/LastConfigurationVal";
 import { ErrorCodeVal } from "../pages/Error_Code_Validation";
 import { TaxAggregationVal } from "../pages/Tax_Aggregation"; 
-
+import { DriverCreationDeactivationPage } from '../pages/Driver_Creation_Deactivation';
 
 let context;
 let page;
@@ -91,6 +91,17 @@ test.afterAll(async () => {
 
 });
 
+
+//yesterday date function 
+function getYesterdayDate() {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
   // DASHBOARD VS CHARGER PAGE COMPARISON
      test('Dashboard vs Charger page Data comparison', async () => {
       test.setTimeout(180000)
@@ -105,7 +116,7 @@ test.afterAll(async () => {
 
      //Print organisation name
     console.log(`\nOrganisation Name: ${orgName}\n`);
-
+    console.log(`Selected Date : ${getYesterdayDate()}`);
     await dashboard.applyTimeFilterInDashboard("Yesterday");
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(5000);
@@ -326,6 +337,8 @@ test('Hubwise Data Validation', async () => {
 
     //Print organisation name
     console.log(`\nOrganisation: ${orgName}\n`)
+
+
 
    
   function getSelectedDate() {
@@ -584,6 +597,8 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
          
     const tariffName = `Auto_Tariff_${Date.now()}`;
     const amount = "1";
+    const chargerId = "35aqzi";
+    const DC_CHARGER_ID="htpac2";
 
     // Create tariff
     console.log(`Start Flat Tariff Creation : ${tariffName}`);
@@ -592,15 +607,18 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await tariffPage.addPrice(amount);
 
     // Search & link charger
-    await tariffPage.searchAndLinkCharger();
+    const linkedChargerId = await tariffPage.searchAndLinkCharger(chargerId);
 
     // Review page
     const reviewDetails = await tariffPage.getReviewAndConfirmDetailsAsTable();
 
     // Create tariff
     await tariffPage.createTariffFinal();
+   
     console.log(`\nFlat Tariff Created Successfully: ${tariffName}\n`);
-    console.log(`Remove the linked charger successfully to delete the tariff`);
+   const TariffName = await tariffPage.gotoLinkedCharger(linkedChargerId);
+    
+
 
     //delete tariff after creation
     await tariffPage.deleteTariff(tariffName);
@@ -616,7 +634,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await tariffPage.addPrice(amount);
 
     // Search & link charger
-    await tariffPage.searchAndLinkCharger();
+    await tariffPage.searchAndLinkCharger(DC_CHARGER_ID);
 
     // Review page
     const reviewDetailsforFastCharging = await tariffPage.getReviewAndConfirmDetailsAsTable();
@@ -624,6 +642,8 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     // Create tariff
     await tariffPage.createTariffFinal();
     console.log(`\nFast Charging Tariff Created Successfully: ${fastTariffName}\n`);
+
+    await tariffPage.gotoLinkedCharger(DC_CHARGER_ID);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
@@ -645,7 +665,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
 
     // Search & link charger
-    await tariffPage.searchAndLinkCharger();
+    await tariffPage.searchAndLinkCharger(chargerId);
 
     // Review page
     const reviewDetailsforTimeOfDay = await tariffPage.getReviewAndConfirmDetailsAsTable();
@@ -653,6 +673,8 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     // Create tariff
     await tariffPage.createTariffFinal();
     console.log(`\nTime Of Day Tariff Created Successfully: ${timeOfDayTariffName}\n`);
+
+    await tariffPage.gotoLinkedCharger(chargerId);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
@@ -683,6 +705,8 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     // Create tariff
     await tariffPage.createTariffFinal();
     console.log(`\nCharge By Hour Tariff Created Successfully: ${chargeByHourTariffName}\n`);
+
+    await tariffPage.gotoLinkedCharger(chargerId);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
@@ -712,6 +736,8 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     // Create tariff
     await tariffPage.createTariffFinal();
     console.log(`\nState Of Charge Tariff Created Successfully: ${stateOfChargeTariffName}\n`);
+
+    await tariffPage.gotoLinkedCharger(chargerId);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
@@ -732,6 +758,8 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
         //Print organisation name
         console.log(`\nOrganisation: ${orgName}\n`)
+
+        console.log(`Selected Date : ${getYesterdayDate()}`);
         
         //Apply Time Filter in Dashboard
         await sessionPage.applyTimeFilterInDashboard("Yesterday");
@@ -917,6 +945,7 @@ test('Validate Revenue Amount between Dashboard and Revenue Page', async () => {
 
   console.log(`\nOrganisation Name: ${orgName}\n`);
 
+  console.log(`Selected Date : ${getYesterdayDate()}`);
   await revenuePage.applyTimeFilterInDashboard("Yesterday");
   const DashBoardRevenue = await revenuePage.getDashboardRevenue();
 
@@ -948,7 +977,7 @@ test('Validate Revenue Amount between Dashboard and Revenue Page', async () => {
   ).toBeTruthy();
 });
 
-test('Validate Revenue Report And Invoice Data', async () => {
+test.only('Validate Revenue Report And Invoice Data', async () => {
   test.setTimeout(200000);
 
   const REVENUEPAGE = new RevenuePage(page);
@@ -1385,6 +1414,14 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
               const dataValidation = new DataValidation(page);
               await page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo");
               await page.waitForLoadState("networkidle");
+              
+ const currentUrl = page.url();
+        const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+        //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
+    
+              
     
     //Apply Time Filter in Dashboard
           await dataValidation.ApplyTimeFilterInDashboard("Calendar");
@@ -1455,7 +1492,8 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
     //Navigate to Revenue Page
     await page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo/revenue_management/overview");
     await page.waitForLoadState("networkidle");
-    
+
+   
     //Apply Time Filter in Revenue Page
     await dataValidation.SelectDate();
     
@@ -1484,6 +1522,12 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
      await page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo/chargers");
     await page.waitForLoadState("networkidle"); 
 
+    const currentUrl = page.url();
+        const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+        //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
+
     // click on any charger
     await lastConfigVal.ClickOnFirstCharger();
 
@@ -1493,7 +1537,7 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
 
     //Reconfiguration Value
     const reConfigDate = await lastConfigVal.getLastConfigurationValueInCharger();
-      console.log("Last Reconfiguration Date in Configuration Tracking:", reConfigDate);
+      console.log("Last configuration Date in Installation Details:", reConfigDate);
 
     //Validation
     await lastConfigVal.ValidateLastConfigurationValue(lastConfigDate, reConfigDate);
@@ -1507,6 +1551,12 @@ test('Validate Error Code', async () => {
   const errorCodeVal = new ErrorCodeVal(page);
    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
   await page.waitForLoadState("networkidle");
+
+  const currentUrl = page.url();
+        const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+        //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
 
   //edit table and get error code
   await errorCodeVal.ClickOnEditTableField();
@@ -1523,6 +1573,12 @@ test('Create, Validate and Delete Aggregation Fee', async () => {
     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/overview");
     await page.waitForLoadState("networkidle");
 
+    const currentUrl = page.url();
+        const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+        //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
+
     const Data = {
         TariffName: "Test Aggregation",
         Percentage:10
@@ -1534,16 +1590,10 @@ test('Create, Validate and Delete Aggregation Fee', async () => {
     //Validate Aggregation Fee
     const result = await Aggregation.ValidateAggregationFee(Data.TariffName, Data.Percentage);
     console.log(result);
-  if (expect(result.name).toBe(Data.TariffName)) {
-    console.log("Aggregation Fee name validation is passed");
-  }
-  if (expect(result.percentage).toBe(Data.Percentage.toString())) {
-    console.log("Aggregation Fee percentage validation is passed");
-  }
-  if (expect(result.date).toContain("2026")) {
-    console.log("Aggregation Fee date validation is passed");
-  }
-  console.log("\nAggregation Fee validated successfully\n");
+  expect(result.name).toBe(Data.TariffName) ? console.log(`Aggregation Fee name validation is passed- [${result.name},${Data.TariffName}]`) : console.error(`Aggregation Fee name validation is failed- [${result.name},${Data.TariffName}]`);
+  expect(result.percentage).toBe(Data.Percentage.toString()) ? console.log(`Aggregation Fee percentage validation is passed- [${result.percentage},${Data.Percentage.toString()}]`) : console.error(`Aggregation Fee percentage validation is failed- [${result.percentage},${Data.Percentage.toString()}]`);
+  expect(result.date).toContain("2026") ? console.log(`Aggregation Fee date validation is passed- [${result.date}]`) : console.error(`Aggregation Fee date validation is failed- [${result.date}]`);
+  // console.log("\nAggregation Fee validated successfully\n");
 
   //Delete Aggregation Fee
   await Aggregation.DeleteAggregationFee();
@@ -1552,11 +1602,16 @@ test('Create, Validate and Delete Aggregation Fee', async () => {
 
 
 //Tax Creation, Validation and Deletion
-test.only('Create, Validate and Delete Tax', async () => {
+test('Create, Validate and Delete Tax', async () => {
   test.setTimeout(200000)
     const TaxVal = new TaxAggregationVal(page);
     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/overview");
     await page.waitForLoadState("networkidle");
+    const currentUrl = page.url();
+        const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+        //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
 
     const Data = {
         TaxName: "Test Tax",
@@ -1574,24 +1629,37 @@ test.only('Create, Validate and Delete Tax', async () => {
     //Validate Tax
     const result = await TaxVal.ValidateTax(Data.TaxName,Data.TaxNumber, Data.TaxPolicy, Data.BusinessName, Data.Address, Data.SubCategory, Data.Amount, Data.AmountType);
     console.log(result);
-  if (expect(result.taxName).toBe(Data.TaxName)) {
-    // console.log("Tax name validation is passed");
-  }
-
-  if (expect(result.businessName).toBe(Data.BusinessName)) {
-    // console.log("Tax business name validation is passed");
-  }
-
-  if (expect(result.taxid).toBe(Data.TaxNumber)) {
-    // console.log("Tax number validation is passed");
-  }
-  if (expect(result.address).toBe(Data.Address)) {
-    // console.log("Tax address validation is passed");
-  }
-  console.log("\nTax validated successfully\n");
+  expect(result.name).toBe(Data.TaxName) ? console.log(`Tax name validation is passed- [${result.name},${Data.TaxName}]`) : console.error(`Tax name validation is failed- [${result.name},${Data.TaxName}]`);
+  expect(result.businessName).toBe(Data.BusinessName) ? console.log(`Tax business name validation is passed- [${result.businessName},${Data.BusinessName}]`) : console.error(`Tax business name validation is failed- [${result.businessName},${Data.BusinessName}]`);
+  expect(result.taxid).toBe(Data.TaxNumber) ? console.log(`Tax number validation is passed- [${result.taxid},${Data.TaxNumber}]`) : console.error(`Tax number validation is failed- [${result.taxid},${Data.TaxNumber}]`);
+  expect(result.address).toBe(Data.Address) ? console.log(`Tax address validation is passed- [${result.address},${Data.Address}]`) : console.error(`Tax address validation is failed- [${result.address},${Data.Address}]`);
 
   //Delete Tax
   await TaxVal.DeleteTax();
 });
+
+
+//Driver Creation, Validation and Deactivation
+test('Create, Validate and Deactivate Driver', async () => {
+  test.setTimeout(200000)
+    const driverCreation = new DriverCreationDeactivationPage(page);
+    await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/drivers_and_vehicles/drivers");
+    await page.waitForLoadState("networkidle");
+    const currentUrl = page.url();
+        const orgName = currentUrl.split('/org/')[1].split('/')[0];
+
+        //Print organisation name
+        console.log(`\nOrganisation: ${orgName}\n`)
+    const driverData = {
+        Name: "Test Driver"
+    };
+
+    const driver = await driverCreation.createDriver(driverData);
+    await driverCreation.deactivateDriver(driver.phoneNum);
+
+
+});
+
+
 
 });
