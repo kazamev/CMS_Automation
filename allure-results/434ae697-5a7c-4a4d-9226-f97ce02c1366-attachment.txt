@@ -1,76 +1,5 @@
 
-<html>
-<head>
-<style>
-body { font-family: Arial; font-size: 15px; }
-h2 { background:#222; color:#fff; padding:8px; }
-
-pre {
-  background:#f4f4f4;
-  padding:10px;
-  white-space:pre-wrap;
-  border-left:4px solid #2196f3;
-}
-
-/*TABLE FIXES */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 10px 0;
-  font-size: 11px;
-}
-
-th, td {
-  border: 1px solid #444;
-  padding: 4px 6px;
-  word-break: break-word;
-  vertical-align: top;
-}
-
-thead {
-  background: #eee;
-}
-
-tr {
-  page-break-inside: avoid;   /*  NO ROW SPLIT */
-}
-
-</style>
-</head>
-<body>
-
-<h1>Playwright Console Logs</h1>
-<h2>Validate Revenue Report And Invoice Data</h2><pre> Validate Revenue Report And Invoice Data =====
-
-
-Organisation Name: ev_pump
-
-Success row Overview Data
-Transaction id: 36869535
-Billed Amount: 231.69
-Host Details: EV PUMP
-Driver Details: Crane R 9820351253
-Time stamp: 06/04/2026
-        
-        11:41:41 pm
-Invoice Data
-Transaction id: 36869535
-Billed Amount: 231.69
-Host Details: EV PUMP
-Driver Details: Crane R - 9820351253
-Time stamp: Apr 06 2026, 11:41:42 pm
-
- Comparison Report
-Transaction id: MATCHED
-Billed Amount: MATCHED
-Host Details: MATCHED
-Driver Details: MATCHED
-Time stamp: MATCHED
-
-No API calls captured
-
-
-=</pre><h2>Validate Last Configuration Date</h2><pre> Validate Last Configuration Date =====
+===== TEST START: Validate Last Configuration Date =====
 
 
 Organisation: ev_pump
@@ -90,4 +19,5 @@ Last Configuration Date is consistent across pages.
 │────────│────────│───────────────────────────────────────────────────────────────────────────────────│
 
 
-=</pre></body></html>
+===== TEST END: Validate Last Configuration Date =====
+

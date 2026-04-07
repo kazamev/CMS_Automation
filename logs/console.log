@@ -35,3 +35,26 @@ No API calls captured
 
 ===== TEST END: Validate Revenue Report And Invoice Data =====
 
+
+===== TEST START: Validate Last Configuration Date =====
+
+
+Organisation: ev_pump
+
+Last Configuration Date in Charger Details Page: 08/01/2026 11:34 AM
+Charger ID:  1i5sks
+Last configuration Date in Installation Details: 08/01/2026, 11:34:51 AM
+Last Configuration Date is consistent across pages.
+
+==== API CALLS : Validate Last Configuration Date ====
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                               │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/ev_pump/chargers/tariff_details?device_id=1i5sks │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/1i5sks                                │
+│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
+
+
+===== TEST END: Validate Last Configuration Date =====
+

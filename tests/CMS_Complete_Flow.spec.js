@@ -1515,7 +1515,7 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
     
 
   // Last Configuration Date Validation
-  test("Validate Last Configuration Date", async () => {
+  test.only("Validate Last Configuration Date", async () => {
     
     test.setTimeout(120000);
     const lastConfigVal = new LastConfigurationVal(page);
@@ -1531,6 +1531,9 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
     // click on any charger
     await lastConfigVal.ClickOnFirstCharger();
 
+     //ChargerId
+    const chargerId = await lastConfigVal.getChargerId();
+
     //Last Configuration value
     const lastConfigDate = await lastConfigVal.getLastConfigurationValue();
       console.log("Last Configuration Date in Charger Details Page:", lastConfigDate);
@@ -1542,7 +1545,6 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
     //Validation
     await lastConfigVal.ValidateLastConfigurationValue(lastConfigDate, reConfigDate);
   });
-
 
 
 // Error Code Validation
