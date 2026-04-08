@@ -24,6 +24,12 @@ async getLastConfigurationValue() {
     return lastConfigDate;
   }
 
+async getChargerId() {
+    const chargerId = await this.page.locator("(//p[@class='font-medium text-sm'])[1]").textContent();
+    console.log("Charger ID: ", chargerId);
+    return chargerId;
+  }
+
 async getLastConfigurationValueInCharger() {
     await this.ReconfigurationIcon.click();
     await this.page.waitForTimeout(3000);

@@ -149,13 +149,13 @@ async countSessionIdsInExcel(filePath) {
     const tolerance = excelCount * 0.05;
     //Compare All Count with Dashboard KPI
     {
-        if (Math.abs(allCount - sessionKpi) > tolerance) {
+        if (Math.abs(allCount - sessionKpi) > 5) {
         errors.push(`🛑All sessions Count in the session page (${allCount}) does NOT match KPI Count (${sessionKpi})`);
          }
     }
 
     //Compare Excel count with KPI
-   if (Math.abs(sessionKpi - excelCount) > tolerance)  {
+   if (Math.abs(sessionKpi - excelCount) > 5)  {
         errors.push(`🛑KPI Count (${sessionKpi}) does NOT match Excel Count (${excelCount})`);
     }
     //Compare UI All Count with Excel
@@ -165,7 +165,7 @@ async countSessionIdsInExcel(filePath) {
     }
     //Return structured result
     if (errors.length === 0) {
-        console.log(`🟡 Session counts match across the Dashboard, Session page, and Excel file (${excelCount} ) ---within ±5% tolerance`);
+        console.log(`🟡 Session counts match across the Dashboard, Session page, and Excel file (${excelCount} ) ---within ±5 tolerance`);
         return {
             success: true,
             excelCount

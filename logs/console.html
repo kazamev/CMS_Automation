@@ -40,32 +40,27 @@ tr {
 <body>
 
 <h1>Playwright Console Logs</h1>
-<h2>Validate Revenue Report And Invoice Data</h2><pre> Validate Revenue Report And Invoice Data =====
+<h2>Create, Validate and Delete Aggregation Fee</h2><pre> Create, Validate and Delete Aggregation Fee =====
 
 
-Organisation Name: ev_pump
+Organisation: Tyagi_Org
 
-Success row Overview Data
-Transaction id: 36869535
-Billed Amount: 231.69
-Host Details: EV PUMP
-Driver Details: Crane R 9820351253
-Time stamp: 06/04/2026
-        
-        11:41:41 pm
-Invoice Data
-Transaction id: 36869535
-Billed Amount: 231.69
-Host Details: EV PUMP
-Driver Details: Crane R - 9820351253
-Time stamp: Apr 06 2026, 11:41:42 pm
+"Test Aggregation" created successfully with Tax Percentage: 10%
 
- Comparison Report
-Transaction id: MATCHED
-Billed Amount: MATCHED
-Host Details: MATCHED
-Driver Details: MATCHED
-Time stamp: MATCHED
+ Test Data for Aggregation Fee Creation: {
+  "TariffName": "Test Aggregation",
+  "Percentage": 10
+}
+{
+  "name": "Test Aggregation",
+  "date": "08 Apr, 2026",
+  "percentage": "10",
+  "chargerId": "13jnen"
+}
+Aggregation Fee name validation is passed- [Test Aggregation,Test Aggregation]
+Aggregation Fee percentage validation is passed- [10,10]
+Aggregation Fee updated successfully by removing the associated charger
+Aggregation Fee deleted successfully
 
 No API calls captured
 

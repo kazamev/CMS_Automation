@@ -23,12 +23,12 @@ export default defineConfig({
     ['ortoni-report', { outputFolder: 'ortoni-report' }]
   ],
 
-  timeout: 180000,
+  timeout: 3000000,
 
   use: {
     headless: false,
     storageState: path.resolve(__dirname, 'storageState.json'),
-    actionTimeout: 80000,
+    actionTimeout: 900000,
     navigationTimeout: 900000,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

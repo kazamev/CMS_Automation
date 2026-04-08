@@ -54,7 +54,7 @@ const formattedDate = today
 
     const info = await transporter.sendMail({
       from: 'shilpa@kazam.in',
-      to: 'shilpa@kazam.in',
+      to: 'shilpa@kazam.in,akhilesh@kazam.in,kishore@kazam.in',
       subject: 'CMS Automation Test Reports',
       text: `
 Hi Team,
