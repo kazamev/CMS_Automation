@@ -1,7 +1,3 @@
-Global Setup: Starting secure login
-Select Organization page loaded
-Organization selected, landed inside app
-Global Setup Success! State saved to: C:\Users\dodda\OneDrive\Documents\CMS_Automation\storageState.json
 
 ===== TEST START: Create, Validate and Delete Aggregation Fee =====
 
@@ -10,15 +6,12 @@ Organisation: Tyagi_Org
 
 "Test Aggregation" created successfully with Tax Percentage: 10%
 
- Test Data for Aggregation Fee Creation: {
-  "TariffName": "Test Aggregation",
-  "Percentage": 10
-}
+ Test Data for Aggregation Fee Creation: { TariffName: 'Test Aggregation', Percentage: 10 }
 {
-  "name": "Test Aggregation",
-  "date": "08 Apr, 2026",
-  "percentage": "10",
-  "chargerId": "13jnen"
+  name: 'Test Aggregation',
+  date: '08 Apr, 2026',
+  percentage: '10',
+  chargerId: '13jnen'
 }
 Aggregation Fee name validation is passed- [Test Aggregation,Test Aggregation]
 Aggregation Fee percentage validation is passed- [10,10]

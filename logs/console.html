@@ -40,54 +40,29 @@ tr {
 <body>
 
 <h1>Playwright Console Logs</h1>
-<h2>Validate Revenue Report And Invoice Data</h2><pre> Validate Revenue Report And Invoice Data =====
+<h2>Create, Validate and Delete Aggregation Fee</h2><pre> Create, Validate and Delete Aggregation Fee =====
 
 
-Organisation Name: ev_pump
+Organisation: Tyagi_Org
 
-Success row Overview Data
-Transaction id: 36869535
-Billed Amount: 231.69
-Host Details: EV PUMP
-Driver Details: Crane R 9820351253
-Time stamp: 06/04/2026
-        
-        11:41:41 pm
-Invoice Data
-Transaction id: 36869535
-Billed Amount: 231.69
-Host Details: EV PUMP
-Driver Details: Crane R - 9820351253
-Time stamp: Apr 06 2026, 11:41:42 pm
+"Test Aggregation" created successfully with Tax Percentage: 10%
 
- Comparison Report
-Transaction id: MATCHED
-Billed Amount: MATCHED
-Host Details: MATCHED
-Driver Details: MATCHED
-Time stamp: MATCHED
+ Test Data for Aggregation Fee Creation: {
+  "TariffName": "Test Aggregation",
+  "Percentage": 10
+}
+{
+  "name": "Test Aggregation",
+  "date": "08 Apr, 2026",
+  "percentage": "10",
+  "chargerId": "13jnen"
+}
+Aggregation Fee name validation is passed- [Test Aggregation,Test Aggregation]
+Aggregation Fee percentage validation is passed- [10,10]
+Aggregation Fee updated successfully by removing the associated charger
+Aggregation Fee deleted successfully
 
 No API calls captured
-
-
-=</pre><h2>Validate Last Configuration Date</h2><pre> Validate Last Configuration Date =====
-
-
-Organisation: ev_pump
-
-Last Configuration Date in Charger Details Page: 08/01/2026 11:34 AM
-Charger ID:  1i5sks
-Last configuration Date in Installation Details: 08/01/2026, 11:34:51 AM
-Last Configuration Date is consistent across pages.
-
-==== API CALLS : Validate Last Configuration Date ====
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
-│ METHOD │ STATUS │ URL                                                                               │
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/ev_pump/chargers/tariff_details?device_id=1i5sks │
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
-│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/1i5sks                                │
-│────────│────────│───────────────────────────────────────────────────────────────────────────────────│
 
 
 =</pre></body></html>
