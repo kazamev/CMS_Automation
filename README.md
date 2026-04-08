@@ -1,8 +1,36 @@
-This project automates the functional and analytical validation of the Charging Management System (CMS) web application using Playwright with JavaScript and Ortoni reporting.
+CMS Automation Script
+
+This project contains an automated UI and data validation testing framework for the Charging Management System (CMS) platform. It utilizes Playwright with JavaScript to validate critical CMS workflows, dashboards, and analytical data.
+Additionally, it integrates multiple reporting tools and utilities for HTML reporting, PDF generation, and email notifications
+
+TEST COVERAGE:
+
+Login Validation
+Organisation Details Validation
+User Creation and Verification
+Driver Creation, Validation, and Deactivation
+End-to-End Charger Creation & Reconfiguration
+Online/Offline Charger & Connector Validation
+Session Count, Usage, Revenue Validation
+Session-related validations
+Dashboard vs Charger Page Data Comparison
+Revenue Validation (Dashboard vs Revenue Page)
+Highest Usage Validation
+Weekly Data Validation (Sessions, Usage, Revenue, Online %)
+Tariff Creation, Validation, and Deletion
+Driver Group Creation and Validation
+Tax and Aggregation Validation
+Validation before Tariff Deletion (Assigned Chargers Check)
+Revenue Report and Invoice Validation
+State-wise and Hub-wise Data Validation
+Business APIs (V1, V2, V3) exported and converted to PDF
+Connector Type Validation
+Error Code and Status Validation
+Last Configuration Validation
 
 
+🧰 Tech Stack: 
 
-🧰 Tech Stack
 Language: JavaScript (Node.js)
 Automation Framework: Playwright
 Reporting Tools: Allure, Ortoni, Extent Reports
@@ -10,6 +38,7 @@ Other Tools: Puppeteer, XLSX, Nodemailer
 
 
 Utilities & File Handling
+
 fs-extra – File system operations with extra features
 archiver – Used to create zip files (e.g., reports, logs)
 xlsx – Read/write Excel files (test data handling)
@@ -19,12 +48,17 @@ pdf-lib – Generate and modify PDF files
 Communication
 nodemailer – Send emails (eg, test reports)
 
+Clone the Repository
+
+git clone <repository-url>
+cd CMS_Automation
+
 
 How to Install Dependencies
 npm install
 
 How to Run Tests
-npm run Complete:allure (Embeded all tests in single Test File(CMS_Complete_Flow))
+npm run Complete:allure (This command runs the complete CMS flow (end-to-end scenarios).)
 
 
 All Installed Pakages
@@ -42,3 +76,55 @@ All Installed Pakages
 ├── pdf-lib@1.17.1
 ├── puppeteer@24.34.0
 └── xlsx@0.18.5
+
+
+Project Structure
+
+CMS_Automation/
+│
+├── .github/                     # CI/CD workflows (if configured)
+│
+├── all-api-logs/               # API logs generated during execution
+├── allure-results/             # Raw Allure results
+├── downloads/                  # Downloaded files during tests
+├── extent-report/              # Extent report output
+├── ortoni-report/              # Ortoni report output
+├── test-results/               # Playwright test results
+│
+├── logs/                       # Execution logs
+│
+├── pages/                      # Page Object Model (POM classes)
+    ├── LoginPage.js         
+│   ├── DashboardPage.js
+│   ├── ChargerPage.js
+│   └── ...                    
+├── tests/                      # Main test scripts
+    ├── CMS_Complete_Flow.spec.js
+│   ├── login.spec.js
+│   ├── dashboard.spec.js
+│   └── ...     
+│
+├── fixtures/                   # Playwright fixtures (setup/teardown)
+├── Utils/                      # Reusable utility functions
+├── reporters/                  # Custom reporters configuration
+├── scripts/                    # Helper scripts (PDF generation, etc.)
+│
+├── node_modules/               # Installed dependencies (auto-generated)
+│
+├── global-setup.js             # Global setup (login/session handling)
+├── playwright.config.js        # Playwright configuration
+├── storageState.json           # Saved authentication state
+│
+├── package.json                # Project dependencies & scripts
+├── package-lock.json           # Dependency lock file
+│
+├── README.md                   # Project documentation
+│
+├── Allure_Report.pdf           # Generated Allure report (PDF)
+├── Ortoni_Report.pdf           # Generated Ortoni report (PDF)
+├── Playwright_Report.pdf       # Playwright report (PDF)
+│
+├── Ortoni_Report.zip           # Zipped report archive
+├── setup-error-debug.png       # Debug screenshot
+│
+└── .gitignore                  # Ignored files
