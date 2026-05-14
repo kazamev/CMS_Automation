@@ -1,7 +1,3 @@
-Global Setup: Starting secure login
-Select Organization page loaded
-Organization selected, landed inside app
-Global Setup Success! State saved to: C:\Automation\CMS_Automation\storageState.json
 
 ===== TEST START: Validate Revenue Report And Invoice Data =====
 

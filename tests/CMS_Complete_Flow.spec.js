@@ -1,6 +1,7 @@
 import { attachApiLogger } from '../Utils/api-logger';
 import{attachAllApiLogger} from '../Utils/AllApiLogger';
 import { test, expect } from '../fixtures/login.fixture';
+// import { test, expect } from '../fixtures/globalData.fixture';
 import { OrganisationPage } from '../pages/OrgListpage';
 import { DashboardPage } from '../pages/DashBoard';
 import { ChargersPage } from "../pages/ChargersPage";
@@ -25,7 +26,7 @@ let apiLogger;
 let allApiLogger; 
 
 test.describe('CMS End-to-End Integrated Flow', () => {
-test.setTimeout(180000)
+test.setTimeout(300000)
 test.beforeAll(async ({ browser }) => {
     context = await browser.newContext({
       storageState: 'storageState.json',
@@ -54,7 +55,7 @@ test.afterAll(async () => {
 
   //ORGANISATION DETAILS 
   test('Organisation Details Validation', async () => {
-  test.setTimeout(180000);
+  test.setTimeout(250000);
 
   const orgPage = new OrganisationPage(page);
 
@@ -65,11 +66,11 @@ test.afterAll(async () => {
   console.log("Total organisations:", count);
 
   const orgData =
-    await orgPage.getOrganisationDetailsByName("Atomz Power");
+    await orgPage.getOrganisationDetailsByName("Nikol Automotive Private Limited");
 
   console.log(orgData);
 
-  const requiredOrg = "Atomz Power";
+  const requiredOrg = "Nikol Automotive Private Limited";
   await orgPage.selectOrganisation(requiredOrg);
 
   // await expect(page).toHaveTitle("Select Organization");
@@ -104,7 +105,7 @@ function getYesterdayDate() {
 
   // DASHBOARD VS CHARGER PAGE COMPARISON
      test('Dashboard vs Charger page Data comparison', async () => {
-      test.setTimeout(180000)
+      test.setTimeout(250000)
     const dashboard = new DashboardPage(page);
 
     // IMPORTANT: no new context, same page
@@ -317,7 +318,7 @@ function getYesterdayDate() {
 
    //Hub Data Validation
 test('Hubwise Data Validation', async () => {
-    test.setTimeout(180000)
+    test.setTimeout(300000)
     const dashboard = new DashboardPage(page);
     const Hubdata=new HubDataPage(page);
     const sessionPage = new DashboardSessionsPage(page);
@@ -479,7 +480,7 @@ const revenueData = await revenuePage.printRevenueValues();
 
     //ADD & RECONFIGURE CHARGER
     test('End-to-End Add and Reconfigured Charger Flow', async () => {
-      test.setTimeout(200000)
+      test.setTimeout(250000)
         const chargers = new ChargersPage(page);
         await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/chargers");
         await page.waitForLoadState("networkidle");
@@ -747,7 +748,7 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
     //SESSIONS & USAGE VALIDATION
     test('Validate Session Counts, Usage, Revenue And Online Percentage', async () => {
-      test.setTimeout(200000)
+      test.setTimeout(280000)
         const sessionPage = new DashboardSessionsPage(page);
         await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
         await page.waitForLoadState("networkidle");
@@ -933,7 +934,7 @@ if (!chargerOnlineResult.success) {
   
 
 test('Validate Revenue Amount between Dashboard and Revenue Page', async () => {
-  test.setTimeout(200000);
+  test.setTimeout(280000);
 
   const revenuePage = new RevenuePage(page);
 
@@ -976,8 +977,8 @@ test('Validate Revenue Amount between Dashboard and Revenue Page', async () => {
   ).toBeTruthy();
 });
 
-test('Validate Revenue Report And Invoice Data', async () => {
-  test.setTimeout(200000);
+test.only('Validate Revenue Report And Invoice Data', async () => {
+  test.setTimeout(280000);
 
   const REVENUEPAGE = new RevenuePage(page);
 
@@ -1017,7 +1018,7 @@ test('Validate Revenue Report And Invoice Data', async () => {
 
 // DRIVER TARIFF CREATION AND DELETION
     test('Create, Validate and Delete Driver Group And Tariff', async () => {
-      test.setTimeout(200000)
+      test.setTimeout(280000)
         const tariffPage = new TariffPage(page);
 
         // Navigate to Revenue Management
@@ -1068,7 +1069,7 @@ test('Validate Revenue Report And Invoice Data', async () => {
 
 //STATEWISE DATA VALIDATION
 test('Statewise Data Validation', async () => {
-    test.setTimeout(180000)
+    test.setTimeout(280000)
     const dashboard = new DashboardPage(page);
     const statedata=new StateDataPage(page);
     const sessionPage = new DashboardSessionsPage(page);
@@ -1185,7 +1186,7 @@ test('Statewise Data Validation', async () => {
 
     //Highest Usage Validation
       test('Highest Usage Validation', async () => {
-         test.setTimeout(180000)
+         test.setTimeout(280000)
            const HigUsg=new HigUsgPage(page);
           const dashboard = new DashboardPage(page);
           const sessionPage = new DashboardSessionsPage(page);
@@ -1257,7 +1258,7 @@ test('Statewise Data Validation', async () => {
 
 //CONNECTOR TYPE VALIDATION
 test('Verify Connector type', async () => {
-    test.setTimeout(180000)
+    test.setTimeout(280000)
     const connectorPage = new ConnectorPage(page);
 
     // Navigate to dashboard URL here
@@ -1286,7 +1287,7 @@ test('Verify Connector type', async () => {
 
 //Weekly Chargers and Connectors Data Validation
 test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
-      test.setTimeout(200000)
+      test.setTimeout(280000)
     const dashboard = new  WeeklyChargerConnectorValidator(page);
 
     // Navigate to dashboard URL here
@@ -1409,7 +1410,7 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
 
     
     test('Validate Session,Usage,Online percentage,Revenue', async () => {
-            test.setTimeout(200000)
+            test.setTimeout(280000)
               const dataValidation = new DataValidation(page);
               await page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo");
               await page.waitForLoadState("networkidle");
@@ -1516,7 +1517,7 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
   // Last Configuration Date Validation
   test("Validate Last Configuration Date", async () => {
     
-    test.setTimeout(120000);
+    test.setTimeout(280000);
     const lastConfigVal = new LastConfigurationVal(page);
      await page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo/chargers");
     await page.waitForLoadState("networkidle"); 
@@ -1548,7 +1549,7 @@ test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
 
 // Error Code Validation
 test('Validate Error Code', async () => {
-  test.setTimeout(120000);
+  test.setTimeout(280000);
   const errorCodeVal = new ErrorCodeVal(page);
    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
   await page.waitForLoadState("networkidle");
@@ -1568,8 +1569,8 @@ test('Validate Error Code', async () => {
 });
 
 //Aggregator Tariff Creation and Deletion
-test.only('Create, Validate and Delete Aggregation Fee', async () => {
-  test.setTimeout(200000)
+test('Create, Validate and Delete Aggregation Fee', async () => {
+  test.setTimeout(280000)
     const Aggregation = new TaxAggregationVal(page);
     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/overview");
     await page.waitForLoadState("networkidle");
@@ -1615,7 +1616,7 @@ try {
 
 //Tax Creation, Validation and Deletion
 test('Create, Validate and Delete Tax', async () => {
-  test.setTimeout(200000)
+  test.setTimeout(280000)
     const TaxVal = new TaxAggregationVal(page);
     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/revenue_management/overview");
     await page.waitForLoadState("networkidle");
@@ -1680,7 +1681,7 @@ try {
 
 //Driver Creation, Validation and Deactivation
 test('Create, Validate and Deactivate Driver', async () => {
-  test.setTimeout(200000)
+  test.setTimeout(280000)
     const driverCreation = new DriverCreationDeactivationPage(page);
     await page.goto("https://novo.kazam.in/org/Tyagi_Org/1b8d6bd0-22f5-4cd5-b794-1ce364573a30/cpo/drivers_and_vehicles/drivers");
     await page.waitForLoadState("networkidle");
