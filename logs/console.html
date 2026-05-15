@@ -40,34 +40,37 @@ tr {
 <body>
 
 <h1>Playwright Console Logs</h1>
-<h2>Validate Revenue Report And Invoice Data</h2><pre> Validate Revenue Report And Invoice Data =====
+<h2>Highest Usage Validation</h2><pre> Highest Usage Validation =====
 
 
-Organisation Name: ev_pump
+Organisation: hpcl
 
-Success row Overview Data
-Transaction id: 18665657
-Billed Amount: 0.00
-Host Details: EV PUMP
-Driver Details: Kunalsingh Parmar 8999432746
-Time stamp: 13/05/2026
-        
-        11:37:01 pm
-Invoice Data
-Transaction id: 18665657
-Billed Amount: --
-Host Details: EV PUMP
-Driver Details: Kunalsingh Parmar - 8999432746
-Time stamp: May 13 2026, 11:37:01 pm
+Selected Date: 14/05/2026
+Highest Usage Charger Details
+Charger id: m7ffyh
+Sessions: 30
+Usage: 563.55
+Avg Utilization: 19h 24m
+Host Details: Exicom
+Downloaded Excel Path: C:\Automation\CMS_Automation\pages\downloads\sessions.xlsx
+Excel Session Count: 30
+🟢 Sessions count of the Highest Usage Charger matches → UI: 30, Excel: 30
+Session Excel Usage (kWh): 563.56
+Highest Usage (kWh): 563.55
+🟡 Highest Usage in the charger page (563.55 kwh) matches session Excel Usage (563.56 kwh) --within ±5% tolerance
 
- Comparison Report
-Transaction id: MATCHED
-Billed Amount: MATCHED
-Host Details: MATCHED
-Driver Details: MATCHED
-Time stamp: MATCHED
-
-No API calls captured
+==== API CALLS : Highest Usage Validation ====
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ METHOD │ STATUS │ URL                                                                              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/chargers/tariff_details?device_id=m7ffyh   │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/charger-status/m7ffyh                               │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/get-make                                   │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
+│ GET    │ 200    │ https://novo.kazam.in/api/v1/org/hpcl/custom-field/get-custom-field              │
+│────────│────────│──────────────────────────────────────────────────────────────────────────────────│
 
 
 =</pre></body></html>

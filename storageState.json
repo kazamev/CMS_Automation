@@ -2,20 +2,20 @@
   "cookies": [
     {
       "name": "access-token",
-      "value": "004129ee-da40-4809-9976-c1a0a50316dc.c074678e6d7b78ea9464dfd02aac9d4ff32b0dbb488b70c101e09fd0673e46ba",
+      "value": "1684faf6-8b70-4035-9a29-83fe0f9e1920.a43c744a2b4023070811a1df59b12a439cb6d84226dea844f2e1896d586ccbd1",
       "domain": "novo.kazam.in",
       "path": "/",
-      "expires": 1779353500.098119,
+      "expires": 1779440229.045495,
       "httpOnly": true,
       "secure": true,
       "sameSite": "Strict"
     },
     {
       "name": "mp_811465ce4e3a8cdd85a4f4e406c3f1c0_mixpanel",
-      "value": "%7B%22distinct_id%22%3A%22%24device%3Ae6245b90-4020-4868-9431-cfbac8695711%22%2C%22%24device_id%22%3A%22e6245b90-4020-4868-9431-cfbac8695711%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22__mps%22%3A%7B%7D%2C%22__mpso%22%3A%7B%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%7D%2C%22__mpus%22%3A%7B%7D%2C%22__mpa%22%3A%7B%7D%2C%22__mpu%22%3A%7B%7D%2C%22__mpr%22%3A%5B%5D%2C%22__mpap%22%3A%5B%5D%7D",
+      "value": "%7B%22distinct_id%22%3A%22%24device%3Adf97e15b-3f11-4210-a4b4-df17e5c913ce%22%2C%22%24device_id%22%3A%22df97e15b-3f11-4210-a4b4-df17e5c913ce%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22__mps%22%3A%7B%7D%2C%22__mpso%22%3A%7B%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%7D%2C%22__mpus%22%3A%7B%7D%2C%22__mpa%22%3A%7B%7D%2C%22__mpu%22%3A%7B%7D%2C%22__mpr%22%3A%5B%5D%2C%22__mpap%22%3A%5B%5D%7D",
       "domain": ".kazam.in",
       "path": "/",
-      "expires": 1810284700,
+      "expires": 1810371430,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"

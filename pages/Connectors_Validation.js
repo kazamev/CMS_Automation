@@ -41,14 +41,17 @@ async selectFirstRow(Data) {
           await this.page.waitForTimeout(5000);
           console.log("Number of Selected Connectors in the particuler charger: ", await Connectors.count());
         if (Connectors) {
-        console.log("Connector filter applied successfully");
+        console.log("🟢Connector filter applied successfully");
          } else {
-        console.log("Connector filter not applied");
+        console.log("🔴Connector filter not applied");
     }
 
     } else {
         console.log(`No Chargers available for the selected connector type: ${Data.Connector}`);
     }
+
+    
    
 }
+ 
 }

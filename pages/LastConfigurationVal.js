@@ -59,7 +59,12 @@ async ValidateLastConfigurationValue(lastConfigDate,ReconfigurationDate) {
 
   //Assertion
   expect(normalizedLast, "Last Configuration Date mismatch").toBe(normalizedReconfig);
-  console.log("Last Configuration Date is consistent across pages.");
-
+  // console.log("🟢 Last Configuration Date is consistent across pages.");
+ 
+  if (normalizedLast === normalizedReconfig) {
+    console.log("🟢 Last Configuration Date is consistent across pages.");
+  } else {
+    console.log("🔴 Last Configuration Date mismatch across pages.");
+  }
 }
 }

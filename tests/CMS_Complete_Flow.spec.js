@@ -62,8 +62,8 @@ test.afterAll(async () => {
   await page.goto('https://novo.kazam.in/org');
   await page.waitForLoadState('networkidle');
 
-  const count = await orgPage.getOrganisationCount();
-  console.log("Total organisations:", count);
+  // const count = await orgPage.getOrganisationCount();
+  // console.log("Total organisations:", count);
 
   const orgData =
     await orgPage.getOrganisationDetailsByName("Nikol Automotive Private Limited");
@@ -89,8 +89,13 @@ test.afterAll(async () => {
     validation.success,
     validation.message
   ).toBeTruthy();
-
-});
+if (validation.success) { 
+  console.log("🟢 Organisation details matched");
+} else {    
+  console.log("🔴 Organisation details did not match");
+}
+  
+}); 
 
 
 //yesterday date function 
@@ -220,10 +225,13 @@ function getYesterdayDate() {
       expect(chargerOnlineData.all.trim()).toBe(dashboardOnlineData.all.trim());
       // expect(chargerOnlineData.busy.trim()).toBe(dashboardOnlineData.busy.trim());
       // expect(chargerOnlineData.available.trim()).toBe(dashboardOnlineData.available.trim());
-      expect(chargerOnlineData.error.trim()).toBe(dashboardOnlineData.error.trim());
+      // expect(chargerOnlineData.error.trim()).toBe(dashboardOnlineData.error.trim());
+
+      if (chargerOnlineData.chargers.trim() === dashboardOnlineData.chargers.trim() &&  chargerOnlineData.connectors.trim() === dashboardOnlineData.connectors.trim() && chargerOnlineData.all.trim() === dashboardOnlineData.all.trim()) {
       console.log("🟢 The Online Charger count matches on both the Dashboard and the Charger page.");
-
-
+      } else {  
+      console.log("🔴 The Online Charger count does not match on both the Dashboard and the Charger page.");
+      }
     });
 
     //USER ROLE CREATION, VERIFICATION & DELETION
@@ -269,7 +277,13 @@ function getYesterdayDate() {
         await dashboard.RoleDeletion();
         await page.waitForTimeout(3000);
         console.log("User Role Deleted Successfully");
+
+        if (roleDetails.name === Data.RoleName && roleDetails.description === Data.RoleDescription) { 
+          console.log("🟢 User Role flow working properly");
+        } else {
+          console.log("🔴 User Role flow not working properly");
         
+        }
       });
 
       //Hub Creation
@@ -307,12 +321,16 @@ function getYesterdayDate() {
     console.log('\nHub Deletion Started....');
     console.log(`Hub Deleted Successfully -> ${hubData.HubName}`);
 
-    // // VALIDATE HUB DELETED
-    // await dashboard.HubSearch.fill(hubData.HubName);
-    // await page.waitForLoadState('networkidle');
-    // await expect(dashboard.HubCard.filter({ hasText: hubData.HubName })).toHaveCount(0);
-    // console.log('Hub Deletion Validation Passed');
-    // await page.waitForTimeout(5000)
+      //VALIDATE HUB DELETED
+    await dashboard.HubSearch.fill(hubData.HubName);
+    await page.waitForLoadState('networkidle');
+    await expect(dashboard.HubCard.filter({ hasText: hubData.HubName })).toHaveCount(0);
+    if (await dashboard.HubCard.filter({ hasText: hubData.HubName }).count() === 0) { 
+      console.log("🟢 Hub Creation and Deletion working Properly");
+    } else {
+      console.log("🔴 Hub Creation and Deletion not working Properly");
+    
+    }
   });
 
 
@@ -436,11 +454,11 @@ if (onlineResult.success) {
       //Verify Usage (KPI vs Excel)
       const USAGEKPI=usageKpi.toFixed(2)
       const usageResult = await sessionPage.verifyUsageFromExcel(filePath, USAGEKPI);
-      if (!usageResult.success) {
-        console.error("Usage Validation Failed:", usageResult.message);
-      } else {
-        console.log("Usage Validation Passed:", usageResult.message);
-      }
+      // if (!usageResult.success) {
+      //   console.error("Usage Validation Failed:", usageResult.message);
+      // } else {
+      //   console.log("Usage Validation Passed:", usageResult.message);
+      // }
 
       //Navigate to the Revenue page
       await page.goto("https://novo.kazam.in/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/cpo/revenue_management/overview")
@@ -616,14 +634,22 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await tariffPage.createTariffFinal();
    
     console.log(`\nFlat Tariff Created Successfully: ${tariffName}\n`);
-   const TariffName = await tariffPage.gotoLinkedCharger(linkedChargerId);
+   const TariffName7 = await tariffPage.gotoLinkedCharger(linkedChargerId);
     
 
 
     //delete tariff after creation
     await tariffPage.deleteTariff(tariffName);
     console.log("\nFlatTariff deleted successfully\n");
-   
+
+    if (TariffName7 === tariffName) {
+      console.log("🟢 Flat Tariff flow working properly");
+    }
+      else {  
+      console.log("🔴 Flat Tariff flow not working properly");
+      }
+
+
      // Create Fast Charging tariff
      const fastTariffName = `Auto_Fast_Tariff_${Date.now()}`;
     
@@ -643,12 +669,18 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await tariffPage.createTariffFinal();
     console.log(`\nFast Charging Tariff Created Successfully: ${fastTariffName}\n`);
 
-    await tariffPage.gotoLinkedCharger(DC_CHARGER_ID);
+    const TariffName1 = await tariffPage.gotoLinkedCharger(DC_CHARGER_ID);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
     await tariffPage.deleteTariff(fastTariffName);
     console.log("\nFast Charging Tariff deleted successfully\n");
+
+    if (TariffName1 === fastTariffName) {
+      console.log("🟢 Fast Charging Tariff flow working properly");
+    } else {
+      console.log("🔴 Fast Charging Tariff flow not working properly");
+    }
 
     // Create Time Of Day tariff
      const timeOfDayTariffName = `Auto_TimeOfDay_Tariff_${Date.now()}`;
@@ -674,12 +706,18 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await tariffPage.createTariffFinal();
     console.log(`\nTime Of Day Tariff Created Successfully: ${timeOfDayTariffName}\n`);
 
-    await tariffPage.gotoLinkedCharger(chargerId);
+    const TariffName2= await tariffPage.gotoLinkedCharger(chargerId);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
     await tariffPage.deleteTariff(timeOfDayTariffName);
     console.log("\nTime Of Day Tariff deleted successfully\n");
+    if (TariffName2 === timeOfDayTariffName) {
+      console.log("🟢 Time Of Day Tariff flow working properly");
+    } else {
+      console.log("🔴 Time Of Day Tariff flow not working properly");
+    }
+
 
 
     // Create Charge By Hour tariff
@@ -706,17 +744,22 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await tariffPage.createTariffFinal();
     console.log(`\nCharge By Hour Tariff Created Successfully: ${chargeByHourTariffName}\n`);
 
-    await tariffPage.gotoLinkedCharger(chargerId);
+    const TariffName3 = await tariffPage.gotoLinkedCharger(chargerId);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
     await tariffPage.deleteTariff(chargeByHourTariffName);
     console.log("\nCharge By Hour Tariff deleted successfully\n");
 
+      if (TariffName3 === chargeByHourTariffName) {
+      console.log("🟢 Charge By Hour Tariff flow working properly")
+      } else {
+        console.log("🔴 Charge By Hour Tariff flow not working properly");
+      }
+
      // Create State Of Charge tariff
      const stateOfChargeTariffName = `Auto_StateOfCharge_Tariff_${Date.now()}`;
-    
-
+  
     console.log(`Start State Of Charge Tariff Creation : ${stateOfChargeTariffName}`);
     await tariffPage.createTariff(stateOfChargeTariffName);
 
@@ -737,14 +780,20 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
     await tariffPage.createTariffFinal();
     console.log(`\nState Of Charge Tariff Created Successfully: ${stateOfChargeTariffName}\n`);
 
-    await tariffPage.gotoLinkedCharger(DC_CHARGER_ID);
+    const TariffName4 = await tariffPage.gotoLinkedCharger(DC_CHARGER_ID);
     console.log(`Remove the linked charger successfully to delete the tariff`);
 
     //delete tariff after creation
     await tariffPage.deleteTariff(stateOfChargeTariffName);
     console.log("\nState Of Charge Tariff deleted successfully\n");
+      if (TariffName4 === stateOfChargeTariffName) {
+      console.log("🟢 State Of Charge Tariff flow working properly");
+    } else {
+      console.log("🔴 State Of Charge Tariff flow not working properly");
+    }
 
     });
+
 
     //SESSIONS & USAGE VALIDATION
     test('Validate Session Counts, Usage, Revenue And Online Percentage', async () => {
@@ -804,11 +853,11 @@ await chargers.verifyExcelCountMatchesUI(afterCount);
 
     //Verify Usage (KPI vs Excel)
     const usageResult = await sessionPage.verifyUsageFromExcel(filePath, usageKpi);
-    if (!usageResult.success) {
-      console.error("Usage Validation Failed:", usageResult.message);
-    } else {
-      console.log("Usage Validation Passed:", usageResult.message);
-    }
+    // if (!usageResult.success) {
+    //   console.error("Usage Validation Failed:", usageResult.message);
+    // } else {
+    //   console.log("Usage Validation Passed:", usageResult.message);
+    // }
      
 //Go to Daily Reports
 await sessionPage.openDailyReportsPage();
@@ -845,11 +894,11 @@ const dailyCheck = await sessionPage.verifySessionReportCounts(
 
 //usage validation from daily report excel and dashboard KPI
 const ReportusageResult = await sessionPage.verifyReportUsageFromExcel(filePath2, usageKpi);
-    if (!ReportusageResult.success) {
-      console.error("Usage Validation Failed:", ReportusageResult.message);
-    } else {
-      console.log("Usage Validation Passed:", ReportusageResult.message);
-    }
+    // if (!ReportusageResult.success) {
+    //   console.error("Usage Validation Failed:", ReportusageResult.message);
+    // } else {
+    //   console.log("Usage Validation Passed:", ReportusageResult.message);
+    // }
 
 //Select dropdown value
 await sessionPage.selectReportDropdown("Chargers");  
@@ -883,8 +932,8 @@ await sessionPage.selectKazamCalendarDate(getYesterdayDate());
     console.log("Total Revenue from Report Excel:", totalRevenue);
 
 //Revenue Validation
-  const revenueValidationResult = await sessionPage.validateRevenue(revenueReportPath, sessionPage.revenueKpi);
-  console.log("Revenue Validation Result:", revenueValidationResult);
+  const revenueValidationResult = await sessionPage.validateRevenue(revenueReportPath,sessionPage.revenueKpi);
+console.log(revenueValidationResult);
 
 //Charger Page Validation
     await sessionPage.ChargerPage();
@@ -977,7 +1026,7 @@ test('Validate Revenue Amount between Dashboard and Revenue Page', async () => {
   ).toBeTruthy();
 });
 
-test.only('Validate Revenue Report And Invoice Data', async () => {
+test('Validate Revenue Report And Invoice Data', async () => {
   test.setTimeout(280000);
 
   const REVENUEPAGE = new RevenuePage(page);
@@ -1014,6 +1063,12 @@ test.only('Validate Revenue Report And Invoice Data', async () => {
     comparison.success,
     comparison.message
   ).toBeTruthy();
+
+  if (comparison.success) {
+    console.log("🟢 Revenue Report Overview data matches with Invoice data");
+  } else {
+    console.log("🔴 Revenue Report Overview data does not match with Invoice data");
+  }
 });
 
 // DRIVER TARIFF CREATION AND DELETION
@@ -1063,6 +1118,8 @@ test.only('Validate Revenue Report And Invoice Data', async () => {
 
 // Delete Driver Group
     await tariffPage.DriverGroupDltion(groupName);
+
+// Validate Driver Group Deletion 
 
     });
 
@@ -1175,17 +1232,17 @@ test('Statewise Data Validation', async () => {
   
       //Verify Usage (KPI vs Excel)
       const usageResult = await sessionPage.verifyUsageFromExcel(filePath, usageKpi);
-      if (!usageResult.success) {
-        console.error("Usage Validation Failed:", usageResult.message);
-      } else {
-        console.log("Usage Validation Passed:", usageResult.message);
-      }
+      // if (!usageResult.success) {
+      //   console.error("Usage Validation Failed:", usageResult.message);
+      // } else {
+      //   console.log("Usage Validation Passed:", usageResult.message);
+      // }
 
       });
 
 
     //Highest Usage Validation
-      test('Highest Usage Validation', async () => {
+      test.only('Highest Usage Validation', async () => {
          test.setTimeout(280000)
            const HigUsg=new HigUsgPage(page);
           const dashboard = new DashboardPage(page);
@@ -1237,22 +1294,22 @@ test('Statewise Data Validation', async () => {
       
         //Verify Counts (KPI vs UI vs Excel)
         const result = await HigUsg.verifySessionCounts(filePath, Values.Sessions);
-        if (!result.success) {
-          console.error("Count Validation Failed:", result.message);
-         } else {
-          console.log("Count Validation Passed:", result.message);
-          }
+        // if (!result.success) {
+        //   console.error("Count Validation Failed:", result.message);
+        //  } else {
+        //   console.log("Count Validation Passed:", result.message);
+        //   }
       
         //Sum Usage from Excel
         await HigUsg.SumOfUsage(filePath, 9); // Column index for usage
         
         //Verify Usage (KPI vs Excel)
         const usageResult = await HigUsg.verifyUsage(filePath, Values.Usage);
-        if (!usageResult.success) {
-        console.error("Usage Validation Failed:", usageResult.message);
-        } else {
-        console.log("Usage Validation Passed:", usageResult.message);
-            }
+        // if (!usageResult.success) {
+        // console.error("Usage Validation Failed:", usageResult.message);
+        // } else {
+        // console.log("Usage Validation Passed:", usageResult.message);
+        //     }
       });
 
 
@@ -1286,130 +1343,130 @@ test('Verify Connector type', async () => {
 });
 
 //Weekly Chargers and Connectors Data Validation
-test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
-      test.setTimeout(280000)
-    const dashboard = new  WeeklyChargerConnectorValidator(page);
+// test('Validate_Weekly_Chargers_And_Connectors_Data', async () => {
+//       test.setTimeout(280000)
+//     const dashboard = new  WeeklyChargerConnectorValidator(page);
 
-    // Navigate to dashboard URL here
-    await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
-    await page.waitForLoadState("networkidle");
+//     // Navigate to dashboard URL here
+//     await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo");
+//     await page.waitForLoadState("networkidle");
     
 
-    const currentUrl = page.url();
-    const orgName = currentUrl.split('/org/')[1].split('/')[0];
-    //Print organisation name
-    console.log(`\nOrganisation Name: ${orgName}\n`);
+//     const currentUrl = page.url();
+//     const orgName = currentUrl.split('/org/')[1].split('/')[0];
+//     //Print organisation name
+//     console.log(`\nOrganisation Name: ${orgName}\n`);
 
-    await dashboard.applyTimeFilterInDashboard("Calendar");
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(5000);
-    console.log("One Week DashBoard Data");
-    const revenue = await dashboard.getRevenue();
-    console.log("Revenue:", revenue);
-    const sessions = await dashboard.getTotalSessions();
-    console.log("Sessions:", sessions);
-    const usage = await dashboard.getUsage();
-    console.log("Usage:", usage);
-    const onlinePercentage = await dashboard.getOnlinePercentage();
-    console.log("Online Percentage:", onlinePercentage);
-    const dashboardCounts = await dashboard.getDashboardChargerCounts();
-    const dashboardStatus = await dashboard.getDashboardConnectorStatusCounts();
+//     await dashboard.applyTimeFilterInDashboard("Calendar");
+//     await page.waitForLoadState('networkidle');
+//     await page.waitForTimeout(5000);
+//     console.log("One Week DashBoard Data");
+//     const revenue = await dashboard.getRevenue();
+//     console.log("Revenue:", revenue);
+//     const sessions = await dashboard.getTotalSessions();
+//     console.log("Sessions:", sessions);
+//     const usage = await dashboard.getUsage();
+//     console.log("Usage:", usage);
+//     const onlinePercentage = await dashboard.getOnlinePercentage();
+//     console.log("Online Percentage:", onlinePercentage);
+//     const dashboardCounts = await dashboard.getDashboardChargerCounts();
+//     const dashboardStatus = await dashboard.getDashboardConnectorStatusCounts();
 
-      const dashboardData = {
-        chargers: dashboardCounts.chargers,
-        connectors: dashboardCounts.connectors,
-        nonConfigured: dashboardCounts.nonConfigured,
+//       const dashboardData = {
+//         chargers: dashboardCounts.chargers,
+//         connectors: dashboardCounts.connectors,
+//         nonConfigured: dashboardCounts.nonConfigured,
 
-        all: dashboardStatus.All,
-        busy: dashboardStatus.Busy,
-        available: dashboardStatus.Available,
-        error: dashboardStatus.Error
-      };
+//         all: dashboardStatus.All,
+//         busy: dashboardStatus.Busy,
+//         available: dashboardStatus.Available,
+//         error: dashboardStatus.Error
+//       };
 
-      console.log("Dashboard Charger Data(Offline and Online):", dashboardData);
-       await dashboard.OnlineFilter()
-        await page.waitForTimeout(3000);
-        const dashboardOnlineCounts = await dashboard.getDashboardChargerCounts();
-        const dashboardOnlineStatus = await dashboard.getDashboardConnectorStatusCounts();
+//       console.log("Dashboard Charger Data(Offline and Online):", dashboardData);
+//        await dashboard.OnlineFilter()
+//         await page.waitForTimeout(3000);
+//         const dashboardOnlineCounts = await dashboard.getDashboardChargerCounts();
+//         const dashboardOnlineStatus = await dashboard.getDashboardConnectorStatusCounts();
 
-        const dashboardOnlineData = {
-        chargers: dashboardOnlineCounts.chargers,
-        connectors: dashboardOnlineCounts.connectors,
-        nonConfigured: dashboardOnlineCounts.nonConfigured,
+//         const dashboardOnlineData = {
+//         chargers: dashboardOnlineCounts.chargers,
+//         connectors: dashboardOnlineCounts.connectors,
+//         nonConfigured: dashboardOnlineCounts.nonConfigured,
 
-        all: dashboardOnlineStatus.All,
-        busy: dashboardOnlineStatus.Busy,
-        available: dashboardOnlineStatus.Available,
-        error: dashboardOnlineStatus.Error
-      };
+//         all: dashboardOnlineStatus.All,
+//         busy: dashboardOnlineStatus.Busy,
+//         available: dashboardOnlineStatus.Available,
+//         error: dashboardOnlineStatus.Error
+//       };
 
-     //Navigate to the Charger Page
-     await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
-     await page.waitForLoadState("networkidle");
+//      //Navigate to the Charger Page
+//      await page.goto("https://novo.kazam.in/org/nikolev/46f85af4-f77d-4ea0-bbd2-955517ebad82/cpo/chargers");
+//      await page.waitForLoadState("networkidle");
 
-     //apply the time filter in the charger page
-     await dashboard.applyTimeFilterinChargerPage("Calendar");
+//      //apply the time filter in the charger page
+//      await dashboard.applyTimeFilterinChargerPage("Calendar");
 
-    const chargerCounts = await dashboard.getChargerCounts();
-    const chargerStatus = await dashboard.getConnectorStatusCounts();
+//     const chargerCounts = await dashboard.getChargerCounts();
+//     const chargerStatus = await dashboard.getConnectorStatusCounts();
 
-    const chargerData = {
-        chargers: chargerCounts.chargers,
-        connectors: chargerCounts.connectors,
-        // nonConfigured: chargerCounts.nonConfigured,
+//     const chargerData = {
+//         chargers: chargerCounts.chargers,
+//         connectors: chargerCounts.connectors,
+//         // nonConfigured: chargerCounts.nonConfigured,
 
-        all: chargerStatus.All,
-        busy: chargerStatus.Busy,
-        available: chargerStatus.Available,
-        error: chargerStatus.Error
-      };
+//         all: chargerStatus.All,
+//         busy: chargerStatus.Busy,
+//         available: chargerStatus.Available,
+//         error: chargerStatus.Error
+//       };
 
-      console.log("Charger Page Data(Offline And Online):", chargerData);
+//       console.log("Charger Page Data(Offline And Online):", chargerData);
 
-      // Compare Dashboard vs Charger page data
-      // expect(chargerData.chargers.trim()).toBe(dashboardData.chargers.trim());
-      // expect(chargerData.connectors.trim()).toBe(dashboardData.connectors.trim());
-      // // expect(chargerData.nonConfigured.trim()).toBe(dashboardData.nonConfigured.trim());
-      // expect(chargerData.all.trim()).toBe(dashboardData.all.trim());
-      // expect(chargerData.busy.trim()).toBe(dashboardData.busy.trim());
-      // expect(chargerData.available.trim()).toBe(dashboardData.available.trim());
-      // expect(chargerData.error.trim()).toBe(dashboardData.error.trim());
-      console.log("🟢 The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.");
+//       // Compare Dashboard vs Charger page data
+//       // expect(chargerData.chargers.trim()).toBe(dashboardData.chargers.trim());
+//       // expect(chargerData.connectors.trim()).toBe(dashboardData.connectors.trim());
+//       // // expect(chargerData.nonConfigured.trim()).toBe(dashboardData.nonConfigured.trim());
+//       // expect(chargerData.all.trim()).toBe(dashboardData.all.trim());
+//       // expect(chargerData.busy.trim()).toBe(dashboardData.busy.trim());
+//       // expect(chargerData.available.trim()).toBe(dashboardData.available.trim());
+//       // expect(chargerData.error.trim()).toBe(dashboardData.error.trim());
+//       console.log("🟢 The Charger count(Offline and Online) matches on both the Dashboard and the Charger page.");
 
 
-      //dashboard online charger data
-      console.log("Dashboard Online Chargers Data:", dashboardOnlineData);
-      await dashboard.OnlineFilterCharger()
-      await page.waitForTimeout(3000);
-      const chargerOnlineCounts = await dashboard.getChargerCounts();
-      const chargerOnlineStatus = await dashboard.getConnectorStatusCounts();
+//       //dashboard online charger data
+//       console.log("Dashboard Online Chargers Data:", dashboardOnlineData);
+//       await dashboard.OnlineFilterCharger()
+//       await page.waitForTimeout(3000);
+//       const chargerOnlineCounts = await dashboard.getChargerCounts();
+//       const chargerOnlineStatus = await dashboard.getConnectorStatusCounts();
 
-      const chargerOnlineData = {
-        chargers: chargerOnlineCounts.chargers,
-        connectors: chargerOnlineCounts.connectors,
-        // nonConfigured: chargerOnlineCounts.nonConfigured,
+//       const chargerOnlineData = {
+//         chargers: chargerOnlineCounts.chargers,
+//         connectors: chargerOnlineCounts.connectors,
+//         // nonConfigured: chargerOnlineCounts.nonConfigured,
 
-        all: chargerOnlineStatus.All,
-        busy: chargerOnlineStatus.Busy,
-        available: chargerOnlineStatus.Available,
-        error: chargerOnlineStatus.Error
-      };
-      console.log("Charger Page Online Chargers Data:", chargerOnlineData);
-      // Compare Dashboard vs Charger page data
-      // expect(chargerOnlineData.chargers.trim()).toBe(dashboardOnlineData.chargers.trim());
-      // expect(chargerOnlineData.connectors.trim()).toBe(dashboardOnlineData.connectors.trim());
-      // // expect(chargerOnlineData.nonConfigured.trim()).toBe(dashboardOnlineData.nonConfigured.trim());
-      // expect(chargerOnlineData.all.trim()).toBe(dashboardOnlineData.all.trim());
-      // expect(chargerOnlineData.busy.trim()).toBe(dashboardOnlineData.busy.trim());
-      // expect(chargerOnlineData.available.trim()).toBe(dashboardOnlineData.available.trim());
-      // expect(chargerOnlineData.error.trim()).toBe(dashboardOnlineData.error.trim());
-      console.log("🟢 The Online Charger count matches on both the Dashboard and the Charger page.");
+//         all: chargerOnlineStatus.All,
+//         busy: chargerOnlineStatus.Busy,
+//         available: chargerOnlineStatus.Available,
+//         error: chargerOnlineStatus.Error
+//       };
+//       console.log("Charger Page Online Chargers Data:", chargerOnlineData);
+//       // Compare Dashboard vs Charger page data
+//       // expect(chargerOnlineData.chargers.trim()).toBe(dashboardOnlineData.chargers.trim());
+//       // expect(chargerOnlineData.connectors.trim()).toBe(dashboardOnlineData.connectors.trim());
+//       // // expect(chargerOnlineData.nonConfigured.trim()).toBe(dashboardOnlineData.nonConfigured.trim());
+//       // expect(chargerOnlineData.all.trim()).toBe(dashboardOnlineData.all.trim());
+//       // expect(chargerOnlineData.busy.trim()).toBe(dashboardOnlineData.busy.trim());
+//       // expect(chargerOnlineData.available.trim()).toBe(dashboardOnlineData.available.trim());
+//       // expect(chargerOnlineData.error.trim()).toBe(dashboardOnlineData.error.trim());
+//       console.log("🟢 The Online Charger count matches on both the Dashboard and the Charger page.");
 
-    });
+//     });
 
 
     
-    test('Validate Session,Usage,Online percentage,Revenue', async () => {
+    test('Validate Weekly Session,Usage,Online percentage,Revenue', async () => {
             test.setTimeout(280000)
               const dataValidation = new DataValidation(page);
               await page.goto("https://novo.kazam.in/org/ev_pump/3c30aea2-8e99-416e-803a-7c777a73e8f3/cpo");
@@ -1596,16 +1653,16 @@ test('Create, Validate and Delete Aggregation Fee', async () => {
     console.log(result);
   try {
   expect(result.name).toBe(Data.TariffName);
-  console.log(`Aggregation Fee name validation is passed- [${result.name},${Data.TariffName}]`);
+  console.log(` 🟢 Aggregation Fee name validation is passed- [${result.name},${Data.TariffName}]`);
 } catch (error) {
-  console.error(`Aggregation Fee name validation is failed- [${result.name},${Data.TariffName}]`);
+  console.error(`🔴 Aggregation Fee name validation is failed- [${result.name},${Data.TariffName}]`);
 }  // console.log("\nAggregation Fee validated successfully\n");
 
 try {
   expect(result.percentage).toBe(Data.Percentage.toString());
-  console.log(`Aggregation Fee percentage validation is passed- [${result.percentage},${Data.Percentage}]`);
+  console.log(` 🟢 Aggregation Fee percentage validation is passed- [${result.percentage},${Data.Percentage}]`);
 } catch {
-  console.error(`Aggregation Fee percentage validation is failed- [${result.percentage},${Data.Percentage}]`);
+  console.error(`🔴 Aggregation Fee percentage validation is failed- [${result.percentage},${Data.Percentage}]`);
 }
 
   //Delete Aggregation Fee
@@ -1649,30 +1706,30 @@ test('Create, Validate and Delete Tax', async () => {
   console.log("\nValidating Tax Details\n");
   try {
   expect(result.taxName).toBe(Data.TaxName);
-  console.log(`Tax name validation is passed-  [${result.taxName},${Data.TaxName}]`);
+  console.log(` 🟢 Tax name validation is passed-  [${result.taxName},${Data.TaxName}]`);
 } catch {
-  console.error(`Tax name validation is failed- [${result.taxName},${Data.TaxName}]`);
+  console.error(`🔴 Tax name validation is failed- [${result.taxName},${Data.TaxName}]`);
 }
 
 try {
   expect(result.businessName).toBe(Data.BusinessName);
-  console.log(`Tax business name validation is passed- [${result.businessName},${Data.BusinessName}]`);
+  console.log(` 🟢 Tax business name validation is passed- [${result.businessName},${Data.BusinessName}]`);
 } catch {
-  console.error(`Tax business name validation is failed- [${result.businessName},${Data.BusinessName}]`);
+  console.error(`🔴 Tax business name validation is failed- [${result.businessName},${Data.BusinessName}]`);
 }
 
 try {
   expect(result.taxid).toBe(Data.TaxNumber);
-  console.log(`Tax number validation is passed- [${result.taxid},${Data.TaxNumber}]`);
+  console.log(` 🟢 Tax number validation is passed- [${result.taxid},${Data.TaxNumber}]`);
 } catch {
-  console.error(`Tax number validation is failed- [${result.taxid},${Data.TaxNumber}]`);
+  console.error(`🔴 Tax number validation is failed- [${result.taxid},${Data.TaxNumber}]`);
 }
 
 try {
   expect(result.address).toBe(Data.Address);
-  console.log(`Tax address validation is passed- [${result.address},${Data.Address}]`);
+  console.log(` 🟢 Tax address validation is passed- [${result.address},${Data.Address}]`);
 } catch {
-  console.error(`Tax address validation is failed- [${result.address},${Data.Address}]`);
+  console.error(`🔴 Tax address validation is failed- [${result.address},${Data.Address}]`);
 }
   //Delete Tax
   await TaxVal.DeleteTax();

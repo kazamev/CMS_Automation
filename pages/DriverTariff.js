@@ -149,10 +149,10 @@ export class TariffPage {
   await this.page.waitForTimeout(2000);
   await this.page.keyboard.press("Enter");
 
-  const groupRow = this.page.locator(`//p[normalize-space()='${groupName}']`).first();
+  const groupRow1 = this.page.locator(`//p[normalize-space()='${groupName}']`).first();
 
-  await groupRow.waitFor({ state: "visible", timeout: 15000 });
-  await groupRow.click();
+  await groupRow1.waitFor({ state: "visible", timeout: 15000 });
+  await groupRow1.click();
   await this.page.waitForTimeout(2000);
   console.log(`Successfully opened Driver Group: ${groupName}`);
 
@@ -239,10 +239,10 @@ async DriverGroupDltion(groupName) {
   await this.driverGroupSearchBar.fill(groupName);
   await this.page.keyboard.press("Enter");
 
-  const groupRow = this.page.locator("//span[@class='one_line_wrapper']").first();
+  const groupRow3 = this.page.locator("//span[@class='one_line_wrapper']").first();
  await this.page.waitForTimeout(4000);
-  await groupRow.waitFor({ state: "visible", timeout: 15000 });
-  await groupRow.click();
+  await groupRow3.waitFor({ state: "visible", timeout: 15000 });
+  await groupRow3.click();
      await this.page.waitForTimeout(4000);
   console.log(`Successfully opened Driver Group: ${groupName}`);
 
@@ -281,9 +281,22 @@ async DriverGroupDltion(groupName) {
   await this.GroupdltBtn.click();
   await this.page.waitForTimeout(2000);
   await this.ConfirmDeleteBtn.click();
-  await this.page.waitForTimeout(2000);
-//   await this.page.waitForLoadState("networkidle");
-  console.log("Driver Group deleted successfully.");
+  // await this.page.waitForTimeout(2000);
+  await this.page.waitForTimeout(10000);
+  console.log("Driver Group deleted successfully");
+
+  await this.driverGroupSearchBar.click();
+    await this.page.waitForTimeout(4000);
+  await this.driverGroupSearchBar.fill(groupName);
+  await this.page.keyboard.press("Enter");
+
+  const groupRow4 = this.page.locator("//span[@class='one_line_wrapper']").first();
+ await this.page.waitForTimeout(4000);
+  if (await groupRow4.isVisible()) {
+    console.log("🔴 Driver Group Creation, validation and deletion failed");
+  } else {
+    console.log("🟢 Driver Group Creation, validation and deletion successful");
+  }
     // await this.page.waitForTimeout(6000);
 }
 

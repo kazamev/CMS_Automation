@@ -253,7 +253,7 @@ async getConnectorStatusCounts() {
         await this.RoleDeleteBtn.click();
         await this.page.waitForTimeout(2000);
         await this.Confirmbtn.click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForTimeout(10000);
     }
 
     //dummymail generater
