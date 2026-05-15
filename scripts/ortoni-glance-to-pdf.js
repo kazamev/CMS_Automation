@@ -82,8 +82,8 @@ const path = require('path');
   scale: 0.9,
   // pageRanges: '2-',   //THIS IS THE KEY
   margin: {
-    top: '20px',
-    bottom: '20px',
+    top: '16px',
+    bottom: '16px',
     left: '15px',
     right: '15px',
   },

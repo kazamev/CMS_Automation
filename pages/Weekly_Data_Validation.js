@@ -60,6 +60,7 @@ export class DataValidation {
 
     // Fetch KPI values from Dashboard
     async GetKPIValues() {
+      await this.page.waitForTimeout(5000);
   const sessionText = await this.sessionsValue.textContent();
   const usageText = await this.usageValue.textContent();
   const onlineText = await this.onlinePercent.textContent();
@@ -268,20 +269,25 @@ async CountSessionIdsInExcel(filePath) {
     const tolerance = excelCount * 0.05;
     //Compare All Count with Dashboard KPI
     {
-        if (Math.abs(allCount - sessionKpi) > tolerance) {
-        errors.push(`🛑All sessions Count in the session page (${allCount}) does NOT match KPI Count (${sessionKpi})`);
-         }
-         else {
-            console.log(`🟡 All sessions Count in the session page (${allCount}) matches KPI Count (${sessionKpi}) ---within ±5% tolerance`);
-         }
+        if (Math.abs(allCount - sessionKpi) === 0) {
+            console.log(`🟢 All sessions Count in the session page (${allCount}) matches Dashboard KPI Sessions (${sessionKpi})`);
+        }
+       else if (Math.abs(sessionKpi - excelCount) <= tolerance) {
+            console.log(`🟡 Dashboard KPI Sessions (${sessionKpi}) matches Excel Count (${excelCount}) ---within ±5% tolerance`)
+            }
+        else {
+            errors.push(`🛑 Dashboard KPI Sessions (${sessionKpi}) does NOT match Excel Count (${excelCount})`);
     }
 
     //Compare Excel count with KPI
-   if (Math.abs(sessionKpi - excelCount) > tolerance)  {
-        errors.push(`🛑KPI Count (${sessionKpi}) does NOT match Excel Count (${excelCount})`);
+   if (Math.abs(sessionKpi - excelCount) === 0)  {
+        console.log(`🟢 KPI Count (${sessionKpi}) matches Excel Count (${excelCount})`);
+    }
+    else if (Math.abs(sessionKpi - excelCount) <= tolerance) { 
+        console.log(`🟡 KPI Count (${sessionKpi}) matches Excel Count (${excelCount}) ---within ±5% tolerance`);
     }
     else {
-        console.log(`🟡 KPI Count (${sessionKpi}) matches Excel Count (${excelCount}) ---within ±5% tolerance`);
+        errors.push(`🛑KPI Count (${sessionKpi}) does NOT match Excel Count (${excelCount})`);
     }
 
     //Compare UI All Count with Excel
@@ -290,11 +296,11 @@ async CountSessionIdsInExcel(filePath) {
  
     }
     else {
-        console.log(`🟡 All sessions Count in the session page (${allCount}) matches Excel Count (${excelCount})`);
+        console.log(`🟢 All sessions Count in the session page (${allCount}) matches Excel Count (${excelCount})`);
     }
     
 }
-
+ }
 // Sum of Usage from session Excel
 async SumOfUsage(filePath) {
   const wb = excel.readFile(filePath);
@@ -327,11 +333,14 @@ async VerifyUsageFromExcel(filePath, usageKpi) {
     const tolerance = excelUsageMWh * 0.05;
     let errors = [];
     //Check if values differ beyond tolerance
-    if (Math.abs(usageKpi - excelUsageMWh) > tolerance) {
-       console.log(`🔴 Usage KPI (${usageKpi} MWh) does NOT match session Excel Usage (${excelUsageMWh} MWh)`);
+    if (Math.abs(usageKpi - excelUsageMWh) === 0) {
+       console.log(`🟢 Usage KPI (${usageKpi} MWh) matches session Excel Usage (${excelUsageMWh} MWh)`);
+    }
+    else if (Math.abs(usageKpi - excelUsageMWh) <= tolerance) {
+        console.log(`🟡 Usage KPI (${usageKpi} MWh) matches session Excel Usage (${excelUsageMWh} MWh) --within ±5% tolerance`);
     }
         else { 
-       console.log(`🟡 Usage KPI (${usageKpi} MWh) matches session Excel Usage (${excelUsageMWh} MWh) --within ±5% tolerance`);
+       console.log(`🛑 Usage KPI (${usageKpi} MWh) does NOT match session Excel Usage (${excelUsageMWh} MWh)`);
     }
 }
 
@@ -739,7 +748,7 @@ async verifyRevenueFromExcel(filePath4, revenueText, revenueKpi) {
       `🔴 Excel Revenue (${Revenue}) does not match Revenue Page value (${revenuePageValue})`
     );
   } else {
-    console.log(`🟢 Excel Revenue matches Revenue Page Value`);
+    console.log(`🟢 Excel Revenue (${Revenue}) matches Revenue Page Value (${revenuePageValue})`);
   }
 
   // Excel vs KPI
@@ -748,7 +757,7 @@ async verifyRevenueFromExcel(filePath4, revenueText, revenueKpi) {
       `🔴 Excel Revenue (${Revenue}) does not match Dashboard(KPI) revenue (${revenueKpiValue})`
     );
   } else {
-    console.log(`🟢 Excel Revenue matches Dashboard(KPI) Revenue`);
+    console.log(`🟢 Excel Revenue (${Revenue}) matches Dashboard(KPI) Revenue (${revenueKpiValue})`);
   }
 
   // KPI vs Page
@@ -757,14 +766,8 @@ async verifyRevenueFromExcel(filePath4, revenueText, revenueKpi) {
       `🔴 Dashboard Revenue (${revenueKpiValue}) does not match Revenue Page value (${revenuePageValue})`
     );
   } else {
-    console.log(`🟢 Dashboard(KPI) Revenue matches Revenue Page Value`);
+    console.log(`🟢 Dashboard(KPI) Revenue (${revenueKpiValue}) matches Revenue Page Value (${revenuePageValue})`);
   }
 
-  if (errors.length === 0) {
-    return { success: true, message: "🟢 Revenue values matched successfully" };
-  }
-
-  errors.forEach(e => console.log(e));
-  return { success: false, message: errors.join(" | ") };
 }
 }

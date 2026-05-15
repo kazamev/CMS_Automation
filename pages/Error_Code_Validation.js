@@ -93,6 +93,7 @@ async GetErrorCodeValue() {
 // }
 // Validate that the "Error Code" value from the main table is present in the list of "Error Codes" in the charger details page
 async ValidateErrorCodeValue() {
+
   const singleValue = await this.GetErrorCodeValue(); // "NoError,NoError"
   const listValues = await this.GetErrorCode();       // ["NoError", "NoError"]
 
@@ -100,8 +101,21 @@ async ValidateErrorCodeValue() {
     .split(",")
     .map(v => v.trim());
 
-  expect(listValues,"Error Code value from main table is not present in charger details").toEqual(expectedValues);
-  console.log("Error Code value in chargers list and charger details page are same.");
+  try {
+    expect(
+      listValues,
+      "Error Code value from main table is not present in charger details"
+    ).toEqual(expectedValues);
+
+    console.log("🟢 Error Code value from main table is present in charger details");
+
+  } catch (error) {
+
+    console.log("🔴 Error Code value from main table is NOT present in charger details");
+
+    throw error; // keeps test failing properly
+  }
+
   await this.page.waitForTimeout(3000);
 }
 }

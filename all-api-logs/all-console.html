@@ -1,0 +1,57 @@
+
+<html>
+<head>
+<style>
+body { font-family: Arial; font-size: 15px; }
+h2 { background:#222; color:#fff; padding:8px; }
+
+pre {
+  background:#f4f4f4;
+  padding:10px;
+  white-space:pre-wrap;
+  border-left:4px solid #2196f3;
+}
+
+/*TABLE FIXES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 11px;
+  table-layout: fixed; 
+}
+
+th, td {
+  border: 1px solid #444;
+  padding: 4px 6px;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+thead {
+  background: #eee;
+}
+
+tr {
+  page-break-inside: avoid;   /* NO ROW SPLIT */
+}
+
+</style>
+</head>
+<body>
+
+<h1>Playwright Console Logs</h1>
+<h2>Highest Usage Validation</h2>
+  <table>
+  <colgroup>
+    <col style="width: 73px;">
+    <col style="width: 73px;">
+    <col style="width: auto;">
+  </colgroup>
+    <thead>
+      <tr><th>METHOD</th><th>STATUS</th><th>URL</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v2/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/revenue/wallet</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/count?config_status=config&page=1&count=20&duration_filter=Today&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers?config_status=config&page=1&count=20&duration_filter=Today&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/dashboard/charge-state?config_status=config&page=1&count=20&duration_filter=Today&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/count?config_status=non-config&page=1&count=20&duration_filter=Today&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/custom-field</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/count?config_status=config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers?config_status=config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/dashboard/charge-state?config_status=config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/count?config_status=non-config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/count?config_status=config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=&sort_by=energy_usage&sort_order=desc</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers?config_status=config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=&sort_by=energy_usage&sort_order=desc</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/dashboard/charge-state?config_status=config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=&sort_by=energy_usage&sort_order=desc</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/count?config_status=non-config&page=1&count=20&duration_filter=Yesterday&network_types=&protocols=&sockets=&vendors=&geo_states=&zones=&sort_by=energy_usage&sort_order=desc</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v1/org/hpcl/chargers/tariff_details?device_id=m7ffyh</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/error-mapping</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v2/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/device/is-device-configure?device_id=m7ffyh</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/%20%20%20%20%20%20%20%20m7ffyh/graphs/usage?filter=Today&org=hpcl</td></tr><tr><td>POST</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/charger-controls</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v1/charger-status/m7ffyh</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/graphs/usage?duration_filter=Yesterday&org=hpcl</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v2/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/charger-controls/charging-profiles</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v1/org/hpcl/get-make</td></tr><tr><td>GET</td><td>200</td><td>https://novo.kazam.in/api/v1/org/hpcl/custom-field/get-custom-field</td></tr><tr><td>GET</td><td>FAILED</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/sessions?global_search=&search=&duration_filter=Yesterday&filters=%7B%22anomaly%22%3A%5B%22non_anomaly%22%5D%2C%22anomaly_reason%22%3A%5B%5D%2C%22end_reason%22%3A%5B%5D%2C%22geo_state%22%3A%5B%5D%2C%22network_type%22%3A%5B%5D%2C%22protocol%22%3A%5B%5D%2C%22sockets%22%3A%5B%5D%2C%22txn_type%22%3A%5B%5D%2C%22vendor%22%3A%5B%5D%2C%22zone_id%22%3A%5B%5D%2C%22driver_ids%22%3A%5B%5D%7D&metadata=%7B%22page%22%3A1%2C%22count%22%3A20%2C%22total%22%3A0%2C%22ongoing%22%3A0%7D&sort_by=start_time&sort_order=desc&anomalyTxn=false</td></tr><tr><td>GET</td><td>FAILED</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/sessions/count?global_search=&search=&duration_filter=Yesterday&filters=%7B%22anomaly%22%3A%5B%22non_anomaly%22%5D%2C%22anomaly_reason%22%3A%5B%5D%2C%22end_reason%22%3A%5B%5D%2C%22geo_state%22%3A%5B%5D%2C%22network_type%22%3A%5B%5D%2C%22protocol%22%3A%5B%5D%2C%22sockets%22%3A%5B%5D%2C%22txn_type%22%3A%5B%5D%2C%22vendor%22%3A%5B%5D%2C%22zone_id%22%3A%5B%5D%2C%22driver_ids%22%3A%5B%5D%7D&metadata=%7B%22page%22%3A1%2C%22count%22%3A20%2C%22total%22%3A0%2C%22anomaly%22%3A0%2C%22ongoing%22%3A0%7D</td></tr><tr><td>GET</td><td>FAILED</td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/sessions?global_search=&search=&duration_filter=Yesterday&filters=%7B%22anomaly%22%3A%5B%22non_anomaly%22%5D%2C%22anomaly_reason%22%3A%5B%5D%2C%22end_reason%22%3A%5B%5D%2C%22geo_state%22%3A%5B%5D%2C%22network_type%22%3A%5B%5D%2C%22protocol%22%3A%5B%5D%2C%22sockets%22%3A%5B%5D%2C%22txn_type%22%3A%5B%5D%2C%22vendor%22%3A%5B%5D%2C%22zone_id%22%3A%5B%5D%2C%22driver_ids%22%3A%5B%5D%7D&metadata=%7B%22page%22%3A1%2C%22count%22%3A20%2C%22total%22%3A0%2C%22anomaly%22%3A0%2C%22ongoing%22%3A0%7D&sort_by=start_time&sort_order=desc&anomalyTxn=false</td></tr><tr><td>GET</td><td></td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/sessions/count?global_search=&search=&duration_filter=Yesterday&filters=%7B%22anomaly%22%3A%5B%22non_anomaly%22%2C%22anomaly%22%5D%2C%22anomaly_reason%22%3A%5B%5D%2C%22end_reason%22%3A%5B%5D%2C%22geo_state%22%3A%5B%5D%2C%22network_type%22%3A%5B%5D%2C%22protocol%22%3A%5B%5D%2C%22sockets%22%3A%5B%5D%2C%22txn_type%22%3A%5B%5D%2C%22vendor%22%3A%5B%5D%2C%22zone_id%22%3A%5B%5D%2C%22driver_ids%22%3A%5B%5D%7D&metadata=%7B%22page%22%3A1%2C%22count%22%3A20%2C%22total%22%3A0%2C%22anomaly%22%3A0%2C%22ongoing%22%3A0%7D</td></tr><tr><td>GET</td><td></td><td>https://novo.kazam.in/api/v3/org/hpcl/9d778325-3fdd-4879-a9f9-b660ca6e240c/chargers/m7ffyh/sessions?global_search=&search=&duration_filter=Yesterday&filters=%7B%22anomaly%22%3A%5B%22non_anomaly%22%2C%22anomaly%22%5D%2C%22anomaly_reason%22%3A%5B%5D%2C%22end_reason%22%3A%5B%5D%2C%22geo_state%22%3A%5B%5D%2C%22network_type%22%3A%5B%5D%2C%22protocol%22%3A%5B%5D%2C%22sockets%22%3A%5B%5D%2C%22txn_type%22%3A%5B%5D%2C%22vendor%22%3A%5B%5D%2C%22zone_id%22%3A%5B%5D%2C%22driver_ids%22%3A%5B%5D%7D&metadata=%7B%22page%22%3A1%2C%22count%22%3A20%2C%22total%22%3A0%2C%22anomaly%22%3A0%2C%22ongoing%22%3A0%7D&sort_by=start_time&sort_order=desc&anomalyTxn=false</td></tr>
+    </tbody>
+  </table></body></html>

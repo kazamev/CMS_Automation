@@ -111,19 +111,18 @@ async selectSingleDate(day) {
   // Open Success Transactions and get Overview Data
 async openSuccessTransactionAndGetOverview() {
   const successRow = this.page.locator("//div[contains(@class,'cursor-pointer')]").filter({ hasText: "Success" }).first();
-  await this.page.locator("body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) span").first().waitFor({ state: "visible", timeout: 20000 });
+  await successRow.waitFor({ state: "visible", timeout: 20000 });
   console.log("Success row Overview Data");
   const overviewSelectors = {
 
     "Transaction id":
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(2)",
+      "//*[@id='cms-app-main-content']/div/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/div/div[1]/span",
 
     "Billed Amount":
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3)",
-
-    "Host Details":"//body//div//div//div//div//div//div//div//div//div//div//div//div//div[1]//div[1]//div[11]//span[1]//span[1]",
-    "Driver Details":"//body/div/div/div/div/div/div/main/div/div/div/div/div/div/div/div[1]/div[1]/div[12]/span[1]",
-    "Time stamp":"//body/div/div/div/div/div/div/main/div/div/div/div/div/div/div/div[1]/div[1]/div[13]/span[1]",
+      "//*[@id='cms-app-main-content']/div/div[2]/div[2]/div[2]/div/div/div[2]/div[1]/div/div[3]/div",
+    "Host Details":"//body//div//div//div//div//div//div//div//div//div//div//div//div//div[1]//div[1]//div[10]//span[1]//span[1]",
+    "Driver Details":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(11) > span:nth-child(1)",
+    "Time stamp":"body > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(12) > span:nth-child(1)",
   };
   const extractedTexts = {};
   for (const [key, selector] of Object.entries(overviewSelectors)) {
@@ -237,12 +236,25 @@ async compareOverviewWithInvoice(overviewData, invoiceData) {
           isMatch = timeO && timeI && timeO[0] === timeI[0];
       }
     } 
-    else if (key === "Billed Amount") {
-      // Remove currency symbols and compare numbers
-      const numO = overviewVal.replace(/[^0-9.]/g, "");
-      const numI = invoiceVal.replace(/[^0-9.]/g, "");
-      isMatch = numO === numI;
-    } 
+    // else if (key === "Billed Amount") {
+    //   // Remove currency symbols and compare numbers
+    //   const numO = overviewVal.replace(/[^0-9.]/g, "");
+    //   const numI = invoiceVal.replace(/[^0-9.]/g, "");
+    //   isMatch = numO === numI;
+    // } 
+
+
+  else if (key === "Billed Amount") {
+  const numO = overviewVal.replace(/[^0-9.]/g, "");
+
+  const numI =
+    invoiceVal === "--"
+      ? "0"
+      : invoiceVal.replace(/[^0-9.]/g, "");
+
+  isMatch = Number(numO) === Number(numI);
+}
+
     else {
       // Exact match for other fields
       isMatch = overviewVal === invoiceVal;

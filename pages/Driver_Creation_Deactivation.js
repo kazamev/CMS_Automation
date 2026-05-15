@@ -81,6 +81,13 @@ constructor(page) {
         await this.SaveButton.click();
         await this.page.waitForTimeout(2000);
         console.log(`Driver with phone number ${phoneNum} has been deactivated.`);
+        if (await this.page.locator("//p[@class='bg-red-600/10 text-red-500 px-4 py-1 rounded-lg w-max text-sm']").isVisible()) {
+            console.log("🟢 Driver deactivation successful, status updated to Deactivated");
+        } else {
+            console.log("🔴 Driver deactivation might have failed, Deactivated status not visible");
+        }
     }
+
+
 
 }

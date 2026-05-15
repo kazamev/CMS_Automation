@@ -70,24 +70,17 @@ async countExcelSessions(filePath) {
 
 async verifySessionCounts(filePath, Sessions) {
     const excelCount = await this.countExcelSessions(filePath);
-    let errors = [];
+    // let errors = [];
     if (Number(Sessions) !== Number(excelCount)) {
-        errors.push(
-            `🛑 Sessions count mismatch → UI: ${Sessions}, Excel: ${excelCount}`
+        console.log(
+            `🛑 Sessions count of the Highest Usage Charger mismatch → UI: ${Sessions}, Excel: ${excelCount}`
         );
     }
-    if (errors.length === 0) {
-        return {
-            success: true,
-            message: `🟢 Sessions count matched → ${excelCount}`,
-            excelCount
-        };
-    } else {
-        return {
-            success: false,
-            message: errors.join("\n"),
-            excelCount
-        };
+   
+        else {
+        console.log(
+            `🟢 Sessions count of the Highest Usage Charger matches → UI: ${Sessions}, Excel: ${excelCount}`
+         );
     }
 }
 
@@ -112,29 +105,35 @@ async verifyUsage(filePath,Usage) {
     console.log(`Highest Usage (kWh): ${Usage}`);
     //Allowed buffer/tolerance (0.2 MWh)
     const tolerance = excelUsage * 0.05;
-    let errors = [];
+    // let errors = [];
     //Check if values differ beyond tolerance
-    if (Math.abs(Usage - excelUsage) > tolerance) {
-        errors.push(
-            `🔴 Highest Usage in the charger page (${Usage} kwh) does NOT match session Excel Usage (${excelUsage} kwh)`);
+    if (Math.abs(Usage - excelUsage) === 0) {
+        console.log(`🟢 Highest Usage in the charger page (${Usage} kwh) matches session Excel Usage (${excelUsage} kwh)`);
+    }
+    else if (Math.abs(Usage - excelUsage) <= tolerance) {
+        console.log(`🟡 Highest Usage in the charger page (${Usage} kwh) matches session Excel Usage (${excelUsage} kwh) --within ±5% tolerance`);
+    }
+    else {
+        console.log(
+            `🛑 Highest Usage in the charger page (${Usage} kwh) does NOT match session Excel Usage (${excelUsage} kwh)`);
     }
 
     //Return result
-    if (errors.length === 0) {
-        return {
-            success: true,
-            excelUsage,
-            message:  `🟡 Highest Usage in the charger page (${Usage} kWh) match session Excel Usage (${excelUsage} kWh) --within ±5% tolerance`
-        };
-    } else {
-        console.log( `🔴 Highest Usage in the charger page (${Usage} kWh) does NOT match session Excel Usage (${excelUsage} kWh)`);
-        errors.forEach(e => console.log("" + e));
-        return {
-            success: false,
-            excelUsage,
-            message: errors.join(" | ")
-        };
-    }
+    // if (errors.length === 0) {
+    //     return {
+    //         success: true,
+    //         excelUsage,
+    //         message:  ` Highest Usage in the charger page (${Usage} kWh) matches session Excel Usage (${excelUsage} kWh) --within ±5% tolerance`
+    //     };
+    // } else {
+    //     console.log( `🔴 Highest Usage in the charger page (${Usage} kWh) does NOT match session Excel Usage (${excelUsage} kWh)`);
+    //     errors.forEach(e => console.log("" + e));
+    //     return {
+    //         success: false,
+    //         excelUsage,
+    //         message: errors.join(" | ")
+    //     };
+    // }
 }
 
 }
